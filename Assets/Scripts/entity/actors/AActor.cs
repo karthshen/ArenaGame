@@ -67,7 +67,7 @@ public abstract class AActor : AEntity
 
     public abstract Command HandleInput();
 
-    public void Move();
+    public abstract void Move();
 
     public abstract void Jump();
 
