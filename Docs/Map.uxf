@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
-  <zoom_level>8</zoom_level>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>328</x>
-      <y>176</y>
-      <w>240</w>
-      <h>200</h>
+      <x>340</x>
+      <y>100</y>
+      <w>300</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>&lt;Singleton&gt;
 MapManager
@@ -25,10 +25,10 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>488</x>
-      <y>432</y>
-      <w>360</w>
-      <h>200</h>
+      <x>540</x>
+      <y>420</y>
+      <w>450</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>&lt;abstract&gt;
 GameMap
@@ -48,10 +48,10 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
-      <y>368</y>
-      <w>24</w>
-      <h>80</h>
+      <x>570</x>
+      <y>340</y>
+      <w>30</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
