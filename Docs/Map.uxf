@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>328</x>
-      <y>176</y>
+      <x>448</x>
+      <y>88</y>
       <w>240</w>
       <h>200</h>
     </coordinates>
@@ -25,8 +25,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>488</x>
-      <y>432</y>
+      <x>608</x>
+      <y>344</y>
       <w>360</w>
       <h>200</h>
     </coordinates>
@@ -36,6 +36,7 @@ GameMap
 # mapId;
 # players: List&lt;AActors&gt;
 # interactbles: List&lt;AInteractable&gt;
++ camera: ArenaCamera //Passed in with Unity
 --
 /+ MapConfiguration():void/
 + 
@@ -48,8 +49,43 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
-      <y>368</y>
+      <x>632</x>
+      <y>280</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>608</x>
+      <y>600</y>
+      <w>240</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>ArenaCamera
+--
+- player1: AActor
+- player2: AActor
+- 
+--
++ Camera():void : MonoBehavior
++ Start():void
++ LateUpdate():void
++ UpdatePosition():void
+--
+Responsibilities
+-- The camera will be tracing the movement of 
+the players and change the camera POV.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>536</y>
       <w>24</w>
       <h>80</h>
     </coordinates>
