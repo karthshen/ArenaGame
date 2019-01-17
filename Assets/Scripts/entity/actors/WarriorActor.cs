@@ -25,6 +25,7 @@ public class WarriorActor : AActor
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
+        defaultState = new ActorStandingState();
 
         buttonA = warriorButtonA;
         buttonB = warriorButtonB;
@@ -52,9 +53,13 @@ public class WarriorActor : AActor
         throw new System.NotImplementedException();
     }
 
-    public override Command HandleInput()
+    public override void HandleInput()
     {
-        throw new System.NotImplementedException();
+        ActorState newState = defaultState.HandleInput(this);
+        if (!defaultState.Equals(null))
+        {
+            defaultState = newState;
+        }
     }
 
     public override void Jump()

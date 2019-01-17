@@ -82,7 +82,7 @@ public abstract class AActor : AEntity
     //Functiosn
     public abstract float TakeDamage(float damage);
 
-    public abstract Command HandleInput();
+    public abstract void HandleInput();
 
     public abstract void Move();
 

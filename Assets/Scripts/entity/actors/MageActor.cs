@@ -24,7 +24,8 @@ public class MageActor : AActor
         entityMesh = mageMesh;
 
         //Actor Config, button, ability, etc
-        this.actorStat = new MageStat();
+        actorStat = new MageStat();
+        defaultState = new ActorStandingState();
 
         buttonA = mageButtonA;
         buttonB = mageButtonB;
@@ -52,9 +53,13 @@ public class MageActor : AActor
         throw new System.NotImplementedException();
     }
 
-    public override Command HandleInput()
+    public override void HandleInput()
     {
-        throw new System.NotImplementedException();
+        ActorState newState = defaultState.HandleInput(this);
+        if (!defaultState.Equals(null))
+        {
+            defaultState = newState;
+        }
     }
 
     public override void Jump()
