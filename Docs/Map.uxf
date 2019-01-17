@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>328</x>
+      <y>176</y>
+      <w>240</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;Singleton&gt;
+MapManager
+--
+- currentMap: GameMap
+--
+# MapManager():void //SingletonClass
++ initializeMap(mapName:MapName):void 
+
+--
+Responsibilities
+-- Initializes and maintains the map object.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>488</x>
+      <y>432</y>
+      <w>360</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;abstract&gt;
+GameMap
+--
+# mapId;
+# players: List&lt;AActors&gt;
+# interactbles: List&lt;AInteractable&gt;
+--
+/+ MapConfiguration():void/
++ 
+--
+Responsibilities
+-- Map object. Holds the information on AActors and
+	AInteractables on the map. </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>368</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+</diagram>
