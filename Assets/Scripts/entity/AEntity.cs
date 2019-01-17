@@ -4,14 +4,22 @@ using UnityEngine;
 
 public abstract class AEntity : MonoBehaviour
 {
-    protected int entityid;
+    protected System.Guid entityId;
     protected string entityName;
     protected EntityState state;
     protected Mesh entityMesh;
 
-    public int GetEntityId()
+    protected AEntity()
     {
-        return this.entityid;
+        if(entityId.Equals(0)|| entityName.Equals("") || state.Equals(null) || entityMesh)
+        {
+            throw new UnassignedReferenceException(this.GetType() + "class is not initialized correctly");
+        }
+    }
+
+    public System.Guid GetEntityId()
+    {
+        return this.entityId;
     }
 
     public string GetName()

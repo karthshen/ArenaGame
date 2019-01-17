@@ -7,7 +7,7 @@ public abstract class AActor : AEntity
     private float currentHealth;
     private float currentEnergy;
 
-    private ActorStat actorStat;
+    protected ActorStat actorStat;
 
     protected Command buttonA;
     protected Command buttonB;
@@ -19,8 +19,25 @@ public abstract class AActor : AEntity
     protected Ability abilityLeft;
     protected Ability abilityRight;
 
-    protected new ActorState state;
     protected PickupItem item = null;
+
+    protected AActor() : base()
+    { 
+        if (actorStat.Equals(null))
+        {
+            throw new MissingReferenceException("Actor stat/state is not set for " + this.name + ": " + this.GetEntityId());
+        }
+
+        if (buttonA.Equals(null) || buttonB.Equals(null) || buttonC.Equals(null) || buttonD.Equals(null))
+        {
+            throw new MissingReferenceException("Actor button configuration missing for " + this.name + ": " + this.GetEntityId());
+        }
+
+        if (abilityUp.Equals(null) || abilityDown.Equals(null) || abilityLeft.Equals(null) || abilityRight.Equals(null))
+        {
+            throw new MissingReferenceException("Actor ability configuration missing for " + this.name + ": " + this.GetEntityId());
+        }
+    }
 
     //Mutators
     protected float CurrentHealth
