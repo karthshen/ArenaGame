@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class AEntity : MonoBehaviour
 {
@@ -11,29 +9,29 @@ public abstract class AEntity : MonoBehaviour
 
     protected AEntity()
     {
-        if(entityId.Equals(0)|| entityName.Equals("") || state.Equals(null) || entityMesh)
+        if (entityId.Equals(0) || entityName.Equals("") || state.Equals(null) || entityMesh)
         {
-            throw new UnassignedReferenceException(this.GetType() + "class is not initialized correctly");
+            throw new UnassignedReferenceException(GetType() + "class is not initialized correctly");
         }
     }
 
     public System.Guid GetEntityId()
     {
-        return this.entityId;
+        return entityId;
     }
 
     public string GetName()
     {
-        return this.name;
-    } 
+        return name;
+    }
 
     public EntityState GetState()
     {
-        return this.state;
+        return state;
     }
 
     public Mesh GetMesh()
     {
-        return this.entityMesh;
+        return entityMesh;
     }
 }

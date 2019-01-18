@@ -11,11 +11,6 @@ public class ArcherActor : AActor
     Ability archerAbilityLeft;
     Ability archerAbilityRight;
 
-    Command archerButtonA;
-    Command archerButtonB;
-    Command archerButtonC;
-    Command archerButtonD;
-
     public ArcherActor()
     {
         //Entity Config
@@ -26,11 +21,6 @@ public class ArcherActor : AActor
         //Actor Config, button, ability, etc
         actorStat = new ArcherStat();
         defaultState = new ActorStandingState();
-
-        buttonA = archerButtonA;
-        buttonB = archerButtonB;
-        buttonC = archerButtonC;
-        buttonD = archerButtonD;
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;

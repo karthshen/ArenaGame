@@ -9,11 +9,6 @@ public abstract class AActor : AEntity
 
     protected ActorStat actorStat;
 
-    protected Command buttonA;
-    protected Command buttonB;
-    protected Command buttonC;
-    protected Command buttonD;
-
     protected Ability abilityUp;
     protected Ability abilityDown;
     protected Ability abilityLeft;
@@ -26,11 +21,6 @@ public abstract class AActor : AEntity
         if (actorStat.Equals(null))
         {
             throw new MissingReferenceException("Actor stat/state is not set for " + this.name + ": " + this.GetEntityId());
-        }
-
-        if (buttonA.Equals(null) || buttonB.Equals(null) || buttonC.Equals(null) || buttonD.Equals(null))
-        {
-            throw new MissingReferenceException("Actor button configuration missing for " + this.name + ": " + this.GetEntityId());
         }
 
         if (abilityUp.Equals(null) || abilityDown.Equals(null) || abilityLeft.Equals(null) || abilityRight.Equals(null))

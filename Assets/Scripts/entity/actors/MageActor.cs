@@ -11,11 +11,6 @@ public class MageActor : AActor
     Ability mageAbilityLeft;
     Ability mageAbilityRight;
 
-    Command mageButtonA;
-    Command mageButtonB;
-    Command mageButtonC;
-    Command mageButtonD;
-
     public MageActor()
     {
         //Entity Config
@@ -26,11 +21,6 @@ public class MageActor : AActor
         //Actor Config, button, ability, etc
         actorStat = new MageStat();
         defaultState = new ActorStandingState();
-
-        buttonA = mageButtonA;
-        buttonB = mageButtonB;
-        buttonC = mageButtonC;
-        buttonD = mageButtonD;
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;

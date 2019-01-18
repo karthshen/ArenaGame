@@ -11,11 +11,6 @@ public class WarriorActor : AActor
     Ability warriorAbilityLeft;
     Ability warriorAbilityRight;
 
-    Command warriorButtonA;
-    Command warriorButtonB;
-    Command warriorButtonC;
-    Command warriorButtonD;
-
     public WarriorActor() : base()
     {
         //Entity Config
@@ -26,11 +21,6 @@ public class WarriorActor : AActor
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
         defaultState = new ActorStandingState();
-
-        buttonA = warriorButtonA;
-        buttonB = warriorButtonB;
-        buttonC = warriorButtonC;
-        buttonD = warriorButtonD;
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
