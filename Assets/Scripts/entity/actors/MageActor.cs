@@ -11,21 +11,32 @@ public class MageActor : AActor
     Ability mageAbilityLeft;
     Ability mageAbilityRight;
 
-    public MageActor()
+    string actorName = "Mage";
+
+    public MageActor() : base()
+    {
+
+    }
+
+    private void Start()
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
+        defaultState = new ActorStandingState();
         state = defaultState;
+        mageMesh = new Mesh();
         entityMesh = mageMesh;
 
         //Actor Config, button, ability, etc
         actorStat = new MageStat();
-        defaultState = new ActorStandingState();
+        entityName = actorName;
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;
         abilityUp = mageAbilityUp;
         abilityDown = mageAbilityDown;
+
+        NullParameterCheck();
     }
 
     public override void Attack()
@@ -43,15 +54,6 @@ public class MageActor : AActor
         throw new System.NotImplementedException();
     }
 
-    public override void HandleInput()
-    {
-        ActorState newState = defaultState.HandleInput(this);
-        if (!defaultState.Equals(null))
-        {
-            defaultState = newState;
-        }
-    }
-
     public override void Jump()
     {
         throw new System.NotImplementedException();
@@ -59,11 +61,18 @@ public class MageActor : AActor
 
     public override void Move()
     {
-        throw new System.NotImplementedException();
+        base.Move();
     }
 
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();
+    }
+   /*
+    * This is for test cases ONLY
+    */
+    public void CallStart()
+    {
+        Start();
     }
 }

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public abstract class AActor : AEntity
 {
     //Attributes
     private float currentHealth;
     private float currentEnergy;
+    private float moveHorizontal;
 
     protected ActorStat actorStat;
 
@@ -16,18 +18,7 @@ public abstract class AActor : AEntity
 
     protected PickupItem item = null;
 
-    protected AActor() : base()
-    { 
-        if (actorStat.Equals(null))
-        {
-            throw new MissingReferenceException("Actor stat/state is not set for " + this.name + ": " + this.GetEntityId());
-        }
-
-        if (abilityUp.Equals(null) || abilityDown.Equals(null) || abilityLeft.Equals(null) || abilityRight.Equals(null))
-        {
-            throw new MissingReferenceException("Actor ability configuration missing for " + this.name + ": " + this.GetEntityId());
-        }
-    }
+    protected Rigidbody rb;
 
     //Mutators
     protected float CurrentHealth
@@ -69,12 +60,38 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float MoveHorizontal
+    {
+        get
+        {
+            return moveHorizontal;
+        }
+
+        set
+        {
+            moveHorizontal = value;
+        }
+    }
+
     //Functiosn
     public abstract float TakeDamage(float damage);
 
-    public abstract void HandleInput();
+    public void HandleInput(InputDevice inputDevice)
+    {
+        ActorState newState = ((ActorState)state).HandleInput(this, inputDevice);
+        state = newState;
+    }
 
-    public abstract void Move();
+    public virtual void Move()
+    {
+        //TODO Improve the movement code
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
+
+        transform.Translate(movement * actorStat.MoveVelocity * Time.deltaTime);
+        //Debug.Log("Translate" + transform.position.x);
+
+        //rb.AddForce(movement * actorStat.MoveVelocity);
+    }
 
     public abstract void Jump();
 
@@ -87,5 +104,19 @@ public abstract class AActor : AEntity
     public ActorStat GetActorStat()
     {
         return this.actorStat;
+    }
+
+    public new void NullParameterCheck()
+    {
+        base.NullParameterCheck();
+        if (actorStat == null)
+        {
+            throw new MissingReferenceException("Actor stat/state is not set for " + this.entityName + ": " + this.GetEntityId());
+        }
+
+        //if (abilityUp.Equals(null) || abilityDown.Equals(null) || abilityLeft.Equals(null) || abilityRight.Equals(null))
+        //{
+        //    throw new MissingReferenceException("Actor ability configuration missing for " + this.name + ": " + this.GetEntityId());
+        //}
     }
 }

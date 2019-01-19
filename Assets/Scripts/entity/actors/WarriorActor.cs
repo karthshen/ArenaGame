@@ -11,21 +11,33 @@ public class WarriorActor : AActor
     Ability warriorAbilityLeft;
     Ability warriorAbilityRight;
 
+    string actorName = "Warrior";
+
     public WarriorActor() : base()
     {
+        
+    }
+
+    void Start()
+    {
+        
         //Entity Config
         entityId = System.Guid.NewGuid();
+        defaultState = new ActorStandingState();
         state = defaultState;
         entityMesh = warriorMesh;
+        rb = GetComponent<Rigidbody>();
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
-        defaultState = new ActorStandingState();
+        entityName = actorName;
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
+
+        NullParameterCheck();
     }
 
     public override void Attack()
@@ -43,27 +55,26 @@ public class WarriorActor : AActor
         throw new System.NotImplementedException();
     }
 
-    public override void HandleInput()
-    {
-        ActorState newState = defaultState.HandleInput(this);
-        if (!defaultState.Equals(null))
-        {
-            defaultState = newState;
-        }
-    }
-
     public override void Jump()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void Move()
+    public new void Move()
     {
-        throw new System.NotImplementedException();
+        base.Move();
     }
 
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();
+    }
+
+    /*
+     * This is for test cases ONLY
+     */
+    public void CallStart()
+    {
+        Start();
     }
 }

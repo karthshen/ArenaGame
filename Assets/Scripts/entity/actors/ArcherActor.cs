@@ -11,21 +11,32 @@ public class ArcherActor : AActor
     Ability archerAbilityLeft;
     Ability archerAbilityRight;
 
-    public ArcherActor()
+    string actorName = "Archer";
+
+    public ArcherActor() : base()
+    {
+
+    }
+
+    private void Start()
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
+        defaultState = new ActorStandingState();
         state = defaultState;
+        archerMesh = new Mesh();
         entityMesh = archerMesh;
 
         //Actor Config, button, ability, etc
         actorStat = new ArcherStat();
-        defaultState = new ActorStandingState();
+        entityName = actorName;
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;
         abilityUp = archerAbilityUp;
         abilityDown = archerAbilityDown;
+
+        NullParameterCheck();
     }
 
     public override void Attack()
@@ -43,15 +54,6 @@ public class ArcherActor : AActor
         throw new System.NotImplementedException();
     }
 
-    public override void HandleInput()
-    {
-        ActorState newState = defaultState.HandleInput(this);
-        if (!defaultState.Equals(null))
-        {
-            defaultState = newState;
-        }
-    }
-
     public override void Jump()
     {
         throw new System.NotImplementedException();
@@ -59,11 +61,19 @@ public class ArcherActor : AActor
 
     public override void Move()
     {
-        throw new System.NotImplementedException();
+        base.Move();
     }
 
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();
+    }
+
+    /*
+     * This is for test cases ONLY
+     */
+    public void CallStart()
+    {
+        Start();
     }
 }

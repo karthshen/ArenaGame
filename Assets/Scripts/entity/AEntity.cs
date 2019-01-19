@@ -7,14 +7,6 @@ public abstract class AEntity : MonoBehaviour
     protected EntityState state;
     protected Mesh entityMesh;
 
-    protected AEntity()
-    {
-        if (entityId.Equals(0) || entityName.Equals("") || state.Equals(null) || entityMesh)
-        {
-            throw new UnassignedReferenceException(GetType() + "class is not initialized correctly");
-        }
-    }
-
     public System.Guid GetEntityId()
     {
         return entityId;
@@ -22,7 +14,7 @@ public abstract class AEntity : MonoBehaviour
 
     public string GetName()
     {
-        return name;
+        return entityName;
     }
 
     public EntityState GetState()
@@ -33,5 +25,13 @@ public abstract class AEntity : MonoBehaviour
     public Mesh GetMesh()
     {
         return entityMesh;
+    }
+
+    public void NullParameterCheck()
+    {
+        if (entityId == null || entityName == null || state == null )//|| entityMesh == null)
+        {
+            throw new UnassignedReferenceException(GetType() + "class is not initialized correctly");
+        }
     }
 }

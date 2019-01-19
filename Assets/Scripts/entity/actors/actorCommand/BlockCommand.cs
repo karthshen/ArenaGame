@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class JumpCommand : Command
+public class BlockCommand : Command
 {
     public override void Execute(AActor actor)
     {
-        actor.Jump();
+        actor.Block();
     }
 }

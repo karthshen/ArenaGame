@@ -3,16 +3,19 @@ using UnityEditor;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using InControl;
 
 public class PlayerTest
 {
     private class TestActor : AActor
     {
         public bool hasMoved = false;
+        public bool hasBlocked = false;
+        public int hasJumped = 0;
 
         //Everything copied from WarriorActor
         ActorState defaultState;
-        Mesh warriorMesh = new Mesh();
+        Mesh warriorMesh;
 
         Ability warriorAbilityUp;
         Ability warriorAbilityDown;
@@ -22,16 +25,22 @@ public class PlayerTest
         string actorName = "Warrior";
 
         public TestActor() : base()
-    {
+        {
+            
+        }
+
+        private void Start()
+        {
             //Entity Config
             entityId = System.Guid.NewGuid();
             defaultState = new ActorStandingState();
             state = defaultState;
             entityMesh = warriorMesh;
-            entityName = actorName;
+            rb = GetComponent<Rigidbody>();
 
             //Actor Config, button, ability, etc
             actorStat = new WarriorStat();
+            entityName = actorName;
 
             abilityLeft = warriorAbilityLeft;
             abilityRight = warriorAbilityRight;
@@ -41,6 +50,14 @@ public class PlayerTest
             NullParameterCheck();
         }
 
+       /*
+        * This is for test cases ONLY
+        */
+        public void CallStart()
+        {
+            Start();
+        }
+
         public override void Attack()
         {
             throw new System.NotImplementedException();
@@ -48,7 +65,7 @@ public class PlayerTest
 
         public override void Block()
         {
-            throw new System.NotImplementedException();
+            hasBlocked = true;
         }
 
         public override void Grab()
@@ -56,22 +73,14 @@ public class PlayerTest
             throw new System.NotImplementedException();
         }
 
-        public override void HandleInput()
-        {
-            ActorState newState = ((ActorState)state).HandleInput(this);
-            if (!state.Equals(null))
-            {
-                state = newState;
-            }
-        }
-
         public override void Jump()
         {
-            throw new System.NotImplementedException();
+            hasJumped++;
         }
 
         public override void Move()
         {
+            base.Move();
             hasMoved = true;
         }
 
@@ -81,32 +90,95 @@ public class PlayerTest
         }
     }
 
+    GameObject testActor;
+    GameObject warriorActor;
+    GameObject archerActor;
+    GameObject mageActor;
+
+    InputDevice inputDevice;
+
+    [SetUp]
+    public void Setup()
+    {
+        testActor = new GameObject("TestActor");
+        warriorActor = new GameObject("WarriorActor");
+        archerActor = new GameObject("ArcherActor");
+        mageActor = new GameObject("MageActor");
+
+        testActor.AddComponent<TestActor>();
+        testActor.GetComponent<TestActor>().CallStart();
+
+        warriorActor.AddComponent<WarriorActor>();
+        warriorActor.GetComponent<WarriorActor>().CallStart();
+
+        archerActor.AddComponent<ArcherActor>();
+        archerActor.GetComponent<ArcherActor>().CallStart();
+
+        mageActor.AddComponent<MageActor>();
+        mageActor.GetComponent<MageActor>().CallStart();
+
+        inputDevice = new InputDevice("");
+        inputDevice.TestControl();
+    }
+
     [Test]
     public void PlayerNullAttributeTest()
     {
-        ArcherActor archer = new ArcherActor();
-        WarriorActor warrior = new WarriorActor();
-        MageActor mage = new MageActor();
-
-        Assert.AreEqual(archer.GetName(), "Archer");
-        Assert.AreEqual(warrior.GetName(), "Warrior");
-        Assert.AreEqual(mage.GetName(), "Mage");
+        Assert.AreEqual(archerActor.GetComponent<ArcherActor>().GetName(), "Archer");
+        Assert.AreEqual(warriorActor.GetComponent<WarriorActor>().GetName(), "Warrior");
+        Assert.AreEqual(mageActor.GetComponent<MageActor>().GetName(), "Mage");
     }
 
     [Test]
     public void PlayerMoveTest()
     {
-        TestActor testActor = new TestActor();
-        ((ActorState)testActor.GetState()).HandleInput(testActor);
+        inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, true, 1000);
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
 
         //Character should be moved, and right after the move, the character should be stopped and Standing still
-        Assert.AreEqual(true, testActor.hasMoved);
-        Assert.AreEqual(testActor.GetState().GetType(), typeof(ActorStandingState));
+        Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasMoved);
+        Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorMovingState));
+
+        inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, false, 1001);
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+        Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorStandingState));
+    }
+   
+    [Test]
+    public void PlayerJumpTest()
+    {
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action3, true, 1000);
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+
+        Assert.AreEqual(1, testActor.GetComponent<TestActor>().hasJumped);
+        Assert.AreEqual(typeof(ActorJumpState), testActor.GetComponent<TestActor>().GetState().GetType());
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+        Assert.AreEqual(2, testActor.GetComponent<TestActor>().hasJumped);
+        Assert.AreEqual(typeof(ActorJumpState), testActor.GetComponent<TestActor>().GetState().GetType());
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+        Assert.AreEqual(2, testActor.GetComponent<TestActor>().hasJumped);
+        Assert.AreEqual(typeof(ActorJumpState), testActor.GetComponent<TestActor>().GetState().GetType());
+    }
+
+    [Test]
+    public void PlayerBlockTest()
+    {
+        inputDevice.UpdateWithStateTestCase(InputControlType.LeftTrigger, true, 1000);
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+
+        Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasBlocked);
+        Assert.AreEqual(typeof(ActorBlockState), testActor.GetComponent<TestActor>().GetState().GetType());
     }
 
     // A UnityTest behaves like a coroutine in PlayMode
     // and allows you to yield null to skip a frame in EditMode
-    [UnityTest]
+    //[UnityTest]
     public IEnumerator PlayerMoveTestWithEnumeratorPasses()
     {
         // Use the Assert class to test conditions.

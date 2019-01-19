@@ -20,7 +20,7 @@ namespace MultiplayerExample
 		void Update()
 		{
 			var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
-           // Debug.Log(playerNum);
+            Debug.Log(playerNum);
 			if (inputDevice == null)
 			{
 				// If no controller exists for this cube, just make it translucent.

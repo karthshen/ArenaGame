@@ -1,17 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class ActorJumpState : ActorState
 {
-    bool bJump = false;
+    Command jumpCommand = new JumpCommand();
 
-    protected ActorJumpState()
+    bool bJump = true;
+
+    public ActorJumpState()
     {
     }
 
-    public override ActorState HandleInput(AActor actor)
+    public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        throw new System.NotImplementedException();
+        if(inputDevice.Action3 || inputDevice.Action4)
+        {
+            if (bJump)
+            {
+                jumpCommand.Execute(actor);
+                SetCanJump(false);
+                return this;
+            }
+        }
+
+        return this;
     }
 
     public void SetCanJump(bool bJump)

@@ -37,16 +37,57 @@ namespace InControl
 			DPad = new TwoAxisInputControl();
 		}
 
+        public void TestControl()
+        {
+            AddControl(InputControlType.LeftStickX, "LeftStickX");
+            AddControl(InputControlType.LeftStickY, "LeftStickY");
+            AddControl(InputControlType.RightStickX, "RightStickX");
+            AddControl(InputControlType.RightStickY, "RightStickY");
 
-		public InputControl GetControl( InputControlType inputControlType )
+            AddControl(InputControlType.LeftTrigger, "LeftTrigger");
+            AddControl(InputControlType.RightTrigger, "RightTrigger");
+
+            AddControl(InputControlType.DPadUp, "DPadUp");
+            AddControl(InputControlType.DPadDown, "DPadDown");
+            AddControl(InputControlType.DPadLeft, "DPadLeft");
+            AddControl(InputControlType.DPadRight, "DPadRight");
+
+            AddControl(InputControlType.Action1, "Action1");
+            AddControl(InputControlType.Action2, "Action2");
+            AddControl(InputControlType.Action3, "Action3");
+            AddControl(InputControlType.Action4, "Action4");
+
+            AddControl(InputControlType.LeftBumper, "LeftBumper");
+            AddControl(InputControlType.RightBumper, "RightBumper");
+
+            AddControl(InputControlType.LeftStickButton, "LeftStickButton");
+            AddControl(InputControlType.RightStickButton, "RightStickButton");
+
+            AddControl(InputControlType.Start, "Start");
+            AddControl(InputControlType.Back, "Back");
+
+        }
+
+
+        public InputControl GetControl( InputControlType inputControlType )
 		{
 			var control = Controls[ (int) inputControlType ];
 			return control ?? InputControl.Null;
 		}
 
+        public InputControl GetControlTestCase(InputControlType inputControlType)
+        {
+            var control = Controls[(int)inputControlType];
+            return control;
+        }
 
-		// Warning: this is not efficient. Don't use it unless you have to, m'kay?
-		public static InputControlType GetInputControlTypeByName( string inputControlName )
+        public void UpdateWithStateTestCase(InputControlType inputControlType, bool state, ulong updateTick)
+        {
+            GetControlTestCase(inputControlType).UpdateWithStateTestCase(state, updateTick);
+        }
+
+        // Warning: this is not efficient. Don't use it unless you have to, m'kay?
+        public static InputControlType GetInputControlTypeByName( string inputControlName )
 		{
 			return (InputControlType) Enum.Parse( typeof(InputControlType), inputControlName );
 		}

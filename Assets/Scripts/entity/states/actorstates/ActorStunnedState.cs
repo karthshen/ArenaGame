@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using InControl;
 
 public class ActorStunnedState : ActorState
 {
@@ -7,7 +8,7 @@ public class ActorStunnedState : ActorState
     {
     }
 
-    public override ActorState HandleInput(AActor actor)
+    public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         throw new System.NotImplementedException();
     }
