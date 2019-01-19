@@ -35,7 +35,7 @@ public class InputHandler : MonoBehaviour
 
     void HandleInput(InputDevice inputDevice)
     {
-        Debug.Log("Current Player:" + playerNum);
+        //Debug.Log("Current Player:" + playerNum);
         AActor actor = actors[playerNum];
         actor.HandleInput(inputDevice);
     }
