@@ -10,7 +10,7 @@ public class PlayerTest
     private class TestActor : AActor
     {
         public bool hasMoved = false;
-        public bool hasJumped = false;
+        public int hasJumped = 0;
 
         //Everything copied from WarriorActor
         ActorState defaultState;
@@ -60,7 +60,7 @@ public class PlayerTest
 
         public override void Jump()
         {
-            hasJumped = true;
+            hasJumped++;
         }
 
         public override void Move()
@@ -100,13 +100,15 @@ public class PlayerTest
     [Test]
     public void PlayerMoveTest()
     {
-        inputDevice.UpdateWithStateTestCase(InputControlType.Action1, true, 1000);
+        inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, true, 1000);
 
         testActor.HandleInput(inputDevice);
 
         //Character should be moved, and right after the move, the character should be stopped and Standing still
         Assert.AreEqual(true, testActor.hasMoved);
         Assert.AreEqual(testActor.GetState().GetType(), typeof(ActorMovingState));
+
+        inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, false, 1001);
 
         testActor.HandleInput(inputDevice);
         Assert.AreEqual(testActor.GetState().GetType(), typeof(ActorStandingState));
@@ -115,7 +117,20 @@ public class PlayerTest
     [Test]
     public void PlayerJumpTest()
     {
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action3, true, 1000);
+
         testActor.HandleInput(inputDevice);
+
+        Assert.AreEqual(1, testActor.hasJumped);
+        Assert.AreEqual(typeof(ActorJumpState), testActor.GetState().GetType());
+
+        testActor.HandleInput(inputDevice);
+        Assert.AreEqual(2, testActor.hasJumped);
+        Assert.AreEqual(typeof(ActorJumpState), testActor.GetState().GetType());
+
+        testActor.HandleInput(inputDevice);
+        Assert.AreEqual(2, testActor.hasJumped);
+        Assert.AreEqual(typeof(ActorJumpState), testActor.GetState().GetType());
     }
 
     // A UnityTest behaves like a coroutine in PlayMode

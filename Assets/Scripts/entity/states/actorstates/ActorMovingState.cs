@@ -10,6 +10,13 @@ public class ActorMovingState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        return new ActorStandingState();
+        if(inputDevice.LeftStickX.Value == 0)
+        {
+            return new ActorStandingState();
+        }
+        else
+        {
+            return this;
+        }
     }
 }
