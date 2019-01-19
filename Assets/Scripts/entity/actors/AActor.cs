@@ -7,6 +7,7 @@ public abstract class AActor : AEntity
     //Attributes
     private float currentHealth;
     private float currentEnergy;
+    private float moveHorizontal;
 
     protected ActorStat actorStat;
 
@@ -17,10 +18,7 @@ public abstract class AActor : AEntity
 
     protected PickupItem item = null;
 
-    protected AActor() : base()
-    { 
-
-    }
+    protected Rigidbody rb;
 
     //Mutators
     protected float CurrentHealth
@@ -62,21 +60,37 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float MoveHorizontal
+    {
+        get
+        {
+            return moveHorizontal;
+        }
+
+        set
+        {
+            moveHorizontal = value;
+        }
+    }
+
     //Functiosn
     public abstract float TakeDamage(float damage);
 
     public void HandleInput(InputDevice inputDevice)
     {
         ActorState newState = ((ActorState)state).HandleInput(this, inputDevice);
-        if (!state.Equals(null))
-        {
-            state = newState;
-        }
+        state = newState;
     }
 
     public virtual void Move()
     {
+        //TODO Improve the movement code
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
 
+        transform.Translate(movement * actorStat.MoveVelocity * Time.deltaTime);
+        //Debug.Log("Translate" + transform.position.x);
+
+        //rb.AddForce(movement * actorStat.MoveVelocity);
     }
 
     public abstract void Jump();

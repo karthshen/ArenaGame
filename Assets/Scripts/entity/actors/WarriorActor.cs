@@ -4,7 +4,7 @@ using System.Collections;
 public class WarriorActor : AActor
 {
     ActorState defaultState;
-    Mesh warriorMesh = new Mesh();
+    Mesh warriorMesh;
 
     Ability warriorAbilityUp;
     Ability warriorAbilityDown;
@@ -15,11 +15,18 @@ public class WarriorActor : AActor
 
     public WarriorActor() : base()
     {
+        
+    }
+
+    void Start()
+    {
+        
         //Entity Config
         entityId = System.Guid.NewGuid();
         defaultState = new ActorStandingState();
         state = defaultState;
         entityMesh = warriorMesh;
+        rb = GetComponent<Rigidbody>();
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
@@ -61,5 +68,13 @@ public class WarriorActor : AActor
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();
+    }
+
+    /*
+     * This is for test cases ONLY
+     */
+    public void CallStart()
+    {
+        Start();
     }
 }

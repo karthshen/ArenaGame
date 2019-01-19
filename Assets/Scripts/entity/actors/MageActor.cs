@@ -4,7 +4,7 @@ using System.Collections;
 public class MageActor : AActor
 {
     ActorState defaultState;
-    Mesh mageMesh = new Mesh();
+    Mesh mageMesh;
 
     Ability mageAbilityUp;
     Ability mageAbilityDown;
@@ -13,12 +13,18 @@ public class MageActor : AActor
 
     string actorName = "Mage";
 
-    public MageActor()
+    public MageActor() : base()
+    {
+
+    }
+
+    private void Start()
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
         defaultState = new ActorStandingState();
         state = defaultState;
+        mageMesh = new Mesh();
         entityMesh = mageMesh;
 
         //Actor Config, button, ability, etc
@@ -61,5 +67,12 @@ public class MageActor : AActor
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();
+    }
+   /*
+    * This is for test cases ONLY
+    */
+    public void CallStart()
+    {
+        Start();
     }
 }

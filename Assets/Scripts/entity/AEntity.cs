@@ -1,16 +1,11 @@
 ﻿using UnityEngine;
 
-public abstract class AEntity
+public abstract class AEntity : MonoBehaviour
 {
     protected System.Guid entityId;
     protected string entityName;
     protected EntityState state;
     protected Mesh entityMesh;
-
-    protected AEntity()
-    {
-       
-    }
 
     public System.Guid GetEntityId()
     {
@@ -34,7 +29,7 @@ public abstract class AEntity
 
     public void NullParameterCheck()
     {
-         if (entityId == null || entityName == null || state == null || entityMesh == null)
+        if (entityId == null || entityName == null || state == null )//|| entityMesh == null)
         {
             throw new UnassignedReferenceException(GetType() + "class is not initialized correctly");
         }

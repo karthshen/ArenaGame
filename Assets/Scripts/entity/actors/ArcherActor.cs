@@ -4,7 +4,7 @@ using System.Collections;
 public class ArcherActor : AActor
 {
     ActorState defaultState;
-    Mesh archerMesh = new Mesh();
+    Mesh archerMesh;
 
     Ability archerAbilityUp;
     Ability archerAbilityDown;
@@ -13,12 +13,18 @@ public class ArcherActor : AActor
 
     string actorName = "Archer";
 
-    public ArcherActor()
+    public ArcherActor() : base()
+    {
+
+    }
+
+    private void Start()
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
         defaultState = new ActorStandingState();
         state = defaultState;
+        archerMesh = new Mesh();
         entityMesh = archerMesh;
 
         //Actor Config, button, ability, etc
@@ -61,5 +67,13 @@ public class ArcherActor : AActor
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();
+    }
+
+    /*
+     * This is for test cases ONLY
+     */
+    public void CallStart()
+    {
+        Start();
     }
 }

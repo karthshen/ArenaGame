@@ -4,6 +4,8 @@ using InControl;
 
 public class ActorMovingState : ActorState
 {
+    Command moveCommand = new MoveCommand();
+
     public ActorMovingState()
     {
     }
@@ -16,6 +18,8 @@ public class ActorMovingState : ActorState
         }
         else
         {
+            actor.MoveHorizontal = inputDevice.LeftStickX.Value;
+            moveCommand.Execute(actor);
             return this;
         }
     }

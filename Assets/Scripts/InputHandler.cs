@@ -8,10 +8,15 @@ public class InputHandler : MonoBehaviour
     private int playerNum;
     private List<AActor> actors;
 
+    public GameObject Player1;
+
     // Use this for initialization
     void Start()
     {
         actors = new List<AActor>();
+
+        //TODO Remove this after testing
+        AddPlayer(Player1.GetComponent<WarriorActor>());
     }
 
     // Update is called once per frame
