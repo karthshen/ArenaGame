@@ -57,8 +57,22 @@ namespace InControl
 			tempState.Set( state || tempState.State );
 		}
 
+        public void UpdateWithStateTestCase(bool state, ulong updateTick)
+        {
+            if (UpdateTick > updateTick)
+            {
+                throw new InvalidOperationException("A control cannot be updated with an earlier tick.");
+            }
 
-		public void UpdateWithValue( float value, ulong updateTick )
+            int val = state ? 1 : 0;
+
+            tempState.Set(val);
+            thisState.State = state;
+            thisState.Value = val;
+        }
+
+
+        public void UpdateWithValue( float value, ulong updateTick )
 		{
 			if (IsNull)
 			{

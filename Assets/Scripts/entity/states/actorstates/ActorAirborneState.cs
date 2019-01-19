@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class ActorAirborneState : ActorState
 {
@@ -7,9 +8,8 @@ public class ActorAirborneState : ActorState
     {
     }
 
-    public override ActorState HandleInput(AActor actor)
+    public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         throw new System.NotImplementedException();
     }
-
 }

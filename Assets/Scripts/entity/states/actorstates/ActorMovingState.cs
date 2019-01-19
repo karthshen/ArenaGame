@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class ActorMovingState : ActorState
 {
@@ -7,7 +8,7 @@ public class ActorMovingState : ActorState
     {
     }
 
-    public override ActorState HandleInput(AActor actor)
+    public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         return new ActorStandingState();
     }

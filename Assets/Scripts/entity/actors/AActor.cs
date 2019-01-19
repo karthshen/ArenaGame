@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public abstract class AActor : AEntity
 {
@@ -64,9 +65,9 @@ public abstract class AActor : AEntity
     //Functiosn
     public abstract float TakeDamage(float damage);
 
-    public void HandleInput()
+    public void HandleInput(InputDevice inputDevice)
     {
-        ActorState newState = ((ActorState)state).HandleInput(this);
+        ActorState newState = ((ActorState)state).HandleInput(this, inputDevice);
         if (!state.Equals(null))
         {
             state = newState;

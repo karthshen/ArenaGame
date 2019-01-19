@@ -3,12 +3,14 @@ using UnityEditor;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using InControl;
 
 public class PlayerTest
 {
     private class TestActor : AActor
     {
         public bool hasMoved = false;
+        public bool hasJumped = false;
 
         //Everything copied from WarriorActor
         ActorState defaultState;
@@ -58,7 +60,7 @@ public class PlayerTest
 
         public override void Jump()
         {
-            throw new System.NotImplementedException();
+            hasJumped = true;
         }
 
         public override void Move()
@@ -70,6 +72,17 @@ public class PlayerTest
         {
             throw new System.NotImplementedException();
         }
+    }
+
+    TestActor testActor;
+    InputDevice inputDevice;
+
+    [SetUp]
+    public void Setup()
+    {
+        testActor = new TestActor();
+        inputDevice = new InputDevice("");
+        inputDevice.TestControl();
     }
 
     [Test]
@@ -87,12 +100,22 @@ public class PlayerTest
     [Test]
     public void PlayerMoveTest()
     {
-        TestActor testActor = new TestActor();
-        ((ActorState)testActor.GetState()).HandleInput(testActor);
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action1, true, 1000);
+
+        testActor.HandleInput(inputDevice);
 
         //Character should be moved, and right after the move, the character should be stopped and Standing still
         Assert.AreEqual(true, testActor.hasMoved);
+        Assert.AreEqual(testActor.GetState().GetType(), typeof(ActorMovingState));
+
+        testActor.HandleInput(inputDevice);
         Assert.AreEqual(testActor.GetState().GetType(), typeof(ActorStandingState));
+    }
+   
+    [Test]
+    public void PlayerJumpTest()
+    {
+        testActor.HandleInput(inputDevice);
     }
 
     // A UnityTest behaves like a coroutine in PlayMode
