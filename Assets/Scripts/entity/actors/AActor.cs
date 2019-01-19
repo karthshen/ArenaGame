@@ -74,7 +74,10 @@ public abstract class AActor : AEntity
         }
     }
 
-    public abstract void Move();
+    public virtual void Move()
+    {
+
+    }
 
     public abstract void Jump();
 

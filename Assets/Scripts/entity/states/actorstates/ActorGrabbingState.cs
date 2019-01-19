@@ -4,7 +4,7 @@ using InControl;
 
 public class ActorGrabbingState : ActorState
 {
-    protected ActorGrabbingState()
+    public ActorGrabbingState()
     {
     }
 

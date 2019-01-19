@@ -6,6 +6,8 @@ public class ActorStandingState : ActorState
 {
     Command moveCommand = new MoveCommand();
     Command jumpCommand = new JumpCommand();
+    Command blockCommand = new BlockCommand();
+    Command grabCommand = new GrabCommand();
 
     public ActorStandingState()
     {
@@ -24,6 +26,16 @@ public class ActorStandingState : ActorState
         {
             jumpCommand.Execute(actor);
             return new ActorJumpState();
+        }
+        else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)
+        {
+            blockCommand.Execute(actor);
+            return new ActorBlockState();
+        }
+        else if (inputDevice.RightTrigger || inputDevice.RightBumper)
+        {
+            grabCommand.Execute(actor);
+            return new ActorGrabbingState();
         }
 
         return this;

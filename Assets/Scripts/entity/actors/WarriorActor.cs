@@ -53,9 +53,9 @@ public class WarriorActor : AActor
         throw new System.NotImplementedException();
     }
 
-    public override void Move()
+    public new void Move()
     {
-        throw new System.NotImplementedException();
+        base.Move();
     }
 
     public override float TakeDamage(float damage)

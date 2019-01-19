@@ -10,6 +10,7 @@ public class PlayerTest
     private class TestActor : AActor
     {
         public bool hasMoved = false;
+        public bool hasBlocked = false;
         public int hasJumped = 0;
 
         //Everything copied from WarriorActor
@@ -50,7 +51,7 @@ public class PlayerTest
 
         public override void Block()
         {
-            throw new System.NotImplementedException();
+            hasBlocked = true;
         }
 
         public override void Grab()
@@ -65,6 +66,7 @@ public class PlayerTest
 
         public override void Move()
         {
+            base.Move();
             hasMoved = true;
         }
 
@@ -133,9 +135,20 @@ public class PlayerTest
         Assert.AreEqual(typeof(ActorJumpState), testActor.GetState().GetType());
     }
 
+    [Test]
+    public void PlayerBlockTest()
+    {
+        inputDevice.UpdateWithStateTestCase(InputControlType.LeftTrigger, true, 1000);
+
+        testActor.HandleInput(inputDevice);
+
+        Assert.AreEqual(true, testActor.hasBlocked);
+        Assert.AreEqual(typeof(ActorBlockState), testActor.GetState().GetType());
+    }
+
     // A UnityTest behaves like a coroutine in PlayMode
     // and allows you to yield null to skip a frame in EditMode
-    [UnityTest]
+    //[UnityTest]
     public IEnumerator PlayerMoveTestWithEnumeratorPasses()
     {
         // Use the Assert class to test conditions.
