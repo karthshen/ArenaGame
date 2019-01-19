@@ -56,15 +56,6 @@ public class PlayerTest
             throw new System.NotImplementedException();
         }
 
-        public override void HandleInput()
-        {
-            ActorState newState = ((ActorState)state).HandleInput(this);
-            if (!state.Equals(null))
-            {
-                state = newState;
-            }
-        }
-
         public override void Jump()
         {
             throw new System.NotImplementedException();

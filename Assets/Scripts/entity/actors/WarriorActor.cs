@@ -4,28 +4,33 @@ using System.Collections;
 public class WarriorActor : AActor
 {
     ActorState defaultState;
-    Mesh warriorMesh;
+    Mesh warriorMesh = new Mesh();
 
     Ability warriorAbilityUp;
     Ability warriorAbilityDown;
     Ability warriorAbilityLeft;
     Ability warriorAbilityRight;
 
+    string actorName = "Warrior";
+
     public WarriorActor() : base()
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
+        defaultState = new ActorStandingState();
         state = defaultState;
         entityMesh = warriorMesh;
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
-        defaultState = new ActorStandingState();
+        entityName = actorName;
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
+
+        NullParameterCheck();
     }
 
     public override void Attack()
@@ -41,15 +46,6 @@ public class WarriorActor : AActor
     public override void Grab()
     {
         throw new System.NotImplementedException();
-    }
-
-    public override void HandleInput()
-    {
-        ActorState newState = defaultState.HandleInput(this);
-        if (!defaultState.Equals(null))
-        {
-            defaultState = newState;
-        }
     }
 
     public override void Jump()

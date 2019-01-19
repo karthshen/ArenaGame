@@ -18,15 +18,7 @@ public abstract class AActor : AEntity
 
     protected AActor() : base()
     { 
-        if (actorStat.Equals(null))
-        {
-            throw new MissingReferenceException("Actor stat/state is not set for " + this.name + ": " + this.GetEntityId());
-        }
 
-        if (abilityUp.Equals(null) || abilityDown.Equals(null) || abilityLeft.Equals(null) || abilityRight.Equals(null))
-        {
-            throw new MissingReferenceException("Actor ability configuration missing for " + this.name + ": " + this.GetEntityId());
-        }
     }
 
     //Mutators
@@ -72,7 +64,14 @@ public abstract class AActor : AEntity
     //Functiosn
     public abstract float TakeDamage(float damage);
 
-    public abstract void HandleInput();
+    public void HandleInput()
+    {
+        ActorState newState = ((ActorState)state).HandleInput(this);
+        if (!state.Equals(null))
+        {
+            state = newState;
+        }
+    }
 
     public abstract void Move();
 
@@ -87,5 +86,19 @@ public abstract class AActor : AEntity
     public ActorStat GetActorStat()
     {
         return this.actorStat;
+    }
+
+    public new void NullParameterCheck()
+    {
+        base.NullParameterCheck();
+        if (actorStat == null)
+        {
+            throw new MissingReferenceException("Actor stat/state is not set for " + this.entityName + ": " + this.GetEntityId());
+        }
+
+        //if (abilityUp.Equals(null) || abilityDown.Equals(null) || abilityLeft.Equals(null) || abilityRight.Equals(null))
+        //{
+        //    throw new MissingReferenceException("Actor ability configuration missing for " + this.name + ": " + this.GetEntityId());
+        //}
     }
 }

@@ -3,6 +3,8 @@ using UnityEditor;
 
 public class ActorStandingState : ActorState
 {
+    Command moveCommand = new MoveCommand();
+
     public ActorStandingState()
     {
 
@@ -10,6 +12,7 @@ public class ActorStandingState : ActorState
 
     public override ActorState HandleInput(AActor actor)
     {
-        throw new System.NotImplementedException();
+        moveCommand.Execute(actor);
+        return new ActorMovingState();
     }
 }

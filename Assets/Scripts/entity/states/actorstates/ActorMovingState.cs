@@ -9,6 +9,6 @@ public class ActorMovingState : ActorState
 
     public override ActorState HandleInput(AActor actor)
     {
-        throw new System.NotImplementedException();
+        return new ActorStandingState();
     }
 }

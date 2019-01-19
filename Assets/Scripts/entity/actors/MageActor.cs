@@ -4,28 +4,33 @@ using System.Collections;
 public class MageActor : AActor
 {
     ActorState defaultState;
-    Mesh mageMesh;
+    Mesh mageMesh = new Mesh();
 
     Ability mageAbilityUp;
     Ability mageAbilityDown;
     Ability mageAbilityLeft;
     Ability mageAbilityRight;
 
+    string actorName = "Mage";
+
     public MageActor()
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
+        defaultState = new ActorStandingState();
         state = defaultState;
         entityMesh = mageMesh;
 
         //Actor Config, button, ability, etc
         actorStat = new MageStat();
-        defaultState = new ActorStandingState();
+        entityName = actorName;
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;
         abilityUp = mageAbilityUp;
         abilityDown = mageAbilityDown;
+
+        NullParameterCheck();
     }
 
     public override void Attack()
@@ -41,15 +46,6 @@ public class MageActor : AActor
     public override void Grab()
     {
         throw new System.NotImplementedException();
-    }
-
-    public override void HandleInput()
-    {
-        ActorState newState = defaultState.HandleInput(this);
-        if (!defaultState.Equals(null))
-        {
-            defaultState = newState;
-        }
     }
 
     public override void Jump()

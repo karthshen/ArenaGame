@@ -4,28 +4,33 @@ using System.Collections;
 public class ArcherActor : AActor
 {
     ActorState defaultState;
-    Mesh archerMesh;
+    Mesh archerMesh = new Mesh();
 
     Ability archerAbilityUp;
     Ability archerAbilityDown;
     Ability archerAbilityLeft;
     Ability archerAbilityRight;
 
+    string actorName = "Archer";
+
     public ArcherActor()
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
+        defaultState = new ActorStandingState();
         state = defaultState;
         entityMesh = archerMesh;
 
         //Actor Config, button, ability, etc
         actorStat = new ArcherStat();
-        defaultState = new ActorStandingState();
+        entityName = actorName;
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;
         abilityUp = archerAbilityUp;
         abilityDown = archerAbilityDown;
+
+        NullParameterCheck();
     }
 
     public override void Attack()
@@ -41,15 +46,6 @@ public class ArcherActor : AActor
     public override void Grab()
     {
         throw new System.NotImplementedException();
-    }
-
-    public override void HandleInput()
-    {
-        ActorState newState = defaultState.HandleInput(this);
-        if (!defaultState.Equals(null))
-        {
-            defaultState = newState;
-        }
     }
 
     public override void Jump()
