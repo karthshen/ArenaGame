@@ -61,7 +61,7 @@ public class ArcherActor : AActor
 
     public override void Move()
     {
-        throw new System.NotImplementedException();
+        base.Move();
     }
 
     public override float TakeDamage(float damage)
