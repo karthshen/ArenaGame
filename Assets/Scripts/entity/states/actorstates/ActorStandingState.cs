@@ -21,7 +21,6 @@ public class ActorStandingState : ActorState
         PlayAnimation(actor);
         if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
         {
-            Debug.Log("Creating Moving State" + Time.frameCount);
             return new ActorMovingState();
         }
 
