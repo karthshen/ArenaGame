@@ -15,10 +15,7 @@ public class ActorJumpState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        //if (actor.IsGrounded)
-        //{
-        //    return new ActorStandingState();
-        //}
+        PlayAnimation(actor);
 
         if (inputDevice.LeftStickX.Value != 0)
         {
@@ -43,5 +40,10 @@ public class ActorJumpState : ActorState
     public void Jumped()
     {
         jumpNum--;
+    }
+
+    protected override void PlayAnimation(AActor actor)
+    {
+        actor.GetAnimatorController().SetInt("animation,17");
     }
 }

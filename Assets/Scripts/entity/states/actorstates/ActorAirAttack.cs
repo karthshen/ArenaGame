@@ -19,4 +19,9 @@ public class ActorAirAttack : ActorState
     {
         this.bJump = bJump;
     }
+
+    protected override void PlayAnimation(AActor actor)
+    {
+        throw new System.NotImplementedException();
+    }
 }

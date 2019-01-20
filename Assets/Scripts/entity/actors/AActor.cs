@@ -16,7 +16,7 @@ public abstract class AActor : AEntity
     protected Ability abilityLeft;
     protected Ability abilityRight;
 
-    protected Animator animator;
+    protected AnimatorController ac;
 
     protected PickupItem item = null;
 
@@ -90,9 +90,9 @@ public abstract class AActor : AEntity
         }
     }
 
-    public Animator GetAnimator()
+    public AnimatorController GetAnimatorController()
     {
-        return animator;
+        return ac;
     }
 
     //Functiosn

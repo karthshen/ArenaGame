@@ -16,8 +16,6 @@ public class ActorMovingState : ActorStandingState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        actor.GetAnimator().SetInteger("animation", 17);
-
         if (inputDevice.LeftStickX.Value == 0)
         {
             return new ActorStandingState();
@@ -29,5 +27,10 @@ public class ActorMovingState : ActorStandingState
         }
 
         return base.HandleInput(actor, inputDevice);
+    }
+
+    protected override void PlayAnimation(AActor actor)
+    {
+        actor.GetAnimatorController().SetInt("animation,20");
     }
 }

@@ -9,7 +9,7 @@ public class ActorStandingState : ActorState
     Command blockCommand = new BlockCommand();
     Command grabCommand = new GrabCommand();
 
-    public ActorStandingState()
+    public ActorStandingState() :base()
     {
        
     }
@@ -18,12 +18,10 @@ public class ActorStandingState : ActorState
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         //actor.GetAnimator().enabled = true;
-        actor.GetAnimator().SetInteger("animation", 13);
-
+        PlayAnimation(actor);
         if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
         {
             Debug.Log("Creating Moving State" + Time.frameCount);
-            actor.GetAnimator().StopPlayback();
             return new ActorMovingState();
         }
 
@@ -45,5 +43,10 @@ public class ActorStandingState : ActorState
         }
 
         return this;
+    }
+
+    protected override void PlayAnimation(AActor actor)
+    {
+        actor.GetAnimatorController().SetInt("animation,13");
     }
 }
