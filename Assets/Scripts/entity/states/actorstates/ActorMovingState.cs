@@ -11,11 +11,14 @@ public class ActorMovingState : ActorStandingState
 
     public ActorMovingState()
     {
+
     }
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        if(inputDevice.LeftStickX.Value == 0)
+        actor.GetAnimator().SetInteger("animation", 17);
+
+        if (inputDevice.LeftStickX.Value == 0)
         {
             return new ActorStandingState();
         }

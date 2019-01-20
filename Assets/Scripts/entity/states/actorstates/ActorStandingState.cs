@@ -11,15 +11,19 @@ public class ActorStandingState : ActorState
 
     public ActorStandingState()
     {
-
+       
     }
 
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
+        //actor.GetAnimator().enabled = true;
+        actor.GetAnimator().SetInteger("animation", 13);
+
         if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
         {
             Debug.Log("Creating Moving State" + Time.frameCount);
+            actor.GetAnimator().StopPlayback();
             return new ActorMovingState();
         }
 
