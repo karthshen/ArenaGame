@@ -26,6 +26,7 @@ public class ActorStandingState : ActorState
         if ((inputDevice.Action3 || inputDevice.Action4))
         {
             actor.IsGrounded = false;
+            jumpCommand.Execute(actor);
             return new ActorJumpState();
         }
         else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)

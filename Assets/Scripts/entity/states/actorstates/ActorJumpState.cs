@@ -7,7 +7,7 @@ public class ActorJumpState : ActorState
     Command jumpCommand = new JumpCommand();
     Command moveCommand = new MoveCommand();
 
-    int jumpNum = 2;
+    int jumpNum = 1;
 
     public ActorJumpState()
     {
