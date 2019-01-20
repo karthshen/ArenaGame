@@ -37,6 +37,7 @@ public class PlayerTest
             state = defaultState;
             entityMesh = warriorMesh;
             rb = GetComponent<Rigidbody>();
+            ac = GetComponent<AnimatorController>();
 
             //Actor Config, button, ability, etc
             actorStat = new WarriorStat();
@@ -107,6 +108,14 @@ public class PlayerTest
 
         testActor.AddComponent<TestActor>();
         testActor.AddComponent<Rigidbody>();
+        testActor.AddComponent<AnimatorController>();
+        testActor.AddComponent<Animator>();
+
+        //Setup animators
+        Animator[] animators = new Animator[1];
+        animators[0] = testActor.GetComponent<Animator>();
+        testActor.GetComponent<AnimatorController>().animators = animators;
+
         testActor.GetComponent<TestActor>().CallStart();
 
         warriorActor.AddComponent<WarriorActor>();
