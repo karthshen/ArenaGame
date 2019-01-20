@@ -19,4 +19,9 @@ public class ActorBlockState : ActorState
         }
         return this;
     }
+
+    protected override void PlayAnimation(AActor actor)
+    {
+        throw new System.NotImplementedException();
+    }
 }

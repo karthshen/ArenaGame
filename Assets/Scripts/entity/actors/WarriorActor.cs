@@ -28,6 +28,8 @@ public class WarriorActor : AActor
         entityMesh = warriorMesh;
         rb = GetComponent<Rigidbody>();
 
+        ac = GetComponent<AnimatorController>();
+
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
         entityName = actorName;

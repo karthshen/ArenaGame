@@ -16,6 +16,8 @@ public abstract class AActor : AEntity
     protected Ability abilityLeft;
     protected Ability abilityRight;
 
+    protected AnimatorController ac;
+
     protected PickupItem item = null;
 
     protected Rigidbody rb;
@@ -86,6 +88,11 @@ public abstract class AActor : AEntity
         {
             bIsGrounded = value;
         }
+    }
+
+    public AnimatorController GetAnimatorController()
+    {
+        return ac;
     }
 
     //Functiosn

@@ -12,4 +12,9 @@ public class ActorGrabbingState : ActorState
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void PlayAnimation(AActor actor)
+    {
+        throw new System.NotImplementedException();
+    }
 }
