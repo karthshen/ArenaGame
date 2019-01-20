@@ -106,6 +106,7 @@ public class PlayerTest
         mageActor = new GameObject("MageActor");
 
         testActor.AddComponent<TestActor>();
+        testActor.AddComponent<Rigidbody>();
         testActor.GetComponent<TestActor>().CallStart();
 
         warriorActor.AddComponent<WarriorActor>();
@@ -135,11 +136,11 @@ public class PlayerTest
         inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, true, 1000);
 
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
-
-        //Character should be moved, and right after the move, the character should be stopped and Standing still
-        Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasMoved);
         Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorMovingState));
 
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+        //Character should be moved, and right after the move, the character should be stopped and Standing still
+        Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasMoved);
         inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, false, 1001);
 
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);

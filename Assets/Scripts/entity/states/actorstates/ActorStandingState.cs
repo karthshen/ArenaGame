@@ -17,14 +17,15 @@ public class ActorStandingState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        if (inputDevice.LeftStickX.Value != 0)
+        if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
         {
-            actor.MoveHorizontal = inputDevice.LeftStickX.Value;
-            moveCommand.Execute(actor);
+            Debug.Log("Creating Moving State" + Time.frameCount);
             return new ActorMovingState();
         }
-        else if (inputDevice.Action3 || inputDevice.Action4)
+
+        if ((inputDevice.Action3 || inputDevice.Action4))
         {
+            actor.IsGrounded = false;
             jumpCommand.Execute(actor);
             return new ActorJumpState();
         }

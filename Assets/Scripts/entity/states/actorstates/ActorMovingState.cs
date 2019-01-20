@@ -2,9 +2,12 @@
 using System.Collections;
 using InControl;
 
-public class ActorMovingState : ActorState
+public class ActorMovingState : ActorStandingState
 {
     Command moveCommand = new MoveCommand();
+    Command jumpCommand = new JumpCommand();
+    Command blockCommand = new BlockCommand();
+    Command grabCommand = new GrabCommand();
 
     public ActorMovingState()
     {
@@ -20,7 +23,8 @@ public class ActorMovingState : ActorState
         {
             actor.MoveHorizontal = inputDevice.LeftStickX.Value;
             moveCommand.Execute(actor);
-            return this;
         }
+
+        return base.HandleInput(actor, inputDevice);
     }
 }
