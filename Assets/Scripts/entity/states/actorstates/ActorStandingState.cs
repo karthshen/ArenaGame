@@ -21,11 +21,11 @@ public class ActorStandingState : ActorState
         {
             actor.MoveHorizontal = inputDevice.LeftStickX.Value;
             moveCommand.Execute(actor);
-            return new ActorMovingState();
         }
-        else if (inputDevice.Action3 || inputDevice.Action4)
+
+        if ((inputDevice.Action3 || inputDevice.Action4))
         {
-            jumpCommand.Execute(actor);
+            actor.IsGrounded = false;
             return new ActorJumpState();
         }
         else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)

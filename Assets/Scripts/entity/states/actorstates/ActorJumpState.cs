@@ -5,8 +5,9 @@ using InControl;
 public class ActorJumpState : ActorState
 {
     Command jumpCommand = new JumpCommand();
+    Command moveCommand = new MoveCommand();
 
-    bool bJump = true;
+    int jumpNum = 2;
 
     public ActorJumpState()
     {
@@ -14,12 +15,24 @@ public class ActorJumpState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        if(inputDevice.Action3 || inputDevice.Action4)
+        //if (actor.IsGrounded)
+        //{
+        //    return new ActorStandingState();
+        //}
+
+        if (inputDevice.LeftStickX.Value != 0)
         {
-            if (bJump)
+            actor.MoveHorizontal = inputDevice.LeftStickX.Value;
+            moveCommand.Execute(actor);
+        }
+
+        if (inputDevice.Action3.WasPressed || inputDevice.Action4.WasPressed)
+        {
+            if (jumpNum > 0 && actor.IsGrounded == false)
             {
+                Jumped();
+                Debug.Log("Jump: "+ jumpNum + "- Vertical Velocity: " + actor.GetRigidbody().velocity.y);
                 jumpCommand.Execute(actor);
-                SetCanJump(false);
                 return this;
             }
         }
@@ -27,8 +40,8 @@ public class ActorJumpState : ActorState
         return this;
     }
 
-    public void SetCanJump(bool bJump)
+    public void Jumped()
     {
-        this.bJump = bJump;
+        jumpNum--;
     }
 }

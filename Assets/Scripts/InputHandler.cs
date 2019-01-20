@@ -20,6 +20,8 @@ public class InputHandler : MonoBehaviour
         //TODO Remove this after testing
         AddPlayer(Player1.GetComponent<AActor>());
         AddPlayer(Player2.GetComponent<AActor>());
+
+        Physics.gravity = Physics.gravity * 1.54f;
     }
 
     // Update is called once per frame

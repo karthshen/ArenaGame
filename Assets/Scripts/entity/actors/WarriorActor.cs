@@ -57,7 +57,7 @@ public class WarriorActor : AActor
 
     public override void Jump()
     {
-        throw new System.NotImplementedException();
+        base.Jump();
     }
 
     public new void Move()

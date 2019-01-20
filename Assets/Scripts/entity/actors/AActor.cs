@@ -20,6 +20,8 @@ public abstract class AActor : AEntity
 
     protected Rigidbody rb;
 
+    private bool bIsGrounded = false;
+
     //Mutators
     protected float CurrentHealth
     {
@@ -73,13 +75,29 @@ public abstract class AActor : AEntity
         }
     }
 
+    public bool IsGrounded
+    {
+        get
+        {
+            return bIsGrounded;
+        }
+
+        set
+        {
+            bIsGrounded = value;
+        }
+    }
+
     //Functiosn
     public abstract float TakeDamage(float damage);
 
     public void HandleInput(InputDevice inputDevice)
     {
         ActorState newState = ((ActorState)state).HandleInput(this, inputDevice);
-        state = newState;
+        if(state != null)
+        {
+            state = newState;
+        }
     }
 
     public virtual void Move()
@@ -93,7 +111,13 @@ public abstract class AActor : AEntity
         //rb.AddForce(movement * actorStat.MoveVelocity);
     }
 
-    public abstract void Jump();
+    public virtual void Jump()
+    {
+        //rb.AddForce(Vector3.up * actorStat.JumpVelocity);
+        GetRigidbody().velocity = Vector3.zero;
+        GetRigidbody().angularVelocity = Vector3.zero;
+        rb.AddForce(Vector3.up * actorStat.JumpVelocity * 111);
+    }
 
     public abstract void Attack();
 
@@ -118,5 +142,19 @@ public abstract class AActor : AEntity
         //{
         //    throw new MissingReferenceException("Actor ability configuration missing for " + this.name + ": " + this.GetEntityId());
         //}
+    }
+
+    public Rigidbody GetRigidbody()
+    {
+        return rb;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            bIsGrounded = true;
+            this.state = new ActorStandingState();
+        }
     }
 }
