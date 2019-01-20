@@ -96,7 +96,7 @@ public abstract class AActor : AEntity
         ActorState newState = ((ActorState)state).HandleInput(this, inputDevice);
         if(state != null)
         {
-            Debug.Log("CurrentState:" + state.GetType());
+            //Debug.Log("CurrentState:" + state.GetType());
             state = newState;
         }
     }
@@ -105,10 +105,7 @@ public abstract class AActor : AEntity
     {
         //TODO Improve the movement code
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-
         transform.Translate(movement * actorStat.MoveVelocity * Time.deltaTime);
-        //Debug.Log("Translate" + transform.position.x);
-
         //rb.AddForce(movement * actorStat.MoveVelocity);
     }
 

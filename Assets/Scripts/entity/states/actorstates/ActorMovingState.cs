@@ -2,7 +2,7 @@
 using System.Collections;
 using InControl;
 
-public class ActorMovingState : ActorState
+public class ActorMovingState : ActorStandingState
 {
     Command moveCommand = new MoveCommand();
     Command jumpCommand = new JumpCommand();
@@ -19,29 +19,12 @@ public class ActorMovingState : ActorState
         {
             return new ActorStandingState();
         }
-        else if (inputDevice.LeftStickX.Value != 0)
+        else
         {
             actor.MoveHorizontal = inputDevice.LeftStickX.Value;
             moveCommand.Execute(actor);
         }
 
-        if ((inputDevice.Action3 || inputDevice.Action4))
-        {
-            actor.IsGrounded = false;
-            jumpCommand.Execute(actor);
-            return new ActorJumpState();
-        }
-        else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)
-        {
-            blockCommand.Execute(actor);
-            return new ActorBlockState();
-        }
-        else if (inputDevice.RightTrigger || inputDevice.RightBumper)
-        {
-            grabCommand.Execute(actor);
-            return new ActorGrabbingState();
-        }
-
-        return this;
+        return base.HandleInput(actor, inputDevice);
     }
 }
