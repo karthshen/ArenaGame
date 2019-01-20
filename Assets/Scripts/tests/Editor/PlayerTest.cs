@@ -154,6 +154,10 @@ public class PlayerTest
 
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
 
+        Assert.AreEqual(0, testActor.GetComponent<TestActor>().hasJumped);
+        Assert.AreEqual(typeof(ActorJumpState), testActor.GetComponent<TestActor>().GetState().GetType());
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
         Assert.AreEqual(1, testActor.GetComponent<TestActor>().hasJumped);
         Assert.AreEqual(typeof(ActorJumpState), testActor.GetComponent<TestActor>().GetState().GetType());
 
