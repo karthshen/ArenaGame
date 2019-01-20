@@ -21,6 +21,7 @@ public class ActorStandingState : ActorState
         {
             actor.MoveHorizontal = inputDevice.LeftStickX.Value;
             moveCommand.Execute(actor);
+            return new ActorMovingState();
         }
 
         if ((inputDevice.Action3 || inputDevice.Action4))

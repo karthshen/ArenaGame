@@ -31,7 +31,7 @@ public class ActorJumpState : ActorState
             if (jumpNum > 0 && actor.IsGrounded == false)
             {
                 Jumped();
-                Debug.Log("Jump: "+ jumpNum + "- Vertical Velocity: " + actor.GetRigidbody().velocity.y);
+                //Debug.Log("Jump: "+ jumpNum + "- Vertical Velocity: " + actor.GetRigidbody().velocity.y);
                 jumpCommand.Execute(actor);
                 return this;
             }

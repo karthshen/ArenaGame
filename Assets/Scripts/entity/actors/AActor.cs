@@ -96,6 +96,7 @@ public abstract class AActor : AEntity
         ActorState newState = ((ActorState)state).HandleInput(this, inputDevice);
         if(state != null)
         {
+            Debug.Log("CurrentState:" + state.GetType());
             state = newState;
         }
     }
