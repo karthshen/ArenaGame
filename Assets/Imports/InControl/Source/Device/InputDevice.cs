@@ -86,6 +86,11 @@ namespace InControl
             GetControlTestCase(inputControlType).UpdateWithStateTestCase(state, updateTick);
         }
 
+        public void UpdateWithValueTestCase(InputControlType inputControlType, float value, ulong updateTick)
+        {
+            GetControlTestCase(inputControlType).UpdateWithValueTestCase(value, updateTick);
+        }
+
         // Warning: this is not efficient. Don't use it unless you have to, m'kay?
         public static InputControlType GetInputControlTypeByName( string inputControlName )
 		{
