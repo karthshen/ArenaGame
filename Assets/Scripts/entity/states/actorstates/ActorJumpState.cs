@@ -44,6 +44,13 @@ public class ActorJumpState : ActorState
 
     protected override void PlayAnimation(AActor actor)
     {
-        actor.GetAnimatorController().SetInt("animation,16");
+        if (jumpNum == 1)
+        {
+            actor.GetAnimatorController().SetInt("animation,16");
+        }
+        else
+        {
+            actor.GetAnimatorController().SetInt("animation,4");
+        }
     }
 }

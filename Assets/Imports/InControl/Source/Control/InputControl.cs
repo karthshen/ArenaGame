@@ -71,6 +71,21 @@ namespace InControl
             thisState.Value = val;
         }
 
+        public void UpdateWithValueTestCase(float value, ulong updateTick)
+        { 
+            if (UpdateTick > updateTick)
+            {
+                throw new InvalidOperationException("A control cannot be updated with an earlier tick.");
+            }
+
+            if (Mathf.Abs(value) > Mathf.Abs(tempState.Value))
+            {
+                tempState.Set(value);
+            }
+            thisState.Value = value;
+        }
+
+
 
         public void UpdateWithValue( float value, ulong updateTick )
 		{

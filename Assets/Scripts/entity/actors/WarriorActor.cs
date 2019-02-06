@@ -62,7 +62,7 @@ public class WarriorActor : AActor
         base.Jump();
     }
 
-    public new void Move()
+    public override void Move()
     {
         base.Move();
     }

@@ -9,6 +9,9 @@ public abstract class AActor : AEntity
     private float currentEnergy;
     private float moveHorizontal;
 
+    private Vector3 frontDirection = new Vector3(0, 90, 0);
+    private Vector3 backDirection = new Vector3(0, 270, 0);
+
     protected ActorStat actorStat;
 
     protected Ability abilityUp;
@@ -111,6 +114,7 @@ public abstract class AActor : AEntity
     public virtual void Move()
     {
         //TODO Improve the movement code
+        TurnAround();
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
         transform.Translate(movement * actorStat.MoveVelocity * Time.deltaTime);
         //rb.AddForce(movement * actorStat.MoveVelocity);
@@ -154,12 +158,25 @@ public abstract class AActor : AEntity
         return rb;
     }
 
+    //Private functions
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             bIsGrounded = true;
             this.state = new ActorStandingState();
+        }
+    }
+
+    private void TurnAround()
+    {
+        if(moveHorizontal > 0)
+        {
+            transform.GetChild(0).eulerAngles = frontDirection;
+        }
+        else if (moveHorizontal < 0)
+        {
+            transform.GetChild(0).eulerAngles = backDirection;
         }
     }
 }

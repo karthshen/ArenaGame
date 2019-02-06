@@ -96,6 +96,8 @@ public class PlayerTest
     GameObject archerActor;
     GameObject mageActor;
 
+    GameObject warriorMesh;
+
     InputDevice inputDevice;
 
     [SetUp]
@@ -105,11 +107,15 @@ public class PlayerTest
         warriorActor = new GameObject("WarriorActor");
         archerActor = new GameObject("ArcherActor");
         mageActor = new GameObject("MageActor");
+        warriorMesh = new GameObject("WarriorMesh");
 
         testActor.AddComponent<TestActor>();
         testActor.AddComponent<Rigidbody>();
         testActor.AddComponent<AnimatorController>();
         testActor.AddComponent<Animator>();
+
+        //Attach Warrior Mesh to TestActor
+        warriorMesh.transform.parent = testActor.transform;
 
         //Setup animators
         Animator[] animators = new Animator[1];
@@ -118,6 +124,13 @@ public class PlayerTest
 
         testActor.GetComponent<TestActor>().CallStart();
 
+        inputDevice = new InputDevice("");
+        inputDevice.TestControl();
+    }
+
+    [Test]
+    public void PlayerNullAttributeTest()
+    {
         warriorActor.AddComponent<WarriorActor>();
         warriorActor.GetComponent<WarriorActor>().CallStart();
 
@@ -127,30 +140,38 @@ public class PlayerTest
         mageActor.AddComponent<MageActor>();
         mageActor.GetComponent<MageActor>().CallStart();
 
-        inputDevice = new InputDevice("");
-        inputDevice.TestControl();
-    }
-
-    [Test]
-    public void PlayerNullAttributeTest()
-    {
         Assert.AreEqual(archerActor.GetComponent<ArcherActor>().GetName(), "Archer");
         Assert.AreEqual(warriorActor.GetComponent<WarriorActor>().GetName(), "Warrior");
         Assert.AreEqual(mageActor.GetComponent<MageActor>().GetName(), "Mage");
+
+        Assert.AreNotEqual(archerActor.GetComponent<ArcherActor>().GetActorStat().MoveVelocity, warriorActor.GetComponent<WarriorActor>().GetActorStat().MoveVelocity);
     }
 
     [Test]
     public void PlayerMoveTest()
     {
+        //Input Move joystick left x to right
         inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, true, 1000);
 
+        //Character enters moving state
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
         Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorMovingState));
 
+        //Character should be moved
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
-        //Character should be moved, and right after the move, the character should be stopped and Standing still
         Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasMoved);
-        inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, false, 1001);
+
+        //Character should be facing forward direction
+        Assert.AreEqual(new Vector3(0, 90, 0), testActor.transform.GetChild(0).eulerAngles);
+
+        //Input Move joystick left x to left
+        inputDevice.UpdateWithValueTestCase(InputControlType.LeftStickX, -1, 1001);
+        //Character should be facing backward direction
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+        Assert.AreEqual(new Vector3(0, 270, 0), testActor.transform.GetChild(0).eulerAngles);
+
+        //After the move, the character should be stopped and Standing still
+        inputDevice.UpdateWithStateTestCase(InputControlType.LeftStickX, false, 1002);
 
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
         Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorStandingState));
