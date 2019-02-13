@@ -10,7 +10,15 @@ public class WarriorSword : PickupItem
 
     public override void UseItem()
     {
-        Debug.Log("Warrior waves sowrd");
+        GetComponent<Collider>().enabled = true;
+    }
+
+    private void Update()
+    {
+        if(owner.GetState().GetType()!= typeof(ActorAttackState))
+        {
+            GetComponent<Collider>().enabled = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
