@@ -46,7 +46,7 @@ public abstract class AActor : AEntity
     protected float attackTimer = 0f;
 
     //Mutators
-    protected float CurrentHealth
+    public float CurrentHealth
     {
         get
         {
