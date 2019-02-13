@@ -14,6 +14,8 @@ public class WarriorActor : AActor
 
     string actorName = "Warrior";
 
+    public WarriorSword sword;
+
     public WarriorActor() : base()
     {
         
@@ -40,15 +42,18 @@ public class WarriorActor : AActor
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
 
+        if (sword)
+        {
+            sword.ItemPickUp(this);
+        }
+
         NullParameterCheck();
     }
 
     public override void Attack()
     {
-        Debug.Log("Warrior Attacked");
         //Write code to capture the target enemy
-
-
+        sword.UseItem();
     }
 
     public override void Block()
