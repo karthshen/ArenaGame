@@ -1,0 +1,234 @@
+fileFormatVersion: 2
+guid: 86c84f6a3721ccf489a148187bf3345f
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: brace01_002
+    100004: brace01_1
+    100006: brace02_002
+    100008: brace02_1
+    100010: brace03_002
+    100012: brace03_1
+    100014: CATRigCATRigHead
+    100016: CATRigLArm1
+    100018: CATRigLArm2
+    100020: CATRigLArmCollarbone
+    100022: CATRigLArmPalm
+    100024: CATRigPelvis
+    100026: CATRigRArm1
+    100028: CATRigRArm2
+    100030: CATRigRArmCollarbone
+    100032: CATRigSpine
+    100034: CATRigSpine1
+    100036: CATRigSpine2
+    100038: CATRigSpine3
+    100040: CATRigSpine4
+    100042: Head_slot
+    100044: helmet01
+    100046: helmet02
+    100048: helmet03
+    100050: LBracers_slot
+    100052: LShoulders_slot
+    100054: RBracers_slot
+    100056: RShoulders_slot
+    100058: Shield01
+    100060: Shield02
+    100062: Shield03
+    100064: shoulder01_002
+    100066: shoulder01_1
+    100068: shoulder02_002
+    100070: shoulder02_1
+    100072: shoulder03_002
+    100074: shoulder03_1
+    400000: //RootNode
+    400002: brace01_002
+    400004: brace01_1
+    400006: brace02_002
+    400008: brace02_1
+    400010: brace03_002
+    400012: brace03_1
+    400014: CATRigCATRigHead
+    400016: CATRigLArm1
+    400018: CATRigLArm2
+    400020: CATRigLArmCollarbone
+    400022: CATRigLArmPalm
+    400024: CATRigPelvis
+    400026: CATRigRArm1
+    400028: CATRigRArm2
+    400030: CATRigRArmCollarbone
+    400032: CATRigSpine
+    400034: CATRigSpine1
+    400036: CATRigSpine2
+    400038: CATRigSpine3
+    400040: CATRigSpine4
+    400042: Head_slot
+    400044: helmet01
+    400046: helmet02
+    400048: helmet03
+    400050: LBracers_slot
+    400052: LShoulders_slot
+    400054: RBracers_slot
+    400056: RShoulders_slot
+    400058: Shield01
+    400060: Shield02
+    400062: Shield03
+    400064: shoulder01_002
+    400066: shoulder01_1
+    400068: shoulder02_002
+    400070: shoulder02_1
+    400072: shoulder03_002
+    400074: shoulder03_1
+    2100000: 'Material #35'
+    2100002: 'Material #28'
+    2100004: 'Material #32'
+    2100006: 'Material #228'
+    2100008: 'Material #49'
+    2100010: 'Material #225'
+    2100012: 'Material #254'
+    2100014: 'Material #207'
+    2100016: 'Material #44'
+    2100018: 'Material #51'
+    2100020: 'Material #41'
+    2100022: 'Material #55'
+    2300000: brace01_002
+    2300002: brace01_1
+    2300004: brace02_002
+    2300006: brace02_1
+    2300008: brace03_002
+    2300010: brace03_1
+    2300012: helmet01
+    2300014: helmet02
+    2300016: helmet03
+    2300018: Shield01
+    2300020: Shield02
+    2300022: Shield03
+    2300024: shoulder01_002
+    2300026: shoulder01_1
+    2300028: shoulder02_002
+    2300030: shoulder02_1
+    2300032: shoulder03_002
+    2300034: shoulder03_1
+    3300000: brace01_002
+    3300002: brace01_1
+    3300004: brace02_002
+    3300006: brace02_1
+    3300008: brace03_002
+    3300010: brace03_1
+    3300012: helmet01
+    3300014: helmet02
+    3300016: helmet03
+    3300018: Shield01
+    3300020: Shield02
+    3300022: Shield03
+    3300024: shoulder01_002
+    3300026: shoulder01_1
+    3300028: shoulder02_002
+    3300030: shoulder02_1
+    3300032: shoulder03_002
+    3300034: shoulder03_1
+    4300000: Shield03
+    4300002: Shield01
+    4300004: Shield02
+    4300006: brace03_002
+    4300008: brace01_002
+    4300010: brace02_002
+    4300012: shoulder02_002
+    4300014: shoulder01_002
+    4300016: shoulder03_002
+    4300018: helmet02
+    4300020: helmet03
+    4300022: helmet01
+    4300024: brace01_1
+    4300026: brace03_1
+    4300028: brace02_1
+    4300030: shoulder02_1
+    4300032: shoulder03_1
+    4300034: shoulder01_1
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
