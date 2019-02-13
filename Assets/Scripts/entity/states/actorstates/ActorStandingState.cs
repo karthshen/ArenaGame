@@ -8,6 +8,7 @@ public class ActorStandingState : ActorState
     Command jumpCommand = new JumpCommand();
     Command blockCommand = new BlockCommand();
     Command grabCommand = new GrabCommand();
+    Command attackCommand = new AttackCommand();
 
     public ActorStandingState() :base()
     {
@@ -39,6 +40,13 @@ public class ActorStandingState : ActorState
         {
             grabCommand.Execute(actor);
             return new ActorGrabbingState();
+        }
+        else if (inputDevice.Action2)
+        {
+            actor.GenerateAttackQueue();
+            actor.AttackTimer = AActor.ATTACK_TIMER;
+            attackCommand.Execute(actor);
+            return new ActorAttackState();
         }
 
         return this;

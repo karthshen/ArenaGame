@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WarriorActor : AActor
 {
@@ -44,7 +45,10 @@ public class WarriorActor : AActor
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Warrior Attacked");
+        //Write code to capture the target enemy
+
+
     }
 
     public override void Block()
@@ -67,10 +71,35 @@ public class WarriorActor : AActor
         base.Move();
     }
 
+    public override void GenerateAttackQueue()
+    {
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
+        attackQueue.Enqueue(Combo.Attack2);
+    }
+
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();
     }
+
+    //MonoBehavior Functions
+    private void Update()
+    {
+        //Debug.Log("AttackTimer " + attackTimer);
+        if (attackTimer > 0)
+        {
+            attackTimer -= Time.deltaTime;
+            if(attackTimer <= 0)
+            {
+                //Back to standing after each attack
+                state = new ActorStandingState();
+            }
+        }
+    }
+
 
     /*
      * This is for test cases ONLY

@@ -9,7 +9,7 @@ public class ActorMovingState : ActorStandingState
     Command blockCommand = new BlockCommand();
     Command grabCommand = new GrabCommand();
 
-    public ActorMovingState()
+    public ActorMovingState() : base()
     {
 
     }

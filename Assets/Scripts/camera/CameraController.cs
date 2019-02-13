@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour
             desiredPos += actors[i].transform.position;
         }
         if (distance > -CONSTANT_CLOSE) distance = -CONSTANT_CLOSE;
-        Debug.Log("Distance: "+distance);
+        //Debug.Log("Distance: "+distance);
         desiredPos /= actors.Length;
         desiredPos.z = distance;
     }

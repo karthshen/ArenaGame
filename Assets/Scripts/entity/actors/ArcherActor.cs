@@ -64,6 +64,11 @@ public class ArcherActor : AActor
         base.Move();
     }
 
+    public override void GenerateAttackQueue()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override float TakeDamage(float damage)
     {
         throw new System.NotImplementedException();

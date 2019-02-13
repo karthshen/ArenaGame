@@ -1,9 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using InControl;
 
 public abstract class AActor : AEntity
 {
+    //Enums
+    public enum Combo
+    {
+        Attack0,
+        Attack1,
+        Attack2
+    }
+
+    //constants
+    public const float ATTACK_TIMER = 0.7f;
+    public const float ATTACK_INTERVAL = 0.3f;
+
     //Attributes
     private float currentHealth;
     private float currentEnergy;
@@ -19,6 +31,8 @@ public abstract class AActor : AEntity
     protected Ability abilityLeft;
     protected Ability abilityRight;
 
+    public Queue<Combo> attackQueue = new Queue<Combo>();
+
     protected AnimatorController ac;
 
     protected PickupItem item = null;
@@ -26,6 +40,8 @@ public abstract class AActor : AEntity
     protected Rigidbody rb;
 
     private bool bIsGrounded = false;
+
+    protected float attackTimer = 0f;
 
     //Mutators
     protected float CurrentHealth
@@ -93,6 +109,19 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float AttackTimer
+    {
+        get
+        {
+            return attackTimer;
+        }
+
+        set
+        {
+            attackTimer = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -138,6 +167,8 @@ public abstract class AActor : AEntity
     {
         return this.actorStat;
     }
+
+    public abstract void GenerateAttackQueue();
 
     public new void NullParameterCheck()
     {

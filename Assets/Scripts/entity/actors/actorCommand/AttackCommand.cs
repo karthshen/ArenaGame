@@ -5,6 +5,6 @@ public class AttackCommand : Command
 {
     public override void Execute(AActor actor)
     {
-        throw new System.NotImplementedException();
+        actor.Attack();
     }
 }
