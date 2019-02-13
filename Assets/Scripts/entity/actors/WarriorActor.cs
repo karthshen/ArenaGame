@@ -46,6 +46,8 @@ public class WarriorActor : AActor
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
 
+        deathAnimation = "animation,10";
+
         if (sword)
         {
             sword.ItemPickUp(this);
@@ -92,9 +94,10 @@ public class WarriorActor : AActor
     public override float TakeDamage(float damage)
     {
         this.CurrentHealth -= damage;
-        if(CurrentHealth < 0)
+        if(CurrentHealth <= 0)
         {
-            Debug.Log("Warrior Lost");
+            CurrentHealth = 0;
+            state = new ActorDeathState();
         }
         return CurrentHealth;
     }
@@ -112,5 +115,10 @@ public class WarriorActor : AActor
     public void CallStart()
     {
         Start();
+    }
+
+    public override void Death()
+    {
+        
     }
 }

@@ -109,6 +109,11 @@ public class PlayerTest
             attackQueue.Enqueue(Combo.Attack1);
             attackQueue.Enqueue(Combo.Attack2);
         }
+
+        public override void Death()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     GameObject testActor;

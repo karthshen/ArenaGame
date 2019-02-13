@@ -45,6 +45,8 @@ public abstract class AActor : AEntity
 
     protected float attackTimer = 0f;
 
+    protected string deathAnimation = "";
+
     //Mutators
     public float CurrentHealth
     {
@@ -165,9 +167,16 @@ public abstract class AActor : AEntity
 
     public abstract void Grab();
 
+    public abstract void Death();
+
     public ActorStat GetActorStat()
     {
         return this.actorStat;
+    }
+
+    public string GetDeathAnimation()
+    {
+        return deathAnimation;
     }
 
     public abstract void GenerateAttackQueue();

@@ -43,6 +43,8 @@ public class MageActor : AActor
         abilityUp = mageAbilityUp;
         abilityDown = mageAbilityDown;
 
+        deathAnimation = "animation,11";
+
         if (wand)
         {
             wand.ItemPickUp(this);
@@ -89,9 +91,10 @@ public class MageActor : AActor
     public override float TakeDamage(float damage)
     {
         this.CurrentHealth -= damage;
-        if (CurrentHealth < 0)
+        if (CurrentHealth <= 0)
         {
-            Debug.Log("Mage Lost");
+            CurrentHealth = 0;
+            state = new ActorDeathState();
         }
         return CurrentHealth;
     }
@@ -108,5 +111,10 @@ public class MageActor : AActor
     public void CallStart()
     {
         Start();
+    }
+
+    public override void Death()
+    {
+       
     }
 }

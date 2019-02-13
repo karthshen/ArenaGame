@@ -81,4 +81,9 @@ public class ArcherActor : AActor
     {
         Start();
     }
+
+    public override void Death()
+    {
+        throw new System.NotImplementedException();
+    }
 }

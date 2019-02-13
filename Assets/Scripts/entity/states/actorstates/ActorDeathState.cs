@@ -10,11 +10,13 @@ public class ActorDeathState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        throw new System.NotImplementedException();
+        PlayAnimation(actor);
+        actor.Death();
+        return this;
     }
 
     protected override void PlayAnimation(AActor actor)
     {
-        throw new System.NotImplementedException();
+        actor.GetAnimatorController().SetInt(actor.GetDeathAnimation());
     }
 }
