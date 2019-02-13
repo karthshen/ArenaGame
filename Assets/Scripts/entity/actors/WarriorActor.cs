@@ -88,16 +88,7 @@ public class WarriorActor : AActor
     //MonoBehavior Functions
     private void Update()
     {
-        //Debug.Log("AttackTimer " + attackTimer);
-        if (attackTimer > 0)
-        {
-            attackTimer -= Time.deltaTime;
-            if(attackTimer <= 0)
-            {
-                //Back to standing after each attack
-                state = new ActorStandingState();
-            }
-        }
+        base.ActorUpdate();
     }
 
 

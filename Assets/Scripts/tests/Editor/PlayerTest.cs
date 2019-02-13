@@ -11,6 +11,7 @@ public class PlayerTest
     {
         public bool hasMoved = false;
         public bool hasBlocked = false;
+        public bool hasAttacked = false;
         public int hasJumped = 0;
 
         //Everything copied from WarriorActor
@@ -61,7 +62,7 @@ public class PlayerTest
 
         public override void Attack()
         {
-            throw new System.NotImplementedException();
+            this.hasAttacked = true;
         }
 
         public override void Block()
@@ -90,9 +91,23 @@ public class PlayerTest
             throw new System.NotImplementedException();
         }
 
+        private void Update()
+        {
+            base.ActorUpdate();
+        }
+
+        public void TestUpdate()
+        {
+            this.Update();
+        }
+
         public override void GenerateAttackQueue()
         {
-            throw new System.NotImplementedException();
+            attackQueue.Clear();
+
+            attackQueue.Enqueue(Combo.Attack0);
+            attackQueue.Enqueue(Combo.Attack1);
+            attackQueue.Enqueue(Combo.Attack2);
         }
     }
 
@@ -181,7 +196,36 @@ public class PlayerTest
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
         Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorStandingState));
     }
-   
+    
+    [Test]
+    public void PlayerAttackTest()
+    {
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action2, true, 1000);
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+
+        //Actor enters attacking state
+        Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorAttackState));
+        Assert.AreEqual(testActor.GetComponent<TestActor>().AttackTimer, AActor.ATTACK_TIMER);
+        Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack0);
+
+        //Actor ready to attack again
+        testActor.GetComponent<TestActor>().AttackTimer = AActor.ATTACK_INTERVAL - 0.1f;
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action2, true, 1001);
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+        Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack1);
+
+        //Attack timer goes to 0, go back to StandingState
+        testActor.GetComponent<TestActor>().AttackTimer = 0f;
+        testActor.GetComponent<TestActor>().TestUpdate();
+        Assert.AreEqual(typeof(ActorStandingState), testActor.GetComponent<TestActor>().GetState().GetType());
+
+        //Actor ready to attack again
+        testActor.GetComponent<TestActor>().AttackTimer = AActor.ATTACK_INTERVAL - 0.1f;
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action2, true, 1002);
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+        Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack0);
+    }
+
     [Test]
     public void PlayerJumpTest()
     {

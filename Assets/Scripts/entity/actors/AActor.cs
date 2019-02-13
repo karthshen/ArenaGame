@@ -14,7 +14,7 @@ public abstract class AActor : AEntity
 
     //constants
     public const float ATTACK_TIMER = 0.7f;
-    public const float ATTACK_INTERVAL = 0.3f;
+    public const float ATTACK_INTERVAL = 0.35f;
 
     //Attributes
     private float currentHealth;
@@ -187,6 +187,20 @@ public abstract class AActor : AEntity
     public Rigidbody GetRigidbody()
     {
         return rb;
+    }
+
+    protected void ActorUpdate()
+    {
+        //Debug.Log("AttackTimer " + attackTimer);
+        if (attackTimer >= 0)
+        {
+            attackTimer -= Time.deltaTime;
+            if (attackTimer <= 0)
+            {
+                //Back to standing after each attack
+                state = new ActorStandingState();
+            }
+        }
     }
 
     //Private functions
