@@ -28,6 +28,7 @@ public class WarriorActor : AActor
         entityId = System.Guid.NewGuid();
         defaultState = new ActorStandingState();
         state = defaultState;
+        warriorMesh = new Mesh();
         entityMesh = warriorMesh;
         rb = GetComponent<Rigidbody>();
 
@@ -35,6 +36,9 @@ public class WarriorActor : AActor
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
+
+        CurrentHealth = this.actorStat.MaxHealth;
+        CurrentEnergy = this.actorStat.MaxEnergy;
         entityName = actorName;
 
         abilityLeft = warriorAbilityLeft;
@@ -87,7 +91,12 @@ public class WarriorActor : AActor
 
     public override float TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        this.CurrentHealth -= damage;
+        if(CurrentHealth < 0)
+        {
+            Debug.Log("Warrior Lost");
+        }
+        return CurrentHealth;
     }
 
     //MonoBehavior Functions

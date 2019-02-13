@@ -21,6 +21,7 @@ public class ActorAttackState : ActorState
 
         if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
+            //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
             actor.attackQueue.Dequeue();
             actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);

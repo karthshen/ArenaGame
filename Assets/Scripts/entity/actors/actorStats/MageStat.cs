@@ -2,6 +2,6 @@
 {
     public MageStat()
     {
-        this.setActorStat(80, 100, 10, 10, 10, 10, 15, 20);
+        this.setActorStat(80, 100, 7, 5, 100, 10, 15, 20);
     }
 }

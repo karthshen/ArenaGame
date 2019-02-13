@@ -46,6 +46,7 @@ public class ActorStandingState : ActorState
             actor.GenerateAttackQueue();
             actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
+            Debug.Log(actor.GetName() + " attacking from standing state");
             return new ActorAttackState();
         }
 

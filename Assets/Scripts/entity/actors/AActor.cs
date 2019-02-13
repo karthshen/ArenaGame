@@ -17,7 +17,9 @@ public abstract class AActor : AEntity
     public const float ATTACK_INTERVAL = 0.35f;
 
     //Attributes
+    [SerializeField]
     private float currentHealth;
+    [SerializeField]
     private float currentEnergy;
     private float moveHorizontal;
 
@@ -191,13 +193,13 @@ public abstract class AActor : AEntity
 
     protected void ActorUpdate()
     {
-        //Debug.Log("AttackTimer " + attackTimer);
         if (attackTimer >= 0)
         {
             attackTimer -= Time.deltaTime;
-            if (attackTimer <= 0)
+            if (attackTimer < 0)
             {
                 //Back to standing after each attack
+                //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
                 state = new ActorStandingState();
             }
         }
@@ -206,10 +208,11 @@ public abstract class AActor : AEntity
     //Private functions
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.tag == "Ground" && this.state.GetType() == typeof(ActorJumpState))
         {
             bIsGrounded = true;
             this.state = new ActorStandingState();
+            //Debug.Log("Entering StandingState from Ground");
         }
     }
 
