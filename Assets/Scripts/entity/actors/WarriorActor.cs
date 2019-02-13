@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WarriorActor : AActor
 {
@@ -13,6 +14,8 @@ public class WarriorActor : AActor
 
     string actorName = "Warrior";
 
+    public WarriorSword sword;
+
     public WarriorActor() : base()
     {
         
@@ -25,6 +28,7 @@ public class WarriorActor : AActor
         entityId = System.Guid.NewGuid();
         defaultState = new ActorStandingState();
         state = defaultState;
+        warriorMesh = new Mesh();
         entityMesh = warriorMesh;
         rb = GetComponent<Rigidbody>();
 
@@ -32,6 +36,9 @@ public class WarriorActor : AActor
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
+
+        CurrentHealth = this.actorStat.MaxHealth;
+        CurrentEnergy = this.actorStat.MaxEnergy;
         entityName = actorName;
 
         abilityLeft = warriorAbilityLeft;
@@ -39,12 +46,18 @@ public class WarriorActor : AActor
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
 
+        if (sword)
+        {
+            sword.ItemPickUp(this);
+        }
+
         NullParameterCheck();
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        //Write code to capture the target enemy
+        sword.UseItem();
     }
 
     public override void Block()
@@ -67,10 +80,31 @@ public class WarriorActor : AActor
         base.Move();
     }
 
+    public override void GenerateAttackQueue()
+    {
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
+        attackQueue.Enqueue(Combo.Attack2);
+    }
+
     public override float TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        this.CurrentHealth -= damage;
+        if(CurrentHealth < 0)
+        {
+            Debug.Log("Warrior Lost");
+        }
+        return CurrentHealth;
     }
+
+    //MonoBehavior Functions
+    private void Update()
+    {
+        base.ActorUpdate();
+    }
+
 
     /*
      * This is for test cases ONLY

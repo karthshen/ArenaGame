@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class PickupItem : AInteractable
 {
+    protected AActor owner;
+
     public override void InitializeItem()
     {
         throw new System.NotImplementedException();
@@ -20,5 +22,10 @@ public abstract class PickupItem : AInteractable
 
     public abstract void UseItem();
 
-    public abstract void ItemPickUp();
+    public abstract void ItemPickUp(AActor actor);
+
+    public AActor GetOwner()
+    {
+        return owner;
+    }
 }

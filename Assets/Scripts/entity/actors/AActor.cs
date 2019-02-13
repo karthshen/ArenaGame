@@ -1,11 +1,25 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using InControl;
 
 public abstract class AActor : AEntity
 {
+    //Enums
+    public enum Combo
+    {
+        Attack0,
+        Attack1,
+        Attack2
+    }
+
+    //constants
+    public const float ATTACK_TIMER = 0.7f;
+    public const float ATTACK_INTERVAL = 0.35f;
+
     //Attributes
+    [SerializeField]
     private float currentHealth;
+    [SerializeField]
     private float currentEnergy;
     private float moveHorizontal;
 
@@ -19,6 +33,8 @@ public abstract class AActor : AEntity
     protected Ability abilityLeft;
     protected Ability abilityRight;
 
+    public Queue<Combo> attackQueue = new Queue<Combo>();
+
     protected AnimatorController ac;
 
     protected PickupItem item = null;
@@ -26,6 +42,8 @@ public abstract class AActor : AEntity
     protected Rigidbody rb;
 
     private bool bIsGrounded = false;
+
+    protected float attackTimer = 0f;
 
     //Mutators
     protected float CurrentHealth
@@ -93,6 +111,19 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float AttackTimer
+    {
+        get
+        {
+            return attackTimer;
+        }
+
+        set
+        {
+            attackTimer = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -139,6 +170,8 @@ public abstract class AActor : AEntity
         return this.actorStat;
     }
 
+    public abstract void GenerateAttackQueue();
+
     public new void NullParameterCheck()
     {
         base.NullParameterCheck();
@@ -158,13 +191,28 @@ public abstract class AActor : AEntity
         return rb;
     }
 
+    protected void ActorUpdate()
+    {
+        if (attackTimer >= 0)
+        {
+            attackTimer -= Time.deltaTime;
+            if (attackTimer < 0)
+            {
+                //Back to standing after each attack
+                //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
+                state = new ActorStandingState();
+            }
+        }
+    }
+
     //Private functions
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.tag == "Ground" && this.state.GetType() == typeof(ActorJumpState))
         {
             bIsGrounded = true;
             this.state = new ActorStandingState();
+            //Debug.Log("Entering StandingState from Ground");
         }
     }
 

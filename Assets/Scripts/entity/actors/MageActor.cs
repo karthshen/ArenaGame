@@ -13,6 +13,8 @@ public class MageActor : AActor
 
     string actorName = "Mage";
 
+    public MageWand wand;
+
     public MageActor() : base()
     {
 
@@ -26,9 +28,14 @@ public class MageActor : AActor
         state = defaultState;
         mageMesh = new Mesh();
         entityMesh = mageMesh;
+        rb = GetComponent<Rigidbody>();
+
+        ac = GetComponent<AnimatorController>();
 
         //Actor Config, button, ability, etc
         actorStat = new MageStat();
+        CurrentHealth = this.actorStat.MaxHealth;
+        CurrentEnergy = this.actorStat.MaxEnergy;
         entityName = actorName;
 
         abilityLeft = mageAbilityLeft;
@@ -36,12 +43,18 @@ public class MageActor : AActor
         abilityUp = mageAbilityUp;
         abilityDown = mageAbilityDown;
 
+        if (wand)
+        {
+            wand.ItemPickUp(this);
+        }
+
         NullParameterCheck();
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        //Write code to capture the target enemy
+        wand.UseItem();
     }
 
     public override void Block()
@@ -56,7 +69,7 @@ public class MageActor : AActor
 
     public override void Jump()
     {
-        throw new System.NotImplementedException();
+        base.Jump();
     }
 
     public override void Move()
@@ -64,13 +77,34 @@ public class MageActor : AActor
         base.Move();
     }
 
+    public override void GenerateAttackQueue()
+    {
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
+        attackQueue.Enqueue(Combo.Attack2);
+    }
+
     public override float TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        this.CurrentHealth -= damage;
+        if (CurrentHealth < 0)
+        {
+            Debug.Log("Mage Lost");
+        }
+        return CurrentHealth;
     }
-   /*
-    * This is for test cases ONLY
-    */
+
+    //MonoBehavior Functions
+    private void Update()
+    {
+        base.ActorUpdate();
+    }
+
+    /*
+     * This is for test cases ONLY
+     */
     public void CallStart()
     {
         Start();
