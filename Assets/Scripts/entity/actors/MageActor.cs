@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MageActor : AActor
 {
-    ActorState defaultState;
     Mesh mageMesh;
 
     Ability mageAbilityUp;
@@ -24,18 +23,13 @@ public class MageActor : AActor
     {
         //Entity Config
         entityId = System.Guid.NewGuid();
-        defaultState = new ActorStandingState();
-        state = defaultState;
         mageMesh = new Mesh();
         entityMesh = mageMesh;
         rb = GetComponent<Rigidbody>();
-
         ac = GetComponent<AnimatorController>();
 
         //Actor Config, button, ability, etc
         actorStat = new MageStat();
-        CurrentHealth = this.actorStat.MaxHealth;
-        CurrentEnergy = this.actorStat.MaxEnergy;
         entityName = actorName;
 
         abilityLeft = mageAbilityLeft;
@@ -49,6 +43,8 @@ public class MageActor : AActor
         {
             wand.ItemPickUp(this);
         }
+
+        InitializeActor();
 
         NullParameterCheck();
     }
@@ -90,13 +86,7 @@ public class MageActor : AActor
 
     public override float TakeDamage(float damage)
     {
-        this.CurrentHealth -= damage;
-        if (CurrentHealth <= 0)
-        {
-            CurrentHealth = 0;
-            state = new ActorDeathState();
-        }
-        return CurrentHealth;
+        return base.TakeDamage(damage);
     }
 
     //MonoBehavior Functions
@@ -115,6 +105,6 @@ public class MageActor : AActor
 
     public override void Death()
     {
-       
+        base.Death();
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class WarriorActor : AActor
 {
-    ActorState defaultState;
     Mesh warriorMesh;
 
     Ability warriorAbilityUp;
@@ -25,20 +24,15 @@ public class WarriorActor : AActor
     {
         
         //Entity Config
-        entityId = System.Guid.NewGuid();
-        defaultState = new ActorStandingState();
-        state = defaultState;
         warriorMesh = new Mesh();
         entityMesh = warriorMesh;
+        entityId = System.Guid.NewGuid();
         rb = GetComponent<Rigidbody>();
-
         ac = GetComponent<AnimatorController>();
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
 
-        CurrentHealth = this.actorStat.MaxHealth;
-        CurrentEnergy = this.actorStat.MaxEnergy;
         entityName = actorName;
 
         abilityLeft = warriorAbilityLeft;
@@ -47,6 +41,8 @@ public class WarriorActor : AActor
         abilityDown = warriorAbilityDown;
 
         deathAnimation = "animation,10";
+
+        InitializeActor();
 
         if (sword)
         {
@@ -93,13 +89,7 @@ public class WarriorActor : AActor
 
     public override float TakeDamage(float damage)
     {
-        this.CurrentHealth -= damage;
-        if(CurrentHealth <= 0)
-        {
-            CurrentHealth = 0;
-            state = new ActorDeathState();
-        }
-        return CurrentHealth;
+        return base.TakeDamage(damage);
     }
 
     //MonoBehavior Functions
@@ -119,6 +109,6 @@ public class WarriorActor : AActor
 
     public override void Death()
     {
-        
+        base.Death();
     }
 }

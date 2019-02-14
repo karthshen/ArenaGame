@@ -220,7 +220,7 @@ public class PlayerTest
         Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack1);
 
         //Attack timer goes to 0, go back to StandingState
-        testActor.GetComponent<TestActor>().AttackTimer = 0f;
+        testActor.GetComponent<TestActor>().AttackTimer = 0f + Time.deltaTime/2;
         testActor.GetComponent<TestActor>().TestUpdate();
         Assert.AreEqual(typeof(ActorStandingState), testActor.GetComponent<TestActor>().GetState().GetType());
 

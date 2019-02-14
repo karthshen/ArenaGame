@@ -39,7 +39,10 @@ public class InputHandler : MonoBehaviour
     {
         //Debug.Log("Current Player:" + playerNum);
         AActor actor = actors[playerNum];
-        actor.HandleInput(inputDevice);
+        if (actor.GetState().GetType() != typeof(ActorDeathState))
+        {
+            actor.HandleInput(inputDevice);
+        }
     }
 
     void AddPlayer(AActor actor)

@@ -10,8 +10,6 @@ public class ActorDeathState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        PlayAnimation(actor);
-        actor.Death();
         return this;
     }
 
