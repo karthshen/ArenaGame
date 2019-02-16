@@ -15,6 +15,7 @@ public abstract class AActor : AEntity
     //constants
     public const float ATTACK_TIMER = 0.7f;
     public const float ATTACK_INTERVAL = 0.35f;
+    public const float RESPAWN_TIMER = 3.0f;
 
     //Attributes
     [SerializeField]
@@ -23,10 +24,10 @@ public abstract class AActor : AEntity
     private float currentEnergy;
     private float moveHorizontal;
 
+    protected ActorStat actorStat;
+
     private Vector3 frontDirection = new Vector3(0, 90, 0);
     private Vector3 backDirection = new Vector3(0, 270, 0);
-
-    protected ActorStat actorStat;
 
     protected Ability abilityUp;
     protected Ability abilityDown;
@@ -44,6 +45,12 @@ public abstract class AActor : AEntity
     private bool bIsGrounded = false;
 
     protected float attackTimer = 0f;
+
+    private float deathTimer = 0f;
+
+    protected string deathAnimation = "";
+
+    protected int respawnLives = 3;
 
     //Mutators
     public float CurrentHealth
@@ -124,13 +131,44 @@ public abstract class AActor : AEntity
         }
     }
 
+    protected float DeathTimer
+    {
+        get
+        {
+            return deathTimer;
+        }
+
+        set
+        {
+            deathTimer = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
     }
 
-    //Functiosn
-    public abstract float TakeDamage(float damage);
+    //Functions
+    protected void InitializeActor()
+    {
+        state = new ActorStandingState();
+
+        CurrentHealth = this.actorStat.MaxHealth;
+        CurrentEnergy = this.actorStat.MaxEnergy;
+    }
+
+    public virtual float TakeDamage(float damage)
+    {
+        this.CurrentHealth -= damage;
+        if (CurrentHealth <= 0)
+        {
+            CurrentHealth = 0;
+            state = new ActorDeathState();
+            Death();
+        }
+        return CurrentHealth;
+    }
 
     public void HandleInput(InputDevice inputDevice)
     {
@@ -165,9 +203,35 @@ public abstract class AActor : AEntity
 
     public abstract void Grab();
 
+    public virtual void Death()
+    {
+        GetAnimatorController().SetInt(GetDeathAnimation());
+        deathTimer = AActor.RESPAWN_TIMER;
+    }
+
+    public virtual void Respawn()
+    {
+        InitializeActor();
+        GameObject[] respawnObjects = GameObject.FindGameObjectsWithTag("Respawn");
+
+        GameObject respawnLocation = respawnObjects[Random.Range(0, respawnObjects.Length)];
+
+        if (respawnLocation)
+        {
+            this.transform.position = new Vector3(respawnLocation.transform.position.x, respawnLocation.transform.position.y, this.transform.position.z);
+        }
+
+        GetAnimatorController().SetInt("animation,13");
+    }
+
     public ActorStat GetActorStat()
     {
         return this.actorStat;
+    }
+
+    public string GetDeathAnimation()
+    {
+        return deathAnimation;
     }
 
     public abstract void GenerateAttackQueue();
@@ -193,14 +257,24 @@ public abstract class AActor : AEntity
 
     protected void ActorUpdate()
     {
-        if (attackTimer >= 0)
+        if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
-            if (attackTimer < 0)
+            if (attackTimer <= 0)
             {
                 //Back to standing after each attack
                 //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
                 state = new ActorStandingState();
+            }
+        }
+
+        if (deathTimer > 0)
+        {
+            deathTimer -= Time.deltaTime;
+            if(deathTimer <= 0 && respawnLives > 0) // && CanRespawn
+            {
+                respawnLives--;
+                Respawn();
             }
         }
     }
