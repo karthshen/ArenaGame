@@ -12,4 +12,10 @@ public abstract class ActorState : EntityState
     public abstract ActorState HandleInput(AActor actor, InputDevice inputDevice);
 
     protected abstract void PlayAnimation(AActor actor);
+
+    //This is used by outside clients
+    public void PlayStateAnimation(AActor actor)
+    {
+        PlayAnimation(actor);
+    }
 }

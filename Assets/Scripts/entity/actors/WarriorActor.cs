@@ -22,7 +22,6 @@ public class WarriorActor : AActor
 
     void Start()
     {
-        
         //Entity Config
         warriorMesh = new Mesh();
         entityMesh = warriorMesh;
@@ -85,6 +84,12 @@ public class WarriorActor : AActor
         attackQueue.Enqueue(Combo.Attack0);
         attackQueue.Enqueue(Combo.Attack1);
         attackQueue.Enqueue(Combo.Attack2);
+    }
+
+    public override void GenerateAirAttackQueue()
+    {
+        attackQueue.Clear();
+        attackQueue.Enqueue(Combo.Attack0);
     }
 
     public override float TakeDamage(float damage)

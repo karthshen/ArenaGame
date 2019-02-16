@@ -13,9 +13,11 @@ public abstract class AActor : AEntity
     }
 
     //constants
-    public const float ATTACK_TIMER = 0.7f;
-    public const float ATTACK_INTERVAL = 0.35f;
+    public const float ATTACK_TIMER = 0.7f / 1.3f;
+    public const float AIR_ATTACK_LENGTH = 0.35f;
+    public const float ATTACK_INTERVAL = 0.35f / 1.3f;
     public const float RESPAWN_TIMER = 3.0f;
+    public const float AIRBORNE_DRAG = 15.0f;
 
     //Attributes
     [SerializeField]
@@ -237,6 +239,8 @@ public abstract class AActor : AEntity
 
     public abstract void GenerateAttackQueue();
 
+    public abstract void GenerateAirAttackQueue();
+
     public new void NullParameterCheck()
     {
         base.NullParameterCheck();
@@ -261,7 +265,13 @@ public abstract class AActor : AEntity
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
-            if (attackTimer <= 0)
+
+            if(attackTimer < AIR_ATTACK_LENGTH)
+            {
+                GetRigidbody().drag = 0;
+            }
+
+            if (attackTimer <= 0 && state.GetType() == typeof(ActorAttackState))
             {
                 //Back to standing after each attack
                 //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
@@ -283,7 +293,7 @@ public abstract class AActor : AEntity
     //Private functions
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground" && this.state.GetType() == typeof(ActorJumpState))
+        if(collision.gameObject.tag == "Ground" && bIsGrounded == false)
         {
             bIsGrounded = true;
             this.state = new ActorStandingState();
