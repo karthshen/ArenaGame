@@ -21,7 +21,7 @@ public class ActorAirAttackState : ActorState
             attackCommand.Execute(actor);
             PlayAnimation(actor);
             actor.attackQueue.Dequeue();
-            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
+            //actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
             return this;
         }
         return this;
