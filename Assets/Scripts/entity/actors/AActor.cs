@@ -195,6 +195,7 @@ public abstract class AActor : AEntity
         GetRigidbody().velocity = Vector3.zero;
         GetRigidbody().angularVelocity = Vector3.zero;
         rb.AddForce(Vector3.up * actorStat.JumpVelocity * 111);
+        //Debug.Log(GetName() + " is jumping at " + actorStat.JumpVelocity * 111 + " velocity and " + Vector3.up * actorStat.JumpVelocity * 111 + " Force");
     }
 
     public abstract void Attack();
