@@ -22,7 +22,6 @@ public class WarriorActor : AActor
 
     void Start()
     {
-        
         //Entity Config
         warriorMesh = new Mesh();
         entityMesh = warriorMesh;
@@ -60,7 +59,7 @@ public class WarriorActor : AActor
 
     public override void Block()
     {
-        throw new System.NotImplementedException();
+        this.BIsBlocking = true;
     }
 
     public override void Grab()
@@ -87,8 +86,20 @@ public class WarriorActor : AActor
         attackQueue.Enqueue(Combo.Attack2);
     }
 
+    public override void GenerateAirAttackQueue()
+    {
+        attackQueue.Clear();
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
+        attackQueue.Enqueue(Combo.Attack2);
+    }
+
     public override float TakeDamage(float damage)
     {
+        if (BIsBlocking)
+        {
+            damage /= 10;
+        }
         return base.TakeDamage(damage);
     }
 

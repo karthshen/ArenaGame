@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a1101064477cd334097208cfb752aa4e
+guid: 98bf7aa972490644c9fff4203041a7a8
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -161,7 +161,7 @@ ModelImporter:
     400152: thumb_03_r
     400154: upperarm_l
     400156: upperarm_r
-    7400000: ATK3
+    7400000: CustomBlock
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -179,12 +179,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'AnimSD@ATK3' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'lowerarm_l' has translation animation that
-      will be discarded.\n\t'ball_l' is inbetween humanoid transforms and has rotation
-      animation that will be discarded.\n\t'calf_r' has translation animation that
-      will be discarded.\n"
+    animationImportWarnings: "\nClip 'AnimSD@Block' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'ball_l' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -198,17 +196,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ATK3
-      takeName: AnimSD@ATK3
-      firstFrame: 121
-      lastFrame: 145
+      name: CustomBlock
+      takeName: AnimSD@Block
+      firstFrame: 171.4
+      lastFrame: 179
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1

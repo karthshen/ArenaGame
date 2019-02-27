@@ -107,4 +107,12 @@ public class MageActor : AActor
     {
         base.Death();
     }
+
+    public override void GenerateAirAttackQueue()
+    {
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
+    }
 }

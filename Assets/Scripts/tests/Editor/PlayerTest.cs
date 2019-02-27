@@ -114,6 +114,11 @@ public class PlayerTest
         {
             throw new System.NotImplementedException();
         }
+
+        public override void GenerateAirAttackQueue()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     GameObject testActor;

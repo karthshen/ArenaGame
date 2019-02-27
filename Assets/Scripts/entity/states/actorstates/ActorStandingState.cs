@@ -20,6 +20,11 @@ public class ActorStandingState : ActorState
     {
         //actor.GetAnimator().enabled = true;
         PlayAnimation(actor);
+        if(actor.IsGrounded == false)
+        {
+            return this;
+        }
+
         if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
         {
             return new ActorMovingState();
