@@ -13,6 +13,8 @@ public class ActorBlockState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
+        PlayAnimation(actor);
+
         if (!inputDevice.LeftTrigger)
         {
             return new ActorStandingState();
@@ -22,6 +24,6 @@ public class ActorBlockState : ActorState
 
     protected override void PlayAnimation(AActor actor)
     {
-        throw new System.NotImplementedException();
+        actor.GetAnimatorController().SetInt("animation,33");
     }
 }

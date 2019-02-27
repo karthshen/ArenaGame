@@ -46,6 +46,8 @@ public abstract class AActor : AEntity
 
     private bool bIsGrounded = false;
 
+    private bool bIsBlocking = false;
+
     protected float attackTimer = 0f;
 
     private float deathTimer = 0f;
@@ -143,6 +145,19 @@ public abstract class AActor : AEntity
         set
         {
             deathTimer = value;
+        }
+    }
+
+    public bool BIsBlocking
+    {
+        get
+        {
+            return bIsBlocking;
+        }
+
+        set
+        {
+            bIsBlocking = value;
         }
     }
 

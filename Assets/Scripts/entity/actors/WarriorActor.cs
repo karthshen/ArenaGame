@@ -59,7 +59,7 @@ public class WarriorActor : AActor
 
     public override void Block()
     {
-        throw new System.NotImplementedException();
+        this.BIsBlocking = true;
     }
 
     public override void Grab()
@@ -96,6 +96,10 @@ public class WarriorActor : AActor
 
     public override float TakeDamage(float damage)
     {
+        if (BIsBlocking)
+        {
+            damage /= 10;
+        }
         return base.TakeDamage(damage);
     }
 
