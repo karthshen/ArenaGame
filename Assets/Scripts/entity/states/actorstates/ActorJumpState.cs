@@ -6,6 +6,7 @@ public class ActorJumpState : ActorState
 {
     Command jumpCommand = new JumpCommand();
     Command moveCommand = new MoveCommand();
+    Command attackCommand = new AttackCommand();
 
     int jumpNum = 1;
     bool bAttacked = false;
@@ -63,17 +64,12 @@ public class ActorJumpState : ActorState
 
         if (inputDevice.Action2 && !BAttacked)
         {
-            actor.GenerateAirAttackQueue();
-            BAttacked = true;
-            //actor.AttackTimer = AActor.ATTACK_TIMER;
-            //AttackCommand attackCommand = new AttackCommand();
-            //attackCommand.Execute(actor);
-            //actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
-
-            ActorAirAttackState state = new ActorAirAttackState();
-            state.HandleInput(actor, inputDevice);
-
-            return state;
+            actor.GenerateAttackQueue();
+            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
+            actor.AttackTimer = AActor.ATTACK_TIMER;
+            attackCommand.Execute(actor);
+            //Debug.Log(actor.GetName() + " attacking from standing state");
+            return new ActorAttackState();
         }
 
         return this;
