@@ -20,12 +20,17 @@ public class ActorStandingState : ActorState
     {
         //actor.GetAnimator().enabled = true;
         PlayAnimation(actor);
+        if(actor.IsGrounded == false)
+        {
+            return this;
+        }
+
         if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
         {
             return new ActorMovingState();
         }
 
-        if ((inputDevice.Action3 || inputDevice.Action4) && actor.IsGrounded == true)
+        if ((inputDevice.Action3 || inputDevice.Action4))
         {
             actor.IsGrounded = false;
             jumpCommand.Execute(actor);
@@ -45,7 +50,6 @@ public class ActorStandingState : ActorState
         {
             actor.GenerateAttackQueue();
             actor.AttackTimer = AActor.ATTACK_TIMER;
-            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
             attackCommand.Execute(actor);
             //Debug.Log(actor.GetName() + " attacking from standing state");
             return new ActorAttackState();

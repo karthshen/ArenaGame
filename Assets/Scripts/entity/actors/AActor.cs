@@ -271,7 +271,7 @@ public abstract class AActor : AEntity
                 GetRigidbody().drag = 0;
             }
 
-            if (attackTimer <= 0 && state.GetType() == typeof(ActorAttackState))
+            if (attackTimer <= 0 && (state.GetType() == typeof(ActorAttackState) || state.GetType() == typeof(ActorAirAttackState)))
             {
                 //Back to standing after each attack
                 //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);

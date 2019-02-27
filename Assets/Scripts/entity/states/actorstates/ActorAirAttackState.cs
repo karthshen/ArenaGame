@@ -8,21 +8,22 @@ public class ActorAirAttackState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-
         if (actor.attackQueue.Count == 0)
         {
             return this;
         }
 
-        if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        PlayAnimation(actor);
+
+        if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
+            //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
+            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
+            actor.attackQueue.Dequeue();
             actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
-            PlayAnimation(actor);
-            actor.attackQueue.Dequeue();
-            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
-            return this;
         }
+
         return this;
     }
 

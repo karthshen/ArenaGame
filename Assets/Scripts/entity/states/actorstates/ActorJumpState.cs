@@ -64,12 +64,13 @@ public class ActorJumpState : ActorState
 
         if (inputDevice.Action2 && !BAttacked)
         {
-            actor.GenerateAttackQueue();
+            actor.GenerateAirAttackQueue();
             actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
             actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
             //Debug.Log(actor.GetName() + " attacking from standing state");
-            return new ActorAttackState();
+            return new ActorAirAttackState();
+
         }
 
         return this;

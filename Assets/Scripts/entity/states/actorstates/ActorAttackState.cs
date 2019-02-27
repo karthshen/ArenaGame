@@ -22,10 +22,6 @@ public class ActorAttackState : ActorState
         if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
             //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
-            if (actor.IsGrounded == false)
-            {
-                actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
-            }
             actor.attackQueue.Dequeue();
             actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
