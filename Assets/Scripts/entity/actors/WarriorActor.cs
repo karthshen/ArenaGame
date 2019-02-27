@@ -89,7 +89,9 @@ public class WarriorActor : AActor
     public override void GenerateAirAttackQueue()
     {
         attackQueue.Clear();
-        attackQueue.Enqueue(Combo.Attack0);
+        //attackQueue.Enqueue(Combo.Attack0);
+        //attackQueue.Enqueue(Combo.Attack1);
+        attackQueue.Enqueue(Combo.Attack2);
     }
 
     public override float TakeDamage(float damage)
