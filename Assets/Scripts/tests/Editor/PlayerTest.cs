@@ -49,6 +49,9 @@ public class PlayerTest
             abilityUp = warriorAbilityUp;
             abilityDown = warriorAbilityDown;
 
+            //Default to Grounded
+            IsGrounded = true;
+
             NullParameterCheck();
         }
 
@@ -139,6 +142,7 @@ public class PlayerTest
         mageActor = new GameObject("MageActor");
         warriorMesh = new GameObject("WarriorMesh");
 
+        //Default to be grounded
         testActor.AddComponent<TestActor>();
         testActor.AddComponent<Rigidbody>();
         testActor.AddComponent<AnimatorController>();
@@ -214,7 +218,7 @@ public class PlayerTest
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
 
         //Actor enters attacking state
-        Assert.AreEqual(testActor.GetComponent<TestActor>().GetState().GetType(), typeof(ActorAttackState));
+        Assert.AreEqual(typeof(ActorAttackState), testActor.GetComponent<TestActor>().GetState().GetType());
         Assert.AreEqual(testActor.GetComponent<TestActor>().AttackTimer, AActor.ATTACK_TIMER);
         Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack0);
 
