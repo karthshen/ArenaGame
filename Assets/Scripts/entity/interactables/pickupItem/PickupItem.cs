@@ -5,11 +5,6 @@ public abstract class PickupItem : AInteractable
 {
     protected AActor owner;
 
-    public override void InitializeItem()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void Interact(AActor actor)
     {
         throw new System.NotImplementedException();

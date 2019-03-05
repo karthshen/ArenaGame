@@ -31,10 +31,10 @@ public abstract class AActor : AEntity
     private Vector3 frontDirection = new Vector3(0, 90, 0);
     private Vector3 backDirection = new Vector3(0, 270, 0);
 
-    protected Ability abilityUp;
-    protected Ability abilityDown;
-    protected Ability abilityLeft;
-    protected Ability abilityRight;
+    public Ability abilityUp;
+    public Ability abilityDown;
+    public Ability abilityLeft;
+    public Ability abilityRight;
 
     public Queue<Combo> attackQueue = new Queue<Combo>();
 

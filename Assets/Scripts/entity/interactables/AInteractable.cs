@@ -13,7 +13,5 @@ public abstract class AInteractable : AEntity
 
     public abstract void Interact(AActor actor);
 
-    public abstract void InitializeItem();
-
     public abstract void RemoveItem();
 }

@@ -32,6 +32,8 @@ public class MageActor : AActor
         actorStat = new MageStat();
         entityName = actorName;
 
+        mageAbilityDown = new MageThunderbolt(this);
+
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;
         abilityUp = mageAbilityUp;
@@ -57,7 +59,12 @@ public class MageActor : AActor
 
     public override void Block()
     {
-        throw new System.NotImplementedException();
+        BIsBlocking = true;
+    }
+
+    public override void Unblock()
+    {
+        BIsBlocking = false;
     }
 
     public override void Grab()
@@ -114,10 +121,5 @@ public class MageActor : AActor
 
         attackQueue.Enqueue(Combo.Attack0);
         attackQueue.Enqueue(Combo.Attack1);
-    }
-
-    public override void Unblock()
-    {
-        throw new System.NotImplementedException();
     }
 }
