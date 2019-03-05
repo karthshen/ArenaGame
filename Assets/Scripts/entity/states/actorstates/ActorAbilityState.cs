@@ -12,7 +12,7 @@ public class ActorAbilityState : ActorState
     {
         PlayAnimation(actor);
 
-        return new ActorStandingState();
+        return this;
     }
 
     protected override void PlayAnimation(AActor actor)

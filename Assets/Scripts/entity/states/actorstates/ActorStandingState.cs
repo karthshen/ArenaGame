@@ -57,9 +57,9 @@ public class ActorStandingState : ActorState
             return new ActorAttackState();
         }
 
-        else if (inputDevice.Action1)
+        else if (inputDevice.Action1.WasPressed)
         {
-            actor.AttackTimer = AActor.ATTACK_TIMER;
+            actor.CastTimer = AActor.CAST_DURATION;
             abilityDownCommand.Execute(actor);
             return new ActorAbilityState();
         }

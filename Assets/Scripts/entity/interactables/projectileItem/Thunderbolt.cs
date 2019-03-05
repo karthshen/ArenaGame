@@ -8,6 +8,10 @@ public class Thunderbolt : ProjectileItem
     private float moveHorizontal = 1.0f;
     private Vector3 movement;
 
+    private const float DURATION_TIME = 2.0f;
+
+    private float duration_time = 0f;
+
     public void SetOwner(AActor owner)
     {
         this.owner = owner;
@@ -20,11 +24,12 @@ public class Thunderbolt : ProjectileItem
 
     public override void ProjectileStart()
     {
-        gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(transform.rotation.eulerAngles.y),
-            owner.transform.position.y, owner.transform.position.z);
+        gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
+        float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
 
-        gameObject.transform.rotation = owner.transform.rotation;
-        movement = new Vector3(moveHorizontal * Mathf.Sin(transform.rotation.eulerAngles.y), 0.0f, 0.0f);
+        gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
+            owner.transform.position.y + owner.transform.lossyScale.y/2, owner.transform.position.z);
+        movement = new Vector3(moveHorizontal * Mathf.Sin(yDirectionInRadian), 0.0f, 0.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -33,7 +38,7 @@ public class Thunderbolt : ProjectileItem
 
         if (hitActor)
         {
-            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower);
+            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 5);
         }
 
         ProjectileFinish();
@@ -42,5 +47,9 @@ public class Thunderbolt : ProjectileItem
     private void Update()
     {
         transform.Translate(movement * velocity * Time.deltaTime);
+        duration_time += Time.deltaTime;
+
+        if (duration_time >= DURATION_TIME)
+            ProjectileFinish();
     }
 }

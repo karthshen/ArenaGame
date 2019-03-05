@@ -15,6 +15,7 @@ public abstract class AActor : AEntity
     //constants
     public const float ATTACK_TIMER = 0.7f / 1.3f;
     public const float ATTACK_INTERVAL = 0.35f / 1.3f;
+    public const float CAST_DURATION = 0.5f;
     public const float AIR_ATTACK_LENGTH = ATTACK_INTERVAL;
     public const float RESPAWN_TIMER = 3.0f;
     public const float AIRBORNE_DRAG = 15.0f;
@@ -51,6 +52,8 @@ public abstract class AActor : AEntity
     protected float attackTimer = 0f;
 
     private float deathTimer = 0f;
+
+    private float castTimer = 0f;
 
     protected string deathAnimation = "";
 
@@ -158,6 +161,19 @@ public abstract class AActor : AEntity
         set
         {
             bIsBlocking = value;
+        }
+    }
+
+    public float CastTimer
+    {
+        get
+        {
+            return castTimer;
+        }
+
+        set
+        {
+            castTimer = value;
         }
     }
 
@@ -303,6 +319,15 @@ public abstract class AActor : AEntity
             {
                 respawnLives--;
                 Respawn();
+            }
+        }
+
+        if(CastTimer > 0)
+        {
+            CastTimer -= Time.deltaTime;
+            if(CastTimer <= 0)
+            {
+                state = new ActorStandingState();
             }
         }
     }
