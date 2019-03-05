@@ -21,7 +21,7 @@ public class MenuInputHandler : MonoBehaviour
     {
         var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 
-        if(inputDevice != null && menu != null)
+        if(inputDevice != null && menu != null && menu.enabled)
         {
             HandleInput(inputDevice);
         }
