@@ -219,6 +219,8 @@ public abstract class AActor : AEntity
 
     public abstract void Block();
 
+    public abstract void Unblock();
+
     public abstract void Grab();
 
     public virtual void Death()

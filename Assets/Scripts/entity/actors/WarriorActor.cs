@@ -122,4 +122,9 @@ public class WarriorActor : AActor
     {
         base.Death();
     }
+
+    public override void Unblock()
+    {
+        BIsBlocking = false;
+    }
 }

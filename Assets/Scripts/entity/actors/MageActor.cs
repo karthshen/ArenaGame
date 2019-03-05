@@ -115,4 +115,9 @@ public class MageActor : AActor
         attackQueue.Enqueue(Combo.Attack0);
         attackQueue.Enqueue(Combo.Attack1);
     }
+
+    public override void Unblock()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -122,6 +122,11 @@ public class PlayerTest
         {
             throw new System.NotImplementedException();
         }
+
+        public override void Unblock()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     GameObject testActor;

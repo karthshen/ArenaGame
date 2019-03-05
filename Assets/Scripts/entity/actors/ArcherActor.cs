@@ -91,4 +91,9 @@ public class ArcherActor : AActor
     {
         throw new System.NotImplementedException();
     }
+
+    public override void Unblock()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -15,8 +15,9 @@ public class ActorBlockState : ActorState
     {
         PlayAnimation(actor);
 
-        if (!inputDevice.LeftTrigger)
+        if (inputDevice.LeftTrigger.WasReleased || inputDevice.LeftBumper.WasReleased)
         {
+            actor.Unblock();
             return new ActorStandingState();
         }
         return this;
