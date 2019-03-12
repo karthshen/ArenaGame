@@ -10,6 +10,8 @@ public class ActorStandingState : ActorState
     Command grabCommand = new GrabCommand();
     Command attackCommand = new AttackCommand();
 
+    Command abilityDownCommand = new ActorDownAbilityCommand();
+
     public ActorStandingState() :base()
     {
        
@@ -53,6 +55,13 @@ public class ActorStandingState : ActorState
             attackCommand.Execute(actor);
             //Debug.Log(actor.GetName() + " attacking from standing state");
             return new ActorAttackState();
+        }
+
+        else if (inputDevice.Action1.WasPressed)
+        {
+            actor.CastTimer = AActor.CAST_DURATION;
+            abilityDownCommand.Execute(actor);
+            return new ActorAbilityState();
         }
 
         return this;
