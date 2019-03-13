@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using InControl;
+using UnityEngine.SceneManagement;
 
 public class StageSelectMenu : Menu
 {
@@ -136,7 +137,7 @@ public class StageSelectMenu : Menu
 
     public void CharacterSelectMenu()
     {
-
+        SceneManager.LoadScene("CharacterSelect");
     }
 
     protected override void ButtonSelected()
