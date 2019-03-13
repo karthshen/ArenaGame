@@ -7,13 +7,33 @@ public abstract class Menu : MonoBehaviour
 {
     protected Button selectedButton;
 
-    public virtual void HandleInput(MenuInputHandler inputHandler, InputDevice inputDevice)
+    private MenuInputHandler inputHandler;
+
+    public MenuInputHandler InputHandler
+    {
+        get
+        {
+            return inputHandler;
+        }
+
+        set
+        {
+            inputHandler = value;
+        }
+    }
+
+    public virtual void HandleInput(InputDevice inputDevice)
     {
         if (inputDevice.Action2 && selectedButton)
         {
             selectedButton.onClick.Invoke();
         }
 
-        inputHandler.selector.transform.position = selectedButton.transform.position;
+        inputHandler.Selector.transform.position = selectedButton.transform.position;
     }
+
+    public abstract GameObject getSelector();
+
+    protected abstract void ButtonSelected();
+    protected abstract void ButtonDeselected();
 }
