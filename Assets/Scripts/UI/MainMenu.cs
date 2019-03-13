@@ -9,16 +9,22 @@ public class MainMenu : Menu
 {
     public List<Button> buttons;
 
+    public GameObject selector;
+
     private int buttonIndex;
 
     private void Start()
     {
         buttonIndex = 0;
         selectedButton = buttons[buttonIndex];
+
+        ButtonSelected();
     }
 
-    public override void HandleInput(MenuInputHandler inputHandler, InputDevice inputDevice)
+    public override void HandleInput(InputDevice inputDevice)
     {
+        ButtonDeselected();
+
         if (inputDevice.DPadRight.WasPressed)
         {
             buttonIndex++;
@@ -31,7 +37,9 @@ public class MainMenu : Menu
         ButtonIndexCheck();
         selectedButton = buttons[buttonIndex];
 
-        base.HandleInput(inputHandler, inputDevice);
+        ButtonSelected();
+
+        base.HandleInput(inputDevice);
     }
 
     private void ButtonIndexCheck()
@@ -42,9 +50,11 @@ public class MainMenu : Menu
             buttonIndex = buttons.Count - 1;
     }
 
-    public void StartGame()
+    public void StageSelectMenu()
     {
-        SceneManager.LoadScene("SampleScene");
+        gameObject.SetActive(false);
+        InputHandler.menu = InputHandler.menus[1];
+        InputHandler.ReloadCanvas();
     }
 
     public void SettingMenu()
@@ -55,5 +65,20 @@ public class MainMenu : Menu
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public override GameObject getSelector()
+    {
+        return selector;
+    }
+
+    protected override void ButtonSelected()
+    {
+        selectedButton.transform.localScale += new Vector3(0.2f, 0.2f, 0);
+    }
+
+    protected override void ButtonDeselected()
+    {
+        selectedButton.transform.localScale -= new Vector3(0.2f, 0.2f, 0);
     }
 }
