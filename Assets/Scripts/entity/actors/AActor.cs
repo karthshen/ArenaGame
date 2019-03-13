@@ -187,6 +187,9 @@ public abstract class AActor : AEntity
     {
         state = new ActorStandingState();
 
+        if (GetRigidbody())
+            GetRigidbody().isKinematic = false;
+
         CurrentHealth = this.actorStat.MaxHealth;
         CurrentEnergy = this.actorStat.MaxEnergy;
     }
@@ -197,7 +200,6 @@ public abstract class AActor : AEntity
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
-            state = new ActorDeathState();
             Death();
         }
         return CurrentHealth;
@@ -241,6 +243,7 @@ public abstract class AActor : AEntity
 
     public virtual void Death()
     {
+        state = new ActorDeathState();
         GetAnimatorController().SetInt(GetDeathAnimation());
         deathTimer = AActor.RESPAWN_TIMER;
     }
@@ -329,6 +332,15 @@ public abstract class AActor : AEntity
             {
                 state = new ActorStandingState();
             }
+        }
+
+        if(transform.position.y < -20.0f && this.state.GetType() != typeof(ActorDeathState))
+        {
+            if(GetRigidbody())
+                GetRigidbody().isKinematic = true;
+
+            Death();
+            deathTimer = 0.1f;
         }
     }
 
