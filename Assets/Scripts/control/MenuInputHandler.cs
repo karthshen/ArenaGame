@@ -28,6 +28,19 @@ public class MenuInputHandler : MonoBehaviour
         }
     }
 
+    public int PlayerNum
+    {
+        get
+        {
+            return playerNum;
+        }
+
+        set
+        {
+            playerNum = value;
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
