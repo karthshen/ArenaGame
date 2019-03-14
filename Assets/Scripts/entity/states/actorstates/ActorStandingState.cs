@@ -12,22 +12,25 @@ public class ActorStandingState : ActorState
 
     Command abilityDownCommand = new ActorDownAbilityCommand();
 
-    public ActorStandingState() :base()
+    public ActorStandingState() : base()
     {
-       
+        
     }
 
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         //actor.GetAnimator().enabled = true;
+        CheckGravity(actor);
+
         PlayAnimation(actor);
-        if(actor.IsGrounded == false)
+
+        if (actor.IsGrounded == false)
         {
             return this;
         }
 
-        if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
+        if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))
         {
             return new ActorMovingState();
         }
@@ -65,6 +68,14 @@ public class ActorStandingState : ActorState
         }
 
         return this;
+    }
+
+    private void CheckGravity(AActor actor)
+    {
+        if(actor.GetRigidbody().useGravity == false)
+        {
+            actor.GetRigidbody().useGravity = true;
+        }
     }
 
     protected override void PlayAnimation(AActor actor)

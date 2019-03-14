@@ -31,8 +31,9 @@ public class WarriorActor : AActor
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorStat();
-
         entityName = actorName;
+
+        warriorAbilityDown = new WarriorCharge(this);
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
