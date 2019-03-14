@@ -21,13 +21,13 @@ public class ActorStandingState : ActorState
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         //actor.GetAnimator().enabled = true;
-        CheckGravity(actor);
+        ActorStandingInitialize(actor);
 
         PlayAnimation(actor);
 
         if (actor.IsGrounded == false)
         {
-            return this;
+            return new ActorJumpState();
         }
 
         if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))
@@ -39,7 +39,9 @@ public class ActorStandingState : ActorState
         {
             actor.IsGrounded = false;
             jumpCommand.Execute(actor);
-            return new ActorJumpState();
+            ActorJumpState state = new ActorJumpState();
+            state.JumpNum--;
+            return state;
         }
         else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)
         {
@@ -70,12 +72,15 @@ public class ActorStandingState : ActorState
         return this;
     }
 
-    private void CheckGravity(AActor actor)
+    private void ActorStandingInitialize(AActor actor)
     {
         if(actor.GetRigidbody().useGravity == false)
         {
             actor.GetRigidbody().useGravity = true;
         }
+
+        if(actor.BIsBlocking)
+            actor.Unblock();
     }
 
     protected override void PlayAnimation(AActor actor)

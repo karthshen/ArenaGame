@@ -355,6 +355,14 @@ public abstract class AActor : AEntity
         }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground" && bIsGrounded == true)
+        {
+            bIsGrounded = false;
+        }
+    }
+
     private void TurnAround()
     {
         if(moveHorizontal > 0)

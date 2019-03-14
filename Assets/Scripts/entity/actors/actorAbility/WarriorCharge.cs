@@ -4,7 +4,7 @@ using System.Collections;
 public class WarriorCharge : Ability
 {
     private const float CHARGE_FORCE = 1f;
-    private const float CHARGE_SPEED = 300f;
+    private const float CHARGE_SPEED = 600f;
 
     public WarriorCharge(AActor caster)
     {
@@ -22,6 +22,8 @@ public class WarriorCharge : Ability
         Vector3 chargeMovement = new Vector3(CHARGE_FORCE * Mathf.Sin(yDirectionInRadian), 0f, 0f);
 
         caster.GetRigidbody().useGravity = false;
+
+        caster.Block();
 
         caster.GetRigidbody().AddForce(chargeMovement * CHARGE_SPEED);
     }

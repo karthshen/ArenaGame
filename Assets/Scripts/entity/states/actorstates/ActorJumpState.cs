@@ -8,7 +8,7 @@ public class ActorJumpState : ActorState
     Command moveCommand = new MoveCommand();
     Command attackCommand = new AttackCommand();
 
-    int jumpNum = 1;
+    int jumpNum = 2;
     bool bAttacked = false;
 
     public ActorJumpState()

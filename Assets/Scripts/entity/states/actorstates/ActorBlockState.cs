@@ -17,7 +17,6 @@ public class ActorBlockState : ActorState
 
         if (inputDevice.LeftTrigger.WasReleased || inputDevice.LeftBumper.WasReleased)
         {
-            actor.Unblock();
             return new ActorStandingState();
         }
         return this;
