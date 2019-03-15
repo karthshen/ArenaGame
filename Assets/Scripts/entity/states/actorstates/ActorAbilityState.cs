@@ -17,6 +17,18 @@ public class ActorAbilityState : ActorState
 
     protected override void PlayAnimation(AActor actor)
     {
-        actor.GetAnimatorController().SetInt("animation,3");
+        if (actor.GetName() == "Mage")
+        {
+            actor.GetAnimatorController().SetInt("animation,3");
+        }
+        else if (actor.GetName() == "Warrior")
+        {
+            //Player Dash Animation
+            actor.GetAnimatorController().SetInt("animation,9");
+        }
+        else if (actor.GetName() == "Archer")
+        {
+            //Triple Arrow animation
+        }
     }
 }

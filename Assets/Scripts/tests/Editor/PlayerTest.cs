@@ -44,6 +44,8 @@ public class PlayerTest
             actorStat = new WarriorStat();
             entityName = actorName;
 
+            warriorAbilityDown = new WarriorCharge(this);
+
             abilityLeft = warriorAbilityLeft;
             abilityRight = warriorAbilityRight;
             abilityUp = warriorAbilityUp;
@@ -51,6 +53,8 @@ public class PlayerTest
 
             //Default to Grounded
             IsGrounded = true;
+
+            InitializeActor();
 
             NullParameterCheck();
         }
@@ -273,6 +277,21 @@ public class PlayerTest
 
         Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasBlocked);
         Assert.AreEqual(typeof(ActorBlockState), testActor.GetComponent<TestActor>().GetState().GetType());
+    }
+
+    [Test]
+    public void PlayerShieldChargeTest()
+    {
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action1, true, 1000);
+        
+
+        testActor.GetComponent<TestActor>().HandleInput(inputDevice);
+
+        Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasBlocked);
+        Assert.AreEqual(typeof(ActorAbilityState), testActor.GetComponent<TestActor>().GetState().GetType());
+        Assert.AreEqual(4, testActor.GetComponent<TestActor>().CurrentEnergy);
+
+        inputDevice.UpdateWithStateTestCase(InputControlType.Action1, false, 1001);
     }
 
     // A UnityTest behaves like a coroutine in PlayMode

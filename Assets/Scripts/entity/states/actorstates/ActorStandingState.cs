@@ -12,22 +12,25 @@ public class ActorStandingState : ActorState
 
     Command abilityDownCommand = new ActorDownAbilityCommand();
 
-    public ActorStandingState() :base()
+    public ActorStandingState() : base()
     {
-       
+        
     }
 
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         //actor.GetAnimator().enabled = true;
+        ActorStandingInitialize(actor);
+
         PlayAnimation(actor);
-        if(actor.IsGrounded == false)
+
+        if (actor.IsGrounded == false)
         {
-            return this;
+            return new ActorJumpState();
         }
 
-        if (inputDevice.LeftStickX.Value != 0 && GetType()!=typeof(ActorMovingState))
+        if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))
         {
             return new ActorMovingState();
         }
@@ -36,7 +39,9 @@ public class ActorStandingState : ActorState
         {
             actor.IsGrounded = false;
             jumpCommand.Execute(actor);
-            return new ActorJumpState();
+            ActorJumpState state = new ActorJumpState();
+            state.JumpNum--;
+            return state;
         }
         else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)
         {
@@ -57,7 +62,7 @@ public class ActorStandingState : ActorState
             return new ActorAttackState();
         }
 
-        else if (inputDevice.Action1.WasPressed)
+        else if (inputDevice.Action1.WasPressed && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
         {
             actor.CastTimer = AActor.CAST_DURATION;
             abilityDownCommand.Execute(actor);
@@ -65,6 +70,17 @@ public class ActorStandingState : ActorState
         }
 
         return this;
+    }
+
+    private void ActorStandingInitialize(AActor actor)
+    {
+        if(actor.GetRigidbody().useGravity == false)
+        {
+            actor.GetRigidbody().useGravity = true;
+        }
+
+        if(actor.BIsBlocking)
+            actor.Unblock();
     }
 
     protected override void PlayAnimation(AActor actor)

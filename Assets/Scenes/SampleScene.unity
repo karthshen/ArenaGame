@@ -1799,6 +1799,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1264992476}
+  - component: {fileID: 1264992477}
   m_Layer: 0
   m_Name: WarriorEnergy
   m_TagString: Untagged
@@ -1826,6 +1827,27 @@ Transform:
   m_Father: {fileID: 2056084702}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1264992477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264992475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8129910dcf18be49a3af19d2e294d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1898936860}
+  energyBars:
+  - {fileID: 1829485239}
+  - {fileID: 757667118}
+  - {fileID: 1867353999}
+  - {fileID: 1500724244}
+  - {fileID: 1402635812}
+  fullEnergySprite: {fileID: 21300000, guid: f386fe3d619dc624e836dc8b10f034a6, type: 3}
+  emptyEnergySprite: {fileID: 21300000, guid: 552b6817579a5fb44ae29aefe59f6028, type: 3}
 --- !u!1001 &1272657528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2310,7 +2332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 205664246}
-  timer: 0
+  timer: 300
 --- !u!1 &1499998089
 GameObject:
   m_ObjectHideFlags: 0
@@ -3988,6 +4010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784362978}
+  - component: {fileID: 1784362979}
   m_Layer: 0
   m_Name: MageEnergy
   m_TagString: Untagged
@@ -4015,6 +4038,27 @@ Transform:
   m_Father: {fileID: 1263126809}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1784362979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784362977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8129910dcf18be49a3af19d2e294d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 945008154}
+  energyBars:
+  - {fileID: 1179130186}
+  - {fileID: 780129940}
+  - {fileID: 1586428233}
+  - {fileID: 1668314675}
+  - {fileID: 770728141}
+  fullEnergySprite: {fileID: 21300000, guid: faedffe4ddbe39942b20a95b86dfc21d, type: 3}
+  emptyEnergySprite: {fileID: 21300000, guid: 552b6817579a5fb44ae29aefe59f6028, type: 3}
 --- !u!23 &1785156032
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5247,6 +5291,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mage
       objectReference: {fileID: 0}
+    - target: {fileID: 3109323002336567560, guid: 607cc88591dd12b458bdd2e8f26be11b,
+        type: 3}
+      propertyPath: wand
+      value: 
+      objectReference: {fileID: 2029399693}
     - target: {fileID: 4468020733004563382, guid: 607cc88591dd12b458bdd2e8f26be11b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5302,11 +5351,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3109323002336567560, guid: 607cc88591dd12b458bdd2e8f26be11b,
-        type: 3}
-      propertyPath: wand
-      value: 
-      objectReference: {fileID: 2029399693}
     - target: {fileID: 4472069557688482999, guid: 607cc88591dd12b458bdd2e8f26be11b,
         type: 3}
       propertyPath: m_LocalPosition.x
