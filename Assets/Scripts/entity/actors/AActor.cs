@@ -19,6 +19,7 @@ public abstract class AActor : AEntity
     public const float AIR_ATTACK_LENGTH = ATTACK_INTERVAL;
     public const float RESPAWN_TIMER = 3.0f;
     public const float AIRBORNE_DRAG = 15.0f;
+    public const float DAMAGE_TO_HEALTH_CONSTANT = 20f;
 
     //Attributes
     [SerializeField]
@@ -55,9 +56,14 @@ public abstract class AActor : AEntity
 
     private float castTimer = 0f;
 
+    private float energyRegTimer = 0f;
+
     protected string deathAnimation = "";
 
     protected int respawnLives = 3;
+
+    //This is for total damage taken since previous energy restore
+    private float totalDamageTaken = 0;
 
     //Mutators
     public float CurrentHealth
@@ -73,7 +79,7 @@ public abstract class AActor : AEntity
         }
     }
 
-    protected float CurrentEnergy
+    public float CurrentEnergy
     {
         get
         {
@@ -190,8 +196,8 @@ public abstract class AActor : AEntity
         if (GetRigidbody())
             GetRigidbody().isKinematic = false;
 
-        CurrentHealth = this.actorStat.MaxHealth;
-        CurrentEnergy = this.actorStat.MaxEnergy;
+        CurrentHealth = actorStat.MaxHealth;
+        CurrentEnergy = actorStat.MaxEnergy;
     }
 
     public virtual float TakeDamage(float damage)
@@ -202,13 +208,28 @@ public abstract class AActor : AEntity
             CurrentHealth = 0;
             Death();
         }
+
+        totalDamageTaken += damage;
+        if(totalDamageTaken >= DAMAGE_TO_HEALTH_CONSTANT)
+        {
+            if(this.currentEnergy <= ActorStat.MaxEnergy)
+            {
+                currentEnergy++;
+                totalDamageTaken -= DAMAGE_TO_HEALTH_CONSTANT;
+            }
+            else
+            {
+                totalDamageTaken = 0;
+            }
+        }
+
         return CurrentHealth;
     }
 
     public void HandleInput(InputDevice inputDevice)
     {
         ActorState newState = ((ActorState)state).HandleInput(this, inputDevice);
-        if(state != null)
+        if (state != null)
         {
             //Debug.Log("CurrentState:" + state.GetType());
             state = newState;
@@ -302,7 +323,7 @@ public abstract class AActor : AEntity
         {
             attackTimer -= Time.deltaTime;
 
-            if(attackTimer < AIR_ATTACK_LENGTH)
+            if (attackTimer < AIR_ATTACK_LENGTH)
             {
                 GetRigidbody().drag = 0;
             }
@@ -318,36 +339,46 @@ public abstract class AActor : AEntity
         if (deathTimer > 0)
         {
             deathTimer -= Time.deltaTime;
-            if(deathTimer <= 0 && respawnLives > 0) // && CanRespawn
+            if (deathTimer <= 0 && respawnLives > 0) // && CanRespawn
             {
                 respawnLives--;
                 Respawn();
             }
         }
 
-        if(CastTimer > 0)
+        if (CastTimer > 0)
         {
             CastTimer -= Time.deltaTime;
-            if(CastTimer <= 0)
+            if (CastTimer <= 0)
             {
                 state = new ActorStandingState();
             }
         }
 
-        if(transform.position.y < -20.0f && this.state.GetType() != typeof(ActorDeathState))
+        if (transform.position.y < -20.0f && this.state.GetType() != typeof(ActorDeathState))
         {
-            if(GetRigidbody())
+            if (GetRigidbody())
                 GetRigidbody().isKinematic = true;
 
             Death();
             deathTimer = 0.1f;
+        }
+
+        if(currentEnergy < ActorStat.MaxEnergy)
+        {
+            energyRegTimer += Time.deltaTime;
+            if(energyRegTimer >= ActorStat.EnergyRegenerationTime)
+            {
+                currentEnergy++;
+                energyRegTimer -= ActorStat.EnergyRegenerationTime;
+            }
         }
     }
 
     //Private functions
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground" && bIsGrounded == false)
+        if (collision.gameObject.tag == "Ground" && bIsGrounded == false)
         {
             bIsGrounded = true;
             this.state = new ActorStandingState();
@@ -357,7 +388,7 @@ public abstract class AActor : AEntity
 
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground" && bIsGrounded == true)
+        if (collision.gameObject.tag == "Ground" && bIsGrounded == true)
         {
             bIsGrounded = false;
         }
@@ -365,7 +396,7 @@ public abstract class AActor : AEntity
 
     private void TurnAround()
     {
-        if(moveHorizontal > 0)
+        if (moveHorizontal > 0)
         {
             transform.GetChild(0).eulerAngles = frontDirection;
         }

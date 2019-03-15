@@ -62,7 +62,7 @@ public class ActorStandingState : ActorState
             return new ActorAttackState();
         }
 
-        else if (inputDevice.Action1.WasPressed)
+        else if (inputDevice.Action1.WasPressed && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
         {
             actor.CastTimer = AActor.CAST_DURATION;
             abilityDownCommand.Execute(actor);

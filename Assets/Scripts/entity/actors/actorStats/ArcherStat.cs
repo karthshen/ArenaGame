@@ -2,6 +2,6 @@
 {
     public ArcherStat()
     {
-        this.setActorStat(80, 100, 20, 20, 20, 10, 15, 10);
+        this.setActorStat(100, 5, 20, 20, 20, 10, 15, 10, 3);
     }
 }

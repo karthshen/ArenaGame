@@ -14,10 +14,11 @@ public abstract class ActorStat
     private float damageMultiplier = 1;
     private float defenseMultiplier = 1;
     private float velocityMultiplier = 1;
+    private int energyRegenerationTime;
 
     protected void setActorStat(
         float maxHealth, float maxEnergy, float moveVelocity, float jumpVelocity, float sprintVelocity,
-        float attackPower, float defensePower, float abilityPower
+        float attackPower, float defensePower, float abilityPower, int energyGenerationSpeed
         )
     {
         this.maxHealth = maxHealth;
@@ -28,6 +29,7 @@ public abstract class ActorStat
         this.attackPower = attackPower;
         this.defensePower = defensePower;
         this.abiltiyPower = abilityPower;
+        this.energyRegenerationTime = energyGenerationSpeed;
     }
 
     public float MaxHealth
@@ -130,6 +132,19 @@ public abstract class ActorStat
         set
         {
             velocityMultiplier = value;
+        }
+    }
+
+    public int EnergyRegenerationTime
+    {
+        get
+        {
+            return energyRegenerationTime;
+        }
+
+        set
+        {
+            energyRegenerationTime = value;
         }
     }
 }

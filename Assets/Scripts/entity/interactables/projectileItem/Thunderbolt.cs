@@ -4,7 +4,7 @@ using System.Collections;
 public class Thunderbolt : ProjectileItem
 {
     private AActor owner;
-    private float velocity = 5.0f;
+    private float velocity = 10.0f;
     private float moveHorizontal = 1.0f;
     private Vector3 movement;
 
@@ -38,7 +38,7 @@ public class Thunderbolt : ProjectileItem
 
         if (hitActor)
         {
-            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 5);
+            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 3);
         }
 
         ProjectileFinish();
