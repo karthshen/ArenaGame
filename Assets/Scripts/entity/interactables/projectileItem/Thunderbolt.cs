@@ -38,7 +38,7 @@ public class Thunderbolt : ProjectileItem
 
         if (hitActor)
         {
-            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 3, owner);
+            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 1.5f, owner);
         }
 
         ProjectileFinish();

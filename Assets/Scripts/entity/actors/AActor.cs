@@ -24,6 +24,8 @@ public abstract class AActor : AEntity
     public const float AIRBORNE_DRAG = 15.0f;
     public const float DAMAGE_TO_ENERGY_CONSTANT = 20f;
 
+    private const float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
+
     //Attributes
     [SerializeField]
     private float currentHealth;
@@ -277,7 +279,7 @@ public abstract class AActor : AEntity
         }
         else
         {
-            state = new ActorFreezeState(1.0f / 1000 * 50, this, attacker);
+            state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
         }
 
 
