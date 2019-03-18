@@ -15,20 +15,14 @@ public class ActorAttackState : ActorState
         if(actor.attackQueue.Count == 0)
         {
             actor.AttackTimer = AActor.ATTACK_TIMER_BETWEEN_COMBO;
-            return new ActorStandingState();
+            //Debug.Log("Out of Attack Queue");
+            return new ActorStandingState(this.GetType().ToString());
         }
 
-        PlayAnimation(actor);
-
-        if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
+            PlayAnimation(actor);
             //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
-            //Refresh AttackCode
-            actor.AttackCode = System.Guid.NewGuid();
-
-            Debug.Log("Popping Attack Stack");
-            actor.attackQueue.Dequeue();
-            actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
         }
 

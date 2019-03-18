@@ -43,9 +43,7 @@ public class ActorJumpState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        PlayAnimation(actor);
-
-        if (inputDevice.LeftStickX.Value != 0 && !bAttacked)
+        if (inputDevice.LeftStickX.Value != 0)
         {
             actor.MoveHorizontal = inputDevice.LeftStickX.Value;
             moveCommand.Execute(actor);
@@ -56,6 +54,7 @@ public class ActorJumpState : ActorState
             if (JumpNum > 0 && actor.IsGrounded == false)
             {
                 Jumped();
+                PlayAnimation(actor);
                 //Debug.Log("Jump: "+ jumpNum + "- Vertical Velocity: " + actor.GetRigidbody().velocity.y);
                 jumpCommand.Execute(actor);
                 return this;
@@ -64,14 +63,7 @@ public class ActorJumpState : ActorState
 
         if (inputDevice.Action2 && !BAttacked)
         {
-            //Refresh AttackCode
-            actor.AttackCode = System.Guid.NewGuid();
-
             actor.GenerateAirAttackQueue();
-            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
-            actor.AttackTimer = AActor.ATTACK_TIMER;
-            attackCommand.Execute(actor);
-            //Debug.Log(actor.GetName() + " attacking from standing state");
             return new ActorAirAttackState();
 
         }
@@ -90,9 +82,13 @@ public class ActorJumpState : ActorState
         {
             actor.GetAnimatorController().SetInt("animation,16");
         }
-        else
+        else if (JumpNum == 0)
         {
             actor.GetAnimatorController().SetInt("animation,4");
+        }
+        else
+        {
+            actor.GetAnimatorController().SetInt("animation,16");
         }
     }
 }

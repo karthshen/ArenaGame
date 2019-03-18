@@ -85,11 +85,13 @@ public class WarriorActor : AActor
         attackQueue.Enqueue(Combo.Attack0);
         attackQueue.Enqueue(Combo.Attack1);
         attackQueue.Enqueue(Combo.Attack2);
+        attackQueue.Enqueue(Combo.Null);
     }
 
     public override void GenerateAirAttackQueue()
     {
         attackQueue.Clear();
+
         attackQueue.Enqueue(Combo.Attack0);
         attackQueue.Enqueue(Combo.Attack1);
         attackQueue.Enqueue(Combo.Attack2);

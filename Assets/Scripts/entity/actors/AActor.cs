@@ -8,6 +8,7 @@ public abstract class AActor : AEntity
     //Enums
     public enum Combo
     {
+        Null,
         Attack0,
         Attack1,
         Attack2
@@ -365,8 +366,14 @@ public abstract class AActor : AEntity
         return deathAnimation;
     }
 
+    /*
+     * The first element is ignored
+     */
     public abstract void GenerateAttackQueue();
 
+    /*
+     * The first element is ignored
+     */
     public abstract void GenerateAirAttackQueue();
 
     public new void NullParameterCheck()
@@ -416,7 +423,7 @@ public abstract class AActor : AEntity
                 //Back to standing after each attack
                 //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
                 BackToStanding();
-                attackTimer = ATTACK_TIMER_BETWEEN_COMBO;
+                attackTimer = ATTACK_TIMER_BETWEEN_COMBO - ATTACK_INTERVAL;
             }
         }
 

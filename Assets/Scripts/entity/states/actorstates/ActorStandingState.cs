@@ -46,6 +46,7 @@ public class ActorStandingState : ActorState
             jumpCommand.Execute(actor);
             ActorJumpState state = new ActorJumpState();
             state.JumpNum--;
+            state.PlayStateAnimation(actor);
             return state;
         }
         else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)
@@ -60,15 +61,11 @@ public class ActorStandingState : ActorState
         }
         else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
-            //Refresh Attack Code
-            actor.AttackCode = System.Guid.NewGuid();
-
             actor.GenerateAttackQueue();
-            
-            actor.AttackTimer = AActor.ATTACK_TIMER;
-            attackCommand.Execute(actor);
             //Debug.Log(actor.GetName() + " attacking from standing state");
-            return new ActorAttackState();
+            ActorState state = new ActorAttackState();
+            //state.HandleInput(actor, inputDevice);
+            return state;
         }
 
         else if (inputDevice.Action1.WasPressed && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
