@@ -95,13 +95,13 @@ public class WarriorActor : AActor
         attackQueue.Enqueue(Combo.Attack2);
     }
 
-    public override float TakeDamage(float damage)
+    public override float TakeDamage(float damage, AActor attacker)
     {
         if (BIsBlocking)
         {
             damage /= 10;
         }
-        return base.TakeDamage(damage);
+        return base.TakeDamage(damage, attacker);
     }
 
     //MonoBehavior Functions

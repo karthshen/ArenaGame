@@ -14,7 +14,12 @@ public class ActorStandingState : ActorState
 
     public ActorStandingState() : base()
     {
-        
+
+    }
+
+    public ActorStandingState(string previousState) : base(previousState)
+    {
+
     }
 
 
@@ -53,7 +58,7 @@ public class ActorStandingState : ActorState
             grabCommand.Execute(actor);
             return new ActorGrabbingState();
         }
-        else if (inputDevice.Action2)
+        else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
             actor.GenerateAttackQueue();
             actor.AttackTimer = AActor.ATTACK_TIMER;
@@ -74,12 +79,12 @@ public class ActorStandingState : ActorState
 
     private void ActorStandingInitialize(AActor actor)
     {
-        if(actor.GetRigidbody().useGravity == false)
+        if (actor.GetRigidbody().useGravity == false)
         {
             actor.GetRigidbody().useGravity = true;
         }
 
-        if(actor.BIsBlocking)
+        if (actor.BIsBlocking)
             actor.Unblock();
     }
 

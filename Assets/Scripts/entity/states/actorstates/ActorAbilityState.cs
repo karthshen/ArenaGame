@@ -19,6 +19,7 @@ public class ActorAbilityState : ActorState
     {
         if (actor.GetName() == "Mage")
         {
+            //Thunderbolt animation
             actor.GetAnimatorController().SetInt("animation,3");
         }
         else if (actor.GetName() == "Warrior")

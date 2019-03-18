@@ -91,9 +91,9 @@ public class MageActor : AActor
         attackQueue.Enqueue(Combo.Attack2);
     }
 
-    public override float TakeDamage(float damage)
+    public override float TakeDamage(float damage, AActor attacker)
     {
-        return base.TakeDamage(damage);
+        return base.TakeDamage(damage, attacker);
     }
 
     //MonoBehavior Functions

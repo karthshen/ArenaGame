@@ -12,12 +12,13 @@ public class ActorAttackState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        PlayAnimation(actor);
-
         if(actor.attackQueue.Count == 0)
         {
+            actor.AttackTimer = AActor.ATTACK_TIMER_BETWEEN_COMBO;
             return new ActorStandingState();
         }
+
+        PlayAnimation(actor);
 
         if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
