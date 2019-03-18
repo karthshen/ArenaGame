@@ -18,6 +18,9 @@ public class ActorAirAttackState : ActorState
         if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
             //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
+            //Refresh AttackCode
+            actor.AttackCode = System.Guid.NewGuid();
+
             actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
             actor.attackQueue.Dequeue();
             actor.AttackTimer = AActor.ATTACK_TIMER;

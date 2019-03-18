@@ -12,6 +12,8 @@ public class MageThunderbolt : Ability
 
     public override void AbilityExecute()
     {
+        base.AbilityExecute();
+
         caster.CurrentEnergy -= AbilityCost;
 
         thunderbolt = Object.Instantiate(Resources.Load("ThunderBolt")) as GameObject;

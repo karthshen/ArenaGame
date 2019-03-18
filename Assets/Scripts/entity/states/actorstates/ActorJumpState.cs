@@ -64,6 +64,9 @@ public class ActorJumpState : ActorState
 
         if (inputDevice.Action2 && !BAttacked)
         {
+            //Refresh AttackCode
+            actor.AttackCode = System.Guid.NewGuid();
+
             actor.GenerateAirAttackQueue();
             actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
             actor.AttackTimer = AActor.ATTACK_TIMER;

@@ -20,5 +20,8 @@ public abstract class Ability
         }
     }
 
-    public abstract void AbilityExecute();
+    public virtual void AbilityExecute()
+    {
+        caster.AttackCode = System.Guid.NewGuid();
+    }
 }

@@ -29,5 +29,7 @@ public class WarriorCharge : Ability
         caster.Block();
 
         caster.GetRigidbody().AddForce(chargeMovement * CHARGE_SPEED);
+
+        base.AbilityExecute();
     }
 }

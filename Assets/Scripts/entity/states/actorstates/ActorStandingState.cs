@@ -60,7 +60,11 @@ public class ActorStandingState : ActorState
         }
         else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
+            //Refresh Attack Code
+            actor.AttackCode = System.Guid.NewGuid();
+
             actor.GenerateAttackQueue();
+            
             actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
             //Debug.Log(actor.GetName() + " attacking from standing state");
