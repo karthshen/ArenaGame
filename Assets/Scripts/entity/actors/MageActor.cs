@@ -87,7 +87,7 @@ public class MageActor : AActor
         attackQueue.Clear();
 
         attackQueue.Enqueue(Combo.Attack0);
-        attackQueue.Enqueue(Combo.Attack1);
+        //attackQueue.Enqueue(Combo.Attack1);
         attackQueue.Enqueue(Combo.Null);
     }
 
