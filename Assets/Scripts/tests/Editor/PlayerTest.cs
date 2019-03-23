@@ -93,7 +93,7 @@ public class PlayerTest
             hasMoved = true;
         }
 
-        public override float TakeDamage(float damage)
+        public override float TakeDamage(float damage, AActor attacker)
         {
             throw new System.NotImplementedException();
         }

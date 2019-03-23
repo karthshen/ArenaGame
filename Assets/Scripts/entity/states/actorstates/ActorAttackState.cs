@@ -12,18 +12,17 @@ public class ActorAttackState : ActorState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        PlayAnimation(actor);
-
         if(actor.attackQueue.Count == 0)
         {
-            return new ActorStandingState();
+            actor.AttackTimer = AActor.ATTACK_TIMER_BETWEEN_COMBO;
+            //Debug.Log("Out of Attack Queue");
+            return new ActorStandingState(this.GetType().ToString());
         }
 
-        if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
+            PlayAnimation(actor);
             //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
-            actor.attackQueue.Dequeue();
-            actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
         }
 

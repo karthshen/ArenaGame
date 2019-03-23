@@ -69,7 +69,7 @@ public class ArcherActor : AActor
         throw new System.NotImplementedException();
     }
 
-    public override float TakeDamage(float damage)
+    public override float TakeDamage(float damage, AActor attacker)
     {
         throw new System.NotImplementedException();
     }

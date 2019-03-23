@@ -87,13 +87,21 @@ public class MageActor : AActor
         attackQueue.Clear();
 
         attackQueue.Enqueue(Combo.Attack0);
-        attackQueue.Enqueue(Combo.Attack1);
-        attackQueue.Enqueue(Combo.Attack2);
+        //attackQueue.Enqueue(Combo.Attack1);
+        attackQueue.Enqueue(Combo.Null);
     }
 
-    public override float TakeDamage(float damage)
+    public override void GenerateAirAttackQueue()
     {
-        return base.TakeDamage(damage);
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
+    }
+
+    public override float TakeDamage(float damage, AActor attacker)
+    {
+        return base.TakeDamage(damage, attacker);
     }
 
     //MonoBehavior Functions
@@ -113,13 +121,5 @@ public class MageActor : AActor
     public override void Death()
     {
         base.Death();
-    }
-
-    public override void GenerateAirAttackQueue()
-    {
-        attackQueue.Clear();
-
-        attackQueue.Enqueue(Combo.Attack0);
-        attackQueue.Enqueue(Combo.Attack1);
     }
 }

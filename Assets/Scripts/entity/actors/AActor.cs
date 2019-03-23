@@ -1,25 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using InControl;
+using System;
 
 public abstract class AActor : AEntity
 {
     //Enums
     public enum Combo
     {
+        Null,
         Attack0,
         Attack1,
         Attack2
     }
 
     //constants
-    public const float ATTACK_TIMER = 0.7f / 1.3f;
+    public const float ATTACK_TIMER_BETWEEN_COMBO = 0.7f;
+    public const float ATTACK_TIMER = ATTACK_TIMER_BETWEEN_COMBO / 1.3f;
     public const float ATTACK_INTERVAL = 0.35f / 1.3f;
     public const float CAST_DURATION = 0.5f;
     public const float AIR_ATTACK_LENGTH = ATTACK_INTERVAL;
     public const float RESPAWN_TIMER = 3.0f;
     public const float AIRBORNE_DRAG = 15.0f;
-    public const float DAMAGE_TO_HEALTH_CONSTANT = 20f;
+    public const float DAMAGE_TO_ENERGY_CONSTANT = 20f;
+
+    private const float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
 
     //Attributes
     [SerializeField]
@@ -46,10 +51,13 @@ public abstract class AActor : AEntity
 
     protected Rigidbody rb;
 
+    //Fake State
     private bool bIsGrounded = false;
 
     private bool bIsBlocking = false;
+    //---------------------------
 
+    //Timer
     protected float attackTimer = 0f;
 
     private float deathTimer = 0f;
@@ -58,12 +66,19 @@ public abstract class AActor : AEntity
 
     private float energyRegTimer = 0f;
 
+    private float freezeTimer = 0f;
+    //----------------------------
+
     protected string deathAnimation = "";
 
     protected int respawnLives = 3;
 
     //This is for total damage taken since previous energy restore
     private float totalDamageTaken = 0;
+
+    //Attack Code and Damage Code - In order to avoid multiple damage with single attack
+    private Guid attackCode = Guid.NewGuid();
+    private Guid damageCode = Guid.NewGuid();
 
     //Mutators
     public float CurrentHealth
@@ -183,6 +198,45 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float FreezeTimer
+    {
+        get
+        {
+            return freezeTimer;
+        }
+
+        set
+        {
+            freezeTimer = value;
+        }
+    }
+
+    public Guid AttackCode
+    {
+        get
+        {
+            return attackCode;
+        }
+
+        set
+        {
+            attackCode = value;
+        }
+    }
+
+    public Guid DamageCode
+    {
+        get
+        {
+            return damageCode;
+        }
+
+        set
+        {
+            damageCode = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -200,29 +254,49 @@ public abstract class AActor : AEntity
         CurrentEnergy = actorStat.MaxEnergy;
     }
 
-    public virtual float TakeDamage(float damage)
+    public virtual float TakeDamage(float damage, AActor attacker)
     {
+        if (state.GetType() == typeof(ActorDeathState))
+            return 0;
+
+        if (attacker.AttackCode.Equals(damageCode))
+        {
+            return 0;
+        }
+
         this.CurrentHealth -= damage;
+        damageCode = attacker.AttackCode;
+
+        //The attacked actor goes to freeze state
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
             Death();
         }
+        else if(state.GetType() == typeof(ActorBlockState))
+        {
 
+        }
+        else
+        {
+            state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
+        }
+
+
+        //Damage to Energy
         totalDamageTaken += damage;
-        if(totalDamageTaken >= DAMAGE_TO_HEALTH_CONSTANT)
+        if(totalDamageTaken >= DAMAGE_TO_ENERGY_CONSTANT)
         {
             if(this.currentEnergy <= ActorStat.MaxEnergy)
             {
                 currentEnergy++;
-                totalDamageTaken -= DAMAGE_TO_HEALTH_CONSTANT;
+                totalDamageTaken -= DAMAGE_TO_ENERGY_CONSTANT;
             }
             else
             {
                 totalDamageTaken = 0;
             }
         }
-
         return CurrentHealth;
     }
 
@@ -274,7 +348,7 @@ public abstract class AActor : AEntity
         InitializeActor();
         GameObject[] respawnObjects = GameObject.FindGameObjectsWithTag("Respawn");
 
-        GameObject respawnLocation = respawnObjects[Random.Range(0, respawnObjects.Length)];
+        GameObject respawnLocation = respawnObjects[UnityEngine.Random.Range(0, respawnObjects.Length)];
 
         if (respawnLocation)
         {
@@ -294,8 +368,14 @@ public abstract class AActor : AEntity
         return deathAnimation;
     }
 
+    /*
+     * The first element is ignored
+     */
     public abstract void GenerateAttackQueue();
 
+    /*
+     * The first element is ignored
+     */
     public abstract void GenerateAirAttackQueue();
 
     public new void NullParameterCheck()
@@ -318,7 +398,19 @@ public abstract class AActor : AEntity
     }
 
     protected void ActorUpdate()
-    {
+    { 
+        if (deathTimer > 0)
+        {
+            deathTimer -= Time.deltaTime;
+            if (deathTimer <= 0 && respawnLives > 0) // && CanRespawn
+            {
+                respawnLives--;
+                Respawn();
+            }
+
+            return;
+        }
+
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
@@ -332,17 +424,8 @@ public abstract class AActor : AEntity
             {
                 //Back to standing after each attack
                 //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
-                state = new ActorStandingState();
-            }
-        }
-
-        if (deathTimer > 0)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer <= 0 && respawnLives > 0) // && CanRespawn
-            {
-                respawnLives--;
-                Respawn();
+                BackToStanding();
+                attackTimer = ATTACK_TIMER_BETWEEN_COMBO - ATTACK_INTERVAL;
             }
         }
 
@@ -351,11 +434,11 @@ public abstract class AActor : AEntity
             CastTimer -= Time.deltaTime;
             if (CastTimer <= 0)
             {
-                state = new ActorStandingState();
+                BackToStanding();
             }
         }
 
-        if (transform.position.y < -20.0f && this.state.GetType() != typeof(ActorDeathState))
+        if (transform.position.y < -20.0f)
         {
             if (GetRigidbody())
                 GetRigidbody().isKinematic = true;
@@ -373,15 +456,25 @@ public abstract class AActor : AEntity
                 energyRegTimer -= ActorStat.EnergyRegenerationTime;
             }
         }
+
+        if(freezeTimer > 0)
+        {
+            freezeTimer -= Time.deltaTime;
+            if(freezeTimer <= 0)
+            {
+                freezeTimer = 0;
+                BackToStanding();
+            }
+        }
     }
 
     //Private functions
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground" && bIsGrounded == false)
+        if (collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState))
         {
             bIsGrounded = true;
-            this.state = new ActorStandingState();
+            BackToStanding();
             //Debug.Log("Entering StandingState from Ground");
         }
     }
@@ -393,6 +486,14 @@ public abstract class AActor : AEntity
             bIsGrounded = false;
         }
     }
+
+    private void BackToStanding()
+    {
+        if(state.GetType() != typeof(ActorDeathState))
+        {
+            state = new ActorStandingState(state.GetType().ToString());
+        }
+    } 
 
     private void TurnAround()
     {

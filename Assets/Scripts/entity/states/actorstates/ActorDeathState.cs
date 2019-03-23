@@ -6,6 +6,7 @@ public class ActorDeathState : ActorState
 {
     public ActorDeathState()
     {
+
     }
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)

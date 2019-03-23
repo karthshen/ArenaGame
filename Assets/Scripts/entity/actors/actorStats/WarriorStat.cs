@@ -2,6 +2,6 @@
 {
     public WarriorStat()
     {
-        this.setActorStat(100, 5, 7, 5, 100, 3, 20, 5, 4);
+        this.setActorStat(100, 5, 7, 5, 100, 15, 20, 5, 4);
     }
 }

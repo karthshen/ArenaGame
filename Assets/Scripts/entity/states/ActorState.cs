@@ -9,6 +9,11 @@ public abstract class ActorState : EntityState
         //Debug.Log("Entering State: " + GetType());
     }
 
+    protected ActorState(string previousState)
+    {
+        Debug.Log("Previous State: " + previousState + " transit to Current State: " + GetType());
+    }
+
     public abstract ActorState HandleInput(AActor actor, InputDevice inputDevice);
 
     protected abstract void PlayAnimation(AActor actor);

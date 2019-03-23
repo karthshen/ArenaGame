@@ -10,17 +10,18 @@ public class ActorAirAttackState : ActorState
     {
         if (actor.attackQueue.Count == 0)
         {
-            return this;
+            actor.AttackTimer = AActor.ATTACK_TIMER_BETWEEN_COMBO;
+            ActorJumpState state = new ActorJumpState();
+            state.JumpNum = 0;
+            state.BAttacked = true;
+            return state;
         }
 
-        PlayAnimation(actor);
-
-        if (inputDevice.Action2.WasPressed && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
+            PlayAnimation(actor);
             //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
             actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
-            actor.attackQueue.Dequeue();
-            actor.AttackTimer = AActor.ATTACK_TIMER;
             attackCommand.Execute(actor);
         }
 

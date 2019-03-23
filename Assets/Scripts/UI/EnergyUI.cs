@@ -16,11 +16,6 @@ public class EnergyUI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(energyBars.Count != player.GetActorStat().MaxEnergy)
-        {
-            throw new MissingComponentException("Incorrect amount of energy bar for Player: " + player.GetName());
-        }
-
         foreach(Image bar in energyBars)
         {
             bar.sprite = emptyEnergySprite;
@@ -30,7 +25,12 @@ public class EnergyUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i<energyBars.Count; i++)
+        if (energyBars.Count != player.GetActorStat().MaxEnergy)
+        {
+            throw new MissingComponentException("Incorrect amount of energy bar for Player: " + player.GetName());
+        }
+
+        for (int i = 0; i<energyBars.Count; i++)
         {
             if (i < player.CurrentEnergy)
             {

@@ -14,7 +14,12 @@ public class ActorStandingState : ActorState
 
     public ActorStandingState() : base()
     {
-        
+
+    }
+
+    public ActorStandingState(string previousState) : base(previousState)
+    {
+
     }
 
 
@@ -41,6 +46,7 @@ public class ActorStandingState : ActorState
             jumpCommand.Execute(actor);
             ActorJumpState state = new ActorJumpState();
             state.JumpNum--;
+            state.PlayStateAnimation(actor);
             return state;
         }
         else if (inputDevice.LeftTrigger || inputDevice.LeftBumper)
@@ -53,13 +59,13 @@ public class ActorStandingState : ActorState
             grabCommand.Execute(actor);
             return new ActorGrabbingState();
         }
-        else if (inputDevice.Action2)
+        else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
             actor.GenerateAttackQueue();
-            actor.AttackTimer = AActor.ATTACK_TIMER;
-            attackCommand.Execute(actor);
             //Debug.Log(actor.GetName() + " attacking from standing state");
-            return new ActorAttackState();
+            ActorState state = new ActorAttackState();
+            //state.HandleInput(actor, inputDevice);
+            return state;
         }
 
         else if (inputDevice.Action1.WasPressed && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
@@ -74,12 +80,12 @@ public class ActorStandingState : ActorState
 
     private void ActorStandingInitialize(AActor actor)
     {
-        if(actor.GetRigidbody().useGravity == false)
+        if (actor.GetRigidbody().useGravity == false)
         {
             actor.GetRigidbody().useGravity = true;
         }
 
-        if(actor.BIsBlocking)
+        if (actor.BIsBlocking)
             actor.Unblock();
     }
 
