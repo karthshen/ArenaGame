@@ -33,7 +33,8 @@ public class WarriorActor : AActor
         actorStat = new WarriorStat();
         entityName = actorName;
 
-        warriorAbilityDown = new WarriorCharge(this);
+        warriorAbilityLeft = new WarriorCharge(this);
+        warriorAbilityRight = new WarriorCharge(this);
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;

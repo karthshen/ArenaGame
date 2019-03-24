@@ -17,6 +17,14 @@ public class ActorFreezeState : ActorState
         HandleInput(actor, null);
     }
 
+    public ActorFreezeState(float time, AActor actor, AActor attacker, float knockingForce)
+    {
+        this.time = time;
+        this.attacker = attacker;
+        this.knockingForce = knockingForce;
+        HandleInput(actor, null);
+    }
+
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         PlayAnimation(actor);
@@ -25,12 +33,7 @@ public class ActorFreezeState : ActorState
         {
             actor.FreezeTimer = time;
 
-            //Knocking back
-            float yDirectionInRadian = attacker.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
-
-            Vector3 backMovement = new Vector3(knockingForce * Mathf.Sin(yDirectionInRadian), 0f, 0f);
-
-            actor.GetRigidbody().AddForce(backMovement);
+            actor.KnockBack(knockingForce, attacker);
         }
 
         return this;
