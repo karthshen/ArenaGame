@@ -254,6 +254,18 @@ public abstract class AActor : AEntity
         CurrentEnergy = actorStat.MaxEnergy;
     }
 
+    public virtual void KnockBack(float knockingForce, AActor attacker)
+    {
+        //Knocking back
+        float yDirectionInRadian = attacker.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+
+        Vector3 backMovement = new Vector3(knockingForce * Mathf.Sin(yDirectionInRadian), 0f, 0f);
+
+        GetRigidbody().AddForce(backMovement);
+
+        state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
+    }
+
     public virtual float TakeDamage(float damage, AActor attacker)
     {
         if (state.GetType() == typeof(ActorDeathState))

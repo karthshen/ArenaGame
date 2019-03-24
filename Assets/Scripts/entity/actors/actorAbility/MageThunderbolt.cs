@@ -16,7 +16,7 @@ public class MageThunderbolt : Ability
 
         caster.CurrentEnergy -= AbilityCost;
 
-        thunderbolt = Object.Instantiate(Resources.Load("ThunderBolt")) as GameObject;
+        thunderbolt = Object.Instantiate(Resources.Load("Fireball")) as GameObject;
         Thunderbolt bolt = thunderbolt.GetComponent<Thunderbolt>();
         bolt.SetOwner(caster);
         bolt.ProjectileStart();

@@ -33,6 +33,8 @@ public class MageActor : AActor
         entityName = actorName;
 
         mageAbilityDown = new MageThunderbolt(this);
+        mageAbilityLeft = new MageStormShield(this);
+        mageAbilityRight = new MageStormShield(this);
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;

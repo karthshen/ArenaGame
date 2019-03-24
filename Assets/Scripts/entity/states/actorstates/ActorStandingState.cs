@@ -11,6 +11,9 @@ public class ActorStandingState : ActorState
     Command attackCommand = new AttackCommand();
 
     Command abilityDownCommand = new ActorDownAbilityCommand();
+    Command abilityLeftCommand = new ActorLeftAbilityCommand();
+    Command abilityRightCommand = new ActorRightAbilityCommand();
+    Command abilityUpCommand = new ActorAbilityUpCommand();
 
     public ActorStandingState() : base()
     {
@@ -67,12 +70,26 @@ public class ActorStandingState : ActorState
             //state.HandleInput(actor, inputDevice);
             return state;
         }
-
-        else if (inputDevice.Action1.WasPressed && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
+        //Ability Left Input
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value < (0 - Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityLeft.AbilityCost)
+        {
+            actor.CastTimer = AActor.CAST_DURATION;
+            abilityLeftCommand.Execute(actor);
+            return new ActorHoriAbilityState();
+        }
+        //Ability Right Input
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value > (0 + Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityRight.AbilityCost)
+        {
+            actor.CastTimer = AActor.CAST_DURATION;
+            abilityRightCommand.Execute(actor);
+            return new ActorHoriAbilityState();
+        }
+        //Ability Down Input
+        else if ((inputDevice.Action1.WasPressed) && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
         {
             actor.CastTimer = AActor.CAST_DURATION;
             abilityDownCommand.Execute(actor);
-            return new ActorAbilityState();
+            return new ActorDownAbilityState();
         }
 
         return this;

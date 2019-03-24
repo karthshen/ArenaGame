@@ -288,7 +288,7 @@ public class PlayerTest
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
 
         Assert.AreEqual(true, testActor.GetComponent<TestActor>().hasBlocked);
-        Assert.AreEqual(typeof(ActorAbilityState), testActor.GetComponent<TestActor>().GetState().GetType());
+        Assert.AreEqual(typeof(ActorDownAbilityState), testActor.GetComponent<TestActor>().GetState().GetType());
         Assert.AreEqual(4, testActor.GetComponent<TestActor>().CurrentEnergy);
 
         inputDevice.UpdateWithStateTestCase(InputControlType.Action1, false, 1001);
