@@ -8,7 +8,8 @@ public class EnergyPotion : PickupItem
 
     public override void ItemPickUp(AActor actor)
     {
-        owner = actor;
+        base.ItemPickUp(actor);
+
         UseItem(actor);
         RemoveItem();
     }

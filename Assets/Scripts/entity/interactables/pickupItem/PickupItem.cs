@@ -17,7 +17,13 @@ public abstract class PickupItem : AInteractable
 
     public abstract void UseItem(AActor actor);
 
-    public abstract void ItemPickUp(AActor actor);
+    public virtual void ItemPickUp(AActor actor)
+    {
+        if (owner != null)
+            return;
+        else
+            owner = actor;
+    }
 
     public AActor GetOwner()
     {

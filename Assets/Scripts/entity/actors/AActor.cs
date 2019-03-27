@@ -511,7 +511,7 @@ public abstract class AActor : AEntity
             //Debug.Log("Entering StandingState from Ground");
         }
 
-        if (collision.gameObject.GetComponent<PickupItem>())
+        if (collision.gameObject.GetComponent<PickupItem>() && collision.gameObject.GetComponent<PickupItem>().GetOwner() != this)
         {
             PickupItem item = collision.gameObject.GetComponent<PickupItem>();
             item.ItemPickUp(this);
