@@ -56,7 +56,7 @@ public class MageActor : AActor
     public override void Attack()
     {
         //Write code to capture the target enemy
-        wand.UseItem();
+        wand.UseItem(this);
     }
 
     public override void Block()

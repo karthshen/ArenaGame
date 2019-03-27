@@ -71,7 +71,7 @@ public abstract class AActor : AEntity
 
     protected string deathAnimation = "";
 
-    protected int respawnLives = 3;
+    private int respawnLives = 3;
 
     //This is for total damage taken since previous energy restore
     private float totalDamageTaken = 0;
@@ -91,6 +91,10 @@ public abstract class AActor : AEntity
         set
         {
             currentHealth = value;
+            if(currentHealth > GetActorStat().MaxHealth)
+            {
+                currentHealth = GetActorStat().MaxHealth;
+            }
         }
     }
 
@@ -104,6 +108,10 @@ public abstract class AActor : AEntity
         set
         {
             currentEnergy = value;
+            if(currentEnergy > GetActorStat().MaxEnergy)
+            {
+                currentEnergy = GetActorStat().MaxEnergy;
+            }
         }
     }
 
@@ -234,6 +242,19 @@ public abstract class AActor : AEntity
         set
         {
             damageCode = value;
+        }
+    }
+
+    public int RespawnLives
+    {
+        get
+        {
+            return respawnLives;
+        }
+
+        set
+        {
+            respawnLives = value;
         }
     }
 
@@ -488,6 +509,12 @@ public abstract class AActor : AEntity
             bIsGrounded = true;
             BackToStanding();
             //Debug.Log("Entering StandingState from Ground");
+        }
+
+        if (collision.gameObject.GetComponent<PickupItem>())
+        {
+            PickupItem item = collision.gameObject.GetComponent<PickupItem>();
+            item.ItemPickUp(this);
         }
     }
 

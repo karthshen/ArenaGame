@@ -12,10 +12,10 @@ public abstract class PickupItem : AInteractable
 
     public override void RemoveItem()
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 
-    public abstract void UseItem();
+    public abstract void UseItem(AActor actor);
 
     public abstract void ItemPickUp(AActor actor);
 

@@ -8,7 +8,7 @@ public class WarriorSword : PickupItem
         this.owner = actor;
     }
 
-    public override void UseItem()
+    public override void UseItem(AActor actor)
     {
         GetComponent<Collider>().enabled = true;
     }
