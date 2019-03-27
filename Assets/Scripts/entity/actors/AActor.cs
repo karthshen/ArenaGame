@@ -71,7 +71,7 @@ public abstract class AActor : AEntity
 
     protected string deathAnimation = "";
 
-    protected int respawnLives = 3;
+    private int respawnLives = 3;
 
     //This is for total damage taken since previous energy restore
     private float totalDamageTaken = 0;
@@ -91,6 +91,10 @@ public abstract class AActor : AEntity
         set
         {
             currentHealth = value;
+            if(currentHealth > GetActorStat().MaxHealth)
+            {
+                currentHealth = GetActorStat().MaxHealth;
+            }
         }
     }
 
@@ -104,6 +108,10 @@ public abstract class AActor : AEntity
         set
         {
             currentEnergy = value;
+            if(currentEnergy > GetActorStat().MaxEnergy)
+            {
+                currentEnergy = GetActorStat().MaxEnergy;
+            }
         }
     }
 
@@ -237,6 +245,19 @@ public abstract class AActor : AEntity
         }
     }
 
+    public int RespawnLives
+    {
+        get
+        {
+            return respawnLives;
+        }
+
+        set
+        {
+            respawnLives = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -252,6 +273,18 @@ public abstract class AActor : AEntity
 
         CurrentHealth = actorStat.MaxHealth;
         CurrentEnergy = actorStat.MaxEnergy;
+    }
+
+    public virtual void KnockBack(float knockingForce, AActor attacker)
+    {
+        //Knocking back
+        float yDirectionInRadian = attacker.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+
+        Vector3 backMovement = new Vector3(knockingForce * Mathf.Sin(yDirectionInRadian), 0f, 0f);
+
+        GetRigidbody().AddForce(backMovement);
+
+        state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
     }
 
     public virtual float TakeDamage(float damage, AActor attacker)
@@ -476,6 +509,12 @@ public abstract class AActor : AEntity
             bIsGrounded = true;
             BackToStanding();
             //Debug.Log("Entering StandingState from Ground");
+        }
+
+        if (collision.gameObject.GetComponent<PickupItem>() && collision.gameObject.GetComponent<PickupItem>().GetOwner() != this)
+        {
+            PickupItem item = collision.gameObject.GetComponent<PickupItem>();
+            item.ItemPickUp(this);
         }
     }
 

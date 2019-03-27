@@ -79,6 +79,9 @@ public class CameraController : MonoBehaviour
             minY = tempActor.y < minY ? tempActor.y : minY;
             maxY = tempActor.y > maxY ? tempActor.y : maxY;
         }
+
+        maxX *= 1.5f;
+        maxY *= 1.5f;
     }
 
     private void CalculateCmaeraPosAndSize()

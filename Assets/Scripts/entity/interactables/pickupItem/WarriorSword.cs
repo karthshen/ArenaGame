@@ -5,10 +5,10 @@ public class WarriorSword : PickupItem
 {
     public override void ItemPickUp(AActor actor)
     {
-        this.owner = actor;
+        base.ItemPickUp(actor);
     }
 
-    public override void UseItem()
+    public override void UseItem(AActor actor)
     {
         GetComponent<Collider>().enabled = true;
     }

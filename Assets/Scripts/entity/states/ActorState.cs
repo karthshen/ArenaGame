@@ -11,7 +11,7 @@ public abstract class ActorState : EntityState
 
     protected ActorState(string previousState)
     {
-        Debug.Log("Previous State: " + previousState + " transit to Current State: " + GetType());
+        //Debug.Log("Previous State: " + previousState + " transit to Current State: " + GetType());
     }
 
     public abstract ActorState HandleInput(AActor actor, InputDevice inputDevice);

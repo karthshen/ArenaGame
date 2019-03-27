@@ -33,7 +33,8 @@ public class WarriorActor : AActor
         actorStat = new WarriorStat();
         entityName = actorName;
 
-        warriorAbilityDown = new WarriorCharge(this);
+        warriorAbilityLeft = new WarriorCharge(this);
+        warriorAbilityRight = new WarriorCharge(this);
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
@@ -55,7 +56,7 @@ public class WarriorActor : AActor
     public override void Attack()
     {
         //Write code to capture the target enemy
-        sword.UseItem();
+        sword.UseItem(this);
     }
 
     public override void Block()

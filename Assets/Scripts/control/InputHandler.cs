@@ -2,6 +2,7 @@
 using System.Collections;
 using InControl;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class InputHandler : MonoBehaviour
 {
@@ -43,6 +44,10 @@ public class InputHandler : MonoBehaviour
         {
             actor.HandleInput(inputDevice);
         }
+        else if(actor.RespawnLives == 0)
+        {
+            SceneManager.LoadScene("Start");
+        }
     }
 
     void AddPlayer(AActor actor)
@@ -53,5 +58,10 @@ public class InputHandler : MonoBehaviour
     void RemovePlayer(AActor actor)
     {
         actors.Remove(actor);
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 }

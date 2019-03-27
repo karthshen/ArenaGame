@@ -41,6 +41,12 @@ public class Thunderbolt : ProjectileItem
             hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 1.5f, owner);
         }
 
+        if (collision.gameObject.GetComponent<PickupItem>())
+        {
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            return;
+        }
+
         ProjectileFinish();
     }
 

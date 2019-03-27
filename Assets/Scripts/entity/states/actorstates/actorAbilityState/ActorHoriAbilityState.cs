@@ -1,20 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using InControl;
 
-public class ActorAbilityState : ActorState
+public class ActorHoriAbilityState : ActorAbilityState
 {
-    public ActorAbilityState()
-    {
-    }
-
-    public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
-    {
-        PlayAnimation(actor);
-
-        return this;
-    }
-
     protected override void PlayAnimation(AActor actor)
     {
         if (actor.GetName() == "Mage")
@@ -31,5 +19,7 @@ public class ActorAbilityState : ActorState
         {
             //Triple Arrow animation
         }
+
+        base.PlayAnimation(actor);
     }
 }

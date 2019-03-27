@@ -33,6 +33,8 @@ public class MageActor : AActor
         entityName = actorName;
 
         mageAbilityDown = new MageThunderbolt(this);
+        mageAbilityLeft = new MageStormShield(this);
+        mageAbilityRight = new MageStormShield(this);
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;
@@ -54,7 +56,7 @@ public class MageActor : AActor
     public override void Attack()
     {
         //Write code to capture the target enemy
-        wand.UseItem();
+        wand.UseItem(this);
     }
 
     public override void Block()
