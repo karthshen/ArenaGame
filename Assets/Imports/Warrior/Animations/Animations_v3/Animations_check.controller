@@ -2487,8 +2487,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CustomBlock
-  m_Speed: 0.01
+  m_Name: Slam
+  m_Speed: 15
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101177471819726128}
