@@ -13,6 +13,8 @@ public class ArcherActor : AActor
 
     string actorName = "Archer";
 
+    public ArcherBow bow;
+
     public ArcherActor() : base()
     {
 
@@ -42,6 +44,11 @@ public class ArcherActor : AActor
         //Default to Grounded
         IsGrounded = true;
 
+        if (bow)
+        {
+            bow.ItemPickUp(this);
+        }
+
         InitializeActor();
 
         NullParameterCheck();
@@ -49,7 +56,7 @@ public class ArcherActor : AActor
 
     public override void Attack()
     {
-        //Attack
+        bow.UseItem(this);
     }
 
     public override void Block()
