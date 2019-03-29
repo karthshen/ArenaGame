@@ -24,17 +24,25 @@ public class ArcherActor : AActor
         entityId = System.Guid.NewGuid();
         defaultState = new ActorStandingState();
         state = defaultState;
-        archerMesh = new Mesh();
         entityMesh = archerMesh;
 
+        rb = GetComponent<Rigidbody>();
+        ac = GetComponent<AnimatorController>();
         //Actor Config, button, ability, etc
         actorStat = new ArcherStat();
         entityName = actorName;
+
+        //Abilities set up
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;
         abilityUp = archerAbilityUp;
         abilityDown = archerAbilityDown;
+
+        //Default to Grounded
+        IsGrounded = true;
+
+        InitializeActor();
 
         NullParameterCheck();
     }
@@ -46,7 +54,22 @@ public class ArcherActor : AActor
 
     public override void Block()
     {
+        BIsBlocking = true;
+    }
+
+    public override void Death()
+    {
+        base.Death();
+    }
+
+    public override void GenerateAirAttackQueue()
+    {
         throw new System.NotImplementedException();
+    }
+
+    public override void Unblock()
+    {
+        BIsBlocking = false;
     }
 
     public override void Grab()
@@ -56,7 +79,7 @@ public class ArcherActor : AActor
 
     public override void Jump()
     {
-        throw new System.NotImplementedException();
+        base.Jump();
     }
 
     public override void Move()
@@ -71,8 +94,15 @@ public class ArcherActor : AActor
 
     public override float TakeDamage(float damage, AActor attacker)
     {
-        throw new System.NotImplementedException();
+        return base.TakeDamage(damage, attacker);
     }
+
+    //MonoBehavior Functions
+    private void Update()
+    {
+        base.ActorUpdate();
+    }
+
 
     /*
      * This is for test cases ONLY
@@ -80,20 +110,5 @@ public class ArcherActor : AActor
     public void CallStart()
     {
         Start();
-    }
-
-    public override void Death()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void GenerateAirAttackQueue()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Unblock()
-    {
-        throw new System.NotImplementedException();
     }
 }

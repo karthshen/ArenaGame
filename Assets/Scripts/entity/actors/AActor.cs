@@ -357,7 +357,13 @@ public abstract class AActor : AEntity
         //rb.AddForce(Vector3.up * actorStat.JumpVelocity);
         GetRigidbody().velocity = Vector3.zero;
         GetRigidbody().angularVelocity = Vector3.zero;
-        rb.AddForce(Vector3.up * actorStat.JumpVelocity * 111);
+
+        Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * 111;
+
+        Debug.Log(GetName() + " jumped with force: " + forceJump + " Current Gravity: " + Physics.gravity);
+
+        rb.AddForce(forceJump);
+        
         //Debug.Log(GetName() + " is jumping at " + actorStat.JumpVelocity * 111 + " velocity and " + Vector3.up * actorStat.JumpVelocity * 111 + " Force");
     }
 

@@ -23,6 +23,9 @@ public class CameraController : MonoBehaviour
     {
         arenaCamera = GetComponent<Camera>();
         arenaCameraeraDistance = transform.position.z;
+
+        //Temp for constants
+        Physics.gravity *= 1.54f * 1.54f;
     }
 
     // Update is called once per frame
