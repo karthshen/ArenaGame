@@ -295,7 +295,7 @@ public abstract class AActor : AEntity
     private void KnockBackBasedOnPosition(float knockingForce, AActor attacker)
     {
         float leftDirectionInRadian = 270f * Mathf.PI / 180;
-        float rightDirectionInRadian = 90 * Mathf.PI / 180;
+        float rightDirectionInRadian = 90f * Mathf.PI / 180;
 
         Vector3 backMovement;
 
