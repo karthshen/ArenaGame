@@ -29,7 +29,7 @@ public class ArcherActor : AActor
         rb = GetComponent<Rigidbody>();
         ac = GetComponent<AnimatorController>();
         //Actor Config, button, ability, etc
-        actorStat = new ArcherStat();
+        actorStat = new ArcherData();
         entityName = actorName;
 
         //Abilities set up
@@ -49,7 +49,7 @@ public class ArcherActor : AActor
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        //Attack
     }
 
     public override void Block()
@@ -60,11 +60,6 @@ public class ArcherActor : AActor
     public override void Death()
     {
         base.Death();
-    }
-
-    public override void GenerateAirAttackQueue()
-    {
-        throw new System.NotImplementedException();
     }
 
     public override void Unblock()
@@ -89,7 +84,20 @@ public class ArcherActor : AActor
 
     public override void GenerateAttackQueue()
     {
-        throw new System.NotImplementedException();
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
+        attackQueue.Enqueue(Combo.Attack2);
+        attackQueue.Enqueue(Combo.Null);
+    }
+
+    public override void GenerateAirAttackQueue()
+    {
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Attack1);
     }
 
     public override float TakeDamage(float damage, AActor attacker)

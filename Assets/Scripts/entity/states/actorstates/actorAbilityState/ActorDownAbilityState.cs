@@ -8,7 +8,7 @@ public class ActorDownAbilityState : ActorAbilityState
         if (actor.GetName() == "Mage")
         {
             //Thunderbolt animation
-            actor.GetAnimatorController().SetInt("animation,3");
+            actor.GetAnimatorController().SetInt(actor.GetActorStat().AbilityDownAnimation);
         }
         else if (actor.GetName() == "Warrior")
         {

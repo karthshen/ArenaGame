@@ -41,7 +41,7 @@ public class PlayerTest
             ac = GetComponent<AnimatorController>();
 
             //Actor Config, button, ability, etc
-            actorStat = new WarriorStat();
+            actorStat = new WarriorData();
             entityName = actorName;
 
             warriorAbilityDown = new WarriorCharge(this);

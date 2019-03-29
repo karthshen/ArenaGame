@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class ActorStat
+public abstract class ActorData
 {
     private float maxHealth;
     private float maxEnergy;
@@ -15,6 +15,17 @@ public abstract class ActorStat
     private float defenseMultiplier = 1;
     private float velocityMultiplier = 1;
     private int energyRegenerationTime;
+
+    //Animation
+    private string attackAnimation1 = "animation,3";
+    private string attackAnimation2 = "animation,4";
+    private string attackAnimation3 = "animation,2";
+    private string abilityDownAnimation;
+    private string abilityHorizAnimation;
+    private string abilityUpAnimation;
+    private string jumpAnimation;
+    private string deathAnimation;
+    private string idleAnimation = "animation,13";
 
     protected void setActorStat(
         float maxHealth, float maxEnergy, float moveVelocity, float jumpVelocity, float sprintVelocity,
@@ -145,6 +156,123 @@ public abstract class ActorStat
         set
         {
             energyRegenerationTime = value;
+        }
+    }
+
+    public string AttackAnimation1
+    {
+        get
+        {
+            return attackAnimation1;
+        }
+
+        set
+        {
+            attackAnimation1 = value;
+        }
+    }
+
+    public string AttackAnimation2
+    {
+        get
+        {
+            return attackAnimation2;
+        }
+
+        set
+        {
+            attackAnimation2 = value;
+        }
+    }
+
+    public string AttackAnimation3
+    {
+        get
+        {
+            return attackAnimation3;
+        }
+
+        set
+        {
+            attackAnimation3 = value;
+        }
+    }
+
+    public string AbilityDownAnimation
+    {
+        get
+        {
+            return abilityDownAnimation;
+        }
+
+        set
+        {
+            abilityDownAnimation = value;
+        }
+    }
+
+    public string AbilityUpAnimation
+    {
+        get
+        {
+            return abilityUpAnimation;
+        }
+
+        set
+        {
+            abilityUpAnimation = value;
+        }
+    }
+
+    public string JumpAnimation
+    {
+        get
+        {
+            return jumpAnimation;
+        }
+
+        set
+        {
+            jumpAnimation = value;
+        }
+    }
+
+    public string IdleAnimation
+    {
+        get
+        {
+            return idleAnimation;
+        }
+
+        set
+        {
+            idleAnimation = value;
+        }
+    }
+
+    public string DeathAnimation
+    {
+        get
+        {
+            return deathAnimation;
+        }
+
+        set
+        {
+            deathAnimation = value;
+        }
+    }
+
+    public string AbilityHorizAnimation
+    {
+        get
+        {
+            return abilityHorizAnimation;
+        }
+
+        set
+        {
+            abilityHorizAnimation = value;
         }
     }
 }

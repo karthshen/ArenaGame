@@ -33,7 +33,7 @@ public abstract class AActor : AEntity
     private float currentEnergy;
     private float moveHorizontal;
 
-    protected ActorStat actorStat;
+    protected ActorData actorStat;
 
     private Vector3 frontDirection = new Vector3(0, 90, 0);
     private Vector3 backDirection = new Vector3(0, 270, 0);
@@ -91,7 +91,7 @@ public abstract class AActor : AEntity
         set
         {
             currentHealth = value;
-            if(currentHealth > GetActorStat().MaxHealth)
+            if (currentHealth > GetActorStat().MaxHealth)
             {
                 currentHealth = GetActorStat().MaxHealth;
             }
@@ -108,14 +108,14 @@ public abstract class AActor : AEntity
         set
         {
             currentEnergy = value;
-            if(currentEnergy > GetActorStat().MaxEnergy)
+            if (currentEnergy > GetActorStat().MaxEnergy)
             {
                 currentEnergy = GetActorStat().MaxEnergy;
             }
         }
     }
 
-    protected ActorStat ActorStat
+    protected ActorData ActorStat
     {
         get
         {
@@ -277,10 +277,40 @@ public abstract class AActor : AEntity
 
     public virtual void KnockBack(float knockingForce, AActor attacker)
     {
+        KnockBackBasedOnPosition(knockingForce, attacker);
+    }
+
+    private void KnockBackBasedOnDirection(float knockingForce, AActor attacker)
+    {
         //Knocking back
         float yDirectionInRadian = attacker.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
 
         Vector3 backMovement = new Vector3(knockingForce * Mathf.Sin(yDirectionInRadian), 0f, 0f);
+
+        GetRigidbody().AddForce(backMovement);
+
+        state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
+    }
+
+    private void KnockBackBasedOnPosition(float knockingForce, AActor attacker)
+    {
+        float leftDirectionInRadian = 270f * Mathf.PI / 180;
+        float rightDirectionInRadian = 90 * Mathf.PI / 180;
+
+        Vector3 backMovement;
+
+        if (transform.position.x < attacker.transform.position.x)
+        {
+            backMovement = new Vector3(knockingForce * Mathf.Sin(leftDirectionInRadian), 0f, 0f);
+        }
+        else if (transform.position.x > attacker.transform.position.x)
+        {
+            backMovement = new Vector3(knockingForce * Mathf.Sin(rightDirectionInRadian), 0f, 0f);
+        }
+        else
+        {
+            backMovement = new Vector3(0f, 0f, 0f);
+        }
 
         GetRigidbody().AddForce(backMovement);
 
@@ -306,7 +336,7 @@ public abstract class AActor : AEntity
             CurrentHealth = 0;
             Death();
         }
-        else if(state.GetType() == typeof(ActorBlockState))
+        else if (state.GetType() == typeof(ActorBlockState))
         {
 
         }
@@ -318,9 +348,9 @@ public abstract class AActor : AEntity
 
         //Damage to Energy
         totalDamageTaken += damage;
-        if(totalDamageTaken >= DAMAGE_TO_ENERGY_CONSTANT)
+        if (totalDamageTaken >= DAMAGE_TO_ENERGY_CONSTANT)
         {
-            if(this.currentEnergy <= ActorStat.MaxEnergy)
+            if (this.currentEnergy <= ActorStat.MaxEnergy)
             {
                 currentEnergy++;
                 totalDamageTaken -= DAMAGE_TO_ENERGY_CONSTANT;
@@ -360,10 +390,10 @@ public abstract class AActor : AEntity
 
         Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * 111;
 
-        Debug.Log(GetName() + " jumped with force: " + forceJump + " Current Gravity: " + Physics.gravity);
+        //Debug.Log(GetName() + " jumped with force: " + forceJump + " Current Gravity: " + Physics.gravity);
 
         rb.AddForce(forceJump);
-        
+
         //Debug.Log(GetName() + " is jumping at " + actorStat.JumpVelocity * 111 + " velocity and " + Vector3.up * actorStat.JumpVelocity * 111 + " Force");
     }
 
@@ -378,7 +408,7 @@ public abstract class AActor : AEntity
     public virtual void Death()
     {
         state = new ActorDeathState();
-        GetAnimatorController().SetInt(GetDeathAnimation());
+        GetAnimatorController().SetInt(GetActorStat().DeathAnimation);
         deathTimer = AActor.RESPAWN_TIMER;
     }
 
@@ -397,7 +427,7 @@ public abstract class AActor : AEntity
         GetAnimatorController().SetInt("animation,13");
     }
 
-    public ActorStat GetActorStat()
+    public ActorData GetActorStat()
     {
         return this.actorStat;
     }
@@ -437,7 +467,7 @@ public abstract class AActor : AEntity
     }
 
     protected void ActorUpdate()
-    { 
+    {
         if (deathTimer > 0)
         {
             deathTimer -= Time.deltaTime;
@@ -486,20 +516,20 @@ public abstract class AActor : AEntity
             deathTimer = 0.1f;
         }
 
-        if(currentEnergy < ActorStat.MaxEnergy)
+        if (currentEnergy < ActorStat.MaxEnergy)
         {
             energyRegTimer += Time.deltaTime;
-            if(energyRegTimer >= ActorStat.EnergyRegenerationTime)
+            if (energyRegTimer >= ActorStat.EnergyRegenerationTime)
             {
                 currentEnergy++;
                 energyRegTimer -= ActorStat.EnergyRegenerationTime;
             }
         }
 
-        if(freezeTimer > 0)
+        if (freezeTimer > 0)
         {
             freezeTimer -= Time.deltaTime;
-            if(freezeTimer <= 0)
+            if (freezeTimer <= 0)
             {
                 freezeTimer = 0;
                 BackToStanding();
@@ -534,11 +564,11 @@ public abstract class AActor : AEntity
 
     private void BackToStanding()
     {
-        if(state.GetType() != typeof(ActorDeathState))
+        if (state.GetType() != typeof(ActorDeathState))
         {
             state = new ActorStandingState(state.GetType().ToString());
         }
-    } 
+    }
 
     private void TurnAround()
     {

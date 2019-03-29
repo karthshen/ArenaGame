@@ -2488,7 +2488,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slam
-  m_Speed: 15
+  m_Speed: 0.01
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101177471819726128}
@@ -2703,7 +2703,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shoot
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101599421829079462}

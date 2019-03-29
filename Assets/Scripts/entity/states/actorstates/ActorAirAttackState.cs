@@ -36,15 +36,15 @@ public class ActorAirAttackState : ActorState
         }
         else if (actor.attackQueue.Peek() == AActor.Combo.Attack0)
         {
-            actor.GetAnimatorController().SetInt("animation,3");
+            actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation1);
         }
         else if (actor.attackQueue.Peek() == AActor.Combo.Attack1)
         {
-            actor.GetAnimatorController().SetInt("animation,4");
+            actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation2);
         }
         else if (actor.attackQueue.Peek() == AActor.Combo.Attack2)
         {
-            actor.GetAnimatorController().SetInt("animation,2");
+            actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation3);
         }
     }
 }
