@@ -1656,7 +1656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 0
   players:
-  - {fileID: 1898936860}
+  - {fileID: 945008154}
   - {fileID: 1045878205}
 --- !u!4 &888937877
 Transform:
@@ -3805,7 +3805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 1
   players:
-  - {fileID: 1898936860}
+  - {fileID: 945008154}
   - {fileID: 1045878205}
 --- !u!4 &1761695577
 Transform:
@@ -5676,21 +5676,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
-    - target: {fileID: 39695736126220941, guid: 08b834b129275c6419ece36457af287f,
+    - target: {fileID: 39695735116989322, guid: 08b834b129275c6419ece36457af287f,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 39695736126220941, guid: 08b834b129275c6419ece36457af287f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 39695736126220941, guid: 08b834b129275c6419ece36457af287f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: bow
+      value: 
+      objectReference: {fileID: 1052886321}
     - target: {fileID: 39695735116989325, guid: 08b834b129275c6419ece36457af287f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5761,16 +5751,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.3
       objectReference: {fileID: 0}
+    - target: {fileID: 39695736126220941, guid: 08b834b129275c6419ece36457af287f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 39695736126220941, guid: 08b834b129275c6419ece36457af287f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 39695736126220941, guid: 08b834b129275c6419ece36457af287f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 39695736125863661, guid: 08b834b129275c6419ece36457af287f,
         type: 3}
       propertyPath: m_Name
       value: ArcherMesh
       objectReference: {fileID: 0}
-    - target: {fileID: 39695735116989322, guid: 08b834b129275c6419ece36457af287f,
-        type: 3}
-      propertyPath: bow
-      value: 
-      objectReference: {fileID: 1052886321}
     - target: {fileID: 39695736126221221, guid: 08b834b129275c6419ece36457af287f,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -5929,6 +5929,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791116075174531361, guid: dce97f6f4a351904a8b0b018ceacf80f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3791116075174531366, guid: dce97f6f4a351904a8b0b018ceacf80f,
         type: 3}

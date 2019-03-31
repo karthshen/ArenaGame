@@ -8,6 +8,8 @@
         AttackAnimation2 = "animation,23";
         AttackAnimation3 = "animation,23";
 
+        AbilityDownAnimation = "animation,23";
+
         DeathAnimation = "animation,10";
     }
 }

@@ -35,7 +35,9 @@ public class ActorStandingState : ActorState
 
         if (actor.IsGrounded == false)
         {
-            return new ActorJumpState();
+            ActorJumpState state = new ActorJumpState();
+            //state.JumpNum = 0;
+            return state;
         }
 
         if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))

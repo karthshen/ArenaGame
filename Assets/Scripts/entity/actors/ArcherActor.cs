@@ -35,6 +35,7 @@ public class ArcherActor : AActor
         entityName = actorName;
 
         //Abilities set up
+        archerAbilityDown = new ArcherBurstShot(this);
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;
@@ -102,7 +103,7 @@ public class ArcherActor : AActor
         attackQueue.Clear();
 
         attackQueue.Enqueue(Combo.Attack0);
-        attackQueue.Enqueue(Combo.Attack1);
+        //attackQueue.Enqueue(Combo.Attack1);
     }
 
     public override float TakeDamage(float damage, AActor attacker)
