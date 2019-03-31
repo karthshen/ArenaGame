@@ -62,7 +62,7 @@ public class ActorStandingState : ActorState
             grabCommand.Execute(actor);
             return new ActorGrabbingState();
         }
-        else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        else if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
         {
             actor.GenerateAttackQueue();
             //Debug.Log(actor.GetName() + " attacking from standing state");

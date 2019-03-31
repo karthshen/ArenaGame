@@ -232,7 +232,7 @@ public class PlayerTest
         Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack0);
 
         //Actor ready to attack again
-        testActor.GetComponent<TestActor>().AttackTimer = AActor.ATTACK_INTERVAL - 0.1f;
+        testActor.GetComponent<TestActor>().AttackTimer = testActor.GetComponent<TestActor>().ATTACK_INTERVAL - 0.1f;
         inputDevice.UpdateWithStateTestCase(InputControlType.Action2, true, 1001);
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
         Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack1);
@@ -243,7 +243,7 @@ public class PlayerTest
         Assert.AreEqual(typeof(ActorStandingState), testActor.GetComponent<TestActor>().GetState().GetType());
 
         //Actor ready to attack again
-        testActor.GetComponent<TestActor>().AttackTimer = AActor.ATTACK_INTERVAL - 0.1f;
+        testActor.GetComponent<TestActor>().AttackTimer = testActor.GetComponent<TestActor>().ATTACK_INTERVAL - 0.1f;
         inputDevice.UpdateWithStateTestCase(InputControlType.Action2, true, 1002);
         testActor.GetComponent<TestActor>().HandleInput(inputDevice);
         Assert.AreEqual(testActor.GetComponent<TestActor>().attackQueue.Peek(), AActor.Combo.Attack0);
