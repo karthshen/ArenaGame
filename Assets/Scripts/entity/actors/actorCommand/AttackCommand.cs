@@ -8,7 +8,7 @@ public class AttackCommand : Command
         //Refresh AttackCode
         actor.AttackCode = System.Guid.NewGuid();
 
-        //Debug.Log("Popping Attack Stack");
+        //Debug.Log("AttackCode: " + actor.AttackCode);
         actor.AttackTimer = AActor.ATTACK_TIMER;
         actor.Attack();
         actor.attackQueue.Dequeue();
