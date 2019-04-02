@@ -35,7 +35,9 @@ public class ActorStandingState : ActorState
 
         if (actor.IsGrounded == false)
         {
-            return new ActorJumpState();
+            ActorJumpState state = new ActorJumpState();
+            //state.JumpNum = 0;
+            return state;
         }
 
         if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))
@@ -62,7 +64,7 @@ public class ActorStandingState : ActorState
             grabCommand.Execute(actor);
             return new ActorGrabbingState();
         }
-        else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        else if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
         {
             actor.GenerateAttackQueue();
             //Debug.Log(actor.GetName() + " attacking from standing state");
@@ -108,6 +110,6 @@ public class ActorStandingState : ActorState
 
     protected override void PlayAnimation(AActor actor)
     {
-        actor.GetAnimatorController().SetInt("animation,13");
+        actor.GetAnimatorController().SetInt(actor.GetActorStat().IdleAnimation);
     }
 }

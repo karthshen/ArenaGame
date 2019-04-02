@@ -10,19 +10,17 @@ public class InputHandler : MonoBehaviour
     private int playerNum;
     private List<AActor> actors;
 
-    public GameObject Player1;
-    public GameObject Player2;
+    public List<AActor> players;
 
     // Use this for initialization
     void Start()
     {
         actors = new List<AActor>();
 
-        //TODO Remove this after testing
-        AddPlayer(Player1.GetComponent<AActor>());
-        AddPlayer(Player2.GetComponent<AActor>());
-
-        Physics.gravity = Physics.gravity * 1.54f;
+        foreach(AActor player in players)
+        {
+            AddPlayer(player);
+        }
     }
 
     // Update is called once per frame

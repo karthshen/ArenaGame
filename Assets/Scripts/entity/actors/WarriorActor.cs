@@ -30,7 +30,7 @@ public class WarriorActor : AActor
         ac = GetComponent<AnimatorController>();
 
         //Actor Config, button, ability, etc
-        actorStat = new WarriorStat();
+        actorStat = new WarriorData();
         entityName = actorName;
 
         warriorAbilityLeft = new WarriorCharge(this);
@@ -40,8 +40,6 @@ public class WarriorActor : AActor
         abilityRight = warriorAbilityRight;
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
-
-        deathAnimation = "animation,10";
 
         InitializeActor();
 

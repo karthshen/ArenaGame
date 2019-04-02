@@ -29,7 +29,7 @@ public class MageActor : AActor
         ac = GetComponent<AnimatorController>();
 
         //Actor Config, button, ability, etc
-        actorStat = new MageStat();
+        actorStat = new MageData();
         entityName = actorName;
 
         mageAbilityDown = new MageThunderbolt(this);
@@ -40,8 +40,6 @@ public class MageActor : AActor
         abilityRight = mageAbilityRight;
         abilityUp = mageAbilityUp;
         abilityDown = mageAbilityDown;
-
-        deathAnimation = "animation,11";
 
         if (wand)
         {

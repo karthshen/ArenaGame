@@ -13,6 +13,8 @@ public class ArcherActor : AActor
 
     string actorName = "Archer";
 
+    public ArcherBow bow;
+
     public ArcherActor() : base()
     {
 
@@ -24,29 +26,53 @@ public class ArcherActor : AActor
         entityId = System.Guid.NewGuid();
         defaultState = new ActorStandingState();
         state = defaultState;
-        archerMesh = new Mesh();
         entityMesh = archerMesh;
 
+        rb = GetComponent<Rigidbody>();
+        ac = GetComponent<AnimatorController>();
         //Actor Config, button, ability, etc
-        actorStat = new ArcherStat();
+        actorStat = new ArcherData();
         entityName = actorName;
+
+        //Abilities set up
+        archerAbilityDown = new ArcherBurstShot(this);
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;
         abilityUp = archerAbilityUp;
         abilityDown = archerAbilityDown;
 
+        //Default to Grounded
+        IsGrounded = true;
+
+        if (bow)
+        {
+            bow.ItemPickUp(this);
+        }
+
+        InitializeActor();
+
         NullParameterCheck();
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        bow.UseItem(this);
     }
 
     public override void Block()
     {
-        throw new System.NotImplementedException();
+        BIsBlocking = true;
+    }
+
+    public override void Death()
+    {
+        base.Death();
+    }
+
+    public override void Unblock()
+    {
+        BIsBlocking = false;
     }
 
     public override void Grab()
@@ -56,7 +82,7 @@ public class ArcherActor : AActor
 
     public override void Jump()
     {
-        throw new System.NotImplementedException();
+        base.Jump();
     }
 
     public override void Move()
@@ -66,13 +92,31 @@ public class ArcherActor : AActor
 
     public override void GenerateAttackQueue()
     {
-        throw new System.NotImplementedException();
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        attackQueue.Enqueue(Combo.Null);
+    }
+
+    public override void GenerateAirAttackQueue()
+    {
+        attackQueue.Clear();
+
+        attackQueue.Enqueue(Combo.Attack0);
+        //attackQueue.Enqueue(Combo.Attack1);
     }
 
     public override float TakeDamage(float damage, AActor attacker)
     {
-        throw new System.NotImplementedException();
+        return base.TakeDamage(damage, attacker);
     }
+
+    //MonoBehavior Functions
+    private void Update()
+    {
+        base.ActorUpdate();
+    }
+
 
     /*
      * This is for test cases ONLY
@@ -80,20 +124,5 @@ public class ArcherActor : AActor
     public void CallStart()
     {
         Start();
-    }
-
-    public override void Death()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void GenerateAirAttackQueue()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Unblock()
-    {
-        throw new System.NotImplementedException();
     }
 }

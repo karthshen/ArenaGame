@@ -19,7 +19,7 @@ public class ActorAttackState : ActorState
             return new ActorStandingState(this.GetType().ToString());
         }
 
-        if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
         {
             PlayAnimation(actor);
             //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);
@@ -38,13 +38,16 @@ public class ActorAttackState : ActorState
 
         else if(actor.attackQueue.Peek() == AActor.Combo.Attack0)
         {
-            actor.GetAnimatorController().SetInt("animation,3");
+            actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation1);
+            //Debug.Log("AttackQueue Attack0");
         } else if (actor.attackQueue.Peek() == AActor.Combo.Attack1)
         {
-            actor.GetAnimatorController().SetInt("animation,4");
+            actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation2);
+            //Debug.Log("AttackQueue Attack1");
         } else if (actor.attackQueue.Peek() == AActor.Combo.Attack2)
         {
-            actor.GetAnimatorController().SetInt("animation,2");
+            actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation3);
+            //Debug.Log("AttackQueue Attack2");
         }
     }
 }
