@@ -24,6 +24,9 @@ public class CharacterSelectMenu : Menu
     [SerializeField]
     private int playerNum;
 
+    //Outputs
+    private AActorEnum selectedActor;
+
     public bool SelectionConfirmed
     {
         get
@@ -113,9 +116,33 @@ public class CharacterSelectMenu : Menu
     private void ConfirmSelection()
     {
         selectionConfirmed = true;
+        selectedButton.onClick.Invoke();
+        if(playerNum == 0)
+        {
+            GameStageSetting.Player1Selection = selectedActor;
+        }else if(playerNum == 1)
+        {
+            GameStageSetting.Player2Selection = selectedActor;
+        }
+
         if (otherPlayerMenu.SelectionConfirmed)
         {
             SceneManager.LoadScene("SampleScene");
         }
+    }
+
+    public void SelectWarrior()
+    {
+        selectedActor = AActorEnum.Warrior;
+    }
+
+    public void SelectMage()
+    {
+        selectedActor = AActorEnum.Mage;
+    }
+
+    public void SelectArcher()
+    {
+        selectedActor = AActorEnum.Archer;
     }
 }
