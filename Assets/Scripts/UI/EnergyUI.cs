@@ -13,6 +13,8 @@ public class EnergyUI : MonoBehaviour
 
     public Sprite emptyEnergySprite;
 
+    public InputHandler playerInputHandler;
+
     // Use this for initialization
     void Start()
     {
@@ -25,6 +27,11 @@ public class EnergyUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player && playerInputHandler)
+        {
+            player = playerInputHandler.Actors[playerInputHandler.PlayerNum];
+        }
+
         if (energyBars.Count != player.GetActorStat().MaxEnergy)
         {
             throw new MissingComponentException("Incorrect amount of energy bar for Player: " + player.GetName());
