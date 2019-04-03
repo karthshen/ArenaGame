@@ -3,7 +3,7 @@ using System.Collections;
 
 public enum AActorEnum
 {
-    Warrior,
-    Mage,
-    Archer
+    Warrior = 0,
+    Mage = 1,
+    Archer = 2
 }

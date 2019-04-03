@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 86596136}
   - component: {fileID: 86596135}
   m_Layer: 5
-  m_Name: Text
+  m_Name: LeftName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 252778561}
   - component: {fileID: 252778563}
   m_Layer: 5
-  m_Name: TextMeshPro Text
+  m_Name: HealthUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -580,6 +580,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerInputHandler: {fileID: 888937876}
+  actorSprites:
+  - {fileID: 21300000, guid: e2c1c14612a7b2a438f8936643a75f0a, type: 3}
+  - {fileID: 21300000, guid: 15371511a6391e64581403399c14c3e0, type: 3}
+  - {fileID: 21300000, guid: 6175c2772c50fd940a56bc376bf3dc6d, type: 3}
+  actorImage: {fileID: 1470142948}
+  actorName: {fileID: 86596135}
 --- !u!1001 &306530908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2203,7 +2209,7 @@ GameObject:
   - component: {fileID: 1470142949}
   - component: {fileID: 1470142948}
   m_Layer: 5
-  m_Name: Warrior
+  m_Name: LeftImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2329,7 +2335,7 @@ GameObject:
   - component: {fileID: 1499998091}
   - component: {fileID: 1499998093}
   m_Layer: 5
-  m_Name: TextMeshPro Text (1)
+  m_Name: HealthUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2491,6 +2497,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerInputHandler: {fileID: 1761695576}
+  actorSprites:
+  - {fileID: 21300000, guid: e2c1c14612a7b2a438f8936643a75f0a, type: 3}
+  - {fileID: 21300000, guid: 15371511a6391e64581403399c14c3e0, type: 3}
+  - {fileID: 21300000, guid: 6175c2772c50fd940a56bc376bf3dc6d, type: 3}
+  actorImage: {fileID: 1664214016}
+  actorName: {fileID: 1725805474}
 --- !u!1 &1500724242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2832,7 +2844,7 @@ GameObject:
   - component: {fileID: 1664214017}
   - component: {fileID: 1664214016}
   m_Layer: 5
-  m_Name: Mage
+  m_Name: RightImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3237,7 +3249,7 @@ GameObject:
   - component: {fileID: 1725805475}
   - component: {fileID: 1725805474}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RightName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
