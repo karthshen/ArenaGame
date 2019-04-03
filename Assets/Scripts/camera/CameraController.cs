@@ -31,9 +31,19 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(actors.Length < 2)
+        {
+            FindActors();
+        }
+
         CalculateCameraBounds();
         UpdateCameraPosition();
         MoveCamera();
+    }
+
+    private void FindActors()
+    {
+        actors = FindObjectsOfType<AActor>();
     }
 
     private void MoveCamera()

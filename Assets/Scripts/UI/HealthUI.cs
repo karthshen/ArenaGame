@@ -11,6 +11,8 @@ public class HealthUI : MonoBehaviour
 
     public AActor player;
 
+    public InputHandler playerInputHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,11 @@ public class HealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player && playerInputHandler)
+        {
+            player = playerInputHandler.Actors[playerInputHandler.PlayerNum];
+        }
+
         txtHealth.text = string.Format("{0} %", Mathf.RoundToInt(player.CurrentHealth));
     }
 }
