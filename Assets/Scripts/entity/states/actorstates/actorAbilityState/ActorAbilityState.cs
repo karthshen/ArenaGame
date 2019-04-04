@@ -12,6 +12,14 @@ public class ActorAbilityState : ActorState
     {
         PlayAnimation(actor);
 
+        if(actor.IsGrounded == false)
+        {
+            ActorJumpState state = new ActorJumpState();
+            actor.AbilityCastedInAir = true;
+            actor.JumpNum = state.JumpNum;
+            return state;
+        }
+
         return this;
     }
 

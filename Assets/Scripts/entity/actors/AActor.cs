@@ -55,6 +55,10 @@ public abstract class AActor : AEntity
     private bool bIsGrounded = false;
 
     private bool bIsBlocking = false;
+
+    private int jumpNum = 0;
+
+    private bool abilityCastedInAir = false;
     //---------------------------
 
     //Timer
@@ -258,6 +262,32 @@ public abstract class AActor : AEntity
         }
     }
 
+    public bool AbilityCastedInAir
+    {
+        get
+        {
+            return abilityCastedInAir;
+        }
+
+        set
+        {
+            abilityCastedInAir = value;
+        }
+    }
+
+    public int JumpNum
+    {
+        get
+        {
+            return jumpNum;
+        }
+
+        set
+        {
+            jumpNum = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -270,6 +300,8 @@ public abstract class AActor : AEntity
 
         if (GetRigidbody())
             GetRigidbody().isKinematic = false;
+
+        actorStat.MaxHealth = GameStageSetting.PlayerStartingHealth;
 
         CurrentHealth = actorStat.MaxHealth;
         CurrentEnergy = actorStat.MaxEnergy;
@@ -331,7 +363,7 @@ public abstract class AActor : AEntity
         damageCode = attacker.AttackCode;
 
         //The attacked actor goes to freeze state
-        if (CurrentHealth <= 0)
+        if (CurrentHealth <= 0.001)
         {
             CurrentHealth = 0;
             Death();
@@ -468,6 +500,12 @@ public abstract class AActor : AEntity
 
     protected void ActorUpdate()
     {
+        //If Lock Energy Enabled, lock the energy bar
+        if (GameStageSetting.LockEnergy && currentEnergy < actorStat.MaxEnergy)
+        {
+            currentEnergy = actorStat.MaxEnergy;
+        }
+
         if (deathTimer > 0)
         {
             deathTimer -= Time.deltaTime;

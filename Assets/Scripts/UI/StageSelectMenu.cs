@@ -137,7 +137,58 @@ public class StageSelectMenu : Menu
 
     public void CharacterSelectMenu()
     {
+        SaveMapSettings();
         SceneManager.LoadScene("CharacterSelect");
+    }
+
+    private void SaveMapSettings()
+    {
+        //Set up the values in static class
+        GameStageSetting.GameDuration = int.Parse(timeLimitButton.texts[timeLimitButton.scrollIndex].Substring(0, 1)) * 60;
+        if (playerHealthButton.texts[playerHealthButton.scrollIndex].Length == 4)
+        {
+            GameStageSetting.PlayerStartingHealth = 100f;
+        }
+        else
+        {
+            GameStageSetting.PlayerStartingHealth = int.Parse(playerHealthButton.texts[playerHealthButton.scrollIndex].Substring(0, 2));
+        }
+
+        if (lockRageButton.texts[lockRageButton.scrollIndex] == "Lock")
+        {
+            GameStageSetting.LockEnergy = true;
+        }
+        else
+        {
+            GameStageSetting.LockEnergy = false;
+        }
+
+        if (runesButton.texts[runesButton.scrollIndex] == "On")
+        {
+            GameStageSetting.EnableRunes = true;
+        }
+        else
+        {
+            GameStageSetting.EnableRunes = false;
+        }
+
+        if (itemDropButton.texts[itemDropButton.scrollIndex] == "On")
+        {
+            GameStageSetting.ItemDrop = true;
+        }
+        else
+        {
+            GameStageSetting.ItemDrop = false;
+        }
+
+        if (stageHazardsButton.texts[stageHazardsButton.scrollIndex] == "On")
+        {
+            GameStageSetting.StageHazards = true;
+        }
+        else
+        {
+            GameStageSetting.StageHazards = false;
+        }
     }
 
     protected override void ButtonSelected()

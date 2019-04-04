@@ -79,6 +79,14 @@ public class InputHandler : MonoBehaviour
     {
         //Debug.Log("Current Player:" + playerNum);
         AActor actor = Actors[playerNum];
+
+        if (!actor)
+        {
+            //If actor is not spawned yet
+            Debug.Log("Actor not spawned for player: " + playerNum);
+            return;
+        }
+
         if (actor.GetState().GetType() != typeof(ActorDeathState))
         {
             actor.HandleInput(inputDevice);
@@ -117,8 +125,7 @@ public class InputHandler : MonoBehaviour
             AddPlayer(actorToCreate.GetComponent<AActor>());
             if (Actors.Count == playerNum + 1)
             {
-                Actors[playerNum].transform.position = actorInitializeLocation.transform.position;
-                Actors[playerNum].transform.GetChild(0).transform.rotation = actorInitializeLocation.transform.rotation;
+                InitializePlayerActor();
             }
         }
         else
@@ -135,5 +142,11 @@ public class InputHandler : MonoBehaviour
     private void FixedUpdate()
     {
 
+    }
+
+    private void InitializePlayerActor()
+    {
+        Actors[playerNum].transform.position = actorInitializeLocation.transform.position;
+        Actors[playerNum].transform.GetChild(0).transform.rotation = actorInitializeLocation.transform.rotation;
     }
 }

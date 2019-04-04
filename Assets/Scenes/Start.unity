@@ -732,5 +732,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2720619629293568749, guid: 1f097cb083e7fb342809d596fc0c18cd,
+        type: 3}
+      propertyPath: m_Text
+      value: "\tLOCK ENERGY"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f097cb083e7fb342809d596fc0c18cd, type: 3}
