@@ -1334,8 +1334,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282927176
-  m_fontColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2660,6 +2660,14 @@ MonoBehaviour:
   runesText: {fileID: 1856097610}
   itemDropText: {fileID: 1774495070}
   stageHazardText: {fileID: 1191972013}
+  mapImageList:
+  - {fileID: 21300000, guid: 536462fb523493444beb4ac0d3b557ee, type: 3}
+  - {fileID: 21300000, guid: 536462fb523493444beb4ac0d3b557ee, type: 3}
+  mapNameList:
+  - Sky Dome
+  - Arena
+  mapImage: {fileID: 6318632308386067270}
+  mapName: {fileID: 6318632307300188302}
 --- !u!114 &6318632308498211956
 MonoBehaviour:
   m_ObjectHideFlags: 0

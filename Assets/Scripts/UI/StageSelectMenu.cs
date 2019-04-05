@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using InControl;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class StageSelectMenu : Menu
 {
@@ -62,7 +63,7 @@ public class StageSelectMenu : Menu
 
     public Image mapImage;
 
-    public Text mapName;
+    public TextMeshProUGUI mapName;
 
     private int mapSelectionIndex = 0;
 
@@ -113,7 +114,15 @@ public class StageSelectMenu : Menu
     public override void HandleInput(InputDevice inputDevice)
     {
         ButtonDeselected();
-        if (inputDevice.DPadDown.WasPressed)
+
+        if(inputDevice.LeftBumper.WasPressed || inputDevice.LeftTrigger.WasPressed)
+        {
+            mapSelectionIndex--;
+        }else if(inputDevice.RightBumper.WasPressed || inputDevice.RightTrigger.WasPressed)
+        {
+            mapSelectionIndex++;
+        }
+        else if (inputDevice.DPadDown.WasPressed)
         {
             buttonIndex++;
         }
@@ -126,6 +135,7 @@ public class StageSelectMenu : Menu
             ((ScrollButton)selectedButton).OnClickScroll(inputDevice);
         }
 
+        MapSelected();
         ButtonIndexCheck();
         selectedButton = buttons[buttonIndex];
 
