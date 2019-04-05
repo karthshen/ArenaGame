@@ -60,12 +60,8 @@ public class ArcherArrow : ProjectileItem
 
     public override void ProjectileStart()
     {
-        Collider[] collidersToIgnore = owner.GetComponentsInChildren<Collider>();
-
-        foreach (Collider collider in collidersToIgnore)
-        {
-            Physics.IgnoreCollision(GetComponent<Collider>(), collider);
-        }
+        //Ignore Collision of owner and this
+        IgnoreOwnerCollision(owner);
 
         gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
         float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;

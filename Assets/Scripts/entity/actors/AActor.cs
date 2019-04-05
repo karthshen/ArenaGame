@@ -656,8 +656,8 @@ public abstract class AActor : AEntity
                 Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), collider, false);
             }
 
-            Collider objectCOllider = GetComponent<Collider>();
-            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), objectCOllider, false);
+            Collider objectCollider = GetComponent<Collider>();
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), objectCollider, false);
         }
     }
 }

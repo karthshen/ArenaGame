@@ -4,11 +4,12 @@ using System.Collections;
 public class Calibur : ProjectileItem
 {
     private AActor owner;
-    private float velocity = 15.0f;
-    private float moveHorizontal = 1.0f;
+    [SerializeField]
+    private float velocity = 30.0f;
+    private float moveHorizontal = 0.3f;
     private Vector3 movement;
 
-    private const float DURATION_TIME = 2.0f;
+    private const float DURATION_TIME = 0.9f;
 
     private float duration_time = 0f;
 
@@ -24,6 +25,9 @@ public class Calibur : ProjectileItem
 
     public override void ProjectileStart()
     {
+        //Ignore this collision and owner component collision
+        IgnoreOwnerCollision(owner);
+
         gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
         float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
 
@@ -47,7 +51,7 @@ public class Calibur : ProjectileItem
             return;
         }
 
-        ProjectileFinish();
+        //ProjectileFinish();
     }
 
     private void Update()
