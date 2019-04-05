@@ -5,6 +5,7 @@ public static class GameStageSetting
 {
     private static AActorEnum player1Selection;
     private static AActorEnum player2Selection;
+    private static MapSelection selectedMap;
 
     private static float gameDuration; //game duration in seconds
     private static float playerStartingHealth;
@@ -114,6 +115,19 @@ public static class GameStageSetting
         set
         {
             stageHazards = value;
+        }
+    }
+
+    public static MapSelection SelectedMap
+    {
+        get
+        {
+            return selectedMap;
+        }
+
+        set
+        {
+            selectedMap = value;
         }
     }
 }

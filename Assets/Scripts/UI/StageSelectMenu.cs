@@ -55,6 +55,17 @@ public class StageSelectMenu : Menu
 
     private List<ScrollButton> buttons = new List<ScrollButton>();
 
+    //Map Selection Variables - Too lazy to make a new class
+    public List<Sprite> mapImageList;
+
+    public List<string> mapNameList;
+
+    public Image mapImage;
+
+    public Text mapName;
+
+    private int mapSelectionIndex = 0;
+
 
     // Use this for initialization
     void Start()
@@ -94,6 +105,8 @@ public class StageSelectMenu : Menu
         selectedButton = buttons[buttonIndex];
 
         ButtonSelected();
+
+        MapSelected();
     }
 
     // Update is called once per frame
@@ -108,7 +121,6 @@ public class StageSelectMenu : Menu
         {
             buttonIndex--;
         }
-
         else
         {
             ((ScrollButton)selectedButton).OnClickScroll(inputDevice);
@@ -189,6 +201,8 @@ public class StageSelectMenu : Menu
         {
             GameStageSetting.StageHazards = false;
         }
+
+        GameStageSetting.SelectedMap = (MapSelection)mapSelectionIndex;
     }
 
     protected override void ButtonSelected()
@@ -199,5 +213,21 @@ public class StageSelectMenu : Menu
     protected override void ButtonDeselected()
     {
         selectedButton.transform.localScale -= new Vector3(0.07f, 0, 0);
+    }
+
+    private void MapSelected()
+    {
+        if(mapSelectionIndex >= mapNameList.Count)
+        {
+            mapSelectionIndex = 0;
+        }
+
+        if(mapSelectionIndex < 0)
+        {
+            mapSelectionIndex = mapNameList.Count - 1;
+        }
+
+        mapImage.sprite = mapImageList[mapSelectionIndex];
+        mapName.text = mapNameList[mapSelectionIndex];
     }
 }
