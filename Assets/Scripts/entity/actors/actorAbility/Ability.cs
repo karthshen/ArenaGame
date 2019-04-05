@@ -9,6 +9,8 @@ public abstract class Ability
 
     private bool canCastInAir = true;
 
+    private bool dragInAir = true;
+
     public int AbilityCost
     {
         get
@@ -32,6 +34,19 @@ public abstract class Ability
         set
         {
             canCastInAir = value;
+        }
+    }
+
+    public bool DragInAir
+    {
+        get
+        {
+            return dragInAir;
+        }
+
+        set
+        {
+            dragInAir = value;
         }
     }
 

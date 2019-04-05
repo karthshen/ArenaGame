@@ -10,6 +10,7 @@ public class WarriorCharge : Ability
     {
         this.caster = caster;
         AbilityCost = 1;
+        DragInAir = false;
     }
 
     public override void AbilityExecute()

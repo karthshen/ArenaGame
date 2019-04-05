@@ -86,7 +86,7 @@ public class ActorJumpState : ActorState
             actor.GenerateAirAttackQueue();
             return new ActorAirAttackState();
         }
-        else if (bAbilityCasted)
+        else if (actor.AbilityCastedInAir)
         {
             return this;
         }

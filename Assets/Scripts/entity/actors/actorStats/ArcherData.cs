@@ -9,6 +9,7 @@
         AttackAnimation3 = "animation,23";
 
         AbilityDownAnimation = "animation,23";
+        AbilityHorizAnimation = "animation,32";
 
         DeathAnimation = "animation,10";
     }

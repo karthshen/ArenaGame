@@ -349,6 +349,19 @@ public abstract class AActor : AEntity
         state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
     }
 
+    public virtual float TakeDamageAndFreeze(float damage, float freezeTime, AActor attacker)
+    {
+        TakeDamage(damage, attacker);
+
+        if(state.GetType() == typeof(ActorFreezeState))
+        {
+            freezeTimer = 0;
+            state = new ActorFreezeState(freezeTime, this, attacker, 0);
+        }
+
+        return CurrentHealth;
+    }
+
     public virtual float TakeDamage(float damage, AActor attacker)
     {
         if (state.GetType() == typeof(ActorDeathState))
@@ -374,6 +387,7 @@ public abstract class AActor : AEntity
         }
         else
         {
+            freezeTimer = 0;
             state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
         }
 
@@ -541,6 +555,7 @@ public abstract class AActor : AEntity
             CastTimer -= Time.deltaTime;
             if (CastTimer <= 0)
             {
+                GetRigidbody().drag = 0;
                 BackToStanding();
             }
         }
