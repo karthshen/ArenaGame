@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using InControl;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class StageSelectMenu : Menu
 {
@@ -55,6 +56,17 @@ public class StageSelectMenu : Menu
 
     private List<ScrollButton> buttons = new List<ScrollButton>();
 
+    //Map Selection Variables - Too lazy to make a new class
+    public List<Sprite> mapImageList;
+
+    public List<string> mapNameList;
+
+    public Image mapImage;
+
+    public TextMeshProUGUI mapName;
+
+    private int mapSelectionIndex = 0;
+
 
     // Use this for initialization
     void Start()
@@ -94,13 +106,23 @@ public class StageSelectMenu : Menu
         selectedButton = buttons[buttonIndex];
 
         ButtonSelected();
+
+        MapSelected();
     }
 
     // Update is called once per frame
     public override void HandleInput(InputDevice inputDevice)
     {
         ButtonDeselected();
-        if (inputDevice.DPadDown.WasPressed)
+
+        if(inputDevice.LeftBumper.WasPressed || inputDevice.LeftTrigger.WasPressed)
+        {
+            mapSelectionIndex--;
+        }else if(inputDevice.RightBumper.WasPressed || inputDevice.RightTrigger.WasPressed)
+        {
+            mapSelectionIndex++;
+        }
+        else if (inputDevice.DPadDown.WasPressed)
         {
             buttonIndex++;
         }
@@ -108,12 +130,12 @@ public class StageSelectMenu : Menu
         {
             buttonIndex--;
         }
-
         else
         {
             ((ScrollButton)selectedButton).OnClickScroll(inputDevice);
         }
 
+        MapSelected();
         ButtonIndexCheck();
         selectedButton = buttons[buttonIndex];
 
@@ -137,7 +159,60 @@ public class StageSelectMenu : Menu
 
     public void CharacterSelectMenu()
     {
+        SaveMapSettings();
         SceneManager.LoadScene("CharacterSelect");
+    }
+
+    private void SaveMapSettings()
+    {
+        //Set up the values in static class
+        GameStageSetting.GameDuration = int.Parse(timeLimitButton.texts[timeLimitButton.scrollIndex].Substring(0, 1)) * 60;
+        if (playerHealthButton.texts[playerHealthButton.scrollIndex].Length == 4)
+        {
+            GameStageSetting.PlayerStartingHealth = 100f;
+        }
+        else
+        {
+            GameStageSetting.PlayerStartingHealth = int.Parse(playerHealthButton.texts[playerHealthButton.scrollIndex].Substring(0, 2));
+        }
+
+        if (lockRageButton.texts[lockRageButton.scrollIndex] == "Lock")
+        {
+            GameStageSetting.LockEnergy = true;
+        }
+        else
+        {
+            GameStageSetting.LockEnergy = false;
+        }
+
+        if (runesButton.texts[runesButton.scrollIndex] == "On")
+        {
+            GameStageSetting.EnableRunes = true;
+        }
+        else
+        {
+            GameStageSetting.EnableRunes = false;
+        }
+
+        if (itemDropButton.texts[itemDropButton.scrollIndex] == "On")
+        {
+            GameStageSetting.ItemDrop = true;
+        }
+        else
+        {
+            GameStageSetting.ItemDrop = false;
+        }
+
+        if (stageHazardsButton.texts[stageHazardsButton.scrollIndex] == "On")
+        {
+            GameStageSetting.StageHazards = true;
+        }
+        else
+        {
+            GameStageSetting.StageHazards = false;
+        }
+
+        GameStageSetting.SelectedMap = (MapSelection)mapSelectionIndex;
     }
 
     protected override void ButtonSelected()
@@ -148,5 +223,21 @@ public class StageSelectMenu : Menu
     protected override void ButtonDeselected()
     {
         selectedButton.transform.localScale -= new Vector3(0.07f, 0, 0);
+    }
+
+    private void MapSelected()
+    {
+        if(mapSelectionIndex >= mapNameList.Count)
+        {
+            mapSelectionIndex = 0;
+        }
+
+        if(mapSelectionIndex < 0)
+        {
+            mapSelectionIndex = mapNameList.Count - 1;
+        }
+
+        mapImage.sprite = mapImageList[mapSelectionIndex];
+        mapName.text = mapNameList[mapSelectionIndex];
     }
 }

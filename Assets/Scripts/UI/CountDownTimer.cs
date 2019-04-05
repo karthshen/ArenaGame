@@ -22,6 +22,11 @@ public class CountDownTimer : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        timer = GameStageSetting.GameDuration;
+    }
+
     // Update is called once per frame
     void Update()
     {

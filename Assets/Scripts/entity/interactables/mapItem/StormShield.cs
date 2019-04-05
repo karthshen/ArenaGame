@@ -43,6 +43,7 @@ public class StormShield : MapItem
         AActor attackedActor = other.GetComponentInParent<AActor>();
         if (attackedActor && attackedActor.GetEntityId() != owner.GetEntityId())
         {
+            attackedActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 2, owner);
             attackedActor.KnockBack(knockingForce, owner);
         }
     }

@@ -36,7 +36,8 @@ public class ActorStandingState : ActorState
         if (actor.IsGrounded == false)
         {
             ActorJumpState state = new ActorJumpState();
-            //state.JumpNum = 0;
+            state.JumpNum = actor.JumpNum;
+            state.BAbilityCasted = actor.AbilityCastedInAir;
             return state;
         }
 
@@ -45,12 +46,16 @@ public class ActorStandingState : ActorState
             return new ActorMovingState();
         }
 
-        if ((inputDevice.Action3 || inputDevice.Action4))
+        if ((inputDevice.Action3 || inputDevice.Action4) && actor.IsGrounded)
         {
             actor.IsGrounded = false;
             jumpCommand.Execute(actor);
             ActorJumpState state = new ActorJumpState();
+
             state.JumpNum--;
+            actor.JumpNum = state.JumpNum;
+            actor.AbilityCastedInAir = false;
+            state.BAbilityCasted = false;
             state.PlayStateAnimation(actor);
             return state;
         }

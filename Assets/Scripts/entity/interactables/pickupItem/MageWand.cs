@@ -24,7 +24,7 @@ public class MageWand : PickupItem
     private void OnCollisionEnter(Collision collision)
     {
         AActor attackedActor = collision.gameObject.GetComponent<AActor>();
-        if (attackedActor && attackedActor.GetEntityId() != owner.GetEntityId())
+        if ((attackedActor && owner) && attackedActor.GetEntityId() != owner.GetEntityId())
         {
             attackedActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
         }

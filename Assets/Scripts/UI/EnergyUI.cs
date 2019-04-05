@@ -30,6 +30,7 @@ public class EnergyUI : MonoBehaviour
         if (!player && playerInputHandler)
         {
             player = playerInputHandler.Actors[playerInputHandler.PlayerNum];
+            return;
         }
 
         if (energyBars.Count != player.GetActorStat().MaxEnergy)

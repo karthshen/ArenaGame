@@ -45,6 +45,11 @@ public abstract class ActorData
 
     public float MaxHealth
     {
+        set
+        {
+            maxHealth = value;
+        }
+
         get
         {
             return maxHealth;

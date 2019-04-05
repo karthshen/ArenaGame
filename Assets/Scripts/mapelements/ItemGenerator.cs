@@ -20,6 +20,11 @@ public class ItemGenerator : MonoBehaviour
 
         pickupItems.Add("EnergyPotion");
         pickupItems.Add("HealthPotion");
+
+        if (!GameStageSetting.ItemDrop)
+        {
+            this.enabled = false;
+        }
     }
 
     // Update is called once per frame
