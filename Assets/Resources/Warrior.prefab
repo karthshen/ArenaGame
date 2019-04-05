@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 4272232789143594949}
   - component: {fileID: 3412195444603740320}
   - component: {fileID: 5207889026455287224}
+  - component: {fileID: 5026672122864779836}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -404,6 +405,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animators:
   - {fileID: 3412195444603740320}
+--- !u!65 &5026672122864779836
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222724451118799090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.29103217, y: 1.0910152, z: 0.41079026}
+  m_Center: {x: 0.0047903336, y: 0.5437016, z: 0.002395247}
 --- !u!1 &255115152606455135
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +762,7 @@ MeshCollider:
   m_GameObject: {fileID: 637313388525685095}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -2841,7 +2855,7 @@ MeshCollider:
   m_GameObject: {fileID: 3025399560512764921}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -4701,7 +4715,7 @@ MeshCollider:
   m_GameObject: {fileID: 6161607590349754914}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -4856,7 +4870,7 @@ MeshCollider:
   m_GameObject: {fileID: 6340898245355701448}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -6776,7 +6790,7 @@ MeshCollider:
   m_GameObject: {fileID: 8496294697283885468}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14

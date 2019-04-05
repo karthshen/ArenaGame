@@ -592,11 +592,20 @@ public abstract class AActor : AEntity
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if((collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState))) {
+            bIsGrounded = true;
+            BackToStanding();
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground" && bIsGrounded == true)
+        if (collision.gameObject.tag == "Ground" && bIsGrounded == true && jumpNum == 0)
         {
             bIsGrounded = false;
+            jumpNum = 2;
         }
     }
 
@@ -617,6 +626,38 @@ public abstract class AActor : AEntity
         else if (moveHorizontal < 0)
         {
             transform.GetChild(0).eulerAngles = backDirection;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Ground")
+        {
+            Collider[] collidersToIgnore = GetComponentsInChildren<Collider>();
+
+            foreach (Collider collider in collidersToIgnore)
+            {
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), collider, true);
+            }
+
+            Collider objectCOllider = GetComponent<Collider>();
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), objectCOllider, true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Ground")
+        {
+            Collider[] collidersToIgnore = GetComponentsInChildren<Collider>();
+
+            foreach (Collider collider in collidersToIgnore)
+            {
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), collider, false);
+            }
+
+            Collider objectCOllider = GetComponent<Collider>();
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), objectCOllider, false);
         }
     }
 }
