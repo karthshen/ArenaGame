@@ -1,52 +1,17 @@
 ﻿using UnityEngine;
-using UnityEditor;
-using System.Collections.Generic;
+using System.Collections;
 
-public class ArcherArrow : ProjectileItem
+public class Calibur : ProjectileItem
 {
-    public GameObject com;
-
     private AActor owner;
-    private float velocity = 20.0f;
-    private float moveHorizontal = -0.06f;
+    [SerializeField]
+    private float velocity = 30.0f;
+    private float moveHorizontal = 0.3f;
     private Vector3 movement;
-    private float yModifier = 0.06f;
-    private float damageModifier = 1f;
 
-    private const float DURATION_TIME = 2.0f;
+    private const float DURATION_TIME = 0.9f;
 
     private float duration_time = 0f;
-
-    public float YModifier
-    {
-        get
-        {
-            return yModifier;
-        }
-
-        set
-        {
-            yModifier = value;
-        }
-    }
-
-    public float DamageModifier
-    {
-        get
-        {
-            return damageModifier;
-        }
-
-        set
-        {
-            damageModifier = value;
-        }
-    }
-
-    private void Start()
-    {
-        GetComponent<Rigidbody>().centerOfMass = com.transform.position;
-    }
 
     public void SetOwner(AActor owner)
     {
@@ -60,15 +25,15 @@ public class ArcherArrow : ProjectileItem
 
     public override void ProjectileStart()
     {
-        //Ignore Collision of owner and this
+        //Ignore this collision and owner component collision
         IgnoreOwnerCollision(owner);
 
         gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
         float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
 
         gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
-            owner.transform.position.y + yModifier + owner.transform.lossyScale.y / 2, owner.transform.position.z);
-        movement = new Vector3(1 * Mathf.Sin(yDirectionInRadian), 0.0f, 0.0f);
+            owner.transform.position.y + owner.transform.lossyScale.y / 2, owner.transform.position.z);
+        movement = new Vector3(moveHorizontal * Mathf.Sin(yDirectionInRadian), 0.0f, 0.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -77,7 +42,7 @@ public class ArcherArrow : ProjectileItem
 
         if (hitActor)
         {
-            hitActor.TakeDamage(owner.GetActorStat().AttackPower / 1.5f * DamageModifier, owner);
+            hitActor.TakeDamage(owner.GetActorStat().AttackPower * 1.5f, owner);
         }
 
         if (collision.gameObject.GetComponent<PickupItem>())
@@ -86,7 +51,7 @@ public class ArcherArrow : ProjectileItem
             return;
         }
 
-        ProjectileFinish();
+        //ProjectileFinish();
     }
 
     private void Update()

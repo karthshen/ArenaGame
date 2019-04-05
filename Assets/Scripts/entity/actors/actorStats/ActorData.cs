@@ -20,6 +20,9 @@ public abstract class ActorData
     private string attackAnimation1 = "animation,3";
     private string attackAnimation2 = "animation,4";
     private string attackAnimation3 = "animation,2";
+    private string movingAnimation = "animation,17";
+    private string walkAnimation = "animation,25";
+    private string runningAnimation = "animation,20";
     private string abilityDownAnimation;
     private string abilityHorizAnimation;
     private string abilityUpAnimation;
@@ -278,6 +281,45 @@ public abstract class ActorData
         set
         {
             abilityHorizAnimation = value;
+        }
+    }
+
+    public string MovingAnimation
+    {
+        get
+        {
+            return movingAnimation;
+        }
+
+        set
+        {
+            movingAnimation = value;
+        }
+    }
+
+    public string RunningAnimation
+    {
+        get
+        {
+            return runningAnimation;
+        }
+
+        set
+        {
+            runningAnimation = value;
+        }
+    }
+
+    public string WalkAnimation
+    {
+        get
+        {
+            return walkAnimation;
+        }
+
+        set
+        {
+            walkAnimation = value;
         }
     }
 }

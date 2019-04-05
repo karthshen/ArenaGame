@@ -91,21 +91,21 @@ public class ActorJumpState : ActorState
             return this;
         }
         //Ability Left Input
-        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value < (0 - Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityLeft.AbilityCost)
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value < (0 - Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityLeft.AbilityCost && actor.abilityLeft.CanCastInAir == true)
         {
             actor.CastTimer = AActor.CAST_DURATION;
             abilityLeftCommand.Execute(actor);
             return new ActorHoriAbilityState();
         }
         //Ability Right Input
-        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value > (0 + Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityRight.AbilityCost)
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value > (0 + Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityRight.AbilityCost && actor.abilityRight.CanCastInAir == true)
         {
             actor.CastTimer = AActor.CAST_DURATION;
             abilityRightCommand.Execute(actor);
             return new ActorHoriAbilityState();
         }
         //Ability Down Input
-        else if ((inputDevice.Action1.WasPressed) && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
+        else if ((inputDevice.Action1.WasPressed) && actor.CurrentEnergy >= actor.abilityDown.AbilityCost && actor.abilityDown.CanCastInAir == true)
         {
             actor.CastTimer = AActor.CAST_DURATION;
             abilityDownCommand.Execute(actor);
