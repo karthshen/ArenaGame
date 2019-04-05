@@ -9,6 +9,7 @@ public class MageStormShield : Ability
     {
         this.caster = caster;
         AbilityCost = 3;
+        CanCastInAir = false;
     }
 
     public override void AbilityExecute()
