@@ -7,6 +7,11 @@ public class ActorDownAbilityState : ActorAbilityState
     {
         actor.GetAnimatorController().SetInt(actor.GetActorStat().AbilityDownAnimation);
 
+        if(!actor.IsGrounded && actor.abilityDown.DragInAir)
+        {
+            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
+        }
+
         base.PlayAnimation(actor);
     }
 }

@@ -8,8 +8,8 @@ public static class GameStageSetting
     private static MapSelection selectedMap;
 
     private static float gameDuration; //game duration in seconds
-    private static float playerStartingHealth;
-    private static bool lockEnergy;
+    private static float playerStartingHealth = 100f;
+    private static bool lockEnergy = false;
     private static bool enableRunes;
     private static bool itemDrop;
     private static bool stageHazards;

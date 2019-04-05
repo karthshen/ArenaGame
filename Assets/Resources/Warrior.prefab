@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7931491503960122742}
   - component: {fileID: 3791116073280105275}
   - component: {fileID: 3758797328805020494}
-  - component: {fileID: 1420792263}
-  - component: {fileID: 1420792262}
+  - component: {fileID: 4597842177033373615}
+  - component: {fileID: 517832284120153438}
   m_Layer: 0
   m_Name: Sword_M05
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1420792256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.1}
   m_Children: []
   m_Father: {fileID: 6979458972634869906}
   m_RootOrder: 0
@@ -112,7 +112,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &1420792263
+--- !u!54 &4597842177033373615
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,8 +128,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!64 &1420792262
-MeshCollider:
+--- !u!65 &517832284120153438
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,11 +137,10 @@ MeshCollider:
   m_GameObject: {fileID: 1420792256}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: db4594b430fbffc4784480d4a40e5f1b, type: 3}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.26904958, y: 0.04815009, z: 1.1703576}
+  m_Center: {x: 0.00000021795121, y: 0.000000025767514, z: 0.49991578}
 --- !u!1 &78686545014164202
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,8 +415,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.48264503, y: 1.0910152, z: 0.4251612}
-  m_Center: {x: 0.062274016, y: 0.5437016, z: 0.0047904253}
+  m_Size: {x: 0.3245645, y: 1.0910152, z: 0.4251612}
+  m_Center: {x: 0.007185277, y: 0.5437016, z: 0.0047904253}
 --- !u!1 &255115152606455135
 GameObject:
   m_ObjectHideFlags: 0

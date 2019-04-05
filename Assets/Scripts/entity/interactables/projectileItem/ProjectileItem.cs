@@ -16,17 +16,4 @@ public abstract class ProjectileItem : AInteractable
     public abstract void ProjectileStart();
 
     public abstract void ProjectileFinish();
-
-    protected void IgnoreOwnerCollision(AActor owner)
-    {
-        Collider[] collidersToIgnore = owner.GetComponentsInChildren<Collider>();
-
-        foreach (Collider collider in collidersToIgnore)
-        {
-            Physics.IgnoreCollision(GetComponentInChildren<Collider>(), collider);
-        }
-
-        Collider ownerCollider = owner.GetComponent<Collider>();
-        Physics.IgnoreCollision(GetComponentInChildren<Collider>(), ownerCollider);
-    }
 }
