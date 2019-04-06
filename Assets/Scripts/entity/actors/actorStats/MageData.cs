@@ -6,6 +6,7 @@
 
         AbilityDownAnimation = "animation,3";
         AbilityHorizAnimation = "animation,3";
+        AbilityUpAnimation = "animation,3";
         DeathAnimation = "animation,11";
     }
 }

@@ -11,6 +11,7 @@ public class ArcherArrow : ProjectileItem
     private float moveHorizontal = -0.06f;
     private Vector3 movement;
     private float yModifier = 0.06f;
+    private float xModifier = 0.06f;
     private float damageModifier = 1f;
 
     private const float DURATION_TIME = 2.0f;
@@ -40,6 +41,19 @@ public class ArcherArrow : ProjectileItem
         set
         {
             damageModifier = value;
+        }
+    }
+
+    public float XModifier
+    {
+        get
+        {
+            return xModifier;
+        }
+
+        set
+        {
+            xModifier = value;
         }
     }
 

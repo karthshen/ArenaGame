@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField]
+    float CAMERA_SIZE_FACTOR = 1.5f;
+
     Camera arenaCamera;
 
     float minX;
@@ -86,15 +89,25 @@ public class CameraController : MonoBehaviour
 
         foreach(AActor actor in actors){
             Vector3 tempActor = actor.transform.position;
+
+            float tempX = tempActor.x * CAMERA_SIZE_FACTOR;
+            float tempY = tempActor.y * CAMERA_SIZE_FACTOR;
+
             minX = tempActor.x < minX ? tempActor.x : minX;
-            maxX = tempActor.x > maxX ? tempActor.x : maxX;
+            //maxX = tempActor.x > maxX ? tempActor.x : maxX;
 
             minY = tempActor.y < minY ? tempActor.y : minY;
-            maxY = tempActor.y > maxY ? tempActor.y : maxY;
+            //maxY = tempActor.y > maxY ? tempActor.y : maxY;
+
+            //minX = tempX < minX ? tempX : minX;
+            maxX = tempX > maxX ? tempX : maxX;
+
+            //minY = tempY < minY ? tempY : minY;
+            maxY = tempY > maxY ? tempY : maxY;
         }
 
-        maxX *= 1.5f;
-        maxY *= 1.5f;
+        //maxX *= 1.5f;
+        //maxY *= 1.5f;
     }
 
     private void CalculateCmaeraPosAndSize()

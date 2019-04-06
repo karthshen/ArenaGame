@@ -77,6 +77,13 @@ public class ActorStandingState : ActorState
             //state.HandleInput(actor, inputDevice);
             return state;
         }
+        //Ability Up Input
+        else if((inputDevice.Action1.WasPressed && inputDevice.LeftStickY.Value > 0.6f) && actor.CurrentEnergy >= actor.abilityUp.AbilityCost)
+        {
+            actor.CastTimer = AActor.CAST_DURATION;
+            abilityUpCommand.Execute(actor);
+            return new ActorUpAbilityState();
+        }
         //Ability Left Input
         else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value < (0 - Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityLeft.AbilityCost)
         {
