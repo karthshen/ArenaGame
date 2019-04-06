@@ -90,8 +90,8 @@ public class CameraController : MonoBehaviour
         foreach(AActor actor in actors){
             Vector3 tempActor = actor.transform.position;
 
-            float tempX = tempActor.x * CAMERA_SIZE_FACTOR;
-            float tempY = tempActor.y * CAMERA_SIZE_FACTOR;
+            float tempX = tempActor.x + CAMERA_SIZE_FACTOR;
+            float tempY = tempActor.y + CAMERA_SIZE_FACTOR;
 
             minX = tempActor.x < minX ? tempActor.x : minX;
             //maxX = tempActor.x > maxX ? tempActor.x : maxX;

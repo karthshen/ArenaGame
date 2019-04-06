@@ -3166,6 +3166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3c74c488eabb6468e36b7fb2a6cf4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CAMERA_SIZE_FACTOR: 3
   actors: []
   cameraSpeed: 1
 --- !u!1001 &1718703263
