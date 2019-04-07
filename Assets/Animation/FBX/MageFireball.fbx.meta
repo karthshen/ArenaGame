@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dd7415963f7c27d4990caee463f7d546
+guid: 95151297aa52e2247989ad022749575c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -47,41 +47,41 @@ ModelImporter:
     100082: index_proximal_phalange_r
     100084: lowerarm_l
     100086: lowerarm_r
-    100088: middle_01_l
-    100090: middle_01_r
-    100092: middle_02_l
-    100094: middle_02_r
-    100096: middle_03_l
-    100098: middle_03_r
-    100100: neck_01
-    100102: pelvis
-    100104: pinky_01_l
-    100106: pinky_01_r
-    100108: pinky_02_l
-    100110: pinky_02_r
-    100112: pinky_03_l
-    100114: pinky_03_r
-    100116: ring_01_l
-    100118: ring_01_r
-    100120: ring_02_l
-    100122: ring_02_r
-    100124: ring_03_l
-    100126: ring_03_r
-    100128: root
-    100130: spine_01
-    100132: spine_02
-    100134: spine_03
-    100136: thigh_l
-    100138: thigh_r
-    100140: thumb_01_l
-    100142: thumb_01_r
-    100144: thumb_02_l
-    100146: thumb_02_r
-    100148: thumb_03_l
-    100150: thumb_03_r
-    100152: upperarm_l
-    100154: upperarm_r
-    100156: //RootNode
+    100088: //RootNode
+    100090: middle_01_l
+    100092: middle_01_r
+    100094: middle_02_l
+    100096: middle_02_r
+    100098: middle_03_l
+    100100: middle_03_r
+    100102: neck_01
+    100104: pelvis
+    100106: pinky_01_l
+    100108: pinky_01_r
+    100110: pinky_02_l
+    100112: pinky_02_r
+    100114: pinky_03_l
+    100116: pinky_03_r
+    100118: ring_01_l
+    100120: ring_01_r
+    100122: ring_02_l
+    100124: ring_02_r
+    100126: ring_03_l
+    100128: ring_03_r
+    100130: root
+    100132: spine_01
+    100134: spine_02
+    100136: spine_03
+    100138: thigh_l
+    100140: thigh_r
+    100142: thumb_01_l
+    100144: thumb_01_r
+    100146: thumb_02_l
+    100148: thumb_02_r
+    100150: thumb_03_l
+    100152: thumb_03_r
+    100154: upperarm_l
+    100156: upperarm_r
     400000: ball_l
     400002: ball_r
     400004: calf_l
@@ -126,42 +126,42 @@ ModelImporter:
     400082: index_proximal_phalange_r
     400084: lowerarm_l
     400086: lowerarm_r
-    400088: middle_01_l
-    400090: middle_01_r
-    400092: middle_02_l
-    400094: middle_02_r
-    400096: middle_03_l
-    400098: middle_03_r
-    400100: neck_01
-    400102: pelvis
-    400104: pinky_01_l
-    400106: pinky_01_r
-    400108: pinky_02_l
-    400110: pinky_02_r
-    400112: pinky_03_l
-    400114: pinky_03_r
-    400116: ring_01_l
-    400118: ring_01_r
-    400120: ring_02_l
-    400122: ring_02_r
-    400124: ring_03_l
-    400126: ring_03_r
-    400128: root
-    400130: spine_01
-    400132: spine_02
-    400134: spine_03
-    400136: thigh_l
-    400138: thigh_r
-    400140: thumb_01_l
-    400142: thumb_01_r
-    400144: thumb_02_l
-    400146: thumb_02_r
-    400148: thumb_03_l
-    400150: thumb_03_r
-    400152: upperarm_l
-    400154: upperarm_r
-    400156: //RootNode
-    7400000: Dash
+    400088: //RootNode
+    400090: middle_01_l
+    400092: middle_01_r
+    400094: middle_02_l
+    400096: middle_02_r
+    400098: middle_03_l
+    400100: middle_03_r
+    400102: neck_01
+    400104: pelvis
+    400106: pinky_01_l
+    400108: pinky_01_r
+    400110: pinky_02_l
+    400112: pinky_02_r
+    400114: pinky_03_l
+    400116: pinky_03_r
+    400118: ring_01_l
+    400120: ring_01_r
+    400122: ring_02_l
+    400124: ring_02_r
+    400126: ring_03_l
+    400128: ring_03_r
+    400130: root
+    400132: spine_01
+    400134: spine_02
+    400136: spine_03
+    400138: thigh_l
+    400140: thigh_r
+    400142: thumb_01_l
+    400144: thumb_01_r
+    400146: thumb_02_l
+    400148: thumb_02_r
+    400150: thumb_03_l
+    400152: thumb_03_r
+    400154: upperarm_l
+    400156: upperarm_r
+    7400000: Fireball
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -181,14 +181,14 @@ ModelImporter:
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'ball_l' is inbetween humanoid transforms and
-      has rotation animation that will be discarded.\n\t'calf_r' has translation animation
-      that will be discarded.\n"
+      improve retargeting quality.\n\t'calf_l' has translation animation that will
+      be discarded.\n\t'ball_l' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -197,17 +197,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Dash
+      name: Fireball
       takeName: Take 001
-      firstFrame: 621
-      lastFrame: 645
+      firstFrame: 61
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -223,7 +223,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 58
     isReadable: 1
   meshes:
     lODScreenPercentages: []
