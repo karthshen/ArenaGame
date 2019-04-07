@@ -7,7 +7,7 @@ public class ArcherTrap : MapItem
     private AActor owner;
     private Animator animator;
     private float freezeTime = 1f;
-    private float moveForce = 300f;
+    private float moveForce = 200f;
     private bool closed = false;
 
     private float moveHorizontal = 0.3f;
