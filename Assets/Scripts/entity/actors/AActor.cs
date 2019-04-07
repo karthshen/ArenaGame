@@ -19,7 +19,7 @@ public abstract class AActor : AEntity
     public const float ATTACK_TIMER = ATTACK_TIMER_BETWEEN_COMBO / 1.3f;
     public float ATTACK_INTERVAL = 0.35f / 1.3f;
     public float AIR_ATTACK_LENGTH = 0.35f / 1.3f;
-    public const float CAST_DURATION = 0.5f;
+    public const float CAST_DURATION = 1.0f;
     public const float RESPAWN_TIMER = 3.0f;
     public const float AIRBORNE_DRAG = 15.0f;
     public const float DAMAGE_TO_ENERGY_CONSTANT = 20f;
