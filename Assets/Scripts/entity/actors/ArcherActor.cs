@@ -38,6 +38,7 @@ public class ArcherActor : AActor
         archerAbilityDown = new ArcherBurstShot(this);
         archerAbilityRight = new ArcherDeployTrap(this);
         archerAbilityLeft = new ArcherDeployTrap(this);
+        archerAbilityUp = new ArcherUnleshTheHound(this);
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;

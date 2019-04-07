@@ -5,19 +5,28 @@ public class ArcherHound : MapItem
 {
     enum HoundAnimation
     {
-        Bite = 1,
-        Move = 2
+        Bite = 2,
+        Move = 1
     }
-    private const float MOVE_VELOCITY = 20.0f;
+    private const float MOVE_VELOCITY = 7.0f;
+    private const float FREEZE_TIME = 1.0f;
 
+    private Animator animator;
     private AActor owner;
     private float horizontal = 0.3f;
+    [SerializeField]
     private float disappearTime = 10.0f;
-    private Animator animator;
-    private float throwForce = 100f;
+    [SerializeField]
+    private float throwForce = 7f;
+    [SerializeField]
+    private float currentVelocity = 0f;
+    [SerializeField]
+    private int attackTimes = 3;
+
+    private float freezeTime = 0f;
+
     private bool isGrounded = false;
 
-    private float currentVelocity = 0f;
     private HoundAnimation currentAnim;
 
     public AActor Owner
@@ -39,25 +48,10 @@ public class ArcherHound : MapItem
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (currentAnim == HoundAnimation.Move)
-        {
-            Move();
-        }
-
-        disappearTime -= Time.deltaTime;
-        if(disappearTime <= 0)
-        {
-            ItemFinish();
-        }
-    }
-
     public override void ItemStart()
     {
         IgnoreOwnerCollision(owner);
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
 
@@ -86,12 +80,70 @@ public class ArcherHound : MapItem
         currentAnim = anim;
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (currentAnim == HoundAnimation.Move)
+        {
+            Move();
+        }
+
+        disappearTime -= Time.deltaTime;
+        if (disappearTime <= 0)
+        {
+            ItemFinish();
+        }
+
+        if(freezeTime > 0)
+        {
+            freezeTime -= Time.deltaTime;
+            if (freezeTime <= 0)
+            {
+                PlayAnimation(HoundAnimation.Move);
+                float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+                currentVelocity = MOVE_VELOCITY * Mathf.Sin(yDirectionInRadian);
+            }
+        }
+
+        FallOutPlatformCheck();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "InvisibleTriggerWall")
+        if(other.tag == "InvisibleTriggerWall" && isGrounded)
         {
             currentVelocity = -currentVelocity;
             TurnAround();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+
+        //Complicated? attack logic
+        AActor hitActor = collision.gameObject.GetComponent<AActor>();
+        if (hitActor && attackTimes > 0)
+        {
+            owner.AttackCode = System.Guid.NewGuid();
+            hitActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
+            PlayAnimation(HoundAnimation.Bite);
+            currentVelocity = 0f;
+            freezeTime = FREEZE_TIME;
+            if(disappearTime < FREEZE_TIME)
+            {
+                disappearTime = FREEZE_TIME;
+            }
+
+            attackTimes--;
+
+            if(attackTimes == 0)
+            {
+                disappearTime = 1f;
+            }
         }
     }
 
@@ -103,13 +155,13 @@ public class ArcherHound : MapItem
 
     private void TurnAround()
     {
-        if(transform.GetChild(0).eulerAngles == AEntity.FRONT_DIRECTION)
-        {
-            transform.GetChild(0).eulerAngles = AEntity.BACK_DIRECTION;
-        }
-        else if(transform.GetChild(0).eulerAngles == AEntity.BACK_DIRECTION)
+        if(currentVelocity > 0)
         {
             transform.GetChild(0).eulerAngles = AEntity.FRONT_DIRECTION;
+        }
+        else if(currentVelocity < 0)
+        {
+            transform.GetChild(0).eulerAngles = AEntity.BACK_DIRECTION;
         }
     }
 }

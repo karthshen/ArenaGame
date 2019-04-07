@@ -35,4 +35,12 @@ public abstract class AInteractable : AEntity
             Physics.IgnoreCollision(selfCollider, ownerCollider);
         }
     }
+
+    protected void FallOutPlatformCheck()
+    {
+        if (transform.position.y < -20.0f)
+        {
+            RemoveItem();
+        }
+    }
 }
