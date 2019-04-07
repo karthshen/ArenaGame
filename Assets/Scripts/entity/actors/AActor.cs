@@ -560,14 +560,7 @@ public abstract class AActor : AEntity
             }
         }
 
-        if (transform.position.y < -20.0f)
-        {
-            if (GetRigidbody())
-                GetRigidbody().isKinematic = true;
-
-            Death();
-            deathTimer = 0.1f;
-        }
+        FallOffPlatformCheck();
 
         if (currentEnergy < ActorStat.MaxEnergy)
         {
@@ -629,6 +622,18 @@ public abstract class AActor : AEntity
         if (state.GetType() != typeof(ActorDeathState))
         {
             state = new ActorStandingState(state.GetType().ToString());
+        }
+    }
+
+    private void FallOffPlatformCheck()
+    {
+        if (transform.position.y < -20.0f)
+        {
+            if (GetRigidbody())
+                GetRigidbody().isKinematic = true;
+
+            Death();
+            deathTimer = 0.3f;
         }
     }
 

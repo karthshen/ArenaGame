@@ -12,7 +12,7 @@ public class ArcherTrap : MapItem
 
     private float moveHorizontal = 0.3f;
 
-    private float disappearTime = 1.0f;
+    private float disappearTime = 15.0f;
 
     private bool isGrounded = false;
 
@@ -37,7 +37,7 @@ public class ArcherTrap : MapItem
 
     private void Start()
     {
-        
+
     }
 
     public override void Interact(AActor actor)
@@ -49,6 +49,7 @@ public class ArcherTrap : MapItem
             owner.AttackCode = System.Guid.NewGuid();
             actor.TakeDamageAndFreeze(damage, freezeTime, owner);
             closed = true;
+            disappearTime = 1.0f;
         }
     }
 
@@ -59,12 +60,12 @@ public class ArcherTrap : MapItem
         animator = GetComponent<Animator>();
 
         gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
-        
+
         Rigidbody rb = GetComponent<Rigidbody>();
 
         float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
 
-        gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian), 
+        gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
             owner.transform.position.y + owner.transform.lossyScale.y / 2, owner.transform.position.z);
 
         rb.AddForce(new Vector3(moveForce * Mathf.Sin(yDirectionInRadian), moveForce, 0));
@@ -91,7 +92,7 @@ public class ArcherTrap : MapItem
             Interact(actor);
         }
 
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
         }
@@ -99,13 +100,17 @@ public class ArcherTrap : MapItem
 
     private void Update()
     {
-        if (closed)
+
+        disappearTime -= Time.deltaTime;
+        if (disappearTime <= 0 && !closed)
         {
-            disappearTime -= Time.deltaTime;
-            if(disappearTime <= 0)
-            {
-                ItemFinish();
-            }
+            PlayAnimation(TrapAnimation.Close);
+            closed = true;
+            disappearTime = 1;
+        }
+        else if (disappearTime<=0 && closed)
+        {
+            ItemFinish();
         }
     }
 }

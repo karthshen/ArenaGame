@@ -16,6 +16,11 @@ public class MageStormShield : Ability
     {
         base.AbilityExecute();
 
+        if (caster.CurrentEnergy < AbilityCost)
+        {
+            return;
+        }
+
         caster.CurrentEnergy -= AbilityCost;
         stormShield = Object.Instantiate(Resources.Load("StormShield")) as GameObject;
 

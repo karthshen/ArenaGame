@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MageThunderstrike : Ability
 {
-    GameObject thunderstrike;
+    GameObject thundercloud;
 
     public MageThunderstrike(AActor caster)
     {
@@ -18,9 +18,9 @@ public class MageThunderstrike : Ability
 
         caster.CurrentEnergy -= AbilityCost;
 
-        thunderstrike = Object.Instantiate(Resources.Load("Thunderstrike")) as GameObject;
+        thundercloud = Object.Instantiate(Resources.Load("Thundercloud")) as GameObject;
 
-        Thunderstrike strike = thunderstrike.GetComponent<Thunderstrike>();
+        Thundercloud strike = thundercloud.GetComponent<Thundercloud>();
         strike.Owner = caster;
         strike.ItemStart();
     }
