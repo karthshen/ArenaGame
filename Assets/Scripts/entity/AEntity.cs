@@ -7,6 +7,9 @@ public abstract class AEntity : MonoBehaviour
     protected EntityState state;
     protected Mesh entityMesh;
 
+    public static Vector3 FRONT_DIRECTION = new Vector3(0, 90, 0);
+    public static Vector3 BACK_DIRECTION = new Vector3(0, 270, 0);
+
     public System.Guid GetEntityId()
     {
         return entityId;

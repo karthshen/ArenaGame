@@ -66,8 +66,8 @@ public class ActorStandingState : ActorState
         }
         else if (inputDevice.RightTrigger || inputDevice.RightBumper)
         {
-            grabCommand.Execute(actor);
-            return new ActorGrabbingState();
+            //grabCommand.Execute(actor);
+            //return new ActorGrabbingState();
         }
         else if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
         {
