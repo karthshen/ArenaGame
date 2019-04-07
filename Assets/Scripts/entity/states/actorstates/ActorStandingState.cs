@@ -77,26 +77,45 @@ public class ActorStandingState : ActorState
             //state.HandleInput(actor, inputDevice);
             return state;
         }
-        //Ability Left Input
-        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value < (0 - Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityLeft.AbilityCost)
+        //Ability Up Input
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickY.Value > 0.6f))
         {
-            actor.CastTimer = AActor.CAST_DURATION;
-            abilityLeftCommand.Execute(actor);
-            return new ActorHoriAbilityState();
+            if (actor.CurrentEnergy >= actor.abilityUp.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityUpCommand.Execute(actor);
+                return new ActorUpAbilityState();
+            }
+        }
+        //Ability Left Input
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value < (0 - Mathf.Epsilon)))
+        {
+            if (actor.CurrentEnergy >= actor.abilityLeft.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityLeftCommand.Execute(actor);
+                return new ActorHoriAbilityState();
+            }
         }
         //Ability Right Input
-        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value > (0 + Mathf.Epsilon)) && actor.CurrentEnergy >= actor.abilityRight.AbilityCost)
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value > (0 + Mathf.Epsilon)))
         {
-            actor.CastTimer = AActor.CAST_DURATION;
-            abilityRightCommand.Execute(actor);
-            return new ActorHoriAbilityState();
+            if (actor.CurrentEnergy >= actor.abilityRight.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityRightCommand.Execute(actor);
+                return new ActorHoriAbilityState();
+            }
         }
         //Ability Down Input
-        else if ((inputDevice.Action1.WasPressed) && actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
+        else if ((inputDevice.Action1.WasPressed))
         {
-            actor.CastTimer = AActor.CAST_DURATION;
-            abilityDownCommand.Execute(actor);
-            return new ActorDownAbilityState();
+            if (actor.CurrentEnergy >= actor.abilityDown.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityDownCommand.Execute(actor);
+                return new ActorDownAbilityState();
+            }
         }
 
         return this;

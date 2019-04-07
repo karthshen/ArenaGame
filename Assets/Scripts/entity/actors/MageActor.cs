@@ -35,6 +35,7 @@ public class MageActor : AActor
         mageAbilityDown = new MageThunderbolt(this);
         mageAbilityLeft = new MageStormShield(this);
         mageAbilityRight = new MageStormShield(this);
+        mageAbilityUp = new MageThunderstrike(this);
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;
