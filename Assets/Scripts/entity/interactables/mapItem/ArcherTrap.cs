@@ -59,11 +59,11 @@ public class ArcherTrap : MapItem
 
         animator = GetComponent<Animator>();
 
-        gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
+        SetRotationToEntity(owner);
 
         Rigidbody rb = GetComponent<Rigidbody>();
 
-        float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        float yDirectionInRadian = GetYDirectionInRadian();
 
         gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
             owner.transform.position.y + owner.transform.lossyScale.y / 2, owner.transform.position.z);

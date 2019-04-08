@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Calibur : ProjectileItem
 {
-    private AActor owner;
     [SerializeField]
     private float velocity = 30.0f;
     private float moveHorizontal = 0.3f;
@@ -12,11 +11,6 @@ public class Calibur : ProjectileItem
     private const float DURATION_TIME = 0.9f;
 
     private float duration_time = 0f;
-
-    public void SetOwner(AActor owner)
-    {
-        this.owner = owner;
-    }
 
     public override void ProjectileFinish()
     {
@@ -28,8 +22,8 @@ public class Calibur : ProjectileItem
         //Ignore this collision and owner component collision
         IgnoreOwnerCollision(owner);
 
-        gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
-        float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        SetRotationToEntity(owner);
+        float yDirectionInRadian = GetYDirectionInRadian();
 
         if (owner.IsGrounded)
         {

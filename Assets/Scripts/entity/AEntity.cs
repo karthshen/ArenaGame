@@ -37,4 +37,14 @@ public abstract class AEntity : MonoBehaviour
             throw new UnassignedReferenceException(GetType() + "class is not initialized correctly");
         }
     }
+
+    protected void SetRotationToEntity(AEntity entity)
+    {
+        gameObject.transform.GetChild(0).rotation = entity.transform.GetChild(0).rotation;
+    }
+
+    public float GetYDirectionInRadian()
+    {
+        return transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+    }
 }

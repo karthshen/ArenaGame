@@ -16,7 +16,7 @@ public class ArcherBurstShot : Ability
     {
         caster.CurrentEnergy -= AbilityCost;
 
-        float yDirectionInRadian = caster.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        float yDirectionInRadian = caster.GetYDirectionInRadian();
 
         Vector3 chargeMovement = new Vector3(BURST_FORCE * Mathf.Sin(yDirectionInRadian), 0f, 0f);
 

@@ -3,6 +3,8 @@ using UnityEditor;
 
 public abstract class ProjectileItem : AInteractable
 {
+    protected AActor owner;
+
     public override void Interact(AActor actor)
     {
         throw new System.NotImplementedException();
@@ -16,4 +18,9 @@ public abstract class ProjectileItem : AInteractable
     public abstract void ProjectileStart();
 
     public abstract void ProjectileFinish();
+
+    public void SetOwner(AActor owner)
+    {
+        this.owner = owner;
+    }
 }

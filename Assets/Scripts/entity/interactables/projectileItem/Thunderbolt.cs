@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Thunderbolt : ProjectileItem
 {
-    private AActor owner;
     private float velocity = 10.0f;
     private float moveHorizontal = 1.0f;
     private Vector3 movement;
@@ -12,11 +11,6 @@ public class Thunderbolt : ProjectileItem
 
     private float duration_time = 0f;
 
-    public void SetOwner(AActor owner)
-    {
-        this.owner = owner;
-    }
-
     public override void ProjectileFinish()
     {
         RemoveItem();
@@ -24,8 +18,8 @@ public class Thunderbolt : ProjectileItem
 
     public override void ProjectileStart()
     {
-        gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
-        float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        SetRotationToEntity(owner);
+        float yDirectionInRadian = GetYDirectionInRadian();
 
         gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
             owner.transform.position.y + owner.transform.lossyScale.y/2, owner.transform.position.z);
