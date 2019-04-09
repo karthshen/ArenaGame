@@ -24,8 +24,9 @@ public class ArcherClawhook : ProjectileItem
 
     private Vector3 movement;
 
-    private const float SHOOT_OUT_DURATION = 0.8f;
+    private const float SHOOT_OUT_DURATION = 1f;
     private const float CLAW_STAY_TIME = 1.0f;
+    private const float MAX_TRAVEL_DISTANCE = 9.0f;
 
     private float timer = 0f;
 
@@ -61,9 +62,19 @@ public class ArcherClawhook : ProjectileItem
 
         float distance = Vector3.Distance(transform.position, owner.transform.position);
 
+        if(distance > MAX_TRAVEL_DISTANCE)
+        {
+            ProjectileFinish();
+        }
+
         if (clawhookState == ClawhookState.Shooting)
         {
             if (timer > SHOOT_OUT_DURATION)
+            {
+                ProjectileFinish();
+            }
+
+            if (distance > MAX_TRAVEL_DISTANCE)
             {
                 ProjectileFinish();
             }
@@ -76,11 +87,14 @@ public class ArcherClawhook : ProjectileItem
             SetClawPositionToActor(hitActor);
             //push actor toward this actor
             owner.GetRigidbody().AddForce((transform.position - owner.transform.position) * retractionForce / distance);
+
+            //owner.GetRigidbody().AddForce((transform.position - owner.transform.position) * retractionForce / (1 / Time.deltaTime));
         }
         else if (clawhookState == ClawhookState.RetractingOthers)
         {
             //push actor toward the wall
             owner.GetRigidbody().AddForce((transform.position - owner.transform.position) * retractionForce / distance);
+            //owner.GetRigidbody().AddForce((transform.position - owner.transform.position) * retractionForce / (1 / Time.deltaTime));
         }
 
         if(clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers)
@@ -98,7 +112,7 @@ public class ArcherClawhook : ProjectileItem
 
     private bool CheckIfRetracted()
     {
-        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 1f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
+        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 0.5f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
         {
             owner.ClearForceOnActor();
             return true;
