@@ -28,6 +28,7 @@ public class WarriorActor : AActor
         entityId = System.Guid.NewGuid();
         rb = GetComponent<Rigidbody>();
         ac = GetComponent<AnimatorController>();
+        effectSource = GetComponent<AudioSource>();
 
         //Actor Config, button, ability, etc
         actorStat = new WarriorData();

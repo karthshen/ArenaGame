@@ -27,6 +27,7 @@ public class MageActor : AActor
         entityMesh = mageMesh;
         rb = GetComponent<Rigidbody>();
         ac = GetComponent<AnimatorController>();
+        effectSource = GetComponent<AudioSource>();
 
         //Actor Config, button, ability, etc
         actorStat = new MageData();

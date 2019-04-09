@@ -22,7 +22,7 @@ public class ActorHoriAbilityState : ActorAbilityState
         //}
 
         actor.GetAnimatorController().SetInt(actor.GetActorStat().AbilityHorizAnimation);
-        SoundManager.instance.PlayEffect(actor.GetActorStat().AbilityHorizSound);
+        SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.GetActorStat().AbilityHorizSound, ref hasSoundPlayed);
 
         if (!actor.IsGrounded && actor.abilityLeft.DragInAir && actor.abilityRight.DragInAir)
         {

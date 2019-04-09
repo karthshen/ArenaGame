@@ -14,10 +14,10 @@
         //Sound
         AttackSound1 = SoundManager.instance.sword_attack1;
         AttackSound2 = SoundManager.instance.sword_attack2;
-        AttackSound3 = SoundManager.instance.sword_attack3;
+        AttackSound3 = SoundManager.instance.sword_attack1;
 
         //AbilityUpSound
-        AbilityDownSound = AttackSound1;
+        AbilityDownSound = SoundManager.instance.sword_attack3;
         AbilityHorizSound = SoundManager.instance.arrow_attack1;
         //AbilityTriggerSound
     }

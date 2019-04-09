@@ -6,7 +6,7 @@ public class ActorDownAbilityState : ActorAbilityState
     protected override void PlayAnimation(AActor actor)
     {
         actor.GetAnimatorController().SetInt(actor.GetActorStat().AbilityDownAnimation);
-        SoundManager.instance.PlayEffect(actor.GetActorStat().AbilityDownSound);
+        SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.GetActorStat().AbilityDownSound, ref hasSoundPlayed);
 
         if (!actor.IsGrounded && actor.abilityDown.DragInAir)
         {

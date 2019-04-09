@@ -12,5 +12,6 @@ public class AttackCommand : Command
         actor.AttackTimer = AActor.ATTACK_TIMER;
         actor.Attack();
         actor.attackQueue.Dequeue();
+        ((ActorState)actor.GetState()).hasSoundPlayed = false;
     }
 }
