@@ -332,6 +332,22 @@ ModelImporter:
     100652: transform97
     100654: transform98
     100656: transform99
+    100658: pCube55
+    100660: pCube56
+    100662: polySurface100
+    100664: polySurface101
+    100666: polySurface89
+    100668: polySurface90
+    100670: polySurface91
+    100672: polySurface92
+    100674: polySurface93
+    100676: polySurface94
+    100678: polySurface95
+    100680: polySurface96
+    100682: polySurface97
+    100684: polySurface98
+    100686: polySurface99
+    100688: transform119
     400000: ambientLight1
     400002: Arm_m05
     400004: Body_m05
@@ -661,6 +677,22 @@ ModelImporter:
     400652: transform97
     400654: transform98
     400656: transform99
+    400658: pCube55
+    400660: pCube56
+    400662: polySurface100
+    400664: polySurface101
+    400666: polySurface89
+    400668: polySurface90
+    400670: polySurface91
+    400672: polySurface92
+    400674: polySurface93
+    400676: polySurface94
+    400678: polySurface95
+    400680: polySurface96
+    400682: polySurface97
+    400684: polySurface98
+    400686: polySurface99
+    400688: transform119
     2000000: left1
     2000002: right1
     2100000: skin
@@ -670,6 +702,10 @@ ModelImporter:
     2100008: lambert1
     2100010: Side
     2100012: Roof
+    2100014: Zhuzi
+    2100016: lattern
+    2100018: Cloth1
+    2100020: SideBot
     2300000: Arm_m05
     2300002: Body_m05
     2300004: extrudedSurface1
@@ -776,6 +812,21 @@ ModelImporter:
     2300206: pPlane4 7
     2300208: pPlane4 8
     2300210: pPlane4 9
+    2300212: pCube55
+    2300214: pCube56
+    2300216: polySurface100
+    2300218: polySurface101
+    2300220: polySurface89
+    2300222: polySurface90
+    2300224: polySurface91
+    2300226: polySurface92
+    2300228: polySurface93
+    2300230: polySurface94
+    2300232: polySurface95
+    2300234: polySurface96
+    2300236: polySurface97
+    2300238: polySurface98
+    2300240: polySurface99
     3300000: Arm_m05
     3300002: Body_m05
     3300004: extrudedSurface1
@@ -882,6 +933,21 @@ ModelImporter:
     3300206: pPlane4 7
     3300208: pPlane4 8
     3300210: pPlane4 9
+    3300212: pCube55
+    3300214: pCube56
+    3300216: polySurface100
+    3300218: polySurface101
+    3300220: polySurface89
+    3300222: polySurface90
+    3300224: polySurface91
+    3300226: polySurface92
+    3300228: polySurface93
+    3300230: polySurface94
+    3300232: polySurface95
+    3300234: polySurface96
+    3300236: polySurface97
+    3300238: polySurface98
+    3300240: polySurface99
     4300000: Head
     4300002: Face
     4300004: Hair05
@@ -988,6 +1054,21 @@ ModelImporter:
     4300206: BridgeLine2
     4300208: polySurface87
     4300210: polySurface88
+    4300212: pCube56
+    4300214: polySurface89
+    4300216: polySurface90
+    4300218: polySurface91
+    4300220: polySurface92
+    4300222: polySurface93
+    4300224: polySurface94
+    4300226: polySurface95
+    4300228: polySurface96
+    4300230: polySurface97
+    4300232: polySurface98
+    4300234: polySurface99
+    4300236: polySurface100
+    4300238: polySurface101
+    4300240: pCube55
     10800000: ambientLight1
     10800002: directionalLight1
     10800004: directionalLight2
