@@ -25,5 +25,6 @@ public class ActorBlockState : ActorState
     protected override void PlayAnimation(AActor actor)
     {
         actor.GetAnimatorController().SetInt("animation,33");
+        SoundManager.instance.PlayEffect(SoundManager.instance.sword_attack2);
     }
 }

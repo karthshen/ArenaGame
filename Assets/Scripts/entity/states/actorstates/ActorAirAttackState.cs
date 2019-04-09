@@ -37,14 +37,17 @@ public class ActorAirAttackState : ActorState
         else if (actor.attackQueue.Peek() == AActor.Combo.Attack0)
         {
             actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation1);
+            SoundManager.instance.PlayEffect(actor.GetActorStat().AttackSound1);
         }
         else if (actor.attackQueue.Peek() == AActor.Combo.Attack1)
         {
             actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation2);
+            SoundManager.instance.PlayEffect(actor.GetActorStat().AttackSound2);
         }
         else if (actor.attackQueue.Peek() == AActor.Combo.Attack2)
         {
             actor.GetAnimatorController().SetInt(actor.GetActorStat().AttackAnimation3);
+            SoundManager.instance.PlayEffect(actor.GetActorStat().AttackSound3);
         }
     }
 }

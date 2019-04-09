@@ -156,14 +156,17 @@ public class ActorJumpState : ActorState
         if (JumpNum == 1)
         {
             actor.GetAnimatorController().SetInt("animation,16");
+            SoundManager.instance.PlayEffect(actor.GetActorStat().JumpSound);
         }
         else if (JumpNum == 0)
         {
             actor.GetAnimatorController().SetInt("animation,4");
+            SoundManager.instance.PlayEffect(actor.GetActorStat().LandSound);
         }
         else
         {
             actor.GetAnimatorController().SetInt("animation,16");
+            SoundManager.instance.PlayEffect(actor.GetActorStat().JumpSound);
         }
     }
 }

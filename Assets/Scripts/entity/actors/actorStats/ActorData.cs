@@ -31,6 +31,23 @@ public abstract class ActorData
     private string deathAnimation;
     private string idleAnimation = "animation,13";
 
+    //Sound FX
+    private AudioClip attackSound1;
+    private AudioClip attackSound2;
+    private AudioClip attackSound3;
+    private AudioClip movingSound;
+    private AudioClip walkingSound = SoundManager.instance.footstep;
+    private AudioClip runningSound = SoundManager.instance.footstep;
+    private AudioClip damagedSound;
+    private AudioClip abilityDownSound;
+    private AudioClip abilityUpSound;
+    private AudioClip abilityHorizSound;
+    private AudioClip abilityTriggerSound;
+    private AudioClip jumpSound = SoundManager.instance.jump;
+    private AudioClip landSound = SoundManager.instance.land;
+    private AudioClip deathSound;
+    private AudioClip idleSound;
+
     protected void setActorStat(
         float maxHealth, float maxEnergy, float moveVelocity, float jumpVelocity, float sprintVelocity,
         float attackPower, float defensePower, float abilityPower, int energyGenerationSpeed
@@ -334,6 +351,201 @@ public abstract class ActorData
         set
         {
             abilityTriggerAnimation = value;
+        }
+    }
+
+    public AudioClip AttackSound1
+    {
+        get
+        {
+            return attackSound1;
+        }
+
+        set
+        {
+            attackSound1 = value;
+        }
+    }
+
+    public AudioClip AttackSound2
+    {
+        get
+        {
+            return attackSound2;
+        }
+
+        set
+        {
+            attackSound2 = value;
+        }
+    }
+
+    public AudioClip AttackSound3
+    {
+        get
+        {
+            return attackSound3;
+        }
+
+        set
+        {
+            attackSound3 = value;
+        }
+    }
+
+    public AudioClip MovingSound
+    {
+        get
+        {
+            return movingSound;
+        }
+
+        set
+        {
+            movingSound = value;
+        }
+    }
+
+    public AudioClip WalkingSound
+    {
+        get
+        {
+            return walkingSound;
+        }
+
+        set
+        {
+            walkingSound = value;
+        }
+    }
+
+    public AudioClip RunningSound
+    {
+        get
+        {
+            return runningSound;
+        }
+
+        set
+        {
+            runningSound = value;
+        }
+    }
+
+    public AudioClip AbilityDownSound
+    {
+        get
+        {
+            return abilityDownSound;
+        }
+
+        set
+        {
+            abilityDownSound = value;
+        }
+    }
+
+    public AudioClip AbilityUpSound
+    {
+        get
+        {
+            return abilityUpSound;
+        }
+
+        set
+        {
+            abilityUpSound = value;
+        }
+    }
+
+    public AudioClip AbilityHorizSound
+    {
+        get
+        {
+            return abilityHorizSound;
+        }
+
+        set
+        {
+            abilityHorizSound = value;
+        }
+    }
+
+    public AudioClip AbilityTriggerSound
+    {
+        get
+        {
+            return abilityTriggerSound;
+        }
+
+        set
+        {
+            abilityTriggerSound = value;
+        }
+    }
+
+    public AudioClip JumpSound
+    {
+        get
+        {
+            return jumpSound;
+        }
+
+        set
+        {
+            jumpSound = value;
+        }
+    }
+
+    public AudioClip DeathSound
+    {
+        get
+        {
+            return deathSound;
+        }
+
+        set
+        {
+            deathSound = value;
+        }
+    }
+
+    public AudioClip IdleSound
+    {
+        get
+        {
+            return idleSound;
+        }
+
+        set
+        {
+            idleSound = value;
+        }
+    }
+
+    public AudioClip LandSound
+    {
+        get
+        {
+            return landSound;
+        }
+
+        set
+        {
+            landSound = value;
+        }
+    }
+
+    public AudioClip DamagedSound
+    {
+        get
+        {
+            return damagedSound;
+        }
+
+        set
+        {
+            damagedSound = value;
         }
     }
 }
