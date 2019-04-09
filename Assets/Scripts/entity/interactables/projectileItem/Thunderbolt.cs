@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Thunderbolt : ProjectileItem
 {
-    private float velocity = 10.0f;
+    private float velocity = 12.0f;
     private float moveHorizontal = 1.0f;
     private Vector3 movement;
 
@@ -32,7 +32,7 @@ public class Thunderbolt : ProjectileItem
 
         if (hitActor)
         {
-            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 1.5f, owner);
+            hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 1.3f, owner);
         }
 
         if (collision.gameObject.GetComponent<PickupItem>())

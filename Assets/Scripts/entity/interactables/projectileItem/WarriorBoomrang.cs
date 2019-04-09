@@ -10,7 +10,7 @@ public class WarriorBoomrang : ProjectileItem
         SpinStay = 3
     }
 
-    private float velocity = 17.0f;
+    private float velocity = 15.0f;
     private float moveHorizontal = 1f;
     private float positionHorizontal = 0.05f;
 
@@ -26,7 +26,7 @@ public class WarriorBoomrang : ProjectileItem
 
     private void Start()
     {
-        
+
     }
 
     public override void ProjectileStart()
@@ -85,7 +85,7 @@ public class WarriorBoomrang : ProjectileItem
         if (boomrangState == BoomrangAnimation.SpinStay)
         {
             duration_time += Time.deltaTime;
-            if(duration_time >= SPIN_STAY_DURATION)
+            if (duration_time >= SPIN_STAY_DURATION)
             {
                 boomrangState = BoomrangAnimation.SpinIn;
             }
@@ -104,10 +104,15 @@ public class WarriorBoomrang : ProjectileItem
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponentInChildren<Collider>());
             return;
-        } else if(boomrangState == BoomrangAnimation.SpinIn)
+        }
+        else if (boomrangState == BoomrangAnimation.SpinIn)
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponentInChildren<Collider>());
             return;
+        }
+        else if(!collision.gameObject.GetComponent<AEntity>())
+        {
+            boomrangState = BoomrangAnimation.SpinStay;
         }
     }
 

@@ -36,7 +36,7 @@ public class ArcherBurstShot : Ability
         GameObject archerArrow = Object.Instantiate(Resources.Load("ArcherArrow") as GameObject);
         ArcherArrow arrow = archerArrow.GetComponent<ArcherArrow>();
         arrow.SetOwner(caster);
-        arrow.DamageModifier = 3;
+        arrow.DamageModifier = 2;
         arrow.YModifier = yModifier;
         arrow.ProjectileStart();
     }
