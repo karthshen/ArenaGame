@@ -4,7 +4,7 @@ using System.Collections;
 public class StormShield : MapItem
 {
     private float duration_time = 0f;
-    private float knockingForce = 1f;
+    private float knockingForce = 3.5f;
     private AActor owner;
 
     private const float DURATION_TIME = 1.0f;
@@ -67,7 +67,7 @@ public class StormShield : MapItem
             ItemFinish();
 
         BoxCollider collider = GetComponent<BoxCollider>();
-        if (collider.size.x < 9.4f)
+        if (collider.size.x < 5f)
         {
             collider.size = new Vector3(collider.size.x + Time.deltaTime * 100, collider.size.y, collider.size.z);
         }

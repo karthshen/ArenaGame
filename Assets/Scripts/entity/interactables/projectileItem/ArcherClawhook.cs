@@ -5,11 +5,11 @@ public class ArcherClawhook : ProjectileItem
 {
     enum ClawhookState
     {
-        Shooting = 1,
-        RetractingActor = 2,
-        RetractingOthers = 3,
-        Staying = 4,
-        Retracted = 5,
+        Shooting,
+        RetractingActor,
+        RetractingOthers,
+        Staying,
+        Retracted,
     }
 
     [SerializeField]
@@ -23,6 +23,8 @@ public class ArcherClawhook : ProjectileItem
     private AActor hitActor;
 
     private Vector3 movement;
+
+    private Animator animator;
 
     private const float SHOOT_OUT_DURATION = 1f;
     private const float CLAW_STAY_TIME = 1.0f;
@@ -47,6 +49,12 @@ public class ArcherClawhook : ProjectileItem
         movement = new Vector3(moveConstant * velocity * Mathf.Cos(angleJoystick), moveConstant * velocity * Mathf.Sin(angleJoystick), 0f);
 
         clawhookState = ClawhookState.Shooting;
+
+        transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0f, 0f, angleJoystick * Mathf.Rad2Deg));
+
+        animator = GetComponent<Animator>();
+
+        PlayAnimation();
     }
 
     public override void ProjectileFinish()
@@ -57,6 +65,8 @@ public class ArcherClawhook : ProjectileItem
     private void Update()
     {
         UpdateRootPosition();
+
+        PlayAnimation();
 
         DrawLine();
 
@@ -112,9 +122,15 @@ public class ArcherClawhook : ProjectileItem
 
     private bool CheckIfRetracted()
     {
-        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 0.5f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
+        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 0.7f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
         {
             owner.ClearForceOnActor();
+
+            if(clawhookState == ClawhookState.RetractingActor)
+            {
+                hitActor.ClearForceOnActor();
+            }
+
             return true;
         }
         return false;
@@ -132,11 +148,15 @@ public class ArcherClawhook : ProjectileItem
             clawhookState = ClawhookState.RetractingActor;
             hitActor = collision.gameObject.GetComponent<AActor>();
             timer = 0f;
+
+            
         }
         else
         {
             clawhookState = ClawhookState.RetractingOthers;
             timer = 0f;
+
+            
         }
     }
 
@@ -176,5 +196,17 @@ public class ArcherClawhook : ProjectileItem
         }
         else
             return false;
+    }
+
+    private void PlayAnimation()
+    {
+        //if(clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers)
+        //{
+        //    animator.SetInteger("animation", 2);
+        //}
+        //else
+        //{
+        //    animator.SetInteger("animation", 1);
+        //}
     }
 }
