@@ -21,7 +21,7 @@ public class WarriorCharge : Ability
         //This code leaves a bug where after the charge, if the actor stops in air, he is considered in StandingState
         caster.CurrentEnergy -= AbilityCost;
 
-        float yDirectionInRadian = caster.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        float yDirectionInRadian = caster.GetYDirectionInRadian();
 
         Vector3 chargeMovement = new Vector3(CHARGE_FORCE * Mathf.Sin(yDirectionInRadian), 0f, 0f);
 

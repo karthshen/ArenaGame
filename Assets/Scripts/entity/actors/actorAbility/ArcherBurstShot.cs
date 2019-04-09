@@ -16,7 +16,7 @@ public class ArcherBurstShot : Ability
     {
         caster.CurrentEnergy -= AbilityCost;
 
-        float yDirectionInRadian = caster.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        float yDirectionInRadian = caster.GetYDirectionInRadian();
 
         Vector3 chargeMovement = new Vector3(BURST_FORCE * Mathf.Sin(yDirectionInRadian), 0f, 0f);
 
@@ -36,7 +36,7 @@ public class ArcherBurstShot : Ability
         GameObject archerArrow = Object.Instantiate(Resources.Load("ArcherArrow") as GameObject);
         ArcherArrow arrow = archerArrow.GetComponent<ArcherArrow>();
         arrow.SetOwner(caster);
-        arrow.DamageModifier = 3;
+        arrow.DamageModifier = 2;
         arrow.YModifier = yModifier;
         arrow.ProjectileStart();
     }

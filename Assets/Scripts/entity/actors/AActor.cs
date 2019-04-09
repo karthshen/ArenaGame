@@ -315,7 +315,7 @@ public abstract class AActor : AEntity
     private void KnockBackBasedOnDirection(float knockingForce, AActor attacker)
     {
         //Knocking back
-        float yDirectionInRadian = attacker.transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        float yDirectionInRadian = attacker.GetYDirectionInRadian();
 
         Vector3 backMovement = new Vector3(knockingForce * Mathf.Sin(yDirectionInRadian), 0f, 0f);
 

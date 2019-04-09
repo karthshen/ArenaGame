@@ -6,7 +6,6 @@ public class ArcherArrow : ProjectileItem
 {
     public GameObject com;
 
-    private AActor owner;
     private float velocity = 20.0f;
     private float moveHorizontal = -0.06f;
     private Vector3 movement;
@@ -62,11 +61,6 @@ public class ArcherArrow : ProjectileItem
         GetComponent<Rigidbody>().centerOfMass = com.transform.position;
     }
 
-    public void SetOwner(AActor owner)
-    {
-        this.owner = owner;
-    }
-
     public override void ProjectileFinish()
     {
         RemoveItem();
@@ -77,8 +71,8 @@ public class ArcherArrow : ProjectileItem
         //Ignore Collision of owner and this
         IgnoreOwnerCollision(owner);
 
-        gameObject.transform.GetChild(0).rotation = owner.transform.GetChild(0).rotation;
-        float yDirectionInRadian = transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
+        SetRotationToEntity(owner);
+        float yDirectionInRadian = GetYDirectionInRadian();
 
         gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
             owner.transform.position.y + yModifier + owner.transform.lossyScale.y / 2, owner.transform.position.z);

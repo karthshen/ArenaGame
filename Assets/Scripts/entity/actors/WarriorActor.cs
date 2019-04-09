@@ -36,6 +36,7 @@ public class WarriorActor : AActor
         warriorAbilityLeft = new WarriorCharge(this);
         warriorAbilityRight = new WarriorCharge(this);
         warriorAbilityDown = new WarriorSlash(this);
+        warriorAbilityUp = new WarriorThrowBoomrang(this);
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
