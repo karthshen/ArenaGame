@@ -23,4 +23,9 @@ public abstract class ProjectileItem : AInteractable
     {
         this.owner = owner;
     }
+
+    public AActor GetOwner()
+    {
+        return owner;
+    }
 }

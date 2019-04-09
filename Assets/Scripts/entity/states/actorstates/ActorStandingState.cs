@@ -14,6 +14,7 @@ public class ActorStandingState : ActorState
     Command abilityLeftCommand = new ActorLeftAbilityCommand();
     Command abilityRightCommand = new ActorRightAbilityCommand();
     Command abilityUpCommand = new ActorAbilityUpCommand();
+    Command abilityTriggerCommand = new ActorAbilityTriggerCommand();
 
     public ActorStandingState() : base()
     {
@@ -64,11 +65,6 @@ public class ActorStandingState : ActorState
             blockCommand.Execute(actor);
             return new ActorBlockState();
         }
-        else if (inputDevice.RightTrigger || inputDevice.RightBumper)
-        {
-            //grabCommand.Execute(actor);
-            //return new ActorGrabbingState();
-        }
         else if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
         {
             actor.GenerateAttackQueue();
@@ -115,6 +111,17 @@ public class ActorStandingState : ActorState
                 actor.CastTimer = AActor.CAST_DURATION;
                 abilityDownCommand.Execute(actor);
                 return new ActorDownAbilityState();
+            }
+        }
+        //Ability Trigger Input
+        else if ((inputDevice.RightTrigger && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))|| inputDevice.RightBumper)
+        {
+            
+            if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityTriggerCommand.Execute(actor);
+                return new ActorTriggerAbilityState();
             }
         }
 

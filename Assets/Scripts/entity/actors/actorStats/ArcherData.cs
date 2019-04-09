@@ -11,6 +11,7 @@
         AbilityDownAnimation = "animation,23";
         AbilityHorizAnimation = "animation,32";
         AbilityUpAnimation = "animation,32";
+        AbilityTriggerAnimation = "animation,32";
 
         DeathAnimation = "animation,10";
     }

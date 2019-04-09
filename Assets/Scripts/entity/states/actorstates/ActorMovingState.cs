@@ -23,6 +23,7 @@ public class ActorMovingState : ActorStandingState
         else
         {
             actor.MoveHorizontal = inputDevice.LeftStickX.Value;
+            actor.MoveVertical = inputDevice.LeftStickY.Value;
             moveCommand.Execute(actor);
         }
 

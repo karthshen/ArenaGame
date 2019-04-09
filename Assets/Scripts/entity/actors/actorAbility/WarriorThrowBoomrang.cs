@@ -32,7 +32,17 @@ public class WarriorThrowBoomrang : Ability
     {
         WarriorBoomrang[] boomrangs = GameObject.FindObjectsOfType<WarriorBoomrang>();
 
-        if(boomrangs.Length >= MAX_NUM_BOOMRANG)
+        int counter = 0;
+
+        foreach(WarriorBoomrang boomrang in boomrangs)
+        {
+            if(boomrang.GetOwner().GetEntityId() == caster.GetEntityId())
+            {
+                counter++;
+            }
+        }
+
+        if(counter >= MAX_NUM_BOOMRANG)
         {
             return false;
         }

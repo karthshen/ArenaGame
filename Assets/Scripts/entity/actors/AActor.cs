@@ -32,6 +32,7 @@ public abstract class AActor : AEntity
     [SerializeField]
     private float currentEnergy;
     private float moveHorizontal;
+    private float moveVertical;
 
     protected ActorData actorStat;
 
@@ -42,6 +43,7 @@ public abstract class AActor : AEntity
     public Ability abilityDown;
     public Ability abilityLeft;
     public Ability abilityRight;
+    public Ability abilityTrigger;
 
     public Queue<Combo> attackQueue = new Queue<Combo>();
 
@@ -288,6 +290,19 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float MoveVertical
+    {
+        get
+        {
+            return moveVertical;
+        }
+
+        set
+        {
+            moveVertical = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -510,6 +525,12 @@ public abstract class AActor : AEntity
     public Rigidbody GetRigidbody()
     {
         return rb;
+    }
+
+    public void ClearForceOnActor()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     protected void ActorUpdate()

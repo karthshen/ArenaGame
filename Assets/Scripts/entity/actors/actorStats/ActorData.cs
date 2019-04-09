@@ -26,6 +26,7 @@ public abstract class ActorData
     private string abilityDownAnimation;
     private string abilityHorizAnimation;
     private string abilityUpAnimation;
+    private string abilityTriggerAnimation;
     private string jumpAnimation;
     private string deathAnimation;
     private string idleAnimation = "animation,13";
@@ -320,6 +321,19 @@ public abstract class ActorData
         set
         {
             walkAnimation = value;
+        }
+    }
+
+    public string AbilityTriggerAnimation
+    {
+        get
+        {
+            return abilityTriggerAnimation;
+        }
+
+        set
+        {
+            abilityTriggerAnimation = value;
         }
     }
 }
