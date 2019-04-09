@@ -31,7 +31,10 @@ public abstract class AActor : AEntity
     private float currentHealth;
     [SerializeField]
     private float currentEnergy;
+    
+    private float jumpForceFactor = 91f;
     private float moveHorizontal;
+    private float moveVertical;
 
     protected ActorData actorStat;
 
@@ -42,6 +45,7 @@ public abstract class AActor : AEntity
     public Ability abilityDown;
     public Ability abilityLeft;
     public Ability abilityRight;
+    public Ability abilityTrigger;
 
     public Queue<Combo> attackQueue = new Queue<Combo>();
 
@@ -288,6 +292,19 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float MoveVertical
+    {
+        get
+        {
+            return moveVertical;
+        }
+
+        set
+        {
+            moveVertical = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -353,11 +370,8 @@ public abstract class AActor : AEntity
     {
         TakeDamage(damage, attacker);
 
-        if(state.GetType() == typeof(ActorFreezeState))
-        {
-            freezeTimer = 0;
-            state = new ActorFreezeState(freezeTime, this, attacker, 0);
-        }
+        freezeTimer = 0;
+        state = new ActorFreezeState(freezeTime, this, attacker, 0);
 
         return CurrentHealth;
     }
@@ -434,9 +448,13 @@ public abstract class AActor : AEntity
         GetRigidbody().velocity = Vector3.zero;
         GetRigidbody().angularVelocity = Vector3.zero;
 
-        Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * 111;
+        Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * jumpForceFactor;
 
         //Debug.Log(GetName() + " jumped with force: " + forceJump + " Current Gravity: " + Physics.gravity);
+        if(jumpNum == 0)
+        {
+            forceJump *= 1.1f;
+        }
 
         rb.AddForce(forceJump);
 
@@ -510,6 +528,12 @@ public abstract class AActor : AEntity
     public Rigidbody GetRigidbody()
     {
         return rb;
+    }
+
+    public void ClearForceOnActor()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     protected void ActorUpdate()
@@ -586,7 +610,7 @@ public abstract class AActor : AEntity
     //Private functions
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState))
+        if (collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState) && state.GetType() != typeof(ActorFreezeState))
         {
             bIsGrounded = true;
             BackToStanding();
@@ -602,7 +626,8 @@ public abstract class AActor : AEntity
 
     private void OnCollisionStay(Collision collision)
     {
-        if((collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState))) {
+        if ((collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState)))
+        {
             bIsGrounded = true;
             BackToStanding();
         }
@@ -651,7 +676,7 @@ public abstract class AActor : AEntity
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ground")
+        if (other.tag == "Ground")
         {
             Collider[] collidersToIgnore = GetComponentsInChildren<Collider>();
 

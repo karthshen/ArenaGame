@@ -12,6 +12,7 @@ public class ActorJumpState : ActorState
     Command abilityLeftCommand = new ActorLeftAbilityCommand();
     Command abilityRightCommand = new ActorRightAbilityCommand();
     Command abilityUpCommand = new ActorAbilityUpCommand();
+    Command abilityTriggerCommand = new ActorAbilityTriggerCommand();
 
     int jumpNum = 2;
     bool bAttacked = false;
@@ -65,6 +66,7 @@ public class ActorJumpState : ActorState
         if (inputDevice.LeftStickX.Value != 0)
         {
             actor.MoveHorizontal = inputDevice.LeftStickX.Value;
+            actor.MoveVertical = inputDevice.LeftStickY.Value;
             moveCommand.Execute(actor);
         }
 
@@ -128,6 +130,16 @@ public class ActorJumpState : ActorState
                 actor.CastTimer = AActor.CAST_DURATION;
                 abilityDownCommand.Execute(actor);
                 return new ActorDownAbilityState();
+            }
+        }
+        //Ability Trigger Input
+        else if ((inputDevice.RightTrigger && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0))) || inputDevice.RightBumper && actor.abilityTrigger.CanCastInAir == true)
+        {
+            if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityTriggerCommand.Execute(actor);
+                return new ActorTriggerAbilityState();
             }
         }
 

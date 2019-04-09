@@ -36,6 +36,27 @@ public abstract class AInteractable : AEntity
         }
     }
 
+    protected void IgnoreEntityCollision(AEntity entity)
+    {
+        Collider[] collidersToIgnore = entity.GetComponentsInChildren<Collider>();
+
+        foreach (Collider collider in collidersToIgnore)
+        {
+            Collider[] collidersInSelf = GetComponentsInChildren<Collider>();
+            foreach (Collider selfCollider in collidersInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, collider);
+            }
+        }
+
+        Collider ownerCollider = entity.GetComponent<Collider>();
+        Collider[] colliderInSelf = GetComponentsInChildren<Collider>();
+        foreach (Collider selfCollider in colliderInSelf)
+        {
+            Physics.IgnoreCollision(selfCollider, ownerCollider);
+        }
+    }
+
     protected void FallOutPlatformCheck()
     {
         if (transform.position.y < -20.0f)
