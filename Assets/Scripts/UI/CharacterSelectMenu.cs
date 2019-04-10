@@ -57,15 +57,18 @@ public class CharacterSelectMenu : Menu
         if (inputDevice.DPadRight.WasPressed)
         {
             buttonIndex++;
+            PlayHoverSound();
         }
         else if (inputDevice.DPadLeft.WasPressed)
         {
             buttonIndex--;
+            PlayHoverSound();
         }
 
         if (inputDevice.Action2)
         {
             ConfirmSelection();
+            PlaySelectSound();
         }
 
         ButtonIndexCheck();
@@ -156,5 +159,11 @@ public class CharacterSelectMenu : Menu
     public void SelectArcher()
     {
         selectedActor = AActorEnum.Archer;
+    }
+
+    protected override void PreviousMenu()
+    {
+        PlayBackSound();
+        SceneManager.LoadScene("Start");
     }
 }

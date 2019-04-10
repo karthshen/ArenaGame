@@ -7,6 +7,10 @@ public class Thunderstrike : MapItem
 
     private AActor owner;
 
+    private bool hasPlayed = false;
+
+    private AudioSource audioSource;
+
     public AActor Owner
     {
         get
@@ -24,15 +28,19 @@ public class Thunderstrike : MapItem
     {
         IgnoreOwnerCollision(owner);
 
+        audioSource = GetComponent<AudioSource>();
+
         gameObject.transform.position = new Vector3(owner.transform.position.x,
             owner.transform.position.y, owner.transform.position.z);
+
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.thunder, ref hasPlayed);
     }
 
     public override void Interact(AActor actor)
     {
         base.Interact(actor);
 
-        actor.TakeDamageAndFreeze(owner.GetActorStat().AbiltiyPower,0.5f, owner);
+        actor.TakeDamageAndFreeze(owner.GetActorStat().AbiltiyPower, 0.5f, owner);
     }
 
     public override void ItemFinish()

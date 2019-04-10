@@ -28,10 +28,12 @@ public class MainMenu : Menu
         if (inputDevice.DPadRight.WasPressed)
         {
             buttonIndex++;
+            PlayHoverSound();
         }
         else if (inputDevice.DPadLeft.WasPressed)
         {
             buttonIndex--;
+            PlayHoverSound();
         }
 
         ButtonIndexCheck();
@@ -52,6 +54,7 @@ public class MainMenu : Menu
 
     public void StageSelectMenu()
     {
+        PlaySelectSound();
         gameObject.SetActive(false);
         InputHandler.menu = InputHandler.menus[1];
         InputHandler.ReloadCanvas();
@@ -59,11 +62,12 @@ public class MainMenu : Menu
 
     public void SettingMenu()
     {
-
+        PlaySelectSound();
     }
 
     public void ExitGame()
     {
+        PlaySelectSound();
         Application.Quit();
     }
 
@@ -80,5 +84,11 @@ public class MainMenu : Menu
     protected override void ButtonDeselected()
     {
         selectedButton.transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+    }
+
+    protected override void PreviousMenu()
+    {
+        //Exit?
+        ExitGame();
     }
 }
