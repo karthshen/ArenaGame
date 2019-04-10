@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CountDownTimer : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class CountDownTimer : MonoBehaviour
         if (timer <= 0)
         {
             timer = 0;
+
+            //For now
+            SceneManager.LoadScene("Start");
         }
         else
         {

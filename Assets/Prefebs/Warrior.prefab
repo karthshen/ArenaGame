@@ -47,6 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c66c179d35801c4cba169ad2f81a7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ATTACK_INTERVAL: 0.26923078
+  AIR_ATTACK_LENGTH: 0.26923078
+  winSymbol: {fileID: 0}
+  currentHealth: 0
+  currentEnergy: 0
+  sword: {fileID: 0}
 --- !u!54 &3791116075174531364
 Rigidbody:
   m_ObjectHideFlags: 0

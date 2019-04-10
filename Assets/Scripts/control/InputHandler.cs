@@ -13,6 +13,9 @@ public class InputHandler : MonoBehaviour
     public List<AActor> players;
     public GameObject actorInitializeLocation;
 
+    private float restart_timer = 0f;
+    private const float RESTART_TIMER = 5f;
+
     public int PlayerNum
     {
         get
@@ -73,6 +76,29 @@ public class InputHandler : MonoBehaviour
         {
             HandleInput(inputDevice);
         }
+
+        if(restart_timer > 0)
+        {
+            restart_timer -= Time.deltaTime;
+            if (restart_timer <= 0)
+            {
+                SceneManager.LoadScene("Start");
+            }
+        }
+        else if (Actors[playerNum].RespawnLives == 0 && restart_timer == 0)
+        {
+            restart_timer = 5f;
+
+            AActor[] otherActors = GameObject.FindObjectsOfType<AActor>();
+
+            foreach(AActor actor in otherActors)
+            {
+                if (actor.GetEntityId() != Actors[playerNum].GetEntityId())
+                {
+                    actor.Victory();
+                }
+            }
+        }
     }
 
     void HandleInput(InputDevice inputDevice)
@@ -90,10 +116,6 @@ public class InputHandler : MonoBehaviour
         if (actor.GetState().GetType() != typeof(ActorDeathState))
         {
             actor.HandleInput(inputDevice);
-        }
-        else if(actor.RespawnLives == 0)
-        {
-            SceneManager.LoadScene("Start");
         }
     }
 

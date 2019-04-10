@@ -26,6 +26,9 @@ public abstract class AActor : AEntity
 
     private const float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
 
+    //Victory Sign
+    public GameObject winSymbol;
+
     //Attributes
     [SerializeField]
     private float currentHealth;
@@ -452,7 +455,7 @@ public abstract class AActor : AEntity
     public virtual void Jump()
     {
         //rb.AddForce(Vector3.up * actorStat.JumpVelocity);
-        Debug.Log("Zeroing Velocity on Actor:" + GetName());
+        //Debug.Log("Zeroing Velocity on Actor:" + GetName());
         GetRigidbody().velocity = Vector3.zero;
         GetRigidbody().angularVelocity = Vector3.zero;
 
@@ -496,7 +499,7 @@ public abstract class AActor : AEntity
             this.transform.position = new Vector3(respawnLocation.transform.position.x, respawnLocation.transform.position.y, this.transform.position.z);
         }
 
-        GetAnimatorController().SetInt("animation,13");
+        GetAnimatorController().SetInt(GetActorStat().IdleAnimation);
     }
 
     public ActorData GetActorStat()
@@ -555,10 +558,13 @@ public abstract class AActor : AEntity
         if (deathTimer > 0)
         {
             deathTimer -= Time.deltaTime;
-            if (deathTimer <= 0 && respawnLives > 0) // && CanRespawn
+            if (deathTimer <= 0) // && CanRespawn
             {
                 respawnLives--;
-                Respawn();
+                if (respawnLives > 0)
+                {
+                    Respawn();
+                }
             }
 
             return;
@@ -658,9 +664,14 @@ public abstract class AActor : AEntity
         }
     }
 
+    public void Victory()
+    {
+        winSymbol.SetActive(true);
+    }
+
     private void FallOffPlatformCheck()
     {
-        if (transform.position.y < -20.0f)
+        if (transform.position.y < -12.0f)
         {
             if (GetRigidbody())
                 GetRigidbody().isKinematic = true;

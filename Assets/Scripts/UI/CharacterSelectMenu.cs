@@ -57,15 +57,18 @@ public class CharacterSelectMenu : Menu
         if (inputDevice.DPadRight.WasPressed)
         {
             buttonIndex++;
+            PlayHoverSound();
         }
         else if (inputDevice.DPadLeft.WasPressed)
         {
             buttonIndex--;
+            PlayHoverSound();
         }
 
         if (inputDevice.Action2)
         {
             ConfirmSelection();
+            PlaySelectSound();
         }
 
         ButtonIndexCheck();
@@ -135,11 +138,14 @@ public class CharacterSelectMenu : Menu
     {
         if(GameStageSetting.SelectedMap == MapSelection.Arena)
         {
+            //Map1
             SceneManager.LoadScene("SampleScene");
+            SoundManager.instance.PlayMusic(SoundManager.instance.battle00);
         }
         else if(GameStageSetting.SelectedMap == MapSelection.Tavern)
         {
             SceneManager.LoadScene("Map2");
+            SoundManager.instance.PlayMusic(SoundManager.instance.battle01);
         }
     }
 
@@ -156,5 +162,11 @@ public class CharacterSelectMenu : Menu
     public void SelectArcher()
     {
         selectedActor = AActorEnum.Archer;
+    }
+
+    protected override void PreviousMenu()
+    {
+        PlayBackSound();
+        SceneManager.LoadScene("Start");
     }
 }

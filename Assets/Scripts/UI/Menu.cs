@@ -28,12 +28,38 @@ public abstract class Menu : MonoBehaviour
         {
             selectedButton.onClick.Invoke();
         }
+        else if (inputDevice.Action1.WasPressed)
+        {
+            PreviousMenu();
+        }
 
-        inputHandler.Selector.transform.position = selectedButton.transform.position;
+        if(inputHandler.Selector && selectedButton)
+            inputHandler.Selector.transform.position = selectedButton.transform.position;
     }
 
     public abstract GameObject getSelector();
 
     protected abstract void ButtonSelected();
     protected abstract void ButtonDeselected();
+
+    protected abstract void PreviousMenu();
+
+    protected void PlayHoverSound()
+    {
+        bool hasPlayed = false;
+        SoundManager.instance.PlayEffect(SoundManager.instance.uiHover, ref hasPlayed);
+    }
+
+    protected void PlaySelectSound()
+    {
+        bool hasPlayed = false;
+        SoundManager.instance.PlayEffect(SoundManager.instance.uiSelect, ref hasPlayed);
+    }
+
+    protected void PlayBackSound()
+    {
+        bool hasPlayed = false;
+        SoundManager.instance.PlayEffect(SoundManager.instance.uiBack, ref hasPlayed);
+    }
 }
+

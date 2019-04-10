@@ -118,16 +118,21 @@ public class StageSelectMenu : Menu
         if(inputDevice.LeftBumper.WasPressed || inputDevice.LeftTrigger.WasPressed)
         {
             mapSelectionIndex--;
-        }else if(inputDevice.RightBumper.WasPressed || inputDevice.RightTrigger.WasPressed)
+            PlaySelectSound();
+        }
+        else if(inputDevice.RightBumper.WasPressed || inputDevice.RightTrigger.WasPressed)
         {
+            PlaySelectSound();
             mapSelectionIndex++;
         }
         else if (inputDevice.DPadDown.WasPressed)
         {
+            PlayHoverSound();
             buttonIndex++;
         }
         else if (inputDevice.DPadUp.WasPressed)
         {
+            PlayHoverSound();
             buttonIndex--;
         }
         else
@@ -160,6 +165,7 @@ public class StageSelectMenu : Menu
     public void CharacterSelectMenu()
     {
         SaveMapSettings();
+        PlaySelectSound();
         SceneManager.LoadScene("CharacterSelect");
     }
 
@@ -239,5 +245,13 @@ public class StageSelectMenu : Menu
 
         mapImage.sprite = mapImageList[mapSelectionIndex];
         mapName.text = mapNameList[mapSelectionIndex];
+    }
+
+    protected override void PreviousMenu()
+    {
+        PlayBackSound();
+        gameObject.SetActive(false);
+        InputHandler.menu = InputHandler.menus[0];
+        InputHandler.ReloadCanvas();
     }
 }

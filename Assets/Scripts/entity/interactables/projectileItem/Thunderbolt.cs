@@ -6,10 +6,13 @@ public class Thunderbolt : ProjectileItem
     private float velocity = 12.0f;
     private float moveHorizontal = 1.0f;
     private Vector3 movement;
+    private AudioSource audioSource;
 
     private const float DURATION_TIME = 2.0f;
 
     private float duration_time = 0f;
+
+    private bool hasPlayed = false;
 
     public override void ProjectileFinish()
     {
@@ -21,9 +24,13 @@ public class Thunderbolt : ProjectileItem
         SetRotationToEntity(owner);
         float yDirectionInRadian = GetYDirectionInRadian();
 
+        audioSource = GetComponent<AudioSource>();
+
         gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
             owner.transform.position.y + owner.transform.lossyScale.y/2, owner.transform.position.z);
         movement = new Vector3(moveHorizontal * Mathf.Sin(yDirectionInRadian), 0.0f, 0.0f);
+
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.fireball, ref hasPlayed);
     }
 
     private void OnCollisionEnter(Collision collision)

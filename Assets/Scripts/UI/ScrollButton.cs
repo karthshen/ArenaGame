@@ -26,10 +26,16 @@ public class ScrollButton : Button
         if (inputDevice.DPadRight.WasPressed)
         {
             scrollIndex++;
+
+            bool hasPlayed = false;
+            SoundManager.instance.PlayEffect(SoundManager.instance.uiSelect, ref hasPlayed);
         }
         else if (inputDevice.DPadLeft.WasPressed)
         {
             scrollIndex--;
+
+            bool hasPlayed = false;
+            SoundManager.instance.PlayEffect(SoundManager.instance.uiSelect, ref hasPlayed);
         }
 
         ButtonIndexCheck();
