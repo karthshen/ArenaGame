@@ -2661,11 +2661,11 @@ MonoBehaviour:
   itemDropText: {fileID: 1774495070}
   stageHazardText: {fileID: 1191972013}
   mapImageList:
-  - {fileID: 21300000, guid: 536462fb523493444beb4ac0d3b557ee, type: 3}
-  - {fileID: 21300000, guid: 536462fb523493444beb4ac0d3b557ee, type: 3}
+  - {fileID: 21300000, guid: f82376403c25d1f46958cc0dde0dc9a5, type: 3}
+  - {fileID: 21300000, guid: fe2f045df3625264fbca31998e1dd3ec, type: 3}
   mapNameList:
-  - Sky Dome
   - Arena
+  - Tavern
   mapImage: {fileID: 6318632308386067270}
   mapName: {fileID: 6318632307300188302}
 --- !u!114 &6318632308498211956

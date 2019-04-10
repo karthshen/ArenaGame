@@ -5558,6 +5558,7 @@ GameObject:
   - component: {fileID: 1099616978}
   - component: {fileID: 1100714130}
   - component: {fileID: 1102643357}
+  - component: {fileID: 1102643358}
   m_Layer: 0
   m_Name: polySurface100
   m_TagString: Ground
@@ -5576,9 +5577,22 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300236, guid: d18d665bb4a35f146bd052b12f0ac748, type: 3}
+--- !u!65 &1102643358
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102643356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 24.797838, y: 5.5340734, z: 25.962564}
+  m_Center: {x: -110.06551, y: -35.68541, z: 69.003716}
 --- !u!1 &1102643360
 GameObject:
   m_ObjectHideFlags: 0
@@ -10970,8 +10984,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102643436}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 98.54732, y: 43.266148, z: -69.51292}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 98.54731, y: 43.26615, z: -69.51292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1103008430}

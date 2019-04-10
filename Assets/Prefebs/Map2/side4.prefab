@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6151639751403557731}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56.843796, y: 12.9922695, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.67369705, y: 0.67369705, z: 0.67369705}
   m_Children:
   - {fileID: 6151639751403458371}
@@ -432,8 +432,8 @@ GameObject:
   - component: {fileID: 8096675104351049297}
   - component: {fileID: 3616408871575793969}
   - component: {fileID: 5855936246364182490}
-  - component: {fileID: 6726151524722177167}
   - component: {fileID: 3563909042134796450}
+  - component: {fileID: 8767374582067623971}
   m_Layer: 0
   m_Name: pPlane4 6 (1)
   m_TagString: Ground
@@ -500,19 +500,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6726151524722177167
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6182592525727538535}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0205609, y: 0.015924873, z: 1.0694436}
-  m_Center: {x: -0.00000047683716, y: 0.007962436, z: 1.7763568e-15}
 --- !u!64 &3563909042134796450
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -524,6 +511,19 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300080, guid: d18d665bb4a35f146bd052b12f0ac748, type: 3}
+--- !u!65 &8767374582067623971
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182592525727538535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.98388726, y: 0.021136709, z: 1.0694436}
+  m_Center: {x: -0.0000001412568, y: 0.0038791895, z: -0.000000053724275}

@@ -3,6 +3,6 @@ using System.Collections;
 
 public enum MapSelection
 {
-    Skydome = 0,
-    Arena = 1
+    Arena = 0,
+    Tavern = 1
 }
