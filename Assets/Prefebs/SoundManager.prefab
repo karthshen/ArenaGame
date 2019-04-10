@@ -320,5 +320,8 @@ MonoBehaviour:
   tornado: {fileID: 8300000, guid: b8a58d6056a71534d92f9696d5738967, type: 3}
   trap: {fileID: 8300000, guid: 2b941f3ebbca9cc41bdedbe692b48e9e, type: 3}
   chicken1: {fileID: 8300000, guid: ca6637784c4226c45bcd40f3a16a4ddf, type: 3}
+  uiHover: {fileID: 8300000, guid: 014549d249857ce49a327244f5b0dd18, type: 3}
+  uiSelect: {fileID: 8300000, guid: 3ced9cfe51022ee48a5cd72cbd274ac6, type: 3}
+  uiBack: {fileID: 8300000, guid: 77e69280a0aa4d149b28f7160ad476ad, type: 3}
   lowPitchRange: 0.95
   highPitchRange: 1.05
