@@ -133,7 +133,7 @@ public class ActorJumpState : ActorState
             }
         }
         //Ability Trigger Input
-        else if ((inputDevice.RightTrigger && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0))) || inputDevice.RightBumper && actor.abilityTrigger.CanCastInAir == true)
+        else if ((inputDevice.RightTrigger || inputDevice.RightBumper) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)) && actor.abilityTrigger.CanCastInAir == true)
         {
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {

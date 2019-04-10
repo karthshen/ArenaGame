@@ -93,6 +93,8 @@ public class WarriorBoomrang : ProjectileItem
             if (duration_time >= SPIN_STAY_DURATION)
             {
                 boomrangState = BoomrangAnimation.SpinIn;
+                hasPlayed = false;
+                SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.boomrang, ref hasPlayed);
             }
         }
     }

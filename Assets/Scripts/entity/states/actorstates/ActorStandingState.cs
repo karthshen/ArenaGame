@@ -114,9 +114,8 @@ public class ActorStandingState : ActorState
             }
         }
         //Ability Trigger Input
-        else if ((inputDevice.RightTrigger && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))|| inputDevice.RightBumper)
-        {
-            
+        else if ((inputDevice.RightTrigger || inputDevice.RightBumper) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))
+        {            
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {
                 actor.CastTimer = AActor.CAST_DURATION;

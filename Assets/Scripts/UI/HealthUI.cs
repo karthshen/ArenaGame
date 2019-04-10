@@ -17,6 +17,8 @@ public class HealthUI : MonoBehaviour
 
     public Image actorImage;
 
+    public List<Image> actorLifes;
+
     public Text actorName;
 
     private List<string> actorNames;
@@ -40,6 +42,12 @@ public class HealthUI : MonoBehaviour
             LoadActorImageAndName();
         }
 
+        for (int i = 3; i > player.RespawnLives; i--)
+        {
+            if(i>0)
+                actorLifes[i-1].enabled = false;
+        }
+
         txtHealth.text = string.Format("{0} %", Mathf.RoundToInt(player.CurrentHealth));
     }
 
@@ -49,11 +57,33 @@ public class HealthUI : MonoBehaviour
         {
             actorImage.sprite = actorSprites[(int)GameStageSetting.Player1Selection];
             actorName.text = actorNames[(int)GameStageSetting.Player1Selection];
+
+            //TODO Refactor
+            foreach(Image image in actorLifes)
+            {
+                image.sprite = actorSprites[(int)GameStageSetting.Player1Selection];
+            }
+
+            for (int i = 3; i > player.RespawnLives; i--)
+            {
+                actorLifes[i].enabled = false;
+            }
         }
         else if(playerInputHandler.PlayerNum == 1)
         {
             actorImage.sprite = actorSprites[(int)GameStageSetting.Player2Selection];
             actorName.text = actorNames[(int)GameStageSetting.Player2Selection];
+
+            //TODO Refactor
+            foreach (Image image in actorLifes)
+            {
+                image.sprite = actorSprites[(int)GameStageSetting.Player2Selection];
+            }
+
+            for (int i = 3; i > player.RespawnLives; i--)
+            {
+                actorLifes[i].enabled = false;
+            }
         }
     }
 }
