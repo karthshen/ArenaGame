@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ArcherHound : MapItem
 {
+    public bool ChickenGod = false;
+
     enum HoundAnimation
     {
         Bite = 2,
@@ -48,7 +50,22 @@ public class ArcherHound : MapItem
     // Use this for initialization
     void Start()
     {
+        if (ChickenGod)
+        {
+            float yDirectionInRadian = GetYDirectionInRadian();
 
+            Rigidbody rb = GetComponent<Rigidbody>();
+
+            audioSource = GetComponent<AudioSource>();
+
+            animator = GetComponentInChildren<Animator>();
+
+            currentVelocity = MOVE_VELOCITY * Mathf.Sin(yDirectionInRadian);
+
+            PlayAnimation(HoundAnimation.Move);
+
+            IgnoreCollisionWithOtherHounds();
+        }
     }
 
     public override void ItemStart()
@@ -72,6 +89,21 @@ public class ArcherHound : MapItem
         currentVelocity = MOVE_VELOCITY * Mathf.Sin(yDirectionInRadian);
 
         PlayAnimation(HoundAnimation.Move);
+
+        IgnoreCollisionWithOtherHounds();
+    }
+
+    private void IgnoreCollisionWithOtherHounds()
+    {
+        ArcherHound[] otherChickens = GameObject.FindObjectsOfType<ArcherHound>();
+
+        foreach (ArcherHound hound in otherChickens)
+        {
+            if (hound.GetInstanceID() != GetInstanceID())
+            {
+                IgnoreEntityCollision(hound);
+            }
+        }
     }
 
     public override void ItemFinish()
@@ -82,7 +114,11 @@ public class ArcherHound : MapItem
     private void PlayAnimation(HoundAnimation anim)
     {
         animator.SetInteger("animation", (int)anim);
-        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
+        if(anim == HoundAnimation.Bite)
+        {
+            SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
+            hasPlayed = false;
+        }
         currentAnim = anim;
     }
 
@@ -134,8 +170,16 @@ public class ArcherHound : MapItem
         AActor hitActor = collision.gameObject.GetComponent<AActor>();
         if (hitActor && attackTimes > 0)
         {
-            owner.AttackCode = System.Guid.NewGuid();
-            hitActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
+            if (!ChickenGod)
+            {
+                owner.AttackCode = System.Guid.NewGuid();
+                hitActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
+            }
+            else if (ChickenGod)
+            {
+                hitActor.TakeDamageFromEntity(10f,500f, this);
+            }
+
             PlayAnimation(HoundAnimation.Bite);
             currentVelocity = 0f;
             freezeTime = FREEZE_TIME;

@@ -137,6 +137,7 @@ public class PlayerTest
     GameObject warriorActor;
     GameObject archerActor;
     GameObject mageActor;
+    GameObject soundManager;
 
     GameObject warriorMesh;
 
@@ -145,6 +146,10 @@ public class PlayerTest
     [SetUp]
     public void Setup()
     {
+        soundManager = new GameObject("SoundManager");
+        soundManager.AddComponent<SoundManager>();
+        soundManager.GetComponent<SoundManager>().CreateInstance();
+
         testActor = new GameObject("TestActor");
         warriorActor = new GameObject("WarriorActor");
         archerActor = new GameObject("ArcherActor");

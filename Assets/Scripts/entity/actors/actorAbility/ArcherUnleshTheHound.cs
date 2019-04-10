@@ -33,10 +33,20 @@ public class ArcherUnleshTheHound : Ability
     private bool IsHoundSummonable()
     {
         ArcherHound[] hounds = GameObject.FindObjectsOfType<ArcherHound>();
-        if(hounds.Length >= MAX_NUM_HOUND)
+
+        int counter = 0;
+
+        foreach(ArcherHound hound in hounds)
         {
-            return false;
+            if(hound.Owner && hound.Owner.GetEntityId() == caster.GetEntityId())
+            {
+                counter++;
+            }
         }
+
+        if (counter >= MAX_NUM_HOUND)
+            return false;
+
         return true;
     }
 }

@@ -332,7 +332,7 @@ public abstract class AActor : AEntity
     private void KnockBackBasedOnDirection(float knockingForce, AActor attacker)
     {
         //Knocking back
-        float yDirectionInRadian = attacker.GetYDirectionInRadian();
+        float yDirectionInRadian = -attacker.GetYDirectionInRadian();
 
         Vector3 backMovement = new Vector3(knockingForce * Mathf.Sin(yDirectionInRadian), 0f, 0f);
 
@@ -374,6 +374,13 @@ public abstract class AActor : AEntity
         state = new ActorFreezeState(freezeTime, this, attacker, 0);
 
         return CurrentHealth;
+    }
+
+    public void TakeDamageFromEntity(float damage, float knockingForce, AEntity attacker)
+    {
+        AttackCode = System.Guid.NewGuid();
+        TakeDamage(damage, this);
+        KnockBackBasedOnDirection(knockingForce, this);
     }
 
     public virtual float TakeDamage(float damage, AActor attacker)
@@ -622,11 +629,6 @@ public abstract class AActor : AEntity
         {
             PickupItem item = collision.gameObject.GetComponent<PickupItem>();
             item.ItemPickUp(this);
-        }
-
-        if(collision.gameObject.tag == "Wall" && !bIsGrounded && state.GetType() != typeof(ActorDeathState) && state.GetType() != typeof(ActorFreezeState))
-        {
-            jumpNum = 2;
         }
     }
 

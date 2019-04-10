@@ -36,6 +36,19 @@ public class SoundManager : MonoBehaviour
     //Singleton
     public static SoundManager instance = null;
 
+    public void CreateInstance()
+    {
+        if(instance == null)
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+                Destroy(gameObject);
+
+        //DontDestroyOnLoad(gameObject);
+    }
+
     //Initialize singleton
     private void Awake()
     {
@@ -61,13 +74,13 @@ public class SoundManager : MonoBehaviour
 
     public void PlayEffectWithAudioSource(AudioSource source, AudioClip clip, ref bool hasPlayed)
     {
-        if(clip == footstep && source.clip == footstep)
+        if(source && clip == footstep && source.clip == footstep)
         {
             if (!source.isPlaying)
                 source.Play();
         }
 
-        if (!hasPlayed)
+        if (!hasPlayed && source)
         {
             source.clip = clip;
             PlaySound(source);

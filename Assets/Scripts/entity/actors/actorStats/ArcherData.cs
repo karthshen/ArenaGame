@@ -22,7 +22,7 @@
         AttackSound2 = SoundManager.instance.arrow_attack2;
         AttackSound3 = SoundManager.instance.arrow_attack2;
 
-        //AbilityUpSound = SoundManager.instance.trap;
+        AbilityUpSound = SoundManager.instance.chicken1;
         AbilityHorizSound = SoundManager.instance.trap;
         AbilityDownSound = SoundManager.instance.arrow_attack2;
         AbilityTriggerSound = SoundManager.instance.hookshoot;

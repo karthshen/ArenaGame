@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - InvisibleTriggerWall
+  - Wall
   layers:
   - Default
   - TransparentFX
