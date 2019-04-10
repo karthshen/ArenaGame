@@ -149,6 +149,7 @@ public class ActorJumpState : ActorState
     public void Jumped()
     {
         JumpNum--;
+        hasSoundPlayed = false;
     }
 
     protected override void PlayAnimation(AActor actor)
@@ -156,14 +157,17 @@ public class ActorJumpState : ActorState
         if (JumpNum == 1)
         {
             actor.GetAnimatorController().SetInt("animation,16");
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.GetActorStat().JumpSound, ref hasSoundPlayed);
         }
         else if (JumpNum == 0)
         {
             actor.GetAnimatorController().SetInt("animation,4");
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.GetActorStat().JumpSound, ref hasSoundPlayed);
         }
         else
         {
             actor.GetAnimatorController().SetInt("animation,16");
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.GetActorStat().JumpSound, ref hasSoundPlayed);
         }
     }
 }

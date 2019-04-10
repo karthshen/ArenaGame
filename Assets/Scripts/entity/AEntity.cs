@@ -6,6 +6,7 @@ public abstract class AEntity : MonoBehaviour
     protected string entityName;
     protected EntityState state;
     protected Mesh entityMesh;
+    protected AudioSource effectSource;
 
     public static Vector3 FRONT_DIRECTION = new Vector3(0, 90, 0);
     public static Vector3 BACK_DIRECTION = new Vector3(0, 270, 0);
@@ -28,6 +29,11 @@ public abstract class AEntity : MonoBehaviour
     public Mesh GetMesh()
     {
         return entityMesh;
+    }
+
+    public AudioSource GetAudioSource()
+    {
+        return effectSource;
     }
 
     public void NullParameterCheck()

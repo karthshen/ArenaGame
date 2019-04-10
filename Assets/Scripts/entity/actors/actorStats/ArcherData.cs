@@ -2,8 +2,10 @@
 {
     public ArcherData()
     {
+        //stat
         this.setActorStat(100, 5, 7, 5, 100, 15, 15, 5, 2);
 
+        //animation
         AttackAnimation1 = "animation,23";
         AttackAnimation2 = "animation,23";
         AttackAnimation3 = "animation,23";
@@ -14,5 +16,15 @@
         AbilityTriggerAnimation = "animation,32";
 
         DeathAnimation = "animation,10";
+
+        //sound
+        AttackSound1 = SoundManager.instance.arrow_attack1;
+        AttackSound2 = SoundManager.instance.arrow_attack2;
+        AttackSound3 = SoundManager.instance.arrow_attack2;
+
+        //AbilityUpSound = SoundManager.instance.trap;
+        AbilityHorizSound = SoundManager.instance.trap;
+        AbilityDownSound = SoundManager.instance.arrow_attack2;
+        AbilityTriggerSound = SoundManager.instance.hookshoot;
     }
 }

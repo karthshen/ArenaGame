@@ -10,7 +10,7 @@ public class ArcherShootClawhook : Ability
     public ArcherShootClawhook(AActor caster)
     {
         this.caster = caster;
-        AbilityCost = 1;
+        AbilityCost = 0;
     }
 
     public override void AbilityExecute()

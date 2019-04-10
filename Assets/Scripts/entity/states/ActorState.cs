@@ -4,6 +4,8 @@ using InControl;
 
 public abstract class ActorState : EntityState
 {
+    public bool hasSoundPlayed = false;
+
     protected ActorState()
     {
         //Debug.Log("Entering State: " + GetType());

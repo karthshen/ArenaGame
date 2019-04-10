@@ -4,7 +4,7 @@ using UnityEditor;
 public class ArcherBurstShot : Ability
 {
     private const float BURST_FORCE = 1f;
-    private const float BURST_SPEED = 500f;
+    private float BURST_SPEED = 500f;
 
     public ArcherBurstShot(AActor caster)
     {

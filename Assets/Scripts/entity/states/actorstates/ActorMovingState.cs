@@ -35,10 +35,12 @@ public class ActorMovingState : ActorStandingState
         if (Mathf.Abs(actor.MoveHorizontal) < 0.6f)
         {
             actor.GetAnimatorController().SetInt(actor.GetActorStat().WalkAnimation);
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.GetActorStat().WalkingSound, ref hasSoundPlayed);
         }
         else
         {
             actor.GetAnimatorController().SetInt(actor.GetActorStat().RunningAnimation);
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.GetActorStat().RunningSound, ref hasSoundPlayed);
         }
     }
 }

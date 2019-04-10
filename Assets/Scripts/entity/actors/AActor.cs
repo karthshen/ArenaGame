@@ -445,6 +445,7 @@ public abstract class AActor : AEntity
     public virtual void Jump()
     {
         //rb.AddForce(Vector3.up * actorStat.JumpVelocity);
+        Debug.Log("Zeroing Velocity on Actor:" + GetName());
         GetRigidbody().velocity = Vector3.zero;
         GetRigidbody().angularVelocity = Vector3.zero;
 

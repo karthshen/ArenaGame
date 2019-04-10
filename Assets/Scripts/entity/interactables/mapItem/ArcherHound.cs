@@ -12,6 +12,7 @@ public class ArcherHound : MapItem
     private const float FREEZE_TIME = 1.0f;
 
     private Animator animator;
+    private AudioSource audioSource;
     private AActor owner;
     private float horizontal = 0.3f;
     [SerializeField]
@@ -24,6 +25,8 @@ public class ArcherHound : MapItem
     private int attackTimes = 3;
 
     private float freezeTime = 0f;
+
+    private bool hasPlayed = false;
 
     private bool isGrounded = false;
 
@@ -57,6 +60,8 @@ public class ArcherHound : MapItem
 
         Rigidbody rb = GetComponent<Rigidbody>();
 
+        audioSource = GetComponent<AudioSource>();
+
         float yDirectionInRadian = GetYDirectionInRadian();
 
         gameObject.transform.position = new Vector3(owner.transform.position.x + horizontal * Mathf.Sin(yDirectionInRadian),
@@ -77,6 +82,7 @@ public class ArcherHound : MapItem
     private void PlayAnimation(HoundAnimation anim)
     {
         animator.SetInteger("animation", (int)anim);
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
         currentAnim = anim;
     }
 
