@@ -116,8 +116,12 @@ public class ArcherHound : MapItem
         animator.SetInteger("animation", (int)anim);
         if(anim == HoundAnimation.Bite)
         {
-            SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
             hasPlayed = false;
+            SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
+        }
+        else if(anim == HoundAnimation.Move)
+        {
+            hasPlayed = true;
         }
         currentAnim = anim;
     }
