@@ -623,11 +623,6 @@ public abstract class AActor : AEntity
             PickupItem item = collision.gameObject.GetComponent<PickupItem>();
             item.ItemPickUp(this);
         }
-
-        if(collision.gameObject.tag == "Wall" && !bIsGrounded && state.GetType() != typeof(ActorDeathState) && state.GetType() != typeof(ActorFreezeState))
-        {
-            jumpNum = 2;
-        }
     }
 
     private void OnCollisionStay(Collision collision)
