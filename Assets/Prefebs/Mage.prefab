@@ -47,6 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3996c686ff7bfe04db7f505bda61c159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ATTACK_INTERVAL: 0.26923078
+  AIR_ATTACK_LENGTH: 0.26923078
+  winSymbol: {fileID: 0}
+  currentHealth: 0
+  currentEnergy: 0
   wand: {fileID: 0}
 --- !u!54 &4468020733004563380
 Rigidbody:
@@ -267,26 +272,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4258490776135708, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.014565384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258490776135708, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.040565167
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157646895818064, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.014565384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157646895818064, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.040565167
+      objectReference: {fileID: 0}
     - target: {fileID: 95572686818633884, guid: 6a603219345fe5540879e665dfb0f264,
         type: 3}
       propertyPath: m_CullingMode
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4258490776135708, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.014565384
-      objectReference: {fileID: 0}
-    - target: {fileID: 4258490776135708, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.040565167
-      objectReference: {fileID: 0}
-    - target: {fileID: 4157646895818064, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.014565384
-      objectReference: {fileID: 0}
-    - target: {fileID: 4157646895818064, guid: 6a603219345fe5540879e665dfb0f264, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.040565167
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95572686818633884, guid: 6a603219345fe5540879e665dfb0f264, type: 3}

@@ -7,7 +7,7 @@ public static class GameStageSetting
     private static AActorEnum player2Selection;
     private static MapSelection selectedMap;
 
-    private static float gameDuration = 120f; //game duration in seconds
+    private static float gameDuration = 600f; //game duration in seconds
     private static float playerStartingHealth = 100f;
     private static bool lockEnergy = false;
     private static bool enableRunes;
