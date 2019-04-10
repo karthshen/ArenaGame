@@ -1,20 +1,14 @@
 fileFormatVersion: 2
-guid: 52a391392dc05a94099ad52c50ea765c
+guid: 795f6509073bd1a418dce33b7c18ebe4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Boomrang
-    100004: pCube1
     400000: //RootNode
-    400002: Boomrang
-    400004: pCube1
-    2100000: blinn2
-    2300000: pCube1
-    3300000: pCube1
-    4300000: pCube1
-    7400000: Take 001
-    9500000: //RootNode
+    2100000: lambert1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: pPlane5
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -67,8 +61,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -95,7 +89,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
