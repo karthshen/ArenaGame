@@ -13,6 +13,7 @@ public class WarriorBoomrang : ProjectileItem
     private float velocity = 15.0f;
     private float moveHorizontal = 1f;
     private float positionHorizontal = 0.05f;
+    private bool hasPlayed = false;
 
     private Vector3 movement;
 
@@ -21,6 +22,8 @@ public class WarriorBoomrang : ProjectileItem
     private float duration_time = 0f;
 
     private BoomrangAnimation boomrangState;
+
+    private AudioSource audioSource;
 
     private Animator animator;
 
@@ -36,6 +39,8 @@ public class WarriorBoomrang : ProjectileItem
         float yDirectionInRadian = owner.GetYDirectionInRadian();
 
         animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
 
         gameObject.transform.position = new Vector3(owner.transform.position.x + positionHorizontal * Mathf.Sin(yDirectionInRadian),
             owner.transform.position.y + owner.transform.lossyScale.y / 2, owner.transform.position.z);
@@ -119,5 +124,6 @@ public class WarriorBoomrang : ProjectileItem
     private void PlayAnimation(BoomrangAnimation anim)
     {
         animator.SetInteger("animation", (int)anim);
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.boomrang, ref hasPlayed);
     }
 }

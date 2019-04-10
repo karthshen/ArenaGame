@@ -18,6 +18,7 @@ public class ArcherClawhook : ProjectileItem
     private float moveConstant = 1f;
     private float positionHorizontal = 0.05f;
     private float angleJoystick = 0f;
+    private bool  hasPlayed = false;
     private Vector3 rootPosition;
 
     private AActor hitActor;
@@ -25,6 +26,8 @@ public class ArcherClawhook : ProjectileItem
     private Vector3 movement;
 
     private Animator animator;
+
+    private AudioSource audioSource;
 
     private const float SHOOT_OUT_DURATION = 1f;
     private const float CLAW_STAY_TIME = 1.0f;
@@ -53,6 +56,8 @@ public class ArcherClawhook : ProjectileItem
         transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0f, 0f, angleJoystick * Mathf.Rad2Deg));
 
         animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
 
         PlayAnimation();
     }
@@ -200,13 +205,14 @@ public class ArcherClawhook : ProjectileItem
 
     private void PlayAnimation()
     {
-        //if(clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers)
-        //{
-        //    animator.SetInteger("animation", 2);
-        //}
-        //else
-        //{
-        //    animator.SetInteger("animation", 1);
-        //}
+        if(clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers)
+        {
+            //animator.SetInteger("animation", 2);
+            SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.hookback, ref hasPlayed);
+        }
+        else
+        {
+            //animator.SetInteger("animation", 1);
+        }
     }
 }

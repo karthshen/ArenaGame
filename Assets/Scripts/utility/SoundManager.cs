@@ -17,8 +17,17 @@ public class SoundManager : MonoBehaviour
     public AudioClip sword_attack1;
     public AudioClip sword_attack2;
     public AudioClip sword_attack3;
+    public AudioClip boomrang;
+    public AudioClip fireball;
+    public AudioClip hookback;
+    public AudioClip hookshoot;
+    public AudioClip shieldslam;
+    public AudioClip thunder;
+    public AudioClip tornado;
+    public AudioClip trap;
+    public AudioClip chicken1;
 
-    public AudioClip fakeClip;
+    private AudioClip fakeClip;
 
     //Random pitch?
     public float lowPitchRange = .95f;

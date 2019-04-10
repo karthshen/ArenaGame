@@ -16,8 +16,8 @@
         //AttackSound2 = SoundManager.instance.arrow_attack2;
         //AttackSound3 = SoundManager.instance.arrow_attack2;
 
-        //AbilityUpSound
-        //AbilityHorizSound
+        AbilityUpSound = SoundManager.instance.thunder;
+        AbilityHorizSound = SoundManager.instance.tornado;
         AbilityDownSound = SoundManager.instance.staff_attack1;
         //AbilityTriggerSound = SoundManager.instance.jump;
     }
