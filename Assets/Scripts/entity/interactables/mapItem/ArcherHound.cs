@@ -64,15 +64,7 @@ public class ArcherHound : MapItem
 
             PlayAnimation(HoundAnimation.Move);
 
-            ArcherHound[] otherChickens = GameObject.FindObjectsOfType<ArcherHound>();
-
-            foreach(ArcherHound hound in otherChickens)
-            {
-                if (hound.GetInstanceID() != GetInstanceID())
-                {
-                    IgnoreEntityCollision(hound);
-                }
-            }
+            IgnoreCollisionWithOtherHounds();
         }
     }
 
@@ -97,6 +89,21 @@ public class ArcherHound : MapItem
         currentVelocity = MOVE_VELOCITY * Mathf.Sin(yDirectionInRadian);
 
         PlayAnimation(HoundAnimation.Move);
+
+        IgnoreCollisionWithOtherHounds();
+    }
+
+    private void IgnoreCollisionWithOtherHounds()
+    {
+        ArcherHound[] otherChickens = GameObject.FindObjectsOfType<ArcherHound>();
+
+        foreach (ArcherHound hound in otherChickens)
+        {
+            if (hound.GetInstanceID() != GetInstanceID())
+            {
+                IgnoreEntityCollision(hound);
+            }
+        }
     }
 
     public override void ItemFinish()
@@ -107,7 +114,11 @@ public class ArcherHound : MapItem
     private void PlayAnimation(HoundAnimation anim)
     {
         animator.SetInteger("animation", (int)anim);
-        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
+        if(anim == HoundAnimation.Bite)
+        {
+            SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
+            hasPlayed = false;
+        }
         currentAnim = anim;
     }
 
