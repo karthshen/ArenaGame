@@ -180,7 +180,7 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: -0.179
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -323,8 +323,8 @@ MonoBehaviour:
   uiHover: {fileID: 8300000, guid: 014549d249857ce49a327244f5b0dd18, type: 3}
   uiSelect: {fileID: 8300000, guid: 3ced9cfe51022ee48a5cd72cbd274ac6, type: 3}
   uiBack: {fileID: 8300000, guid: 77e69280a0aa4d149b28f7160ad476ad, type: 3}
-  battle00: {fileID: 8300000, guid: a8080f091a6c73e4486e40841ff11574, type: 3}
+  battle00: {fileID: 8300000, guid: 7f200c8640f9ddb48b0bec87a11ab161, type: 3}
   battle01: {fileID: 8300000, guid: 0e81dd5615d5bfb40845784f08c6a9d7, type: 3}
-  menu01: {fileID: 8300000, guid: 9eb531aa365ee714982f19bdc79364de, type: 3}
+  menu01: {fileID: 8300000, guid: cc171a3a31d12a0479c7e1dc3b0593c7, type: 3}
   lowPitchRange: 0.95
   highPitchRange: 1.05
