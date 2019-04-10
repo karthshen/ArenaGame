@@ -26,6 +26,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip tornado;
     public AudioClip trap;
     public AudioClip chicken1;
+    public AudioClip uiHover;
+    public AudioClip uiSelect;
+    public AudioClip uiBack;
 
     private AudioClip fakeClip;
 
