@@ -17,6 +17,6 @@ public class GameGeneralTest
     public void GravityConstantTest()
     {
         // Use the Assert class to test conditions
-        Assert.AreEqual(-9.81f, Physics.gravity.y);
+        Assert.AreEqual(-23.2653961f, Physics.gravity.y);
     }
 }
