@@ -29,6 +29,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip uiHover;
     public AudioClip uiSelect;
     public AudioClip uiBack;
+    public AudioClip battle00;
+    public AudioClip battle01;
+    public AudioClip menu01;
 
     private AudioClip fakeClip;
 

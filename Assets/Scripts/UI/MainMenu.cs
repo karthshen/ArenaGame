@@ -17,7 +17,7 @@ public class MainMenu : Menu
     {
         buttonIndex = 0;
         selectedButton = buttons[buttonIndex];
-
+        SoundManager.instance.PlayMusic(SoundManager.instance.menu01);
         ButtonSelected();
     }
 
@@ -63,6 +63,7 @@ public class MainMenu : Menu
     public void SettingMenu()
     {
         PlaySelectSound();
+        SceneManager.LoadScene("Options");
     }
 
     public void ExitGame()

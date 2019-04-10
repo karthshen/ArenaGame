@@ -33,7 +33,8 @@ public abstract class Menu : MonoBehaviour
             PreviousMenu();
         }
 
-        inputHandler.Selector.transform.position = selectedButton.transform.position;
+        if(inputHandler.Selector && selectedButton)
+            inputHandler.Selector.transform.position = selectedButton.transform.position;
     }
 
     public abstract GameObject getSelector();
