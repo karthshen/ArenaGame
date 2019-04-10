@@ -127,7 +127,19 @@ public class CharacterSelectMenu : Menu
 
         if (otherPlayerMenu.SelectionConfirmed)
         {
+            LoadSelectedMap();
+        }
+    }
+
+    private void LoadSelectedMap()
+    {
+        if(GameStageSetting.SelectedMap == MapSelection.Arena)
+        {
             SceneManager.LoadScene("SampleScene");
+        }
+        else if(GameStageSetting.SelectedMap == MapSelection.Tavern)
+        {
+            SceneManager.LoadScene("Map2");
         }
     }
 

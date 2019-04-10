@@ -623,6 +623,11 @@ public abstract class AActor : AEntity
             PickupItem item = collision.gameObject.GetComponent<PickupItem>();
             item.ItemPickUp(this);
         }
+
+        if(collision.gameObject.tag == "Wall" && !bIsGrounded && state.GetType() != typeof(ActorDeathState) && state.GetType() != typeof(ActorFreezeState))
+        {
+            jumpNum = 2;
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -684,10 +689,12 @@ public abstract class AActor : AEntity
             foreach (Collider collider in collidersToIgnore)
             {
                 Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), collider, true);
+                Physics.IgnoreCollision(other.gameObject.GetComponentInChildren<Collider>(), collider, true);
             }
 
-            Collider objectCOllider = GetComponent<Collider>();
-            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), objectCOllider, true);
+            Collider objectCollider = GetComponent<Collider>();
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), objectCollider, true);
+            Physics.IgnoreCollision(other.gameObject.GetComponentInChildren<Collider>(), objectCollider, true);
         }
     }
 
@@ -700,10 +707,12 @@ public abstract class AActor : AEntity
             foreach (Collider collider in collidersToIgnore)
             {
                 Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), collider, false);
+                Physics.IgnoreCollision(other.gameObject.GetComponentInChildren<Collider>(), collider, false);
             }
 
             Collider objectCollider = GetComponent<Collider>();
             Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), objectCollider, false);
+            Physics.IgnoreCollision(other.gameObject.GetComponentInChildren<Collider>(), objectCollider, false);
         }
     }
 }
