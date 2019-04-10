@@ -89,6 +89,7 @@ public class ArcherHound : MapItem
         currentVelocity = MOVE_VELOCITY * Mathf.Sin(yDirectionInRadian);
 
         PlayAnimation(HoundAnimation.Move);
+        //SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
 
         IgnoreCollisionWithOtherHounds();
     }
