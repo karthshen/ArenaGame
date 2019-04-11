@@ -1298,6 +1298,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2714054982637105959, guid: cdcbd26a22cb0394f89a9bbbbc055b74,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714054982637105959, guid: cdcbd26a22cb0394f89a9bbbbc055b74,
+        type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2714054983222409907, guid: cdcbd26a22cb0394f89a9bbbbc055b74,
         type: 3}
       propertyPath: m_Sprite

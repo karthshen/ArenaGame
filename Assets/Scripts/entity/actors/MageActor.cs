@@ -9,6 +9,8 @@ public class MageActor : AActor
     Ability mageAbilityDown;
     Ability mageAbilityLeft;
     Ability mageAbilityRight;
+    Ability mageAbilityTrigger;
+    Ability mageAbilityBumper;
 
     string actorName = "Mage";
 
@@ -37,11 +39,13 @@ public class MageActor : AActor
         mageAbilityLeft = new MageStormShield(this);
         mageAbilityRight = new MageStormShield(this);
         mageAbilityUp = new MageThunderstrike(this);
+        mageAbilityTrigger = new MageThrowTeleportBolt(this);
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;
         abilityUp = mageAbilityUp;
         abilityDown = mageAbilityDown;
+        abilityTrigger = mageAbilityTrigger;
 
         if (wand)
         {

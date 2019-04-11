@@ -196,7 +196,7 @@ public class ArcherClawhook : ProjectileItem
         if (x != 0.0f || y != 0.0f)
         {
             angleJoystick = Mathf.Atan2(y, x);
-            Debug.Log("Joystick Angle in Radian:" + angleJoystick + " with X: " + x + " Y: " + y);
+            //Debug.Log("Joystick Angle in Radian:" + angleJoystick + " with X: " + x + " Y: " + y);
             return true;
         }
         else

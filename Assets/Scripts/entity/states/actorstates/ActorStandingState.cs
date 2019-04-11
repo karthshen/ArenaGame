@@ -15,6 +15,7 @@ public class ActorStandingState : ActorState
     Command abilityRightCommand = new ActorRightAbilityCommand();
     Command abilityUpCommand = new ActorAbilityUpCommand();
     Command abilityTriggerCommand = new ActorAbilityTriggerCommand();
+    Command abilityBumperCommand = new ActorAbilityBumperCommand();
 
     public ActorStandingState() : base()
     {
@@ -114,13 +115,22 @@ public class ActorStandingState : ActorState
             }
         }
         //Ability Trigger Input
-        else if ((inputDevice.RightTrigger || inputDevice.RightBumper) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))
+        else if ((inputDevice.RightTrigger) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))
         {            
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {
                 actor.CastTimer = AActor.CAST_DURATION;
                 abilityTriggerCommand.Execute(actor);
                 return new ActorTriggerAbilityState();
+            }
+        }
+        else if(inputDevice.RightBumper && actor.abilityBumper != null)
+        {
+            if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityBumperCommand.Execute(actor);
+                return new ActorBumperAbilityState();
             }
         }
 

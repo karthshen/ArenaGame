@@ -49,6 +49,7 @@ public abstract class AActor : AEntity
     public Ability abilityLeft;
     public Ability abilityRight;
     public Ability abilityTrigger;
+    public Ability abilityBumper;
 
     public Queue<Combo> attackQueue = new Queue<Combo>();
 
