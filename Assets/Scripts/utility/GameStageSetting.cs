@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class GameStageSetting
 {
-    private static AActorEnum player1Selection = AActorEnum.Archer;
+    private static AActorEnum player1Selection = AActorEnum.Mage;
     private static AActorEnum player2Selection;
     private static MapSelection selectedMap;
 

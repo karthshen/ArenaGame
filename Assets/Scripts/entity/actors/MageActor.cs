@@ -40,12 +40,14 @@ public class MageActor : AActor
         mageAbilityRight = new MageStormShield(this);
         mageAbilityUp = new MageThunderstrike(this);
         mageAbilityTrigger = new MageThrowTeleportBolt(this);
+        mageAbilityBumper = new MageTeleport(this);
 
         abilityLeft = mageAbilityLeft;
         abilityRight = mageAbilityRight;
         abilityUp = mageAbilityUp;
         abilityDown = mageAbilityDown;
         abilityTrigger = mageAbilityTrigger;
+        abilityBumper = mageAbilityBumper;
 
         if (wand)
         {

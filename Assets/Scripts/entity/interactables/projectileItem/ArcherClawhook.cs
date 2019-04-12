@@ -127,7 +127,7 @@ public class ArcherClawhook : ProjectileItem
 
     private bool CheckIfRetracted()
     {
-        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 0.7f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
+        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 1.3f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
         {
             owner.ClearForceOnActor();
 

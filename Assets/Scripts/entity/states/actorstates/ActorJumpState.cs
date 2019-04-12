@@ -13,6 +13,7 @@ public class ActorJumpState : ActorState
     Command abilityRightCommand = new ActorRightAbilityCommand();
     Command abilityUpCommand = new ActorAbilityUpCommand();
     Command abilityTriggerCommand = new ActorAbilityTriggerCommand();
+    Command abilityBumperCommand = new ActorAbilityBumperCommand();
 
     int jumpNum = 2;
     bool bAttacked = false;
@@ -88,6 +89,16 @@ public class ActorJumpState : ActorState
             actor.GenerateAirAttackQueue();
             return new ActorAirAttackState();
         }
+        //Bumper can cast as many times as in air
+        else if (inputDevice.RightBumper && actor.abilityBumper != null && actor.abilityTrigger.CanCastInAir == true)
+        {
+            if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityBumperCommand.Execute(actor);
+                return new ActorBumperAbilityState();
+            }
+        }
         else if (actor.AbilityCastedInAir)
         {
             return this;
@@ -133,7 +144,7 @@ public class ActorJumpState : ActorState
             }
         }
         //Ability Trigger Input
-        else if ((inputDevice.RightTrigger || inputDevice.RightBumper) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)) && actor.abilityTrigger.CanCastInAir == true)
+        else if ((inputDevice.RightTrigger) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)) && actor.abilityTrigger.CanCastInAir == true)
         {
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {

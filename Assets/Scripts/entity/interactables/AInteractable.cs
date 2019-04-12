@@ -51,9 +51,12 @@ public abstract class AInteractable : AEntity
 
         Collider ownerCollider = entity.GetComponent<Collider>();
         Collider[] colliderInSelf = GetComponentsInChildren<Collider>();
-        foreach (Collider selfCollider in colliderInSelf)
+        if (ownerCollider)
         {
-            Physics.IgnoreCollision(selfCollider, ownerCollider);
+            foreach (Collider selfCollider in colliderInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, ownerCollider);
+            }
         }
     }
 

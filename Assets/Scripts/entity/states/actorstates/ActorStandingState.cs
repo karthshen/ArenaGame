@@ -119,6 +119,8 @@ public class ActorStandingState : ActorState
         {            
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {
+                actor.MoveHorizontal = inputDevice.LeftStickX.Value;
+                actor.MoveVertical = inputDevice.LeftStickY.Value;
                 actor.CastTimer = AActor.CAST_DURATION;
                 abilityTriggerCommand.Execute(actor);
                 return new ActorTriggerAbilityState();

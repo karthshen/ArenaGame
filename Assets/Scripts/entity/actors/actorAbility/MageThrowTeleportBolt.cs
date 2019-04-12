@@ -10,17 +10,14 @@ public class MageThrowTeleportBolt : Ability
     public MageThrowTeleportBolt(AActor caster)
     {
         this.caster = caster;
-        AbilityCost = 1;
+        AbilityCost = 0;
     }
 
     public override void AbilityExecute()
     {
         base.AbilityExecute();
 
-        if (!IsBoltShootable())
-        {
-            return;
-        }
+        IsBoltShootable();
 
         caster.CurrentEnergy -= AbilityCost;
         teleportBolt = Object.Instantiate(Resources.Load("TeleportBolt")) as GameObject;
@@ -35,24 +32,13 @@ public class MageThrowTeleportBolt : Ability
         bolt.ProjectileStart();
     }
 
-    private bool IsBoltShootable()
+    private void IsBoltShootable()
     {
         MageTeleportBolt[] bolts = GameObject.FindObjectsOfType<MageTeleportBolt>();
 
-        int counter = 0;
-
         foreach (MageTeleportBolt bolt in bolts)
         {
-            if (bolt.GetOwner().GetEntityId() == caster.GetEntityId())
-            {
-                counter++;
-            }
+            bolt.RemoveItem();
         }
-
-        if (counter >= MAX_NUM_BOLT)
-        {
-            return false;
-        }
-        return true;
     }
 }

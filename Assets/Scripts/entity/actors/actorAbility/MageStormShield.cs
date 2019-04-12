@@ -8,8 +8,8 @@ public class MageStormShield : Ability
     public MageStormShield(AActor caster)
     {
         this.caster = caster;
-        AbilityCost = 3;
-        CanCastInAir = false;
+        AbilityCost = 2;
+        //CanCastInAir = false;
     }
 
     public override void AbilityExecute()
