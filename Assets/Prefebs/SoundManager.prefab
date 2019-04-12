@@ -311,13 +311,13 @@ MonoBehaviour:
   sword_attack1: {fileID: 8300000, guid: c0b5f6cb24b722e4abf80f8e18407d46, type: 3}
   sword_attack2: {fileID: 8300000, guid: 24ff032bc52563e43916f74c60dc9d35, type: 3}
   sword_attack3: {fileID: 8300000, guid: 8be0d34fe88243e4eb0b5e844d1a7852, type: 3}
-  boomrang: {fileID: 8300000, guid: d0e15ecd10c235a4c821503c2b0ce168, type: 3}
+  boomrang: {fileID: 8300000, guid: bd3e1d58e5295b34a905311817644c1e, type: 3}
   fireball: {fileID: 8300000, guid: 46d823bbd81bfb7459600fdedbede4f4, type: 3}
   hookback: {fileID: 8300000, guid: 6fb555672206f244bba5f05e6ee3b91c, type: 3}
   hookshoot: {fileID: 8300000, guid: 979c3ecb698ee884a8cde65187828c7b, type: 3}
   shieldslam: {fileID: 8300000, guid: f02db6236d178874b8e186149030d922, type: 3}
   thunder: {fileID: 8300000, guid: da964d60a974fab4583acd5269a7a862, type: 3}
-  tornado: {fileID: 8300000, guid: b8a58d6056a71534d92f9696d5738967, type: 3}
+  tornado: {fileID: 8300000, guid: ff35cc0e250b55349a31ba0b2b20da38, type: 3}
   trap: {fileID: 8300000, guid: 2b941f3ebbca9cc41bdedbe692b48e9e, type: 3}
   chicken1: {fileID: 8300000, guid: ca6637784c4226c45bcd40f3a16a4ddf, type: 3}
   uiHover: {fileID: 8300000, guid: 014549d249857ce49a327244f5b0dd18, type: 3}
