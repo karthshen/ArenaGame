@@ -10,6 +10,7 @@
         AbilityDownAnimation = "animation,5";
         AbilityUpAnimation = "animation,35";
         DeathAnimation = "animation,10";
+        AbilityTriggerAnimation = "animation,32";
 
         //Sound
         AttackSound1 = SoundManager.instance.sword_attack1;

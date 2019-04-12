@@ -380,6 +380,13 @@ public abstract class AActor : AEntity
         return CurrentHealth;
     }
 
+    public virtual float FreezeWithNoForce(float freezeTime, AActor attacker)
+    {
+        freezeTime = 0f;
+        state = new ActorFreezeState(freezeTime, this, attacker, 0);
+        return CurrentHealth;
+    }
+
     public void TakeDamageFromEntity(float damage, float knockingForce, AEntity attacker)
     {
         AttackCode = System.Guid.NewGuid();
