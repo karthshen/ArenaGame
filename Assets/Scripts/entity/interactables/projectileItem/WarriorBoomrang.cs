@@ -119,7 +119,7 @@ public class WarriorBoomrang : ProjectileItem
         }
         else if(!collision.gameObject.GetComponent<AEntity>())
         {
-            boomrangState = BoomrangAnimation.SpinStay;
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponentInChildren<Collider>());
         }
     }
 

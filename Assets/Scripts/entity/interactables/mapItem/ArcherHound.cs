@@ -24,7 +24,7 @@ public class ArcherHound : MapItem
     [SerializeField]
     private float currentVelocity = 0f;
     [SerializeField]
-    private int attackTimes = 3;
+    private int attackTimes = 2;
 
     private float freezeTime = 0f;
 

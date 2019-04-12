@@ -32,6 +32,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip battle00;
     public AudioClip battle01;
     public AudioClip menu01;
+    public AudioClip teleport;
+    public AudioClip fireballHit;
 
     private AudioClip fakeClip;
 
@@ -73,12 +75,12 @@ public class SoundManager : MonoBehaviour
         if (!hasPlayed)
         {
             EffectSource.clip = clip;
-            PlaySound(EffectSource);
+            PlaySound(EffectSource, 1f);
             hasPlayed = true;
         }
     }
 
-    public void PlayEffectWithAudioSource(AudioSource source, AudioClip clip, ref bool hasPlayed)
+    public void PlayEffectWithAudioSource(AudioSource source, AudioClip clip, ref bool hasPlayed, float sourceVolume = 1)
     {
         if(source && clip == footstep && source.clip == footstep)
         {
@@ -89,7 +91,7 @@ public class SoundManager : MonoBehaviour
         if (!hasPlayed && source)
         {
             source.clip = clip;
-            PlaySound(source);
+            PlaySound(source, sourceVolume);
             hasPlayed = true;
         }
     }
@@ -100,16 +102,9 @@ public class SoundManager : MonoBehaviour
         MusicSource.Play();
     }
 
-    private void PlaySound(AudioSource source)
+    private void PlaySound(AudioSource source, float sourceVolume)
     {
-        if(source.clip == arrow_attack2)
-        {
-            source.volume = 0.5f;
-        }
-        else
-        {
-            source.volume = 1.0f;
-        }
+        source.volume = sourceVolume;
 
         source.Play();
     }

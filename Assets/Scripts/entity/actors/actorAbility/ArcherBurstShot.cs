@@ -31,6 +31,12 @@ public class ArcherBurstShot : Ability
 
         ShootThreeArrow();
 
+        bool hasPlayed = false;
+
+        AudioSource audioSource = caster.GetAudioSource();
+
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.arrow_attack2, ref hasPlayed, 0.5f);
+
         base.AbilityExecute();
     }
 

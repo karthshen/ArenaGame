@@ -43,7 +43,7 @@ public class MagePortal : MapItem
             ps.playbackSpeed = 2f;
         }
 
-        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.uiHover, ref hasPlayed);
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.teleport, ref hasPlayed);
     }
 
     public override void ItemFinish()
