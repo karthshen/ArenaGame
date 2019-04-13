@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -12,7 +9,10 @@ namespace InControl
 			Name = "XBox 360 Controller";
 			Meta = "XBox 360 Controller on Mac";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.Xbox360;
+
+			IncludePlatforms = new[] {
 				"OS X"
 			};
 
@@ -20,6 +20,7 @@ namespace InControl
 				"", // Yes, really.
 				"Microsoft Wireless 360 Controller",
 				"Mad Catz, Inc. Mad Catz FPS Pro GamePad",
+				"Mad Catz, Inc. MadCatz Call of Duty GamePad",
 				"\u00A9Microsoft Corporation Controller",
 				"\u00A9Microsoft Corporation Xbox Original Wired Controller"
 			};
@@ -105,44 +106,21 @@ namespace InControl
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog2
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog3,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Left Trigger",
-					Target = InputControlType.LeftTrigger,
-					Source = Analog4,
-					TargetRange = InputControlMapping.Range.Positive,
-					IgnoreInitialZeroValue = true
-				},
-				new InputControlMapping {
-					Handle = "Right Trigger",
-					Target = InputControlType.RightTrigger,
-					Source = Analog5,
-					TargetRange = InputControlMapping.Range.Positive,
-					IgnoreInitialZeroValue = true
-				}
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog2 ),
+				RightStickRightMapping( Analog2 ),
+				RightStickUpMapping( Analog3 ),
+				RightStickDownMapping( Analog3 ),
+
+				LeftTriggerMapping( Analog4 ),
+				RightTriggerMapping( Analog5 ),
 			};
 		}
 	}
+	// @endcond
 }
 

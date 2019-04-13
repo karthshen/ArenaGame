@@ -17,12 +17,12 @@ public class ArcherUnleshTheHound : Ability
     {
         base.AbilityExecute();
 
-        caster.CurrentEnergy -= AbilityCost;
-
         if (!IsHoundSummonable())
         {
             return;
         }
+
+        caster.CurrentEnergy -= AbilityCost;
 
         hound = Object.Instantiate(Resources.Load("Chicken")) as GameObject;
         ArcherHound archerHound = hound.GetComponent<ArcherHound>();

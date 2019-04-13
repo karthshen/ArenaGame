@@ -4,11 +4,13 @@ using UnityEditor;
 public class ArcherBurstShot : Ability
 {
     private const float BURST_FORCE = 1f;
-    private float BURST_SPEED = 500f;
+    private const float BURST_SPEED = 500f;
+    private const float BURST_SPEED_AIR = BURST_SPEED / 1.3f;
 
     public ArcherBurstShot(AActor caster)
     {
         this.caster = caster;
+        DragInAir = false;
         AbilityCost = 2;
     }
 
@@ -22,9 +24,18 @@ public class ArcherBurstShot : Ability
 
         caster.GetRigidbody().useGravity = false;
 
-        caster.GetRigidbody().AddForce(-chargeMovement * BURST_SPEED);
+        if (caster.IsGrounded)
+            caster.GetRigidbody().AddForce(-chargeMovement * BURST_SPEED);
+        else if(!caster.IsGrounded)
+            caster.GetRigidbody().AddForce(-chargeMovement * BURST_SPEED_AIR);
 
         ShootThreeArrow();
+
+        bool hasPlayed = false;
+
+        AudioSource audioSource = caster.GetAudioSource();
+
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.arrow_attack2, ref hasPlayed, 0.5f);
 
         base.AbilityExecute();
     }

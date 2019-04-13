@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Thunderbolt : ProjectileItem
 {
-    private float velocity = 12.0f;
+    private float velocity = 15.0f;
     private float moveHorizontal = 1.0f;
     private Vector3 movement;
     private AudioSource audioSource;
@@ -16,6 +16,7 @@ public class Thunderbolt : ProjectileItem
 
     public override void ProjectileFinish()
     {
+        SoundManager.instance.PlayEffectWithAudioSource(SoundManager.instance.EffectSource, SoundManager.instance.fireballHit, ref hasPlayed);
         RemoveItem();
     }
 
@@ -40,9 +41,13 @@ public class Thunderbolt : ProjectileItem
         if (hitActor)
         {
             hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 1.3f, owner);
+            hasPlayed = false;
         }
-
-        if (collision.gameObject.GetComponent<PickupItem>())
+        else if (collision.gameObject.GetComponent<AInteractable>())
+        {
+            
+        }
+        else
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
             return;

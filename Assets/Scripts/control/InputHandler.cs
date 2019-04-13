@@ -77,6 +77,7 @@ public class InputHandler : MonoBehaviour
             HandleInput(inputDevice);
         }
 
+        //restart back to main menu
         if(restart_timer > 0)
         {
             restart_timer -= Time.deltaTime;

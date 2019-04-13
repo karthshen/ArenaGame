@@ -6,6 +6,8 @@ public class StormShield : MapItem
     private float duration_time = 0f;
     private float knockingForce = 3.5f;
     private AActor owner;
+    private AudioSource audioSource;
+    private bool hasPlayed = false;
 
     private const float DURATION_TIME = 1.0f;
 
@@ -26,11 +28,14 @@ public class StormShield : MapItem
     { 
         gameObject.transform.position = new Vector3(owner.transform.position.x, owner.transform.position.y, 0);
         ParticleSystem ps = gameObject.GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
 
         if (ps)
         {
             ps.playbackSpeed = 4;
         }
+
+        SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.tornado, ref hasPlayed);
     }
 
     public override void ItemFinish()

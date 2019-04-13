@@ -1,14 +1,12 @@
 // Copyright (c) 2012-2013 Rotorz Limited. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-using UnityEngine;
-using UnityEditor;
-
-using System;
-
+#if UNITY_EDITOR
 namespace InControl.ReorderableList.Internal
 {
+	using UnityEngine;
+	using System;
+
 
 	/// <summary>
 	/// Resources to assist with reorderable list control.
@@ -73,49 +71,49 @@ namespace InControl.ReorderableList.Internal
 		/// </summary>
 		public static Texture2D texAddButton
 		{
-			get { return s_Cached[(int)ResourceName.add_button]; }
+			get { return s_Cached[(int) ResourceName.add_button]; }
 		}
 		/// <summary>
 		/// Gets light or dark texture "add_button_active.png".
 		/// </summary>
 		public static Texture2D texAddButtonActive
 		{
-			get { return s_Cached[(int)ResourceName.add_button_active]; }
+			get { return s_Cached[(int) ResourceName.add_button_active]; }
 		}
 		/// <summary>
 		/// Gets light or dark texture "container_background.png".
 		/// </summary>
 		public static Texture2D texContainerBackground
 		{
-			get { return s_Cached[(int)ResourceName.container_background]; }
+			get { return s_Cached[(int) ResourceName.container_background]; }
 		}
 		/// <summary>
 		/// Gets light or dark texture "grab_handle.png".
 		/// </summary>
 		public static Texture2D texGrabHandle
 		{
-			get { return s_Cached[(int)ResourceName.grab_handle]; }
+			get { return s_Cached[(int) ResourceName.grab_handle]; }
 		}
 		/// <summary>
 		/// Gets light or dark texture "remove_button.png".
 		/// </summary>
 		public static Texture2D texRemoveButton
 		{
-			get { return s_Cached[(int)ResourceName.remove_button]; }
+			get { return s_Cached[(int) ResourceName.remove_button]; }
 		}
 		/// <summary>
 		/// Gets light or dark texture "remove_button_active.png".
 		/// </summary>
 		public static Texture2D texRemoveButtonActive
 		{
-			get { return s_Cached[(int)ResourceName.remove_button_active]; }
+			get { return s_Cached[(int) ResourceName.remove_button_active]; }
 		}
 		/// <summary>
 		/// Gets light or dark texture "title_background.png".
 		/// </summary>
 		public static Texture2D texTitleBackground
 		{
-			get { return s_Cached[(int)ResourceName.title_background]; }
+			get { return s_Cached[(int) ResourceName.title_background]; }
 		}
 
 		#endregion
@@ -129,7 +127,7 @@ namespace InControl.ReorderableList.Internal
 		/// </summary>
 		private static void GenerateSpecialTextures()
 		{
-			var splitterColor = EditorGUIUtility.isProSkin
+			var splitterColor = InControl.Internal.EditorUtility.IsProSkin
 				? new Color( 1f, 1f, 1f, 0.14f )
 				: new Color( 0.59f, 0.59f, 0.59f, 0.55f );
 			texItemSplitter = CreatePixelTexture( "(Generated) Item Splitter", splitterColor );
@@ -166,7 +164,7 @@ namespace InControl.ReorderableList.Internal
 		/// </summary>
 		private static void LoadResourceAssets()
 		{
-			var skin = EditorGUIUtility.isProSkin ? s_DarkSkin : s_LightSkin;
+			var skin = InControl.Internal.EditorUtility.IsProSkin ? s_DarkSkin : s_LightSkin;
 			s_Cached = new Texture2D[skin.Length];
 
 			for (int i = 0; i < s_Cached.Length; ++i)
@@ -210,7 +208,6 @@ namespace InControl.ReorderableList.Internal
 		}
 
 		#endregion
-
 	}
-
 }
+#endif

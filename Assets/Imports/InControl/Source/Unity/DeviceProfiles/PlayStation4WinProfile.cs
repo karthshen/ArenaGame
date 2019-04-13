@@ -1,23 +1,32 @@
-using System;
-
-
 namespace InControl
 {
+	// This profile works for connection over USB ONLY.
+	// Unfortunately, supporting the profiles for USB and bluetooth
+	// are mutually exclusive. I picked USB since getting the controller
+	// to pair properly over bluetooth is very flaky.
+	// The alternate mappings are commented out below.
+	//
 	// @cond nodoc
 	[AutoDiscover]
 	public class PlayStation4WinProfile : UnityInputDeviceProfile
 	{
 		public PlayStation4WinProfile()
 		{
+			string RegistrationMark = "\u00AE";
+
 			Name = "PlayStation 4 Controller";
 			Meta = "PlayStation 4 Controller on Windows";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.PlayStation4;
+
+			IncludePlatforms = new[] {
 				"Windows"
 			};
 
 			JoystickNames = new[] {
-				"Wireless Controller"
+				"Wireless Controller",
+				"DUALSHOCK" + RegistrationMark + "4 USB Wireless Adaptor"
 			};
 
 			ButtonMappings = new[] {
@@ -58,7 +67,7 @@ namespace InControl
 				},
 				new InputControlMapping {
 					Handle = "Options",
-					Target = InputControlType.Select,
+					Target = InputControlType.Options,
 					Source = Button9
 				},
 				new InputControlMapping {
@@ -78,82 +87,84 @@ namespace InControl
 				},
 				new InputControlMapping {
 					Handle = "TouchPad Button",
-					Target = InputControlType.TouchPadTap,
+					Target = InputControlType.TouchPadButton,
 					Source = Button13
 				},
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog2
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog5,
-					Invert = true
-				},
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog2 ),
+				RightStickRightMapping( Analog2 ),
+				RightStickUpMapping( Analog5 ),
+				RightStickDownMapping( Analog5 ),
+
+				DPadLeftMapping( Analog6 ),
+				DPadRightMapping( Analog6 ),
+				DPadUpMapping2( Analog7 ),
+				DPadDownMapping2( Analog7 ),
+
 				new InputControlMapping {
 					Handle = "Left Trigger",
 					Target = InputControlType.LeftTrigger,
 					Source = Analog3,
-					SourceRange = InputControlMapping.Range.Complete,
-					TargetRange = InputControlMapping.Range.Positive,
+					SourceRange = InputRange.MinusOneToOne,
+					TargetRange = InputRange.ZeroToOne,
 					IgnoreInitialZeroValue = true
 				},
 				new InputControlMapping {
 					Handle = "Right Trigger",
 					Target = InputControlType.RightTrigger,
 					Source = Analog4,
-					SourceRange = InputControlMapping.Range.Complete,
-					TargetRange = InputControlMapping.Range.Positive,
+					SourceRange = InputRange.MinusOneToOne,
+					TargetRange = InputRange.ZeroToOne,
+					IgnoreInitialZeroValue = true
+				},
+			};
+
+			/*
+			 * These are the alternate bluetooth mappings.
+			 * 
+			AnalogMappings = new[] {
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog2 ),
+				LeftStickDownMapping( Analog2 ),
+
+				RightStickLeftMapping( Analog3 ),
+				RightStickRightMapping( Analog3 ),
+				RightStickUpMapping( Analog6 ),
+				RightStickDownMapping( Analog6 ),
+
+				DPadLeftMapping( Analog7 ),
+				DPadRightMapping( Analog7 ),
+				DPadUpMapping2( Analog8 ),
+				DPadDownMapping2( Analog8 ),
+
+				new InputControlMapping {
+					Handle = "Left Trigger",
+					Target = InputControlType.LeftTrigger,
+					Source = Analog4,
+					SourceRange = InputRange.MinusOneToOne,
+					TargetRange = InputRange.ZeroToOne,
 					IgnoreInitialZeroValue = true
 				},
 				new InputControlMapping {
-					Handle = "DPad Left",
-					Target = InputControlType.DPadLeft,
-					Source = Analog6,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
+					Handle = "Right Trigger",
+					Target = InputControlType.RightTrigger,
+					Source = Analog5,
+					SourceRange = InputRange.MinusOneToOne,
+					TargetRange = InputRange.ZeroToOne,
+					IgnoreInitialZeroValue = true
 				},
-				new InputControlMapping {
-					Handle = "DPad Right",
-					Target = InputControlType.DPadRight,
-					Source = Analog6,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Up",
-					Target = InputControlType.DPadUp,
-					Source = Analog7,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Down",
-					Target = InputControlType.DPadDown,
-					Source = Analog7,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				}
 			};
+			*/
 		}
 	}
+	// @endcond
 }
 

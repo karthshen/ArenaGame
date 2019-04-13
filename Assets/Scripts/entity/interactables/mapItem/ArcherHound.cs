@@ -24,7 +24,7 @@ public class ArcherHound : MapItem
     [SerializeField]
     private float currentVelocity = 0f;
     [SerializeField]
-    private int attackTimes = 3;
+    private int attackTimes = 2;
 
     private float freezeTime = 0f;
 
@@ -89,6 +89,7 @@ public class ArcherHound : MapItem
         currentVelocity = MOVE_VELOCITY * Mathf.Sin(yDirectionInRadian);
 
         PlayAnimation(HoundAnimation.Move);
+        //SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
 
         IgnoreCollisionWithOtherHounds();
     }

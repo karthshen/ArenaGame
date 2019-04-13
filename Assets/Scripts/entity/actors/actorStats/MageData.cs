@@ -10,6 +10,8 @@
         AbilityHorizAnimation = "animation,3";
         AbilityUpAnimation = "animation,35";
         DeathAnimation = "animation,11";
+        AbilityTriggerAnimation = "animation,35";
+        AbilityBumperAnimation = "animation,4";
 
         //sound
         AttackSound1 = SoundManager.instance.staff_attack2;
@@ -17,7 +19,7 @@
         //AttackSound3 = SoundManager.instance.arrow_attack2;
 
         //AbilityUpSound = SoundManager.instance.thunder;
-        AbilityHorizSound = SoundManager.instance.tornado;
+        //AbilityHorizSound = SoundManager.instance.tornado;
         //AbilityDownSound = SoundManager.instance.fireball;
         //AbilityTriggerSound = SoundManager.instance.jump;
     }

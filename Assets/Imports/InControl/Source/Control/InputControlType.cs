@@ -1,21 +1,29 @@
-using System;
-
-
 namespace InControl
 {
-	// TODO: This should be renamed to InputControlTarget.
+	using System;
+
+
+	/// <summary>
+	/// An enumeration of input controls.
+	/// This includes both the standardized set of controls and a variety 
+	/// of non-standard and generic unnamed controls.
+	/// </summary>
 	public enum InputControlType : int
 	{
 		None = 0,
 
-		// Standardized.
+		// Standardized controls.
 		//
-		LeftStickX,
-		LeftStickY,
+		LeftStickUp = 1,
+		LeftStickDown,
+		LeftStickLeft,
+		LeftStickRight,
 		LeftStickButton,
 
-		RightStickX,
-		RightStickY,
+		RightStickUp,
+		RightStickDown,
+		RightStickLeft,
+		RightStickRight,
 		RightStickButton,
 
 		DPadUp,
@@ -23,41 +31,95 @@ namespace InControl
 		DPadLeft,
 		DPadRight,
 
-		Action1,
-		Action2,
-		Action3,
-		Action4,
-
 		LeftTrigger,
 		RightTrigger,
 
 		LeftBumper,
 		RightBumper,
 
+		Action1,
+		Action2,
+		Action3,
+		Action4,
+		Action5,
+		Action6,
+		Action7,
+		Action8,
+		Action9,
+		Action10,
+		Action11,
+		Action12,
 
-		// Not standardized, but provided for convenience.
-		//
-		Back,
+		// Command buttons.
+		// When adding to this list, update InputDevice.AnyCommandControlIsPressed() accordingly.
+		Back = 100,
 		Start,
 		Select,
 		System,
+		Options,
 		Pause,
 		Menu,
 		Share,
+		Home,
 		View,
-		Options,
-		TiltX,
+		Power,
+		Capture,
+		Plus,
+		Minus,
+
+		// Steering controls.
+		PedalLeft = 150,
+		PedalRight,
+		PedalMiddle,
+		GearUp,
+		GearDown,
+
+		// Flight Stick controls.
+		Pitch = 200,
+		Roll,
+		Yaw,
+		ThrottleUp,
+		ThrottleDown,
+		ThrottleLeft,
+		ThrottleRight,
+		POVUp,
+		POVDown,
+		POVLeft,
+		POVRight,
+
+		// Unusual controls.
+		//
+		TiltX = 250,
 		TiltY,
 		TiltZ,
 		ScrollWheel,
+
+		[Obsolete( "Use InputControlType.TouchPadButton instead.", true )]
 		TouchPadTap,
+
+		TouchPadButton,
+
 		TouchPadXAxis,
 		TouchPadYAxis,
 
+		LeftSL,
+		LeftSR,
+		RightSL,
+		RightSR,
 
-		// Not standardized.
+		// Alias controls; can't be explicitly mapped in a profile.
 		//
-		Analog0,
+		Command = 300,
+		LeftStickX,
+		LeftStickY,
+		RightStickX,
+		RightStickY,
+		DPadX,
+		DPadY,
+
+		// Generic controls (usually assigned to unknown devices).
+		//
+		Analog0 = 400,
 		Analog1,
 		Analog2,
 		Analog3,
@@ -78,7 +140,7 @@ namespace InControl
 		Analog18,
 		Analog19,
 
-		Button0,
+		Button0 = 500,
 		Button1,
 		Button2,
 		Button3,
@@ -98,7 +160,6 @@ namespace InControl
 		Button17,
 		Button18,
 		Button19,
-
 
 		// Internal. Must be last.
 		//

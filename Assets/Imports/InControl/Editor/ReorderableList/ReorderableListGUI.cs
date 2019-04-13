@@ -1,16 +1,14 @@
 // Copyright (c) 2012-2013 Rotorz Limited. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-using UnityEngine;
-using UnityEditor;
-
-using System.Collections.Generic;
-
-using InControl.ReorderableList.Internal;
-
+#if UNITY_EDITOR
 namespace InControl.ReorderableList
 {
+	using System.Collections.Generic;
+	using Internal;
+	using UnityEditor;
+	using UnityEngine;
+
 
 	/// <summary>
 	/// Utility class for drawing reorderable lists.
@@ -129,21 +127,26 @@ namespace InControl.ReorderableList
 
 		private static void InitStyles()
 		{
-			defaultTitleStyle = new GUIStyle();
-			defaultTitleStyle.border = new RectOffset( 2, 2, 2, 1 );
-			defaultTitleStyle.margin = new RectOffset( 5, 5, 5, 0 );
-			defaultTitleStyle.padding = new RectOffset( 5, 5, 0, 0 );
-			defaultTitleStyle.alignment = TextAnchor.MiddleLeft;
-			defaultTitleStyle.normal.background = ReorderableListResources.texTitleBackground;
-			defaultTitleStyle.normal.textColor = EditorGUIUtility.isProSkin
-				? new Color( 0.8f, 0.8f, 0.8f )
-				: new Color( 0.2f, 0.2f, 0.2f );
+			//defaultTitleStyle = new GUIStyle();
+			//defaultTitleStyle.border = new RectOffset( 2, 2, 2, 1 );
+			//defaultTitleStyle.margin = new RectOffset( 5, 5, 5, 0 );
+			//defaultTitleStyle.padding = new RectOffset( 5, 5, 0, 0 );
+			//defaultTitleStyle.alignment = TextAnchor.MiddleLeft;
+			//defaultTitleStyle.normal.background = ReorderableListResources.texTitleBackground;
+			//defaultTitleStyle.normal.textColor = EditorGUIUtility.isProSkin
+			//	? new Color( 0.8f, 0.8f, 0.8f )
+			//	: new Color( 0.0f, 0.0f, 0.0f );
 
-			defaultContainerStyle = new GUIStyle();
-			defaultContainerStyle.border = new RectOffset( 2, 2, 1, 2 );
-			defaultContainerStyle.margin = new RectOffset( 5, 5, 5, 5 );
+			defaultTitleStyle = new GUIStyle( InControl.Internal.EditorUtility.titleStyle );
+
+			//defaultContainerStyle = new GUIStyle();
+			//defaultContainerStyle.border = new RectOffset( 2, 2, 1, 2 );
+			//defaultContainerStyle.margin = new RectOffset( 5, 5, 5, 5 );
+			//defaultContainerStyle.padding = new RectOffset( 1, 1, 2, 2 );
+			//defaultContainerStyle.normal.background = ReorderableListResources.texContainerBackground;
+
+			defaultContainerStyle = new GUIStyle( InControl.Internal.EditorUtility.groupStyle );
 			defaultContainerStyle.padding = new RectOffset( 1, 1, 2, 2 );
-			defaultContainerStyle.normal.background = ReorderableListResources.texContainerBackground;
 
 			defaultAddButtonStyle = new GUIStyle();
 			defaultAddButtonStyle.fixedWidth = 30;
@@ -382,7 +385,8 @@ namespace InControl.ReorderableList
 			{
 				defaultListControl.flags = flags;
 				return defaultListControl.CalculateListHeight( itemCount, itemHeight );
-			} finally
+			}
+			finally
 			{
 				defaultListControl.flags = restoreFlags;
 			}
@@ -499,7 +503,8 @@ namespace InControl.ReorderableList
 			{
 				defaultListControl.flags = flags;
 				return defaultListControl.CalculateListHeight( new SerializedPropertyAdaptor( arrayProperty ) );
-			} finally
+			}
+			finally
 			{
 				defaultListControl.flags = restoreFlags;
 			}
@@ -572,10 +577,16 @@ namespace InControl.ReorderableList
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Callback to draw custom content for empty list (optional).</param>
 		/// <param name="flags">Optional flags to pass into list field.</param>
-		private static void DoListField( IReorderableListAdaptor adaptor, ReorderableListControl.DrawEmpty drawEmpty, ReorderableListFlags flags = 0 )
+		private static void DoListField( IReorderableListAdaptor adaptor, ReorderableListControl.DrawEmpty drawEmpty, ReorderableListFlags flags )
 		{
 			ReorderableListControl.DrawControlFromState( adaptor, drawEmpty, flags );
 		}
+
+		private static void DoListField( IReorderableListAdaptor adaptor, ReorderableListControl.DrawEmpty drawEmpty )
+		{
+			DoListField( adaptor, drawEmpty, 0 );
+		}
+
 		/// <summary>
 		/// Draw list field control for adapted collection.
 		/// </summary>
@@ -583,9 +594,15 @@ namespace InControl.ReorderableList
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Callback to draw custom content for empty list (optional).</param>
 		/// <param name="flags">Optional flags to pass into list field.</param>
-		private static void DoListFieldAbsolute( Rect position, IReorderableListAdaptor adaptor, ReorderableListControl.DrawEmptyAbsolute drawEmpty, ReorderableListFlags flags = 0 )
+		private static void DoListFieldAbsolute( Rect position, IReorderableListAdaptor adaptor, ReorderableListControl.DrawEmptyAbsolute drawEmpty, ReorderableListFlags flags )
 		{
 			ReorderableListControl.DrawControlFromState( position, adaptor, drawEmpty, flags );
+		}
+
+
+		private static void DoListFieldAbsolute( Rect position, IReorderableListAdaptor adaptor, ReorderableListControl.DrawEmptyAbsolute drawEmpty )
+		{
+			DoListFieldAbsolute( position, adaptor, drawEmpty, 0 );
 		}
 
 
@@ -653,7 +670,8 @@ namespace InControl.ReorderableList
 			{
 				defaultListControl.flags = flags;
 				return defaultListControl.CalculateListHeight( adaptor );
-			} finally
+			}
+			finally
 			{
 				defaultListControl.flags = restoreFlags;
 			}
@@ -666,7 +684,6 @@ namespace InControl.ReorderableList
 		}
 
 		#endregion
-
 	}
-
 }
+#endif

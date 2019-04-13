@@ -1,29 +1,33 @@
-using System;
-using UnityEngine;
-
-
 namespace InControl
 {
+	using UnityEngine;
+
+
 	public class UnityMouseAxisSource : InputControlSource
 	{
-		string mouseAxisQuery;
+		public string MouseAxisQuery;
+
+
+		public UnityMouseAxisSource()
+		{
+		}
 
 
 		public UnityMouseAxisSource( string axis )
 		{
-			this.mouseAxisQuery = "mouse " + axis;
+			MouseAxisQuery = "mouse " + axis;
 		}
 		
 		
 		public float GetValue( InputDevice inputDevice )
 		{
-			return Input.GetAxisRaw( mouseAxisQuery );
+			return Input.GetAxisRaw( MouseAxisQuery );
 		}
 		
 		
 		public bool GetState( InputDevice inputDevice )
 		{
-			return !Mathf.Approximately( GetValue( inputDevice ), 0.0f );
+			return Utility.IsNotZero( GetValue( inputDevice ) );
 		}
 	}
 }

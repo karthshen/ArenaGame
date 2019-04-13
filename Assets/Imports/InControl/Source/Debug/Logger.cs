@@ -1,9 +1,8 @@
-using System;
-using UnityEngine;
-
-
 namespace InControl
 {
+	using System;
+
+
 	public enum LogMessageType
 	{
 		Info,
@@ -21,8 +20,7 @@ namespace InControl
 
 	public class Logger
 	{
-		public delegate void LogMessageHandler( LogMessage message );
-		public static event LogMessageHandler OnLogMessage;
+		public static event Action<LogMessage> OnLogMessage;
 
 
 		public static void LogInfo( string text )

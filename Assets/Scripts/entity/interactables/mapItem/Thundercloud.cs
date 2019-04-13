@@ -6,7 +6,7 @@ public class Thundercloud : MapItem
     public float disappearTime = 3.0f;
 
     [SerializeField]
-    private float thunderTimer = 1f;
+    private float thunderTimer = 0.5f;
 
     private AActor owner;
 

@@ -49,6 +49,7 @@ public abstract class AActor : AEntity
     public Ability abilityLeft;
     public Ability abilityRight;
     public Ability abilityTrigger;
+    public Ability abilityBumper;
 
     public Queue<Combo> attackQueue = new Queue<Combo>();
 
@@ -79,9 +80,6 @@ public abstract class AActor : AEntity
 
     private float freezeTimer = 0f;
     //----------------------------
-
-    protected string deathAnimation = "";
-
     private int respawnLives = 3;
 
     //This is for total damage taken since previous energy restore
@@ -341,7 +339,8 @@ public abstract class AActor : AEntity
 
         GetRigidbody().AddForce(backMovement);
 
-        state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
+        if(state.GetType() != typeof(ActorDeathState))
+            state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
     }
 
     private void KnockBackBasedOnPosition(float knockingForce, AActor attacker)
@@ -366,16 +365,26 @@ public abstract class AActor : AEntity
 
         GetRigidbody().AddForce(backMovement);
 
-        state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
+        if (state.GetType() != typeof(ActorDeathState))
+            state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
     }
 
     public virtual float TakeDamageAndFreeze(float damage, float freezeTime, AActor attacker)
     {
         TakeDamage(damage, attacker);
 
-        freezeTimer = 0;
-        state = new ActorFreezeState(freezeTime, this, attacker, 0);
+        if (state.GetType() != typeof(ActorDeathState))
+        {
+            freezeTimer = 0;
+            state = new ActorFreezeState(freezeTime, this, attacker, 0);
+        }
+        return CurrentHealth;
+    }
 
+    public virtual float FreezeWithNoForce(float freezeTime, AActor attacker)
+    {
+        freezeTime = 0f;
+        state = new ActorFreezeState(freezeTime, this, attacker, 0);
         return CurrentHealth;
     }
 
@@ -412,7 +421,8 @@ public abstract class AActor : AEntity
         else
         {
             freezeTimer = 0;
-            state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
+            if (state.GetType() != typeof(ActorDeathState))
+                state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
         }
 
 
@@ -483,7 +493,7 @@ public abstract class AActor : AEntity
     public virtual void Death()
     {
         state = new ActorDeathState();
-        GetAnimatorController().SetInt(GetActorStat().DeathAnimation);
+        ((ActorState)state).PlayStateAnimation(this);
         deathTimer = AActor.RESPAWN_TIMER;
     }
 
@@ -505,11 +515,6 @@ public abstract class AActor : AEntity
     public ActorData GetActorStat()
     {
         return this.actorStat;
-    }
-
-    public string GetDeathAnimation()
-    {
-        return deathAnimation;
     }
 
     /*
@@ -636,6 +641,11 @@ public abstract class AActor : AEntity
             PickupItem item = collision.gameObject.GetComponent<PickupItem>();
             item.ItemPickUp(this);
         }
+
+        if(!IsGrounded && state.GetType() == typeof(ActorJumpState) && collision.gameObject.GetComponent<AActor>() && transform.position.y > collision.transform.position.y)
+        {
+            BackToStanding();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -661,6 +671,7 @@ public abstract class AActor : AEntity
         if (state.GetType() != typeof(ActorDeathState))
         {
             state = new ActorStandingState(state.GetType().ToString());
+            ((ActorState)(state)).PlayStateAnimation(this);
         }
     }
 

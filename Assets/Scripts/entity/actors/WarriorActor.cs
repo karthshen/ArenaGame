@@ -10,6 +10,7 @@ public class WarriorActor : AActor
     Ability warriorAbilityDown;
     Ability warriorAbilityLeft;
     Ability warriorAbilityRight;
+    Ability warriorAbilityTrigger;
 
     string actorName = "Warrior";
 
@@ -38,11 +39,13 @@ public class WarriorActor : AActor
         warriorAbilityRight = new WarriorCharge(this);
         warriorAbilityDown = new WarriorSlash(this);
         warriorAbilityUp = new WarriorThrowBoomrang(this);
+        warriorAbilityTrigger = new WarriorShootMechanicalHook(this);
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
+        abilityTrigger = warriorAbilityTrigger;
 
         InitializeActor();
 

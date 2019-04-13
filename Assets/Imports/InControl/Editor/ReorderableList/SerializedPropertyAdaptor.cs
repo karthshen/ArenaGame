@@ -1,14 +1,13 @@
 // Copyright (c) 2012-2013 Rotorz Limited. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-using UnityEngine;
-using UnityEditor;
-
-using System;
-
+#if UNITY_EDITOR
 namespace InControl.ReorderableList
 {
+	using System;
+	using UnityEditor;
+	using UnityEngine;
+
 
 	/// <summary>
 	/// Reorderable list adaptor for serialized array property.
@@ -39,7 +38,7 @@ namespace InControl.ReorderableList
 		/// <returns>
 		/// Serialized property wrapper for array element.
 		/// </returns>
-		public SerializedProperty this[ int index ]
+		public SerializedProperty this[int index]
 		{
 			get { return _arrayProperty.GetArrayElementAtIndex( index ); }
 		}
@@ -74,7 +73,7 @@ namespace InControl.ReorderableList
 		/// Initializes a new instance of <see cref="SerializedPropertyAdaptor"/>.
 		/// </summary>
 		/// <param name="arrayProperty">Serialized property for entire array.</param>
-		public SerializedPropertyAdaptor( SerializedProperty arrayProperty ) : this(arrayProperty, 0f)
+		public SerializedPropertyAdaptor( SerializedProperty arrayProperty ) : this( arrayProperty, 0f )
 		{
 		}
 
@@ -197,7 +196,6 @@ namespace InControl.ReorderableList
 		}
 
 		#endregion
-
 	}
-
 }
+#endif

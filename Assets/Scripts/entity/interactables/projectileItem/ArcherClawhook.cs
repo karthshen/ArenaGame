@@ -14,7 +14,7 @@ public class ArcherClawhook : ProjectileItem
 
     [SerializeField]
     private float retractionForce = 100f;
-    private float velocity = 15.0f;
+    private float velocity = 20.0f;
     private float moveConstant = 1f;
     private float positionHorizontal = 0.05f;
     private float angleJoystick = 0f;
@@ -127,7 +127,7 @@ public class ArcherClawhook : ProjectileItem
 
     private bool CheckIfRetracted()
     {
-        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 0.7f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
+        if (Mathf.Abs(Vector3.Distance(transform.position, owner.transform.position)) < 1.3f && (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers))
         {
             owner.ClearForceOnActor();
 
@@ -196,7 +196,7 @@ public class ArcherClawhook : ProjectileItem
         if (x != 0.0f || y != 0.0f)
         {
             angleJoystick = Mathf.Atan2(y, x);
-            Debug.Log("Joystick Angle in Radian:" + angleJoystick + " with X: " + x + " Y: " + y);
+            //Debug.Log("Joystick Angle in Radian:" + angleJoystick + " with X: " + x + " Y: " + y);
             return true;
         }
         else

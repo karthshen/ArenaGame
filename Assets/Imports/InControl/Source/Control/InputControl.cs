@@ -1,34 +1,34 @@
-using System;
-using UnityEngine;
-
-
 namespace InControl
 {
-	public class InputControl
+	public class InputControl : OneAxisInputControl
 	{
-		public static readonly InputControl Null = new InputControl( "NullInputControl" );
+		public static readonly InputControl Null = new InputControl { isNullControl = true };
 
 		public string Handle { get; protected set; }
 		public InputControlType Target { get; protected set; }
 
-		public ulong UpdateTick { get; protected set; }
+		/// <summary>
+		/// When a control is passive, it will not cause a device to be considered active.
+		/// This is useful for certain controls that spam data, like gyro or
+		/// accelerometer input.
+		/// Defaults to <code>false</code>.
+		/// </summary>
+		public bool Passive;
 
-		public float Sensitivity = 1.0f;
-		public float LowerDeadZone = 0.0f;
-		public float UpperDeadZone = 1.0f;
-
+		// TODO: This meaningless distinction should probably be removed entirely.
 		public bool IsButton { get; protected set; }
-
-		InputControlState thisState;
-		InputControlState lastState;
-		InputControlState tempState;
+		public bool IsAnalog { get; protected set; }
 
 		ulong zeroTick;
 
 
-		private InputControl( string handle )
+		InputControl()
 		{
-			Handle = handle;
+			Handle = "None";
+			Target = InputControlType.None;
+			Passive = false;
+			IsButton = false;
+			IsAnalog = false;
 		}
 
 
@@ -36,209 +36,40 @@ namespace InControl
 		{
 			Handle = handle;
 			Target = target;
-
-			IsButton = (target >= InputControlType.Action1 && target <= InputControlType.Action4) ||
-					   (target >= InputControlType.Button0 && target <= InputControlType.Button19);
+			Passive = false;
+			IsButton = Utility.TargetIsButton( target );
+			IsAnalog = !IsButton;
 		}
 
 
-		public void UpdateWithState( bool state, ulong updateTick )
+		public InputControl( string handle, InputControlType target, bool passive )
+			: this( handle, target )
 		{
-			if (IsNull)
-			{
-				throw new InvalidOperationException( "A null control cannot be updated." );
-			}
-
-			if (UpdateTick > updateTick)
-			{
-				throw new InvalidOperationException( "A control cannot be updated with an earlier tick." );
-			}
-
-			tempState.Set( state || tempState.State );
+			Passive = passive;
 		}
 
-        public void UpdateWithStateTestCase(bool state, ulong updateTick)
-        {
-            if (UpdateTick > updateTick)
-            {
-                throw new InvalidOperationException("A control cannot be updated with an earlier tick.");
-            }
 
-            int val = state ? 1 : 0;
-
-            tempState.Set(val);
-            thisState.State = state;
-            thisState.Value = val;
-        }
-
-        public void UpdateWithValueTestCase(float value, ulong updateTick)
-        { 
-            if (UpdateTick > updateTick)
-            {
-                throw new InvalidOperationException("A control cannot be updated with an earlier tick.");
-            }
-
-            if (Mathf.Abs(value) > Mathf.Abs(tempState.Value))
-            {
-                tempState.Set(value);
-            }
-            thisState.Value = value;
-        }
-
-
-
-        public void UpdateWithValue( float value, ulong updateTick )
+		internal void SetZeroTick()
 		{
-			if (IsNull)
-			{
-				throw new InvalidOperationException( "A null control cannot be updated." );
-			}
-
-			if (UpdateTick > updateTick)
-			{
-				throw new InvalidOperationException( "A control cannot be updated with an earlier tick." );
-			}
-
-			if (Mathf.Abs( value ) > Mathf.Abs( tempState.Value ))
-			{
-				tempState.Set( value );
-			}
-		}
-
-
-		internal void PreUpdate( ulong updateTick )
-		{
-			RawValue = null;
-			PreValue = null;
-
-			lastState = thisState;
-			tempState.Reset();
-		}
-
-
-		internal void PostUpdate( ulong updateTick )
-		{
-			thisState = tempState;
-			if (thisState != lastState)
-			{
-				UpdateTick = updateTick;
-			}
-		}
-
-
-		internal void SetZeroTick() 
-		{ 
-			zeroTick = UpdateTick; 
+			zeroTick = UpdateTick;
 		}
 
 
 		internal bool IsOnZeroTick
 		{
-			get { return UpdateTick == zeroTick; }
-		}
-
-
-		public bool State
-		{
-			get { return thisState.State; }
-		}
-
-
-		public bool LastState
-		{
-			get { return lastState.State; }
-		}
-
-
-		public float Value
-		{
-			get { return thisState.Value; }
-		}
-
-
-		public float LastValue
-		{
-			get { return lastState.Value; }
-		}
-
-
-		public bool HasChanged
-		{
-			get { return thisState != lastState; }
-		}
-
-
-		public bool IsPressed
-		{
-			get { return thisState.State; }
-		}
-
-
-		public bool WasPressed
-		{
-			get { return thisState && !lastState; }
-		}
-
-
-		public bool WasReleased
-		{
-			get { return !thisState && lastState; }
-		}
-
-
-		public bool IsNull
-		{
-			get { return this == Null; }
-		}
-
-
-		public bool IsNotNull
-		{
-			get { return this != Null; }
-		}
-
-
-		public override string ToString()
-		{
-			return string.Format( "[InputControl: Handle={0}, Value={1}]", Handle, Value );
-		}
-
-
-		public static implicit operator bool( InputControl control )
-		{
-			return control.State;
-		}
-
-
-		public static implicit operator float( InputControl control )
-		{
-			return control.Value;
-		}
-
-
-		public InputControlType? Obverse
-		{
 			get
 			{
-				switch (Target)
-				{
-				case InputControlType.LeftStickX:
-					return InputControlType.LeftStickY;
-				case InputControlType.LeftStickY:
-					return InputControlType.LeftStickX;
-				case InputControlType.RightStickX:
-					return InputControlType.RightStickY;
-				case InputControlType.RightStickY:
-					return InputControlType.RightStickX;
-				default:
-					return null;
-				}
+				return UpdateTick == zeroTick;
 			}
 		}
 
 
-		// This is for internal use only and is not always set.
-		internal float? RawValue;
-		internal float? PreValue;
-	}
+		public bool IsStandard
+		{
+			get
+			{
+				return Utility.TargetIsStandard( Target );
+			}
+		}
+    }
 }

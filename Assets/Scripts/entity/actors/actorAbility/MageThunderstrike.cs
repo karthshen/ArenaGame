@@ -8,7 +8,7 @@ public class MageThunderstrike : Ability
     public MageThunderstrike(AActor caster)
     {
         this.caster = caster;
-        CanCastInAir = false;
+        CanCastInAir = true;
         AbilityCost = 2;
     }
 
