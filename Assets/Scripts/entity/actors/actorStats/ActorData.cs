@@ -23,6 +23,7 @@ public abstract class ActorData
     private string movingAnimation = "animation,17";
     private string walkAnimation = "animation,25";
     private string runningAnimation = "animation,20";
+    private string freezeAnimation = "animation,8";
     private string abilityDownAnimation;
     private string abilityHorizAnimation;
     private string abilityUpAnimation;
@@ -560,6 +561,19 @@ public abstract class ActorData
         set
         {
             abilityBumperAnimation = value;
+        }
+    }
+
+    public string FreezeAnimation
+    {
+        get
+        {
+            return freezeAnimation;
+        }
+
+        set
+        {
+            freezeAnimation = value;
         }
     }
 }
