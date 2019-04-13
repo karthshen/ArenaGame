@@ -59,21 +59,19 @@ public class Sandbag : AActor
 
     public override float TakeDamage(float damage, AActor attacker)
     {
-        damage = 0;
-        return base.TakeDamage(damage, attacker);
+        //damage = 1;
+        FreezeTimer = 0f;
+        state = new ActorFreezeState(0.3f, this, attacker);
+        ((ActorFreezeState)state).PlayStateAnimation(this);
+
+        return CurrentHealth;
+
     }
 
     private void Update()
     { 
         base.ActorUpdate();
 
-        ((ActorState)(state)).PlayStateAnimation(this);
-    }
-
-    protected override void BackToStanding()
-    {
-        base.BackToStanding();
-
-        ((ActorState)state).PlayStateAnimation(this);
+        //((ActorState)(state)).PlayStateAnimation(this);
     }
 }
