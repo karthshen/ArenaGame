@@ -260,7 +260,7 @@ MonoBehaviour:
   - {fileID: 1424440012}
   - {fileID: 884051529}
   - {fileID: 1110164934}
-  ITEM_GENERATE_INTERVAL: 15
+  ITEM_GENERATE_INTERVAL: 20
 --- !u!1 &56914314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3795313149958360262, guid: dc17dd6169f10e046926ea82274ed33c,
