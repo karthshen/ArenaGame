@@ -90,7 +90,7 @@ public class ActorJumpState : ActorState
             return new ActorAirAttackState();
         }
         //Bumper can cast as many times as in air
-        else if (inputDevice.RightBumper && actor.abilityBumper != null && actor.abilityTrigger.CanCastInAir == true)
+        else if (inputDevice.RightBumper.WasPressed && actor.abilityBumper != null && actor.abilityTrigger.CanCastInAir == true)
         {
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {

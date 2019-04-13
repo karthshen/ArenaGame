@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -9,10 +6,13 @@ namespace InControl
 	{
 		public XboxOneMacProfile()
 		{
-			Name = "XBox One Controller";
-			Meta = "XBox One Controller on OSX";
+			Name = "Xbox One Controller";
+			Meta = "Xbox One Controller on OSX";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.XboxOne;
+
+			IncludePlatforms = new[] {
 				"OS X"
 			};
 
@@ -42,16 +42,6 @@ namespace InControl
 					Source = Button19
 				},
 				new InputControlMapping {
-					Handle = "DPad Left",
-					Target = InputControlType.DPadLeft,
-					Source = Button7
-				},
-				new InputControlMapping {
-					Handle = "DPad Right",
-					Target = InputControlType.DPadRight,
-					Source = Button8
-				},
-				new InputControlMapping {
 					Handle = "DPad Up",
 					Target = InputControlType.DPadUp,
 					Source = Button5
@@ -60,6 +50,16 @@ namespace InControl
 					Handle = "DPad Down",
 					Target = InputControlType.DPadDown,
 					Source = Button6,
+				},
+				new InputControlMapping {
+					Handle = "DPad Left",
+					Target = InputControlType.DPadLeft,
+					Source = Button7
+				},
+				new InputControlMapping {
+					Handle = "DPad Right",
+					Target = InputControlType.DPadRight,
+					Source = Button8
 				},
 				new InputControlMapping {
 					Handle = "Left Bumper",
@@ -99,46 +99,21 @@ namespace InControl
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog2
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog3,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Left Trigger",
-					Target = InputControlType.LeftTrigger,
-					Source = Analog4,
-					SourceRange = InputControlMapping.Range.Complete,
-					TargetRange = InputControlMapping.Range.Positive,
-					IgnoreInitialZeroValue = true
-				},
-				new InputControlMapping {
-					Handle = "Right Trigger",
-					Target = InputControlType.RightTrigger,
-					Source = Analog5,
-					SourceRange = InputControlMapping.Range.Complete,
-					TargetRange = InputControlMapping.Range.Positive,
-					IgnoreInitialZeroValue = true
-				}
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog2 ),
+				RightStickRightMapping( Analog2 ),
+				RightStickUpMapping( Analog3 ),
+				RightStickDownMapping( Analog3 ),
+
+				LeftTriggerMapping( Analog4 ),
+				RightTriggerMapping( Analog5 ),
 			};
 		}
 	}
+	// @endcond
 }
 

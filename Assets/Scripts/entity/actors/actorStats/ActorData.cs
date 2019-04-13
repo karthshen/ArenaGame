@@ -29,7 +29,7 @@ public abstract class ActorData
     private string abilityTriggerAnimation;
     private string abilityBumperAnimation;
     private string jumpAnimation;
-    private string deathAnimation;
+    private string deathAnimation = "animation,10";
     private string idleAnimation = "animation,13";
 
     //Sound FX

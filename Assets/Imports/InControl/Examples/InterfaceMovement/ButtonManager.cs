@@ -1,17 +1,20 @@
-﻿using UnityEngine;
-using InControl;
-
-
-namespace InterfaceMovement
+﻿namespace InterfaceMovement
 {
+	using InControl;
+	using UnityEngine;
+
+
 	public class ButtonManager : MonoBehaviour
 	{
 		public Button focusedButton;
 
+		TwoAxisInputControl filteredDirection;
+
 
 		void Awake()
 		{
-			TwoAxisInputControl.StateThreshold = 0.7f;
+			filteredDirection = new TwoAxisInputControl();
+			filteredDirection.StateThreshold = 0.5f;
 		}
 
 
@@ -19,19 +22,34 @@ namespace InterfaceMovement
 		{
 			// Use last device which provided input.
 			var inputDevice = InputManager.ActiveDevice;
+			filteredDirection.Filter( inputDevice.Direction, Time.deltaTime );
+//			filteredDirection = inputDevice.Direction;
+
+			if (filteredDirection.Left.WasRepeated)
+			{
+				Debug.Log( "!!!" );
+			}
 
 			// Move focus with directional inputs.
-			if (inputDevice.Direction.Up.WasPressed)
+			if (filteredDirection.Up.WasPressed)
+			{
 				MoveFocusTo( focusedButton.up );
+			}
 			
-			if (inputDevice.Direction.Down.WasPressed) 
+			if (filteredDirection.Down.WasPressed)
+			{
 				MoveFocusTo( focusedButton.down );
+			}
 			
-			if (inputDevice.Direction.Left.WasPressed) 
+			if (filteredDirection.Left.WasPressed)
+			{
 				MoveFocusTo( focusedButton.left );
+			}
 			
-			if (inputDevice.Direction.Right.WasPressed)
+			if (filteredDirection.Right.WasPressed)
+			{
 				MoveFocusTo( focusedButton.right );
+			}
 		}
 		
 		

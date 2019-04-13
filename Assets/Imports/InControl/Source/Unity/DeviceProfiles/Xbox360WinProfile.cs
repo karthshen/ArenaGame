@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -9,17 +6,23 @@ namespace InControl
 	{
 		public Xbox360WinProfile()
 		{
-			Name = "XBox 360 Controller";
-			Meta = "XBox 360 Controller on Windows";
+			Name = "Xbox 360 Controller";
+			Meta = "Xbox 360 Controller on Windows";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.Xbox360;
+
+			IncludePlatforms = new[] {
 				"Windows"
 			};
 
 			JoystickNames = new[] {
+				"AIRFLO             ",
+				"AxisPad",
 				"Controller (Afterglow Gamepad for Xbox 360)",
 				"Controller (Batarang wired controller (XBOX))",
 				"Controller (Gamepad for Xbox 360)",
+				"Controller (GPX Gamepad)",
 				"Controller (Infinity Controller 360)",
 				"Controller (Mad Catz FPS Pro GamePad)",
 				"Controller (MadCatz Call of Duty GamePad)",
@@ -27,10 +30,23 @@ namespace InControl
 				"Controller (MLG GamePad for Xbox 360)",
 				"Controller (Razer Sabertooth Elite)",
 				"Controller (Rock Candy Gamepad for Xbox 360)",
+				"Controller (SL-6566)",
 				"Controller (Xbox 360 For Windows)",
 				"Controller (Xbox 360 Wireless Receiver for Windows)",
+				"Controller (Xbox Airflo wired controller)",
+				"Controller (XEOX Gamepad)",
+				"Cyborg V.3 Rumble Pad",
+				"Generic USB Joystick ",
+				"MadCatz GamePad (Controller)",
+				"Saitek P990 Dual Analog Pad",
+				"SL-6566 (Controller)",
+				"USB Gamepad ",
+				"WingMan RumblePad",
 				"XBOX 360 For Windows (Controller)",
-				"Controller (XEOX Gamepad)" // Speedlink XEOX Pro Analog Gamepad
+				"XEOX Gamepad (Controller)",
+				"XEQX Gamepad SL-6556-BK",
+				"Controller (<BETOP GAME FOR WINDOWS>)",
+				"Controller (Inno GamePad..)"
 			};
 
 			LastResortRegex = "360|xbox|catz";
@@ -89,85 +105,53 @@ namespace InControl
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog3
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog4,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Left",
-					Target = InputControlType.DPadLeft,
-					Source = Analog5,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Right",
-					Target = InputControlType.DPadRight,
-					Source = Analog5,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Up",
-					Target = InputControlType.DPadUp,
-					Source = Analog6,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Down",
-					Target = InputControlType.DPadDown,
-					Source = Analog6,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog3 ),
+				RightStickRightMapping( Analog3 ),
+				RightStickUpMapping( Analog4 ),
+				RightStickDownMapping( Analog4 ),
+
+				DPadLeftMapping( Analog5 ),
+				DPadRightMapping( Analog5 ),
+				DPadUpMapping2( Analog6 ),
+				DPadDownMapping2( Analog6 ),
+
 				new InputControlMapping {
 					Handle = "Left Trigger",
 					Target = InputControlType.LeftTrigger,
 					Source = Analog2,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive,
+					SourceRange = InputRange.ZeroToOne,
+					TargetRange = InputRange.ZeroToOne,
 				},
 				new InputControlMapping {
 					Handle = "Right Trigger",
 					Target = InputControlType.RightTrigger,
 					Source = Analog2,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
+					SourceRange = InputRange.ZeroToMinusOne,
+					TargetRange = InputRange.ZeroToOne,
 				},
+
 				new InputControlMapping {
 					Handle = "Left Trigger",
 					Target = InputControlType.LeftTrigger,
-					Source = Analog8
+					Source = Analog( 8 ),
+					SourceRange = InputRange.ZeroToOne,
+					TargetRange = InputRange.ZeroToOne,
 				},
 				new InputControlMapping {
 					Handle = "Right Trigger",
 					Target = InputControlType.RightTrigger,
-					Source = Analog9
-				}
+					Source = Analog( 9 ),
+					SourceRange = InputRange.ZeroToOne,
+					TargetRange = InputRange.ZeroToOne,
+				},
 			};
 		}
 	}
+	// @endcond
 }
 

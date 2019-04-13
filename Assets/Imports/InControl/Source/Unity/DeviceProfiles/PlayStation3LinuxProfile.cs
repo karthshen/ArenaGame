@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -12,7 +9,10 @@ namespace InControl
 			Name = "PlayStation 3 Controller";
 			Meta = "PlayStation 3 Controller on Linux";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.PlayStation3;
+
+			IncludePlatforms = new[] {
 				"Linux"
 			};
 
@@ -21,7 +21,7 @@ namespace InControl
 				"SHENGHIC 2009/0708ZXW-V1Inc. PLAYSTATION(R)3Conteroller" // Not a typo.
 			};
 
-			MaxUnityVersion = new VersionInfo( 4, 9 );
+			MaxUnityVersion = new VersionInfo( 4, 9, 0, 0 );
 
 			ButtonMappings = new[] {
 				new InputControlMapping {
@@ -112,30 +112,18 @@ namespace InControl
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog2
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog3,
-					Invert = true
-				}
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog2 ),
+				RightStickRightMapping( Analog2 ),
+				RightStickUpMapping( Analog3 ),
+				RightStickDownMapping( Analog3 ),
 			};
 		}
 	}
+	// @endcond
 }
 

@@ -1,18 +1,16 @@
 // Copyright (c) 2012-2013 Rotorz Limited. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-using UnityEngine;
-using UnityEditor;
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using InControl.ReorderableList.Internal;
-
+#if UNITY_EDITOR
 namespace InControl.ReorderableList
 {
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel;
+	using Internal;
+	using UnityEditor;
+	using UnityEngine;
+
 
 	/// <summary>
 	/// Arguments which are passed to <see cref="ItemInsertedEventHandler"/>.
@@ -54,7 +52,7 @@ namespace InControl.ReorderableList
 	/// </summary>
 	/// <param name="sender">Object which raised event.</param>
 	/// <param name="args">Event arguments.</param>
-	public delegate void ItemInsertedEventHandler( object sender,ItemInsertedEventArgs args );
+	public delegate void ItemInsertedEventHandler( object sender, ItemInsertedEventArgs args );
 
 	/// <summary>
 	/// Arguments which are passed to <see cref="ItemRemovingEventHandler"/>.
@@ -93,7 +91,7 @@ namespace InControl.ReorderableList
 	/// </remarks>
 	/// <param name="sender">Object which raised event.</param>
 	/// <param name="args">Event arguments.</param>
-	public delegate void ItemRemovingEventHandler( object sender,ItemRemovingEventArgs args );
+	public delegate void ItemRemovingEventHandler( object sender, ItemRemovingEventArgs args );
 
 	/// <summary>
 	/// Base class for custom reorderable list control.
@@ -157,7 +155,7 @@ namespace InControl.ReorderableList
 		/// <returns>
 		/// The modified value.
 		/// </returns>
-		public delegate T ItemDrawer<T>( Rect position,T item );
+		public delegate T ItemDrawer<T>( Rect position, T item );
 
 		/// <summary>
 		/// Invoked to draw content for empty list.
@@ -238,11 +236,12 @@ namespace InControl.ReorderableList
 			s_CurrentItemIndex = new Stack<int>();
 			s_CurrentItemIndex.Push( -1 );
 
-			if (EditorGUIUtility.isProSkin)
+			if (InControl.Internal.EditorUtility.IsProSkin)
 			{
 				AnchorBackgroundColor = new Color( 85f / 255f, 85f / 255f, 85f / 255f, 0.85f );
 				TargetBackgroundColor = new Color( 0, 0, 0, 0.5f );
-			} else
+			}
+			else
 			{
 				AnchorBackgroundColor = new Color( 225f / 255f, 225f / 255f, 225f / 255f, 0.85f );
 				TargetBackgroundColor = new Color( 0, 0, 0, 0.5f );
@@ -266,7 +265,7 @@ namespace InControl.ReorderableList
 		{
 			int controlID = GUIUtility.GetControlID( FocusType.Passive );
 
-			var control = GUIUtility.GetStateObject( typeof(ReorderableListControl), controlID ) as ReorderableListControl;
+			var control = GUIUtility.GetStateObject( typeof( ReorderableListControl ), controlID ) as ReorderableListControl;
 			control.flags = flags;
 			control.Draw( controlID, adaptor, drawEmpty );
 		}
@@ -282,7 +281,7 @@ namespace InControl.ReorderableList
 		{
 			int controlID = GUIUtility.GetControlID( FocusType.Passive );
 
-			var control = GUIUtility.GetStateObject( typeof(ReorderableListControl), controlID ) as ReorderableListControl;
+			var control = GUIUtility.GetStateObject( typeof( ReorderableListControl ), controlID ) as ReorderableListControl;
 			control.flags = flags;
 			control.Draw( position, controlID, adaptor, drawEmpty );
 		}
@@ -492,9 +491,10 @@ namespace InControl.ReorderableList
 
 			if ((flags & ReorderableListFlags.ShowIndices) != 0)
 			{
-				int digitCount = Mathf.Max( 2, Mathf.CeilToInt( Mathf.Log10( (float)adaptor.Count ) ) );
+				int digitCount = Mathf.Max( 2, Mathf.CeilToInt( Mathf.Log10( (float) adaptor.Count ) ) );
 				_indexLabelWidth = digitCount * 8 + 8;
-			} else
+			}
+			else
 			{
 				_indexLabelWidth = 0;
 			}
@@ -558,8 +558,8 @@ namespace InControl.ReorderableList
 			switch (Event.current.GetTypeForControl( controlID ))
 			{
 			case EventType.MouseDown:
-					// Do not allow button to be pressed using right mouse button since
-					// context menu should be shown instead!
+				// Do not allow button to be pressed using right mouse button since
+				// context menu should be shown instead!
 				if (GUI.enabled && Event.current.button != 1 && position.Contains( mousePosition ))
 				{
 					GUIUtility.hotControl = controlID;
@@ -582,7 +582,8 @@ namespace InControl.ReorderableList
 					{
 						Event.current.Use();
 						return true;
-					} else
+					}
+					else
 					{
 						Event.current.Use();
 						return false;
@@ -594,8 +595,8 @@ namespace InControl.ReorderableList
 				if (visible)
 				{
 					var content = (GUIUtility.hotControl == controlID && position.Contains( mousePosition ))
-							? s_RemoveButtonActiveContent
-							: s_RemoveButtonNormalContent;
+						? s_RemoveButtonActiveContent
+						: s_RemoveButtonNormalContent;
 					removeButtonStyle.Draw( position, content, controlID );
 				}
 				break;
@@ -654,7 +655,8 @@ namespace InControl.ReorderableList
 				s_TargetIndex = Mathf.Clamp( s_TargetIndex, 0, adaptor.Count + 1 );
 				if (s_TargetIndex != s_AnchorIndex && s_TargetIndex != s_AnchorIndex + 1)
 					MoveItem( adaptor, s_AnchorIndex, s_TargetIndex );
-			} finally
+			}
+			finally
 			{
 				StopTrackingReorderDrag();
 			}
@@ -741,7 +743,8 @@ namespace InControl.ReorderableList
 					ShowContextMenu( _controlID, itemIndex, adaptor );
 					Event.current.Use();
 				}
-			} finally
+			}
+			finally
 			{
 				s_CurrentItemIndex.Pop();
 			}
@@ -831,7 +834,8 @@ namespace InControl.ReorderableList
 					// Reset target index and adjust when looping through list items.
 					if (mousePosition.y < firstItemY)
 						newTargetIndex = 0;
-					else if (mousePosition.y >= position.yMax)
+					else
+					if (mousePosition.y >= position.yMax)
 						newTargetIndex = adaptor.Count;
 
 					s_DragItemPosition.y = Mathf.Clamp( mousePosition.y + s_AnchorMouseOffset, firstItemY, position.yMax - s_DragItemPosition.height - 1 );
@@ -866,7 +870,8 @@ namespace InControl.ReorderableList
 					{
 						DoCommand( s_ContextCommandName, itemIndex, adaptor );
 						Event.current.Use();
-					} finally
+					}
+					finally
 					{
 						s_ContextControlID = 0;
 						s_ContextItemIndex = 0;
@@ -875,8 +880,10 @@ namespace InControl.ReorderableList
 				break;
 
 			case EventType.Repaint:
-					// Draw caption area of list.
+				// Draw caption area of list.
+				InControl.Internal.EditorUtility.SetTintColor();
 				containerStyle.Draw( position, GUIContent.none, false, false, false, false );
+				InControl.Internal.EditorUtility.PopTintColor();
 				break;
 			}
 
@@ -924,7 +931,9 @@ namespace InControl.ReorderableList
 					{
 						if (s_DragItemPosition.yMax > lastMidPoint && s_DragItemPosition.yMax < midpoint)
 							newTargetIndex = i;
-					} else if (s_TargetIndex > i)
+					}
+					else
+					if (s_TargetIndex > i)
 					{
 						if (s_DragItemPosition.y > lastMidPoint && s_DragItemPosition.y < midpoint)
 							newTargetIndex = i;
@@ -986,15 +995,15 @@ namespace InControl.ReorderableList
 							}
 						}
 						break;
-/* DEBUG
-						case EventType.Repaint:
-							GUI.color = Color.red;
-							GUI.DrawTexture(new Rect(0, lastMidPoint, 10, 1), EditorGUIUtility.whiteTexture);
-							GUI.color = Color.yellow;
-							GUI.DrawTexture(new Rect(5, itemPosition.y + itemPosition.height / 2f, 10, 1), EditorGUIUtility.whiteTexture);
-							GUI.color = Color.white;
-							break;
-//*/
+						/* DEBUG
+												case EventType.Repaint:
+													GUI.color = Color.red;
+													GUI.DrawTexture(new Rect(0, lastMidPoint, 10, 1), EditorGUIUtility.whiteTexture);
+													GUI.color = Color.yellow;
+													GUI.DrawTexture(new Rect(5, itemPosition.y + itemPosition.height / 2f, 10, 1), EditorGUIUtility.whiteTexture);
+													GUI.color = Color.white;
+													break;
+						//*/
 					}
 				}
 			}
@@ -1015,13 +1024,13 @@ namespace InControl.ReorderableList
 				}
 
 				DrawFloatingListItem( eventType, adaptor, targetSlotPosition );
-/* DEBUG
-				if (eventType == EventType.Repaint) {
-					GUI.color = Color.blue;
-					GUI.DrawTexture(new Rect(100, lastMidPoint, 20, 1), EditorGUIUtility.whiteTexture);
-					GUI.color = Color.white;
-				}
-//*/
+				/* DEBUG
+								if (eventType == EventType.Repaint) {
+									GUI.color = Color.blue;
+									GUI.DrawTexture(new Rect(100, lastMidPoint, 20, 1), EditorGUIUtility.whiteTexture);
+									GUI.color = Color.white;
+								}
+				//*/
 			}
 
 			// Fake control to catch input focus if auto focus was not possible.
@@ -1057,11 +1066,11 @@ namespace InControl.ReorderableList
 			if (hasAddButton)
 			{
 				Rect addButtonRect = new Rect(
-					position.xMax - addButtonStyle.fixedWidth,
-					position.yMax - 1,
-					addButtonStyle.fixedWidth,
-					addButtonStyle.fixedHeight
-				);
+										 position.xMax - addButtonStyle.fixedWidth,
+										 position.yMax - 1,
+										 addButtonStyle.fixedWidth,
+										 addButtonStyle.fixedHeight
+									 );
 				DoAddButton( addButtonRect, controlID, adaptor );
 			}
 		}
@@ -1088,7 +1097,8 @@ namespace InControl.ReorderableList
 			{
 				totalHeight = CalculateListHeight( adaptor );
 				s_ContainerHeightCache[controlID] = totalHeight;
-			} else
+			}
+			else
 			{
 				totalHeight = s_ContainerHeightCache.ContainsKey( controlID )
 					? s_ContainerHeightCache[controlID]
@@ -1188,7 +1198,9 @@ namespace InControl.ReorderableList
 			else
 				position = DrawLayoutEmptyList( drawEmpty );
 
+			InControl.Internal.EditorUtility.SetTintColor();
 			DrawFooterControls( position, controlID, adaptor );
+			InControl.Internal.EditorUtility.PopTintColor();
 		}
 
 		/// <inheritdoc cref="Draw(int, IReorderableListAdaptor, DrawEmpty)"/>
@@ -1225,7 +1237,8 @@ namespace InControl.ReorderableList
 			{
 				DrawListContainerAndItems( position, controlID, adaptor );
 				CheckForAutoFocusControl( controlID );
-			} else
+			}
+			else
 			{
 				DrawEmptyListControl( position, drawEmpty );
 			}
@@ -1680,7 +1693,6 @@ namespace InControl.ReorderableList
 		}
 
 		#endregion
-
 	}
-
 }
+#endif

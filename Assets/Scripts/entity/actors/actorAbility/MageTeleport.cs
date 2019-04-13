@@ -27,7 +27,7 @@ public class MageTeleport : Ability
     {
         bolt = GameObject.FindObjectOfType<MageTeleportBolt>();
 
-        if (bolt)
+        if (bolt && bolt.tpState == MageTeleportBolt.TeleportBoltState.Landed)
             return true;
         else
             return false;

@@ -14,7 +14,7 @@ public class ArcherClawhook : ProjectileItem
 
     [SerializeField]
     private float retractionForce = 100f;
-    private float velocity = 15.0f;
+    private float velocity = 20.0f;
     private float moveConstant = 1f;
     private float positionHorizontal = 0.05f;
     private float angleJoystick = 0f;

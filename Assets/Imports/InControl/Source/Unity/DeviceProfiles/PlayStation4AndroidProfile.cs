@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -13,8 +10,15 @@ namespace InControl
 			Name = "PlayStation 4 Controller";
 			Meta = "PlayStation 4 Controller on Android";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.PlayStation4;
+
+			IncludePlatforms = new[] {
 				"Android"
+			};
+
+			ExcludePlatforms = new[] {
+				"Amazon AFT"
 			};
 
 			JoystickNames = new[] {
@@ -75,74 +79,38 @@ namespace InControl
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog13
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog14,
-					Invert = true
-				},
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog13 ),
+				RightStickRightMapping( Analog13 ),
+				RightStickUpMapping( Analog14 ),
+				RightStickDownMapping( Analog14 ),
+
+				DPadLeftMapping( Analog4 ),
+				DPadRightMapping( Analog4 ),
+				DPadUpMapping( Analog5 ),
+				DPadDownMapping( Analog5 ),
+
 				new InputControlMapping {
 					Handle = "Left Trigger",
 					Target = InputControlType.LeftTrigger,
 					Source = Analog2,
-					SourceRange = InputControlMapping.Range.Complete,
-					TargetRange = InputControlMapping.Range.Positive,
+					SourceRange = InputRange.MinusOneToOne,
+					TargetRange = InputRange.ZeroToOne
 				},
 				new InputControlMapping {
 					Handle = "Right Trigger",
 					Target = InputControlType.RightTrigger,
 					Source = Analog3,
-					SourceRange = InputControlMapping.Range.Complete,
-					TargetRange = InputControlMapping.Range.Positive,
+					SourceRange = InputRange.MinusOneToOne,
+					TargetRange = InputRange.ZeroToOne
 				},
-				new InputControlMapping {
-					Handle = "DPad Left",
-					Target = InputControlType.DPadLeft,
-					Source = Analog4,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Right",
-					Target = InputControlType.DPadRight,
-					Source = Analog4,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Up",
-					Target = InputControlType.DPadUp,
-					Source = Analog5,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Down",
-					Target = InputControlType.DPadDown,
-					Source = Analog5,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive,
-				}
 			};
 		}
 	}
+	// @endcond
 }
 

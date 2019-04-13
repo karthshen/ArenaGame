@@ -1,11 +1,5 @@
-﻿using System;
-
-
-namespace InControl
+﻿namespace InControl
 {
-	// Tested with ADT-1
-	// Profile by Artūras 'arturaz' Šlajus <arturas@tinylabproductions.com>
-	//
 	// @cond nodoc
 	[AutoDiscover]
 	public class AndroidTVProfile : UnityInputDeviceProfile
@@ -15,12 +9,18 @@ namespace InControl
 			Name = "Android TV Controller";
 			Meta = "Android TV Controller on Android TV";
 
-			SupportedPlatforms = new[] { 
+			DeviceClass = InputDeviceClass.Controller;
+
+			IncludePlatforms = new[] {
 				"Android"
 			};
 
-			JoystickNames = new[] { 
-				"Gamepad" 
+			ExcludePlatforms = new[] {
+				"Amazon AFT"
+			};
+
+			JoystickNames = new[] {
+				"Gamepad"
 			};
 
 			ButtonMappings = new[] {
@@ -63,62 +63,35 @@ namespace InControl
 					Handle = "Right Stick Button",
 					Target = InputControlType.RightStickButton,
 					Source = Button9
-				}
+				},
+				new InputControlMapping {
+					Handle = "Start",
+					Target = InputControlType.Start,
+					Source = Button12
+				},
+				new InputControlMapping {
+					Handle = "Back",
+					Target = InputControlType.Back,
+					Source = EscapeKey
+				},
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog2
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog3,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Left",
-					Target = InputControlType.DPadLeft,
-					Source = Analog4,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Right",
-					Target = InputControlType.DPadRight,
-					Source = Analog4,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Up",
-					Target = InputControlType.DPadUp,
-					Source = Analog5,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative
-				},
-				new InputControlMapping {
-					Handle = "DPad Down",
-					Target = InputControlType.DPadDown,
-					Source = Analog5,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive,
-					Invert = true
-				},
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog2 ),
+				RightStickRightMapping( Analog2 ),
+				RightStickUpMapping( Analog3 ),
+				RightStickDownMapping( Analog3 ),
+
+				DPadLeftMapping( Analog4 ),
+				DPadRightMapping( Analog4 ),
+				DPadUpMapping( Analog5 ),
+				DPadDownMapping( Analog5 ),
+
 				new InputControlMapping {
 					Handle = "Left Trigger",
 					Target = InputControlType.LeftTrigger,
@@ -132,4 +105,5 @@ namespace InControl
 			};
 		}
 	}
+	// @endcond
 }

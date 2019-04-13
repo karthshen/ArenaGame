@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -12,8 +9,12 @@ namespace InControl
 			Name = "Apple MFi Controller";
 			Meta = "Apple MFi Controller on iOS";
 
-			SupportedPlatforms = new[] {
-				"iPhone"
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.AppleMFi;
+
+			IncludePlatforms = new[] {
+				"iPhone",
+				"iPad"
 			};
 
 			LastResortRegex = ""; // Match anything.
@@ -77,6 +78,7 @@ namespace InControl
 					Target = InputControlType.Pause,
 					Source = Button0
 				},
+#if !UNITY_5_3_OR_NEWER
 				new InputControlMapping {
 					Handle = "Left Trigger",
 					Target = InputControlType.LeftTrigger,
@@ -87,33 +89,35 @@ namespace InControl
 					Target = InputControlType.RightTrigger,
 					Source = Button11
 				}
+#endif
 			};
 
 			AnalogMappings = new[] {
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog2 ),
+				RightStickRightMapping( Analog2 ),
+				RightStickUpMapping( Analog3 ),
+				RightStickDownMapping( Analog3 ),
+
+#if UNITY_5_3_OR_NEWER
 				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
+					Handle = "Left Trigger",
+					Target = InputControlType.LeftTrigger,
+					Source = Analog10
 				},
 				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog2
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog3,
-					Invert = true
+					Handle = "Right Trigger",
+					Target = InputControlType.RightTrigger,
+					Source = Analog11
 				}
+#endif
 			};
 		}
 	}
+	// @endcond
 }
 

@@ -1,17 +1,21 @@
-using System;
-using UnityEngine;
-
-
 namespace InControl
 {
+	using UnityEngine;
+
+
 	public class UnityMouseButtonSource : InputControlSource
 	{
-		int buttonId;
+		public int ButtonId;
+
+
+		public UnityMouseButtonSource()
+		{
+		}
 
 
 		public UnityMouseButtonSource( int buttonId )
 		{
-			this.buttonId = buttonId;
+			ButtonId = buttonId;
 		}
 
 
@@ -23,7 +27,7 @@ namespace InControl
 
 		public bool GetState( InputDevice inputDevice )
 		{
-			return Input.GetMouseButton( buttonId );
+			return Input.GetMouseButton( ButtonId );
 		}
 	}
 }

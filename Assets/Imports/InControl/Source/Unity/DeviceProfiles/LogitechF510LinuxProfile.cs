@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -12,7 +9,10 @@ namespace InControl
 			Name = "Logitech F510 Controller";
 			Meta = "Logitech F510 Controller on Linux";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.Xbox360;
+
+			IncludePlatforms = new[] {
 				"Linux"
 			};
 
@@ -20,7 +20,7 @@ namespace InControl
 				"Logitech Gamepad F510"
 			};
 
-			MaxUnityVersion = new VersionInfo( 4, 9 );
+			MaxUnityVersion = new VersionInfo( 4, 9, 0, 0 );
 
 			ButtonMappings = new[] {
 				new InputControlMapping {
@@ -76,28 +76,21 @@ namespace InControl
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog3
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog4,
-					Invert = true
-				},
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog3 ),
+				RightStickRightMapping( Analog3 ),
+				RightStickUpMapping( Analog4 ),
+				RightStickDownMapping( Analog4 ),
+
+				DPadLeftMapping( Analog6 ),
+				DPadRightMapping( Analog6 ),
+				DPadUpMapping( Analog7 ),
+				DPadDownMapping( Analog7 ),
+
 				new InputControlMapping {
 					Handle = "Left Trigger",
 					Target = InputControlType.LeftTrigger,
@@ -108,38 +101,9 @@ namespace InControl
 					Target = InputControlType.RightTrigger,
 					Source = Analog5
 				},
-				new InputControlMapping {
-					Handle = "DPad Left",
-					Target = InputControlType.DPadLeft,
-					Source = Analog6,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Right",
-					Target = InputControlType.DPadRight,
-					Source = Analog6,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Up",
-					Target = InputControlType.DPadUp,
-					Source = Analog7,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Down",
-					Target = InputControlType.DPadDown,
-					Source = Analog7,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				}
 			};
 		}
 	}
+	// @endcond
 }
 

@@ -172,7 +172,7 @@ public class PlayerTest
 
         testActor.GetComponent<TestActor>().CallStart();
 
-        inputDevice = new InputDevice("");
+        inputDevice = new InputDevice();
         inputDevice.TestControl();
     }
 

@@ -1,13 +1,12 @@
 ﻿#if UNITY_4_3
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-using UnityEngine;
-
-
 namespace InControl
 {
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
+	using UnityEngine;
+
+
 	public class RangeAttribute : PropertyAttribute
 	{
 		public float min;
@@ -40,6 +39,5 @@ namespace InControl
 	}
 #endif
 }
-
 #endif
 

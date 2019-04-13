@@ -126,7 +126,7 @@ public class ActorStandingState : ActorState
                 return new ActorTriggerAbilityState();
             }
         }
-        else if(inputDevice.RightBumper && actor.abilityBumper != null)
+        else if(inputDevice.RightBumper.WasPressed && actor.abilityBumper != null)
         {
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {

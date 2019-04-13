@@ -1,6 +1,3 @@
-using System;
-
-
 namespace InControl
 {
 	// @cond nodoc
@@ -12,7 +9,10 @@ namespace InControl
 			Name = "PlayStation 3 Controller";
 			Meta = "PlayStation 3 Controller on Windows (via MotioninJoy Gamepad Tool)";
 
-			SupportedPlatforms = new[] {
+			DeviceClass = InputDeviceClass.Controller;
+			DeviceStyle = InputDeviceStyle.PlayStation3;
+
+			IncludePlatforms = new[] {
 				"Windows"
 			};
 
@@ -69,17 +69,17 @@ namespace InControl
 				new InputControlMapping {
 					Handle = "Left Stick Button",
 					Target = InputControlType.LeftStickButton,
-					Source = Button9
+					Source = Button10
 				},
 				new InputControlMapping {
 					Handle = "Right Stick Button",
 					Target = InputControlType.RightStickButton,
-					Source = Button10
+					Source = Button11
 				},
 				new InputControlMapping {
 					Handle = "Start",
 					Target = InputControlType.Start,
-					Source = Button11
+					Source = Button9
 				},
 				new InputControlMapping {
 					Handle = "System",
@@ -89,70 +89,34 @@ namespace InControl
 			};
 
 			AnalogMappings = new[] {
-				new InputControlMapping {
-					Handle = "Left Stick X",
-					Target = InputControlType.LeftStickX,
-					Source = Analog0
-				},
-				new InputControlMapping {
-					Handle = "Left Stick Y",
-					Target = InputControlType.LeftStickY,
-					Source = Analog1,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Right Stick X",
-					Target = InputControlType.RightStickX,
-					Source = Analog2
-				},
-				new InputControlMapping {
-					Handle = "Right Stick Y",
-					Target = InputControlType.RightStickY,
-					Source = Analog5,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Left",
-					Target = InputControlType.DPadLeft,
-					Source = Analog8,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "DPad Right",
-					Target = InputControlType.DPadRight,
-					Source = Analog8,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Up",
-					Target = InputControlType.DPadUp,
-					Source = Analog9,
-					SourceRange = InputControlMapping.Range.Positive,
-					TargetRange = InputControlMapping.Range.Positive
-				},
-				new InputControlMapping {
-					Handle = "DPad Down",
-					Target = InputControlType.DPadDown,
-					Source = Analog9,
-					SourceRange = InputControlMapping.Range.Negative,
-					TargetRange = InputControlMapping.Range.Negative,
-					Invert = true
-				},
-				new InputControlMapping {
-					Handle = "Tilt X",
-					Target = InputControlType.TiltX,
-					Source = Analog3
-				},
-				new InputControlMapping {
-					Handle = "Tilt Y",
-					Target = InputControlType.TiltY,
-					Source = Analog4
-				}
+				LeftStickLeftMapping( Analog0 ),
+				LeftStickRightMapping( Analog0 ),
+				LeftStickUpMapping( Analog1 ),
+				LeftStickDownMapping( Analog1 ),
+
+				RightStickLeftMapping( Analog2 ),
+				RightStickRightMapping( Analog2 ),
+				RightStickUpMapping( Analog5 ),
+				RightStickDownMapping( Analog5 ),
+
+				DPadLeftMapping( Analog8 ),
+				DPadRightMapping( Analog8 ),
+				DPadUpMapping2( Analog9 ),
+				DPadDownMapping2( Analog9 ),
+
+//				new InputControlMapping {
+//					Handle = "Tilt X",
+//					Target = InputControlType.TiltX,
+//					Source = Analog3
+//				},
+//				new InputControlMapping {
+//					Handle = "Tilt Y",
+//					Target = InputControlType.TiltY,
+//					Source = Analog4
+//				}
 			};
 		}
 	}
+	// @endcond
 }
 

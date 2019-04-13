@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Thunderstrike : MapItem
 {
-    public float disappearTime = 0.6f;
+    public float disappearTime = 0.4f;
 
     private AActor owner;
 

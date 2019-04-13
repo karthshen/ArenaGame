@@ -1,17 +1,21 @@
-using System;
-using UnityEngine;
-
-
 namespace InControl
 {
+	using UnityEngine;
+
+
 	public class UnityKeyCodeSource : InputControlSource
 	{
-		KeyCode[] keyCodeList;
+		public KeyCode[] KeyCodeList;
+
+
+		public UnityKeyCodeSource()
+		{
+		}
 		
 		
 		public UnityKeyCodeSource( params KeyCode[] keyCodeList )
 		{
-			this.keyCodeList = keyCodeList;
+			KeyCodeList = keyCodeList;
 		}
 
 
@@ -23,9 +27,9 @@ namespace InControl
 
 		public bool GetState( InputDevice inputDevice )
 		{
-			for (int i = 0; i < keyCodeList.Length; i++)
+			for (var i = 0; i < KeyCodeList.Length; i++)
 			{
-				if (Input.GetKey( keyCodeList[i] ))
+				if (Input.GetKey( KeyCodeList[i] ))
 				{
 					return true;
 				}

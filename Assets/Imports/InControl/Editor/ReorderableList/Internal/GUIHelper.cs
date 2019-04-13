@@ -1,15 +1,14 @@
 // Copyright (c) 2012-2013 Rotorz Limited. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-using UnityEngine;
-using UnityEditor;
-
-using System;
-using System.Reflection;
-
+#if UNITY_EDITOR
 namespace InControl.ReorderableList.Internal
 {
+	using System;
+	using System.Reflection;
+	using UnityEditor;
+	using UnityEngine;
+
 
 	/// <summary>
 	/// Utility functions to assist with GUIs.
@@ -19,19 +18,19 @@ namespace InControl.ReorderableList.Internal
 
 		static GUIHelper()
 		{
-			var tyGUIClip = typeof(GUI).Assembly.GetType( "UnityEngine.GUIClip" );
+			var tyGUIClip = typeof( GUI ).Assembly.GetType( "UnityEngine.GUIClip" );
 			if (tyGUIClip != null)
 			{
 				var piVisibleRect = tyGUIClip.GetProperty( "visibleRect", BindingFlags.Static | BindingFlags.Public );
 				if (piVisibleRect != null)
-					VisibleRect = (Func<Rect>)Delegate.CreateDelegate( typeof(Func<Rect>), piVisibleRect.GetGetMethod() );
+					VisibleRect = (Func<Rect>) Delegate.CreateDelegate( typeof( Func<Rect> ), piVisibleRect.GetGetMethod() );
 			}
 
-			var miFocusTextInControl = typeof(EditorGUI).GetMethod( "FocusTextInControl", BindingFlags.Static | BindingFlags.Public );
+			var miFocusTextInControl = typeof( EditorGUI ).GetMethod( "FocusTextInControl", BindingFlags.Static | BindingFlags.Public );
 			if (miFocusTextInControl == null)
-				miFocusTextInControl = typeof(GUI).GetMethod( "FocusControl", BindingFlags.Static | BindingFlags.Public );
+				miFocusTextInControl = typeof( GUI ).GetMethod( "FocusControl", BindingFlags.Static | BindingFlags.Public );
 
-			FocusTextInControl = (Action<string>)Delegate.CreateDelegate( typeof(Action<string>), miFocusTextInControl );
+			FocusTextInControl = (Action<string>) Delegate.CreateDelegate( typeof( Action<string> ), miFocusTextInControl );
 		}
 
 		/// <summary>
@@ -46,7 +45,6 @@ namespace InControl.ReorderableList.Internal
 		/// Focus control and text editor where applicable.
 		/// </summary>
 		public static Action<string> FocusTextInControl;
-
 	}
-
 }
+#endif

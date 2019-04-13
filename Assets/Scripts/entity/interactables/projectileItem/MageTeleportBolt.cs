@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MageTeleportBolt : ProjectileItem
 {
-    enum TeleportBoltState
+    public enum TeleportBoltState
     {
         Flying = 1,
         Landed = 2,
@@ -21,7 +21,7 @@ public class MageTeleportBolt : ProjectileItem
     private bool hasPlayed = false;
     private Vector3 throwForce;
 
-    private TeleportBoltState tpState;
+    public TeleportBoltState tpState;
 
     private AudioSource audioSource;
 
@@ -53,6 +53,8 @@ public class MageTeleportBolt : ProjectileItem
     public override void ProjectileFinish()
     {
         tpState = TeleportBoltState.Landed;
+        GetComponentInChildren<Collider>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
     }
 
     private void OnCollisionEnter(Collision collision)
