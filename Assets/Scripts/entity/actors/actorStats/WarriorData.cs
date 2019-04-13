@@ -20,6 +20,6 @@
         //AbilityUpSound = SoundManager.instance.boomrang;
         AbilityDownSound = SoundManager.instance.sword_attack3;
         AbilityHorizSound = SoundManager.instance.shieldslam;
-        //AbilityTriggerSound
+        AbilityTriggerSound = SoundManager.instance.hookshoot;
     }
 }

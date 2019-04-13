@@ -18,6 +18,7 @@ public class WarriorMechanicalHook : ProjectileItem
     private float moveConstant = 1f;
     private float positionHorizontal = 0.05f;
     private float angleJoystick = 0f;
+    private float hookbackTimer = 0f;
     private bool hasPlayed = false;
 
     private Vector3 rootPosition;
@@ -33,6 +34,7 @@ public class WarriorMechanicalHook : ProjectileItem
     private const float SHOOT_OUT_DURATION = 1f;
     private const float CLAW_STAY_TIME = 1.0f;
     private const float MAX_TRAVEL_DISTANCE = 9.0f;
+    private const float HOOK_BACK_TIMER = 0.35f;
 
     private float timer = 0f;
 
@@ -105,6 +107,12 @@ public class WarriorMechanicalHook : ProjectileItem
             hitActor.GetRigidbody().AddForce((owner.transform.position - transform.position) * retractionForce * 1.3f / distance);
             owner.AttackCode = System.Guid.NewGuid();
             hitActor.FreezeWithNoForce(2f, owner);
+
+            hookbackTimer += Time.deltaTime;
+            if(hookbackTimer >= HOOK_BACK_TIMER)
+            {
+                ProjectileFinish();
+            }
             //owner.GetRigidbody().AddForce((transform.position - owner.transform.position) * retractionForce / (1 / Time.deltaTime));
         }
         else if (clawhookState == ClawhookState.RetractingOthers)
