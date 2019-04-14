@@ -20,6 +20,8 @@ public class Sandbag : AActor
         actorStat = new SandbagData();
         entityName = "Sandbag";
 
+        abilityDown = new ArcherUnleshTheHound(this);
+
         RespawnLives = 100;
 
         InitializeActor();
@@ -29,32 +31,32 @@ public class Sandbag : AActor
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Block()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void GenerateAirAttackQueue()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void GenerateAttackQueue()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Grab()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public override void Unblock()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override float TakeDamage(float damage, AActor attacker)

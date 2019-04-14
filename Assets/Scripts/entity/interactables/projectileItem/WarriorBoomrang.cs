@@ -20,6 +20,7 @@ public class WarriorBoomrang : ProjectileItem
     private const float THROW_OUT_DURATION = 0.6f;
     private const float SPIN_STAY_DURATION = 0.3f;
     private float duration_time = 0f;
+    private float spinin_time = 8f;
 
     private BoomrangAnimation boomrangState;
 
@@ -73,6 +74,12 @@ public class WarriorBoomrang : ProjectileItem
             transform.position = Vector3.MoveTowards(transform.position, ownerPosition, step / 2f);
 
             if (Vector3.Distance(transform.position, owner.transform.position) < 1f)
+            {
+                ProjectileFinish();
+            }
+
+            spinin_time -= Time.deltaTime;
+            if(spinin_time <= 0)
             {
                 ProjectileFinish();
             }

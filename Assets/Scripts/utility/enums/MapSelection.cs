@@ -4,5 +4,6 @@ using System.Collections;
 public enum MapSelection
 {
     Arena = 0,
-    Tavern = 1
+    Tavern = 1,
+    Training = 2
 }

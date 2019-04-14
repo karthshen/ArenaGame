@@ -17,7 +17,7 @@ public class ArcherUnleshTheHound : Ability
     {
         base.AbilityExecute();
 
-        if (!IsHoundSummonable())
+        if (!IsHoundSummonable() && caster.GetType() != typeof(Sandbag))
         {
             return;
         }
