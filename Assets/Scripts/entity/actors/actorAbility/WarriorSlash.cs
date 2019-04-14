@@ -16,10 +16,10 @@ public class WarriorSlash : Ability
         base.AbilityExecute();
 
         caster.CurrentEnergy -= AbilityCost;
-        calibur = Object.Instantiate(Resources.Load("Calibur")) as GameObject;
+        calibur = Object.Instantiate(Resources.Load("Excalibur")) as GameObject;
 
-        Calibur light = calibur.GetComponent<Calibur>();
-        light.SetOwner(caster);
-        light.ProjectileStart();
+        Excalibur light = calibur.GetComponent<Excalibur>();
+        light.Owner = caster;
+        light.ItemStart();
     }
 }

@@ -112,6 +112,19 @@ public class WarriorBoomrang : ProjectileItem
 
         if (hitActor)
         {
+            if (!owner.AttackCode.Equals(hitActor.DamageCode))
+            {
+
+                GameObject fireblast = Object.Instantiate(Resources.Load("ArrowBurst")) as GameObject;
+
+                FireballBurst blast = fireblast.GetComponent<FireballBurst>();
+
+                blast.Owner = owner;
+
+                blast.SetPositionToEnitty(this);
+
+                blast.ItemStart();
+            }
             hitActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
         }
         else if (collision.gameObject.GetComponent<PickupItem>())
