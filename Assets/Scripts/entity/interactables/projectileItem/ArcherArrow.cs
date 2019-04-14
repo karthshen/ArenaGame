@@ -15,6 +15,8 @@ public class ArcherArrow : ProjectileItem
 
     private const float DURATION_TIME = 2.0f;
 
+    private ParticleSystem[] particleSystems;
+
     private float duration_time = 0f;
 
     public float YModifier
@@ -59,10 +61,23 @@ public class ArcherArrow : ProjectileItem
     private void Start()
     {
         GetComponent<Rigidbody>().centerOfMass = com.transform.position;
+        particleSystems = GetComponentsInChildren<ParticleSystem>();
     }
 
     public override void ProjectileFinish()
     {
+        GameObject fireblast = Object.Instantiate(Resources.Load("ArrowBurst")) as GameObject;
+
+        FireballBurst blast = fireblast.GetComponent<FireballBurst>();
+
+        blast.Owner = owner;
+
+        blast.SetPositionToEnitty(this);
+
+        blast.transform.position = com.transform.position;
+
+        blast.ItemStart();
+
         RemoveItem();
     }
 

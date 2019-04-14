@@ -666,7 +666,7 @@ public abstract class AActor : AEntity
         }
     }
 
-    private void BackToStanding()
+    protected virtual void BackToStanding()
     {
         if (state.GetType() != typeof(ActorDeathState))
         {

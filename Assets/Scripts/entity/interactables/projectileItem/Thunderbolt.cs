@@ -17,6 +17,17 @@ public class Thunderbolt : ProjectileItem
     public override void ProjectileFinish()
     {
         SoundManager.instance.PlayEffectWithAudioSource(SoundManager.instance.EffectSource, SoundManager.instance.fireballHit, ref hasPlayed);
+
+        GameObject fireblast = Object.Instantiate(Resources.Load("FireballBurst")) as GameObject;
+
+        FireballBurst blast = fireblast.GetComponent<FireballBurst>();
+
+        blast.Owner = owner;
+
+        blast.SetPositionToEnitty(this);
+
+        blast.ItemStart();
+
         RemoveItem();
     }
 

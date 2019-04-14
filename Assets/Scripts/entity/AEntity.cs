@@ -53,4 +53,9 @@ public abstract class AEntity : MonoBehaviour
     {
         return transform.GetChild(0).rotation.eulerAngles.y * Mathf.PI / 180;
     }
+
+    public void SetPositionToEnitty(AEntity entity)
+    {
+        gameObject.transform.position = entity.transform.position;
+    }
 }

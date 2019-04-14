@@ -1079,9 +1079,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logDebugInfo: 0
   invertYAxis: 0
-  enableXInput: 0
   useFixedUpdate: 0
   dontDestroyOnLoad: 0
+  suspendInBackground: 0
+  enableICade: 0
+  enableXInput: 0
+  xInputOverrideUpdateRate: 0
+  xInputUpdateRate: 0
+  xInputOverrideBufferSize: 0
+  xInputBufferSize: 0
+  enableNativeInput: 1
+  nativeInputEnableXInput: 1
+  nativeInputPreventSleep: 0
+  nativeInputOverrideUpdateRate: 0
+  nativeInputUpdateRate: 0
   customProfiles: []
 --- !u!4 &1805487956
 Transform:
@@ -3048,13 +3059,13 @@ MonoBehaviour:
   stageHazardsButton: {fileID: 6318632307465878699}
   characterSelectButton: {fileID: 6318632308515970404}
   timeLimitList:
+  - 5:00
+  - 6:00
+  - 7:00
   - 1:00
   - 2:00
   - 3:00
   - 4:00
-  - 5:00
-  - 6:00
-  - 7:00
   playerHealthList:
   - 100%
   - 90%
@@ -3085,11 +3096,13 @@ MonoBehaviour:
   itemDropText: {fileID: 1774495070}
   stageHazardText: {fileID: 1191972013}
   mapImageList:
-  - {fileID: 21300000, guid: f82376403c25d1f46958cc0dde0dc9a5, type: 3}
-  - {fileID: 21300000, guid: fe2f045df3625264fbca31998e1dd3ec, type: 3}
+  - {fileID: 21300000, guid: 6ea65b1b76b60c44d9ded1b83b76982a, type: 3}
+  - {fileID: 21300000, guid: 0c4c1a2ffaa776a419257ceea56cb611, type: 3}
+  - {fileID: 21300000, guid: cf708dc7e8fe72841b3fb8e4dd1440d1, type: 3}
   mapNameList:
   - Arena
   - Tavern
+  - Training
   mapImage: {fileID: 6318632308386067270}
   mapName: {fileID: 6318632307300188302}
 --- !u!114 &6318632308498211956

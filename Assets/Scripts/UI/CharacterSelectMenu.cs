@@ -128,7 +128,11 @@ public class CharacterSelectMenu : Menu
             GameStageSetting.Player2Selection = selectedActor;
         }
 
-        if (otherPlayerMenu.SelectionConfirmed)
+        if(otherPlayerMenu == null)
+        {
+            LoadSelectedMap();
+        }
+        else if (otherPlayerMenu.SelectionConfirmed)
         {
             LoadSelectedMap();
         }
@@ -146,6 +150,11 @@ public class CharacterSelectMenu : Menu
         {
             SceneManager.LoadScene("Map2");
             SoundManager.instance.PlayMusic(SoundManager.instance.battle01);
+        }
+        else if(GameStageSetting.SelectedMap == MapSelection.Training)
+        {
+            SceneManager.LoadScene("TrainingScene");
+            SoundManager.instance.PlayMusic(SoundManager.instance.battle00);
         }
     }
 

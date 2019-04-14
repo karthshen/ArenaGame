@@ -20,6 +20,7 @@ public class WarriorBoomrang : ProjectileItem
     private const float THROW_OUT_DURATION = 0.6f;
     private const float SPIN_STAY_DURATION = 0.3f;
     private float duration_time = 0f;
+    private float spinin_time = 8f;
 
     private BoomrangAnimation boomrangState;
 
@@ -76,6 +77,12 @@ public class WarriorBoomrang : ProjectileItem
             {
                 ProjectileFinish();
             }
+
+            spinin_time -= Time.deltaTime;
+            if(spinin_time <= 0)
+            {
+                ProjectileFinish();
+            }
             //PlayAnimation(boomrangState);
         }
 
@@ -105,6 +112,19 @@ public class WarriorBoomrang : ProjectileItem
 
         if (hitActor)
         {
+            if (!owner.AttackCode.Equals(hitActor.DamageCode))
+            {
+
+                GameObject fireblast = Object.Instantiate(Resources.Load("ArrowBurst")) as GameObject;
+
+                FireballBurst blast = fireblast.GetComponent<FireballBurst>();
+
+                blast.Owner = owner;
+
+                blast.SetPositionToEnitty(this);
+
+                blast.ItemStart();
+            }
             hitActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
         }
         else if (collision.gameObject.GetComponent<PickupItem>())

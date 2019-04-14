@@ -48,12 +48,12 @@ public class InputHandler : MonoBehaviour
         Actors = new List<AActor>();
 
         //product vs debug
-        if (Actors.Count == 0 && playerNum == 0)
+        if (players.Count == 0 && playerNum == 0)
         {
             AddPlayer(GameStageSetting.Player1Selection);
             AddPlayer(null);
         }
-        else if(Actors.Count == 0 && playerNum == 1)
+        else if(players.Count == 0 && playerNum == 1)
         {
             AddPlayer(null);
             AddPlayer(GameStageSetting.Player2Selection);

@@ -44,7 +44,7 @@ public class Calibur : ProjectileItem
 
         if (hitActor)
         {
-            hitActor.TakeDamage(owner.GetActorStat().AttackPower * 1.5f, owner);
+            hitActor.TakeDamage(owner.GetActorStat().AttackPower * 1.1f, owner);
         }
 
         if (collision.gameObject.GetComponent<PickupItem>())

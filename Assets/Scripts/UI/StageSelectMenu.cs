@@ -166,7 +166,14 @@ public class StageSelectMenu : Menu
     {
         SaveMapSettings();
         PlaySelectSound();
-        SceneManager.LoadScene("CharacterSelect");
+        if (GameStageSetting.SelectedMap != MapSelection.Training)
+        {
+            SceneManager.LoadScene("CharacterSelect");
+        }
+        else
+        {
+            SceneManager.LoadScene("TrainingCharacterSelect");
+        }
     }
 
     private void SaveMapSettings()
