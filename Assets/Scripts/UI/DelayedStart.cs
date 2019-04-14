@@ -22,6 +22,8 @@ public class DelayedStart : MonoBehaviour
     {
         Time.timeScale = 0;
         float pauseTime = Time.realtimeSinceStartup + 3.5f;
+        bool hasPlayed = false;
+        SoundManager.instance.PlayEffectWithAudioSource(SoundManager.instance.EffectSource, SoundManager.instance.countDown, ref hasPlayed,0.1f);
         while (Time.realtimeSinceStartup < pauseTime)
             yield return 0;
         countDown.gameObject.SetActive(false);
