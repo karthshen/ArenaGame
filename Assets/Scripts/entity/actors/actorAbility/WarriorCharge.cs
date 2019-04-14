@@ -13,6 +13,17 @@ public class WarriorCharge : Ability
         DragInAir = false;
     }
 
+    public  void AbilityExecuteRip()
+    {
+        GameObject initialBomb = Object.Instantiate(Resources.Load("InitialBomb")) as GameObject;
+
+        WarriorInitialBomb iBomb = initialBomb.GetComponent<WarriorInitialBomb>();
+
+        iBomb.Owner = caster;
+
+        iBomb.ItemStart();
+    }
+
     public override void AbilityExecute()
     {
         //Warrior Charged

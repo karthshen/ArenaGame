@@ -328,5 +328,6 @@ MonoBehaviour:
   menu01: {fileID: 8300000, guid: 41dc716f1e30d55498d017e89b2a0707, type: 3}
   teleport: {fileID: 8300000, guid: abac81507cdb20a4e99b5b45bff3f04b, type: 3}
   fireballHit: {fileID: 8300000, guid: 89967041cf7daf4448305372d26a7e65, type: 3}
+  arrowHit: {fileID: 8300000, guid: afa18f8543a10ba449f750fdcfa917a7, type: 3}
   lowPitchRange: 0.95
   highPitchRange: 1.05

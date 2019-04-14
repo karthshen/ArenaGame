@@ -17,6 +17,10 @@ public class ArcherArrow : ProjectileItem
 
     private ParticleSystem[] particleSystems;
 
+    private AudioSource audioSource;
+
+    private bool hasPlayed = false;
+
     private float duration_time = 0f;
 
     public float YModifier
@@ -61,6 +65,7 @@ public class ArcherArrow : ProjectileItem
     private void Start()
     {
         GetComponent<Rigidbody>().centerOfMass = com.transform.position;
+        audioSource = GetComponent<AudioSource>();
         particleSystems = GetComponentsInChildren<ParticleSystem>();
     }
 
@@ -83,6 +88,8 @@ public class ArcherArrow : ProjectileItem
 
     public override void ProjectileStart()
     {
+        Start();
+
         //Ignore Collision of owner and this
         IgnoreOwnerCollision(owner);
 
@@ -101,13 +108,20 @@ public class ArcherArrow : ProjectileItem
         if (hitActor)
         {
             hitActor.TakeDamage(owner.GetActorStat().AttackPower / 1.5f * DamageModifier, owner);
+            SoundManager.instance.PlayEffectWithAudioSource(hitActor.GetAudioSource(), SoundManager.instance.arrowHit, ref hasPlayed, 0.6f);
         }
 
-        if (collision.gameObject.GetComponent<PickupItem>())
+        else if (collision.gameObject.GetComponent<PickupItem>())
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
             return;
         }
+        else
+        {
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            return;
+        }
+
 
         ProjectileFinish();
     }

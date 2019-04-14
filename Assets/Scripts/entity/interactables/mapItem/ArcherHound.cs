@@ -7,11 +7,11 @@ public class ArcherHound : MapItem
 
     enum HoundAnimation
     {
-        Bite = 2,
+        Bite = 4,
         Move = 1
     }
     private const float MOVE_VELOCITY = 7.0f;
-    private const float FREEZE_TIME = 1.0f;
+    private const float FREEZE_TIME = 1.5f;
 
     private Animator animator;
     private AudioSource audioSource;
@@ -115,12 +115,8 @@ public class ArcherHound : MapItem
     private void PlayAnimation(HoundAnimation anim)
     {
         animator.SetInteger("animation", (int)anim);
-        if(anim == HoundAnimation.Bite)
-        {
-            hasPlayed = false;
-            SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
-        }
-        else if(anim == HoundAnimation.Move)
+
+        if (anim == HoundAnimation.Move)
         {
             hasPlayed = true;
         }
@@ -141,7 +137,7 @@ public class ArcherHound : MapItem
             ItemFinish();
         }
 
-        if(freezeTime > 0)
+        if (freezeTime > 0)
         {
             freezeTime -= Time.deltaTime;
             if (freezeTime <= 0)
@@ -157,7 +153,7 @@ public class ArcherHound : MapItem
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "InvisibleTriggerWall" && isGrounded)
+        if (other.tag == "InvisibleTriggerWall" && isGrounded)
         {
             currentVelocity = -currentVelocity;
             TurnAround();
@@ -166,36 +162,45 @@ public class ArcherHound : MapItem
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
         }
 
         //Complicated? attack logic
         AActor hitActor = collision.gameObject.GetComponent<AActor>();
-        if (hitActor && attackTimes > 0)
+        if (hitActor && attackTimes > 0 && freezeTime <= 0)
         {
+            float isHit = 0;
+
             if (!ChickenGod)
             {
                 owner.AttackCode = System.Guid.NewGuid();
-                hitActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
+                isHit = hitActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
             }
             else if (ChickenGod)
             {
-                hitActor.TakeDamageFromEntity(10f,500f, this);
+                isHit = hitActor.TakeDamageFromEntity(10f, 500f, this);
             }
 
             PlayAnimation(HoundAnimation.Bite);
+
+            if (currentAnim == HoundAnimation.Bite && isHit != 0)
+            {
+                hasPlayed = false;
+                SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.chicken1, ref hasPlayed);
+            }
+
             currentVelocity = 0f;
             freezeTime = FREEZE_TIME;
-            if(disappearTime < FREEZE_TIME)
+            if (disappearTime < FREEZE_TIME)
             {
                 disappearTime = FREEZE_TIME;
             }
 
             attackTimes--;
 
-            if(attackTimes == 0)
+            if (attackTimes == 0)
             {
                 disappearTime = 1f;
             }
@@ -210,11 +215,11 @@ public class ArcherHound : MapItem
 
     private void TurnAround()
     {
-        if(currentVelocity > 0)
+        if (currentVelocity > 0)
         {
             transform.GetChild(0).eulerAngles = AEntity.FRONT_DIRECTION;
         }
-        else if(currentVelocity < 0)
+        else if (currentVelocity < 0)
         {
             transform.GetChild(0).eulerAngles = AEntity.BACK_DIRECTION;
         }

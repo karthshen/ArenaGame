@@ -60,6 +60,30 @@ public abstract class AInteractable : AEntity
         }
     }
 
+    protected void IgnoreGameobjectCollision(GameObject gameObject)
+    {
+        Collider[] collidersToIgnore = gameObject.GetComponentsInChildren<Collider>();
+
+        foreach (Collider collider in collidersToIgnore)
+        {
+            Collider[] collidersInSelf = GetComponentsInChildren<Collider>();
+            foreach (Collider selfCollider in collidersInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, collider);
+            }
+        }
+
+        Collider ownerCollider = gameObject.GetComponent<Collider>();
+        Collider[] colliderInSelf = GetComponentsInChildren<Collider>();
+        if (ownerCollider)
+        {
+            foreach (Collider selfCollider in colliderInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, ownerCollider);
+            }
+        }
+    }
+
     protected void FallOutPlatformCheck()
     {
         if (transform.position.y < -20.0f)

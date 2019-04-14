@@ -388,11 +388,13 @@ public abstract class AActor : AEntity
         return CurrentHealth;
     }
 
-    public void TakeDamageFromEntity(float damage, float knockingForce, AEntity attacker)
+    public float TakeDamageFromEntity(float damage, float knockingForce, AEntity attacker)
     {
         AttackCode = System.Guid.NewGuid();
-        TakeDamage(damage, this);
+        float isHit =  TakeDamage(damage, this);
         KnockBackBasedOnDirection(knockingForce, this);
+
+        return isHit;
     }
 
     public virtual float TakeDamage(float damage, AActor attacker)
