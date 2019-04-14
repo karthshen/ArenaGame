@@ -3,6 +3,8 @@ using System.Collections;
 
 public class WarriorSword : PickupItem
 {
+    public GameObject com;
+
     public override void ItemPickUp(AActor actor)
     {
         base.ItemPickUp(actor);
@@ -27,7 +29,21 @@ public class WarriorSword : PickupItem
         AActor attackedActor = collision.gameObject.GetComponent<AActor>();
         if (attackedActor && attackedActor.GetEntityId() != owner.GetEntityId())
         {
-            attackedActor.TakeDamage(owner.GetActorStat().AttackPower, owner);
+            if (attackedActor.TakeDamage(owner.GetActorStat().AttackPower, owner) != 0)
+            {
+
+                GameObject swordblast = Object.Instantiate(Resources.Load("SwordBurst")) as GameObject;
+
+                FireballBurst blast = swordblast.GetComponent<FireballBurst>();
+
+                blast.Owner = owner;
+
+                //blast.SetPositionToEnitty(this);
+
+                blast.transform.position = com.transform.position;
+
+                blast.ItemStart();
+            }
         }
     }
 }
