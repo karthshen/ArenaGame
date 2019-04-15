@@ -18,6 +18,8 @@ public class InputHandler : MonoBehaviour
     private float restart_timer = 0f;
     private const float RESTART_TIMER = 5f;
 
+    public GameObject scoreboard;
+
     enum InputHandlerState
     {
         InGame = 1,
@@ -62,11 +64,14 @@ public class InputHandler : MonoBehaviour
         {
             AddPlayer(GameStageSetting.Player1Selection);
             AddPlayer(null);
+            actors[0].playerNum = playerNum;
+
         }
         else if (players.Count == 0 && playerNum == 1)
         {
             AddPlayer(null);
             AddPlayer(GameStageSetting.Player2Selection);
+            actors[1].playerNum = playerNum; ;
         }
         else
         {
@@ -121,7 +126,11 @@ public class InputHandler : MonoBehaviour
             {
                 if (actor.GetEntityId() != Actors[playerNum].GetEntityId())
                 {
-                    actor.Victory();
+                    actor.Victory(scoreboard.GetComponent<Scoreboard>());
+                }
+                else
+                {
+                    actor.Lose(scoreboard.GetComponent<Scoreboard>());
                 }
             }
         }

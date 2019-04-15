@@ -24,6 +24,8 @@ public abstract class AActor : AEntity
     public const float AIRBORNE_DRAG = 15.0f;
     public const float DAMAGE_TO_ENERGY_CONSTANT = 20f;
 
+    public int playerNum;
+
     private const float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
 
     //Victory Sign
@@ -81,6 +83,8 @@ public abstract class AActor : AEntity
     private float freezeTimer = 0f;
     //----------------------------
     private int respawnLives = 3;
+
+    private float totalDamageDealt = 0f;
 
     //This is for total damage taken since previous energy restore
     private float totalDamageTaken = 0;
@@ -306,6 +310,19 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float TotalDamageDealt
+    {
+        get
+        {
+            return totalDamageDealt;
+        }
+
+        set
+        {
+            totalDamageDealt = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -442,6 +459,10 @@ public abstract class AActor : AEntity
                 totalDamageTaken = 0;
             }
         }
+
+        //Add to total damage on attaccker
+        attacker.TotalDamageDealt += damage;
+
         return CurrentHealth;
     }
 
@@ -677,9 +698,19 @@ public abstract class AActor : AEntity
         }
     }
 
-    public void Victory()
+    public void Victory(Scoreboard scoreboard)
     {
-        winSymbol.SetActive(true);
+        scoreboard.gameObject.SetActive(true);
+        scoreboard.SetWinner(GetName());
+        scoreboard.winnerPlayerNum.text = playerNum.ToString();
+        scoreboard.winnerTotalDamage.text = ((int)TotalDamageDealt).ToString();
+    }
+
+    public void Lose(Scoreboard scoreboard)
+    {
+        scoreboard.SetLoser(GetName());
+        scoreboard.loserPlayerNum.text = playerNum.ToString();
+        scoreboard.loserTotalDamage.text = ((int)TotalDamageDealt).ToString();
     }
 
     private void FallOffPlatformCheck()

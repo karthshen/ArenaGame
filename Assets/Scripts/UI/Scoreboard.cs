@@ -2,9 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class Scoreboard : MonoBehaviour
 {
+    public List<Sprite> characterIcons;
+   
     public Image winnericon;
     public TextMeshProUGUI winnerText;
     public TextMeshProUGUI winnerTotalDamage;
@@ -51,6 +55,44 @@ public class Scoreboard : MonoBehaviour
             {
                 SceneManager.LoadScene("Start");
             }
+        }
+    }
+
+    public void SetWinner(string name)
+    {
+        if(name == "Warrior")
+        {
+            winnericon.sprite = characterIcons[0];
+            winnerText.text = name;
+        }
+        if (name == "Mage")
+        {
+            winnericon.sprite = characterIcons[1];
+            winnerText.text = name;
+        }
+        if (name == "Archer")
+        {
+            winnericon.sprite = characterIcons[2];
+            winnerText.text = name;
+        }
+    }
+
+    public void SetLoser(string name)
+    {
+        if (name == "Warrior")
+        {
+            losericon.sprite = characterIcons[0];
+            loserText.text = name;
+        }
+        if (name == "Mage")
+        {
+            losericon.sprite = characterIcons[1];
+            loserText.text = name;
+        }
+        if (name == "Archer")
+        {
+            losericon.sprite = characterIcons[2];
+            loserText.text = name;
         }
     }
 }
