@@ -22,7 +22,7 @@ public class SmallLightBomb : ProjectileItem
     private Vector3 movement;
 
     [SerializeField]
-    private float longestDistance = 3;
+    private float longestDistance = 8;
 
     public override void ProjectileFinish()
     {
@@ -42,8 +42,8 @@ public class SmallLightBomb : ProjectileItem
         lineRenderer = gameObject.GetComponent<LineRenderer>();
 
         //lineNum++;
-
-        lineRenderer.positionCount = lineNum + 1;
+        if(lineRenderer)
+            lineRenderer.positionCount = lineNum + 1;
 
         //lineRenderer.SetPosition(lineNum - 1, transform.position);
     }
@@ -58,15 +58,18 @@ public class SmallLightBomb : ProjectileItem
         }
         else
         {
-            Vector3 currentPosition = transform.position;
-            lineRenderer.SetPosition(lineNum, currentPosition);
-            lineNum++;
-            lineRenderer.positionCount = lineNum + 1;
-            lineRenderer.SetPosition(lineNum, transform.position);
-            //Bounce(collision.contacts[0].normal);
+            if (lineRenderer)
+            {
+                Vector3 currentPosition = transform.position;
+                lineRenderer.SetPosition(lineNum, currentPosition);
+                lineNum++;
+                lineRenderer.positionCount = lineNum + 1;
+                lineRenderer.SetPosition(lineNum, transform.position);
+                //Bounce(collision.contacts[0].normal);
 
-            longestDistance += 1.5f;
-            force += 15f;
+                longestDistance += 1.5f;
+                force += 15f;
+            }
         }
     }
 
@@ -74,7 +77,8 @@ public class SmallLightBomb : ProjectileItem
     {
         //transform.Translate(movement * Time.deltaTime);
 
-        lineRenderer.SetPosition(lineNum, transform.position);
+        if(lineRenderer)
+            lineRenderer.SetPosition(lineNum, transform.position);
 
         disappearTime -= Time.deltaTime;
 
