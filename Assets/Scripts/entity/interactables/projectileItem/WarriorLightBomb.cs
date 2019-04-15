@@ -17,7 +17,7 @@ public class WarriorLightBomb : ProjectileItem
 
             SmallLightBomb smallBomb = createdBomb.GetComponent<SmallLightBomb>();
 
-            smallBomb.carrier = gameObject;
+            smallBomb.origin = gameObject;
             smallBomb.SetOwner(GetOwner());
             smallBomb.ProjectileStart();
         }

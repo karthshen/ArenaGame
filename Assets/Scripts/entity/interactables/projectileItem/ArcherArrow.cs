@@ -116,11 +116,11 @@ public class ArcherArrow : ProjectileItem
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
             return;
         }
-        else
-        {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
-            return;
-        }
+        //else
+        //{
+        //    Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        //    return;
+        //}
 
 
         ProjectileFinish();

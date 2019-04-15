@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SmallLightBomb : ProjectileItem
 {
-    public GameObject carrier;
+    public GameObject origin;
 
     private Rigidbody rb;
 
@@ -11,12 +11,10 @@ public class SmallLightBomb : ProjectileItem
 
     private LineRenderer lineRenderer;
 
+    [SerializeField]
     private float disappearTime = 2.5f;
 
     private Vector3 lastFrameVelocity;
-
-    [SerializeField]
-    private float speed = 5f;
 
     [SerializeField]
     private float force = 200f;
@@ -24,7 +22,7 @@ public class SmallLightBomb : ProjectileItem
     private Vector3 movement;
 
     [SerializeField]
-    private float longestDistance = 4;
+    private float longestDistance = 3;
 
     public override void ProjectileFinish()
     {
@@ -35,26 +33,28 @@ public class SmallLightBomb : ProjectileItem
     {
         rb = GetComponent<Rigidbody>();
 
-        rb.AddForce((transform.position - carrier.transform.position) * force);
+        rb.AddForce((transform.position - origin.transform.position) * force);
 
-        Vector3 direction = transform.position - carrier.transform.position;
+        Vector3 direction = transform.position - origin.transform.position;
 
-        movement = new Vector3(speed * Mathf.Cos(DirectionToAngle(direction.y, direction.x)), speed * Mathf.Sin(DirectionToAngle(direction.y, direction.x)), 0);
+        //movement = new Vector3(speed * Mathf.Cos(DirectionToAngle(direction.y, direction.x)), speed * Mathf.Sin(DirectionToAngle(direction.y, direction.x)), 0);
 
         lineRenderer = gameObject.GetComponent<LineRenderer>();
 
-        lineNum++;
+        //lineNum++;
 
         lineRenderer.positionCount = lineNum + 1;
 
-        lineRenderer.SetPosition(lineNum - 1, transform.position);
+        //lineRenderer.SetPosition(lineNum - 1, transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<AActor>())
         {
+            //Take damage here
             IgnoreGameobjectCollision(collision.gameObject);
+            return;
         }
         else
         {
@@ -65,27 +65,9 @@ public class SmallLightBomb : ProjectileItem
             lineRenderer.SetPosition(lineNum, transform.position);
             //Bounce(collision.contacts[0].normal);
 
-            longestDistance += 3.5f;
+            longestDistance += 1.5f;
+            force += 15f;
         }
-        
-
-        //else
-        //{
-        //    IgnoreGameobjectCollision(collision.gameObject);
-        //}
-
-        //if (collision.gameObject.GetComponent<AActor>())
-        //{
-
-        //}
-        //else
-        //{
-        //    Vector3 currentPosition = transform.position;
-        //    lineRenderer.SetPosition(lineNum, currentPosition);
-        //    lineNum++;
-        //    lineRenderer.positionCount = lineNum + 1;
-        //    lineRenderer.SetPosition(lineNum, transform.position);
-        //}
     }
 
     private void Update()
@@ -96,7 +78,7 @@ public class SmallLightBomb : ProjectileItem
 
         disappearTime -= Time.deltaTime;
 
-        if(Vector3.Distance(transform.position, carrier.transform.position) > longestDistance)
+        if(Vector3.Distance(transform.position, origin.transform.position) > longestDistance)
         {
             ProjectileFinish();
         }
@@ -118,7 +100,7 @@ public class SmallLightBomb : ProjectileItem
         //Debug.Log("Out Direction: " + direction);
         //rb.velocity = direction * Mathf.Max(speed, 0);
 
-        movement = new Vector3(speed * Mathf.Cos(DirectionToAngle(direction.y, direction.x)), speed * Mathf.Sin(DirectionToAngle(direction.y, direction.x)), 0);
+        //movement = new Vector3(speed * Mathf.Cos(DirectionToAngle(direction.y, direction.x)), speed * Mathf.Sin(DirectionToAngle(direction.y, direction.x)), 0);
     }
 
     private float DirectionToAngle(float x, float y)
