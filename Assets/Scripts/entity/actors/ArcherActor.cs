@@ -116,6 +116,11 @@ public class ArcherActor : AActor
 
     public override float TakeDamage(float damage, AActor attacker)
     {
+        if (BIsBlocking)
+        {
+            damage /= 2;
+        }
+
         return base.TakeDamage(damage, attacker);
     }
 

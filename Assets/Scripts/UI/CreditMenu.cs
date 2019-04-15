@@ -14,13 +14,13 @@ public class CreditMenu : Menu
 
     protected override void ButtonDeselected()
     {
-        Debug.Log("Button Deselected at Setting Menu");
+        //Debug.Log("Button Deselected at Setting Menu");
     }
 
     protected override void ButtonSelected()
     {
         //throw new System.NotImplementedException();
-        Debug.Log("Button Selected at Setting Menu");
+        //Debug.Log("Button Selected at Setting Menu");
     }
 
     protected override void PreviousMenu()

@@ -54,12 +54,12 @@ public class CharacterSelectMenu : Menu
     {
         ButtonDeselected();
 
-        if (inputDevice.DPadRight.WasPressed)
+        if (inputDevice.DPadRight.WasPressed || inputDevice.LeftStickRight.WasPressed)
         {
             buttonIndex++;
             PlayHoverSound();
         }
-        else if (inputDevice.DPadLeft.WasPressed)
+        else if (inputDevice.DPadLeft.WasPressed || inputDevice.LeftStickLeft.WasPressed)
         {
             buttonIndex--;
             PlayHoverSound();

@@ -665,7 +665,7 @@ public abstract class AActor : AEntity
             item.ItemPickUp(this);
         }
 
-        if(!IsGrounded && state.GetType() == typeof(ActorJumpState) && collision.gameObject.GetComponent<AActor>() && transform.position.y > collision.transform.position.y)
+        if(!IsGrounded && state.GetType() == typeof(ActorJumpState) && (collision.gameObject.GetComponent<AActor>() && transform.position.y > collision.transform.position.y))
         {
             BackToStanding();
         }
@@ -673,7 +673,7 @@ public abstract class AActor : AEntity
 
     private void OnCollisionStay(Collision collision)
     {
-        if ((collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState)))
+        if ((collision.gameObject.tag == "Ground" && bIsGrounded == false && (state.GetType() != typeof(ActorDeathState)) && state.GetType()!= typeof(ActorFreezeState)))
         {
             bIsGrounded = true;
             BackToStanding();

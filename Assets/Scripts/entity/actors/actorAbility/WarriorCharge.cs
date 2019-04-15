@@ -13,7 +13,7 @@ public class WarriorCharge : Ability
         DragInAir = false;
     }
 
-    public  void AbilityExecuteRip()
+    public void AbilityExecuteRip()
     {
         GameObject initialBomb = Object.Instantiate(Resources.Load("InitialBomb")) as GameObject;
 
@@ -34,6 +34,8 @@ public class WarriorCharge : Ability
 
         float yDirectionInRadian = caster.GetYDirectionInRadian();
 
+        caster.ClearForceOnActor();
+
         Vector3 chargeMovement = new Vector3(CHARGE_FORCE * Mathf.Sin(yDirectionInRadian), 0f, 0f);
 
         caster.GetRigidbody().useGravity = false;
@@ -41,6 +43,8 @@ public class WarriorCharge : Ability
         caster.Block();
 
         caster.GetRigidbody().AddForce(chargeMovement * CHARGE_SPEED);
+
+        ((WarriorActor)(caster)).shield.UseItem(caster);
 
         base.AbilityExecute();
     }

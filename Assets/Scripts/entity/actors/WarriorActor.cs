@@ -16,6 +16,8 @@ public class WarriorActor : AActor
 
     public WarriorSword sword;
 
+    public WarriorShield shield;
+
     public WarriorActor() : base()
     {
         
@@ -52,6 +54,11 @@ public class WarriorActor : AActor
         if (sword)
         {
             sword.ItemPickUp(this);
+        }
+
+        if (shield)
+        {
+            shield.ItemPickUp(this);
         }
 
         NullParameterCheck();
@@ -106,7 +113,7 @@ public class WarriorActor : AActor
     {
         if (BIsBlocking)
         {
-            damage /= 10;
+            damage /= 5;
         }
         return base.TakeDamage(damage, attacker);
     }

@@ -108,8 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carrier: {fileID: 0}
   speed: 15
-  force: 25
-  longestDistance: 4
+  force: 15
+  longestDistance: 6
 --- !u!54 &3878953903254530161
 Rigidbody:
   m_ObjectHideFlags: 0
