@@ -11,6 +11,8 @@ public class ArcherActor : AActor
     Ability archerAbilityLeft;
     Ability archerAbilityRight;
     Ability archerAbilityTrigger;
+    Ability archerAbilityBumper;
+    Ability archerAbilityNeutral;
 
     string actorName = "Archer";
 
@@ -41,14 +43,18 @@ public class ArcherActor : AActor
         archerAbilityDown = new ArcherBurstShot(this);
         archerAbilityRight = new ArcherDeployTrap(this);
         archerAbilityLeft = new ArcherDeployTrap(this);
-        archerAbilityUp = new ArcherUnleshTheHound(this);
+        archerAbilityNeutral = new ArcherUnleshTheHound(this);
         archerAbilityTrigger = new ArcherShootClawhook(this);
+        archerAbilityUp = new ArcherDancingArrows(this);
+        //archerAbilityBumper = new ArcherDancingArrows(this);
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;
         abilityUp = archerAbilityUp;
         abilityDown = archerAbilityDown;
         abilityTrigger = archerAbilityTrigger;
+        abilityBumper = archerAbilityBumper;
+        abilityNeutral = archerAbilityNeutral;
 
         //Default to Grounded
         IsGrounded = true;
@@ -116,6 +122,11 @@ public class ArcherActor : AActor
 
     public override float TakeDamage(float damage, AActor attacker)
     {
+        if (BIsBlocking)
+        {
+            damage /= 2;
+        }
+
         return base.TakeDamage(damage, attacker);
     }
 

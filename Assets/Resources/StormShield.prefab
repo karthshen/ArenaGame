@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9070953384074672010}
   - component: {fileID: 377417113630916218}
   - component: {fileID: 6976006370294308348}
+  - component: {fileID: 5603024983675989111}
   m_Layer: 0
   m_Name: StormShield
   m_TagString: Untagged
@@ -172,6 +173,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &5603024983675989111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506700249396345305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3529077, y: 1.5972266, z: 1}
+  m_Center: {x: 0.013573319, y: 1.3980567, z: 0}
 --- !u!1001 &506700249388339294
 PrefabInstance:
   m_ObjectHideFlags: 0

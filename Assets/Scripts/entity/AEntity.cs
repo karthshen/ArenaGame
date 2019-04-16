@@ -58,4 +58,81 @@ public abstract class AEntity : MonoBehaviour
     {
         gameObject.transform.position = entity.transform.position;
     }
+    protected void IgnoreOwnerCollision(AActor owner)
+    {
+        if (!owner)
+            return;
+
+        Collider[] collidersToIgnore = owner.GetComponentsInChildren<Collider>();
+
+        foreach (Collider collider in collidersToIgnore)
+        {
+            Collider[] collidersInSelf = GetComponentsInChildren<Collider>();
+            foreach (Collider selfCollider in collidersInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, collider);
+            }
+        }
+
+        Collider ownerCollider = owner.GetComponent<Collider>();
+        Collider[] colliderInSelf = GetComponentsInChildren<Collider>();
+        foreach (Collider selfCollider in colliderInSelf)
+        {
+            Physics.IgnoreCollision(selfCollider, ownerCollider);
+        }
+    }
+
+    protected void IgnoreEntityCollision(AEntity entity)
+    {
+        if (!entity)
+            return;
+
+        Collider[] collidersToIgnore = entity.GetComponentsInChildren<Collider>();
+
+        foreach (Collider collider in collidersToIgnore)
+        {
+            Collider[] collidersInSelf = GetComponentsInChildren<Collider>();
+            foreach (Collider selfCollider in collidersInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, collider);
+            }
+        }
+
+        Collider ownerCollider = entity.GetComponent<Collider>();
+        Collider[] colliderInSelf = GetComponentsInChildren<Collider>();
+        if (ownerCollider)
+        {
+            foreach (Collider selfCollider in colliderInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, ownerCollider);
+            }
+        }
+    }
+
+    protected void IgnoreGameobjectCollision(GameObject gameObject)
+    {
+        if (!gameObject)
+            return;
+
+        Collider[] collidersToIgnore = gameObject.GetComponentsInChildren<Collider>();
+
+        foreach (Collider collider in collidersToIgnore)
+        {
+            Collider[] collidersInSelf = GetComponentsInChildren<Collider>();
+            foreach (Collider selfCollider in collidersInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, collider);
+            }
+        }
+
+        Collider ownerCollider = gameObject.GetComponent<Collider>();
+        Collider[] colliderInSelf = GetComponentsInChildren<Collider>();
+        if (ownerCollider)
+        {
+            foreach (Collider selfCollider in colliderInSelf)
+            {
+                Physics.IgnoreCollision(selfCollider, ownerCollider);
+            }
+        }
+    }
 }

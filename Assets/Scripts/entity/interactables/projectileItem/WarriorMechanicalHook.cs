@@ -8,7 +8,6 @@ public class WarriorMechanicalHook : ProjectileItem
         Shooting,
         RetractingActor,
         RetractingOthers,
-        Staying,
         Retracted,
     }
 
@@ -34,7 +33,7 @@ public class WarriorMechanicalHook : ProjectileItem
     private const float SHOOT_OUT_DURATION = 1f;
     private const float CLAW_STAY_TIME = 1.0f;
     private const float MAX_TRAVEL_DISTANCE = 9.0f;
-    private const float HOOK_BACK_TIMER = 0.35f;
+    private const float HOOK_BACK_TIMER = 0.5f;
 
     private float timer = 0f;
 
@@ -106,7 +105,7 @@ public class WarriorMechanicalHook : ProjectileItem
             //push actor toward this actor
             hitActor.GetRigidbody().AddForce((owner.transform.position - transform.position) * retractionForce * 1.3f / distance);
             owner.AttackCode = System.Guid.NewGuid();
-            hitActor.FreezeWithNoForce(2f, owner);
+            hitActor.FreezeWithNoForce(1f, owner);
 
             hookbackTimer += Time.deltaTime;
             if(hookbackTimer >= HOOK_BACK_TIMER)
@@ -158,20 +157,25 @@ public class WarriorMechanicalHook : ProjectileItem
             IgnoreEntityCollision(collision.gameObject.GetComponent<AEntity>());
             return;
         }
-        else if (collision.gameObject.GetComponent<AActor>())
+        else if (collision.gameObject.GetComponent<AActor>() && clawhookState == ClawhookState.Shooting)
         {
             clawhookState = ClawhookState.RetractingActor;
+            if (owner.CurrentEnergy > 0)
+            {
+                owner.CurrentEnergy--;
+            }
+            else if(owner.CurrentEnergy <= 0)
+            {
+                clawhookState = ClawhookState.RetractingOthers;
+            }
             hitActor = collision.gameObject.GetComponent<AActor>();
+            owner.AbilityCastedInAir = false;
             timer = 0f;
-
-
         }
-        else
+        else if (clawhookState == ClawhookState.Shooting)
         {
             clawhookState = ClawhookState.RetractingOthers;
             timer = 0f;
-
-
         }
     }
 

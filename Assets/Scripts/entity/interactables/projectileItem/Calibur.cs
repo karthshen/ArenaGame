@@ -45,11 +45,29 @@ public class Calibur : ProjectileItem
         if (hitActor)
         {
             hitActor.TakeDamage(owner.GetActorStat().AttackPower * 1.1f, owner);
+            IgnoreEntityCollision(hitActor);
+
+            //GameObject swordblast = Object.Instantiate(Resources.Load("SwordBurst")) as GameObject;
+
+            //FireballBurst blast = swordblast.GetComponent<FireballBurst>();
+
+            //blast.Owner = owner;
+
+            ////blast.SetPositionToEnitty(this);
+
+            //blast.transform.position = new Vector3(hitActor.transform.position.x,
+            //   hitActor.transform.position.y + owner.transform.lossyScale.y / 2, hitActor.transform.position.z);
+
+            //blast.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+            //blast.ItemStart();
+
+            return;
         }
 
         if (collision.gameObject.GetComponent<PickupItem>())
         {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            IgnoreEntityCollision(collision.gameObject.GetComponent<PickupItem>());
             return;
         }
 

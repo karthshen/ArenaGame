@@ -13,8 +13,20 @@ public class InputHandler : MonoBehaviour
     public List<AActor> players;
     public GameObject actorInitializeLocation;
 
+    public GameObject pausedGameCanvas;
+
     private float restart_timer = 0f;
     private const float RESTART_TIMER = 5f;
+
+    public GameObject scoreboard;
+
+    enum InputHandlerState
+    {
+        InGame = 1,
+        InMenu = 2
+    }
+
+    InputHandlerState state = InputHandlerState.InGame;
 
     public int PlayerNum
     {
@@ -52,11 +64,14 @@ public class InputHandler : MonoBehaviour
         {
             AddPlayer(GameStageSetting.Player1Selection);
             AddPlayer(null);
+            actors[0].playerNum = playerNum;
+
         }
-        else if(players.Count == 0 && playerNum == 1)
+        else if (players.Count == 0 && playerNum == 1)
         {
             AddPlayer(null);
             AddPlayer(GameStageSetting.Player2Selection);
+            actors[1].playerNum = playerNum; ;
         }
         else
         {
@@ -65,6 +80,8 @@ public class InputHandler : MonoBehaviour
                 AddPlayer(player);
             }
         }
+
+        pausedGameCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -72,13 +89,26 @@ public class InputHandler : MonoBehaviour
     {
         var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 
-        if(inputDevice != null)
+        if (inputDevice != null && state == InputHandlerState.InGame)
         {
+            //Temp: Determine if goes in menu state
+            if (inputDevice.Command.WasPressed)
+            {
+                state = InputHandlerState.InMenu;
+                pausedGameCanvas.SetActive(true);
+                Time.timeScale = 0;
+            }
+
             HandleInput(inputDevice);
         }
 
+        if (inputDevice != null && state == InputHandlerState.InMenu)
+        {
+            HandleInputInGameMenu(inputDevice);
+        }
+
         //restart back to main menu
-        if(restart_timer > 0)
+        if (restart_timer > 0)
         {
             restart_timer -= Time.deltaTime;
             if (restart_timer <= 0)
@@ -92,11 +122,15 @@ public class InputHandler : MonoBehaviour
 
             AActor[] otherActors = GameObject.FindObjectsOfType<AActor>();
 
-            foreach(AActor actor in otherActors)
+            foreach (AActor actor in otherActors)
             {
                 if (actor.GetEntityId() != Actors[playerNum].GetEntityId())
                 {
-                    actor.Victory();
+                    actor.Victory(scoreboard.GetComponent<Scoreboard>());
+                }
+                else
+                {
+                    actor.Lose(scoreboard.GetComponent<Scoreboard>());
                 }
             }
         }
@@ -117,6 +151,21 @@ public class InputHandler : MonoBehaviour
         if (actor.GetState().GetType() != typeof(ActorDeathState))
         {
             actor.HandleInput(inputDevice);
+        }
+    }
+
+    void HandleInputInGameMenu(InputDevice inputDevice)
+    {
+        if (inputDevice.Action1.WasReleased)
+        {
+            pausedGameCanvas.SetActive(false);
+            state = InputHandlerState.InGame;
+            Time.timeScale = 1f;
+        }
+        else if (inputDevice.Action2.WasPressed)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Start");
         }
     }
 

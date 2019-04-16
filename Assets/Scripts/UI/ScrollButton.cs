@@ -23,14 +23,14 @@ public class ScrollButton : Button
         if (!scrollText)
             return;
 
-        if (inputDevice.DPadRight.WasPressed)
+        if (inputDevice.DPadRight.WasPressed || inputDevice.LeftStickRight.WasPressed)
         {
             scrollIndex++;
 
             bool hasPlayed = false;
             SoundManager.instance.PlayEffect(SoundManager.instance.uiSelect, ref hasPlayed);
         }
-        else if (inputDevice.DPadLeft.WasPressed)
+        else if (inputDevice.DPadLeft.WasPressed || inputDevice.LeftStickLeft.WasPressed)
         {
             scrollIndex--;
 

@@ -24,6 +24,8 @@ public abstract class AActor : AEntity
     public const float AIRBORNE_DRAG = 15.0f;
     public const float DAMAGE_TO_ENERGY_CONSTANT = 20f;
 
+    public int playerNum;
+
     private const float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
 
     //Victory Sign
@@ -50,6 +52,7 @@ public abstract class AActor : AEntity
     public Ability abilityRight;
     public Ability abilityTrigger;
     public Ability abilityBumper;
+    public Ability abilityNeutral;
 
     public Queue<Combo> attackQueue = new Queue<Combo>();
 
@@ -81,6 +84,8 @@ public abstract class AActor : AEntity
     private float freezeTimer = 0f;
     //----------------------------
     private int respawnLives = 3;
+
+    private float totalDamageDealt = 0f;
 
     //This is for total damage taken since previous energy restore
     private float totalDamageTaken = 0;
@@ -306,6 +311,19 @@ public abstract class AActor : AEntity
         }
     }
 
+    public float TotalDamageDealt
+    {
+        get
+        {
+            return totalDamageDealt;
+        }
+
+        set
+        {
+            totalDamageDealt = value;
+        }
+    }
+
     public AnimatorController GetAnimatorController()
     {
         return ac;
@@ -388,11 +406,13 @@ public abstract class AActor : AEntity
         return CurrentHealth;
     }
 
-    public void TakeDamageFromEntity(float damage, float knockingForce, AEntity attacker)
+    public float TakeDamageFromEntity(float damage, float knockingForce, AEntity attacker)
     {
         AttackCode = System.Guid.NewGuid();
-        TakeDamage(damage, this);
+        float isHit =  TakeDamage(damage, this);
         KnockBackBasedOnDirection(knockingForce, this);
+
+        return isHit;
     }
 
     public virtual float TakeDamage(float damage, AActor attacker)
@@ -440,6 +460,10 @@ public abstract class AActor : AEntity
                 totalDamageTaken = 0;
             }
         }
+
+        //Add to total damage on attaccker
+        attacker.TotalDamageDealt += damage;
+
         return CurrentHealth;
     }
 
@@ -464,22 +488,16 @@ public abstract class AActor : AEntity
 
     public virtual void Jump()
     {
-        //rb.AddForce(Vector3.up * actorStat.JumpVelocity);
-        //Debug.Log("Zeroing Velocity on Actor:" + GetName());
-        GetRigidbody().velocity = Vector3.zero;
-        GetRigidbody().angularVelocity = Vector3.zero;
+        ClearForceOnActor();
 
         Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * jumpForceFactor;
 
-        //Debug.Log(GetName() + " jumped with force: " + forceJump + " Current Gravity: " + Physics.gravity);
         if(jumpNum == 0)
         {
             forceJump *= 1.1f;
         }
 
         rb.AddForce(forceJump);
-
-        //Debug.Log(GetName() + " is jumping at " + actorStat.JumpVelocity * 111 + " velocity and " + Vector3.up * actorStat.JumpVelocity * 111 + " Force");
     }
 
     public abstract void Attack();
@@ -642,7 +660,7 @@ public abstract class AActor : AEntity
             item.ItemPickUp(this);
         }
 
-        if(!IsGrounded && state.GetType() == typeof(ActorJumpState) && collision.gameObject.GetComponent<AActor>() && transform.position.y > collision.transform.position.y)
+        if(!IsGrounded && state.GetType() == typeof(ActorJumpState) && (collision.gameObject.GetComponent<AActor>() && transform.position.y > collision.transform.position.y))
         {
             BackToStanding();
         }
@@ -650,7 +668,7 @@ public abstract class AActor : AEntity
 
     private void OnCollisionStay(Collision collision)
     {
-        if ((collision.gameObject.tag == "Ground" && bIsGrounded == false && state.GetType() != typeof(ActorDeathState)))
+        if ((collision.gameObject.tag == "Ground" && bIsGrounded == false && (state.GetType() != typeof(ActorDeathState)) && state.GetType()!= typeof(ActorFreezeState)))
         {
             bIsGrounded = true;
             BackToStanding();
@@ -675,9 +693,19 @@ public abstract class AActor : AEntity
         }
     }
 
-    public void Victory()
+    public void Victory(Scoreboard scoreboard)
     {
-        winSymbol.SetActive(true);
+        scoreboard.gameObject.SetActive(true);
+        scoreboard.SetWinner(GetName());
+        scoreboard.winnerPlayerNum.text = playerNum.ToString();
+        scoreboard.winnerTotalDamage.text = ((int)TotalDamageDealt).ToString();
+    }
+
+    public void Lose(Scoreboard scoreboard)
+    {
+        scoreboard.SetLoser(GetName());
+        scoreboard.loserPlayerNum.text = playerNum.ToString();
+        scoreboard.loserTotalDamage.text = ((int)TotalDamageDealt).ToString();
     }
 
     private void FallOffPlatformCheck()

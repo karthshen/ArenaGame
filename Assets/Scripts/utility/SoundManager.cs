@@ -34,6 +34,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip menu01;
     public AudioClip teleport;
     public AudioClip fireballHit;
+    public AudioClip arrowHit;
+    public AudioClip countDown;
 
     private AudioClip fakeClip;
 

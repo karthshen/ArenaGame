@@ -14,6 +14,7 @@ public class ActorStandingState : ActorState
     Command abilityLeftCommand = new ActorLeftAbilityCommand();
     Command abilityRightCommand = new ActorRightAbilityCommand();
     Command abilityUpCommand = new ActorAbilityUpCommand();
+    Command abilityNeutralCommand = new ActorNeutralAbilityCommand();
     Command abilityTriggerCommand = new ActorAbilityTriggerCommand();
     Command abilityBumperCommand = new ActorAbilityBumperCommand();
 
@@ -84,6 +85,16 @@ public class ActorStandingState : ActorState
                 return new ActorUpAbilityState();
             }
         }
+        //Ability Neutral(down) input
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickY.Value < -0.6f))
+        {
+            if (actor.CurrentEnergy >= actor.abilityNeutral.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityNeutralCommand.Execute(actor);
+                return new ActorNeutralAbilityState();
+            }
+        }
         //Ability Left Input
         else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickX.Value < (0 - Mathf.Epsilon)))
         {
@@ -104,7 +115,7 @@ public class ActorStandingState : ActorState
                 return new ActorHoriAbilityState();
             }
         }
-        //Ability Down Input
+        //Ability Down(neutral) Input
         else if ((inputDevice.Action1.WasPressed))
         {
             if (actor.CurrentEnergy >= actor.abilityDown.AbilityCost)

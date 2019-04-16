@@ -125,12 +125,12 @@ public class StageSelectMenu : Menu
             PlaySelectSound();
             mapSelectionIndex++;
         }
-        else if (inputDevice.DPadDown.WasPressed)
+        else if (inputDevice.DPadDown.WasPressed || (inputDevice.LeftStickDown.WasPressed && Mathf.Abs(inputDevice.LeftStickX.Value) < 0.05f))
         {
             PlayHoverSound();
             buttonIndex++;
         }
-        else if (inputDevice.DPadUp.WasPressed)
+        else if (inputDevice.DPadUp.WasPressed || (inputDevice.LeftStickUp.WasPressed && Mathf.Abs(inputDevice.LeftStickX.Value) < 0.05f))
         {
             PlayHoverSound();
             buttonIndex--;

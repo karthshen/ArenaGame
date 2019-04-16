@@ -4,7 +4,7 @@ using System.Collections;
 public class StormShield : MapItem
 {
     private float duration_time = 0f;
-    private float knockingForce = 3.5f;
+    private float knockingForce = 4.0f;
     private AActor owner;
     private AudioSource audioSource;
     private bool hasPlayed = false;
@@ -49,7 +49,22 @@ public class StormShield : MapItem
         if (attackedActor && attackedActor.GetEntityId() != owner.GetEntityId())
         {
             attackedActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 2, owner);
+
             attackedActor.KnockBack(knockingForce, owner);
+
+            knockingForce -= Time.deltaTime;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<ProjectileItem>())
+        {
+            collision.gameObject.GetComponent<ProjectileItem>().ProjectileFinish();
+        }
+        else
+        {
+            IgnoreGameobjectCollision(collision.gameObject);
         }
     }
 

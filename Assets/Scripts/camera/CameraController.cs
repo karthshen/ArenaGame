@@ -29,6 +29,10 @@ public class CameraController : MonoBehaviour
 
         //Temp for constants
         Physics.gravity = new Vector3(Physics.gravity.x, -9.81f * 1.54f * 1.54f, Physics.gravity.z);
+
+        Physics.IgnoreLayerCollision(8, 9, true);
+
+        Physics.IgnoreLayerCollision(8, 8, true);
     }
 
     // Update is called once per frame

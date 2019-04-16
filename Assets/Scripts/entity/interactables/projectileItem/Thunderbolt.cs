@@ -8,7 +8,7 @@ public class Thunderbolt : ProjectileItem
     private Vector3 movement;
     private AudioSource audioSource;
 
-    private const float DURATION_TIME = 2.0f;
+    private const float DURATION_TIME = 0.6f;
 
     private float duration_time = 0f;
 
@@ -54,13 +54,18 @@ public class Thunderbolt : ProjectileItem
             hitActor.TakeDamage(owner.GetActorStat().AbiltiyPower / 1.3f, owner);
             hasPlayed = false;
         }
+        else if (collision.gameObject.GetComponent<PickupItem>())
+        {
+            IgnoreEntityCollision(collision.gameObject.GetComponent<PickupItem>());
+            return;
+        }
         else if (collision.gameObject.GetComponent<AInteractable>())
         {
             
         }
         else
         {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            IgnoreGameobjectCollision(collision.gameObject);
             return;
         }
 
