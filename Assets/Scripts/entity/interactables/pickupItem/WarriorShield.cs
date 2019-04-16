@@ -31,11 +31,22 @@ public class WarriorShield : PickupItem
         AActor attackedActor = collision.gameObject.GetComponent<AActor>();
         if (attackedActor && attackedActor.GetEntityId() != owner.GetEntityId())
         {
+            //owner.GetAnimatorController().SetInt("animation,6");
+            /*
+            GameObject dancingArrows = Object.Instantiate(Resources.Load("DancingArrows")) as GameObject;
+            dancingArrows.transform.position = collision.contacts[0].point;
+            DancingArrows booom = dancingArrows.GetComponent<DancingArrows>();
+            booom.SetOwner(owner);
+            booom.ProjectileStart();
+            
+            */
             if (attackedActor.TakeDamage(owner.GetActorStat().AttackPower / 2, owner) != 0)
             {
                 attackedActor.ClearForceOnActor();
 
-                attackedActor.KnockBack(knockingForce, owner);
+                //attackedActor.KnockBack(knockingForce, owner);
+
+                attackedActor.TakeDamageAndFreeze(0, 1.5f, owner);
 
                 GameObject swordblast = Object.Instantiate(Resources.Load("SwordBurst")) as GameObject;
 
@@ -49,6 +60,7 @@ public class WarriorShield : PickupItem
 
                 blast.ItemStart();
             }
+            
         }
     }
 }

@@ -129,17 +129,17 @@ public class WarriorBoomrang : ProjectileItem
         }
         else if (collision.gameObject.GetComponent<PickupItem>())
         {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponentInChildren<Collider>());
+            IgnoreEntityCollision(collision.gameObject.GetComponent<PickupItem>());
             return;
         }
         else if (boomrangState == BoomrangAnimation.SpinIn)
         {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponentInChildren<Collider>());
+            IgnoreGameobjectCollision(collision.gameObject);
             return;
         }
         else if(!collision.gameObject.GetComponent<AEntity>())
         {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponentInChildren<Collider>());
+            IgnoreEntityCollision(collision.gameObject.GetComponent<AEntity>());
         }
     }
 

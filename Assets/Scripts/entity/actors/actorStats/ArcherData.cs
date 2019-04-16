@@ -12,9 +12,10 @@
 
         AbilityDownAnimation = "animation,23";
         AbilityHorizAnimation = "animation,32";
-        AbilityUpAnimation = "animation,32";
+        AbilityUpAnimation = "animation,23";
         AbilityTriggerAnimation = "animation,32";
         AbilityBumperAnimation = "animation,23";
+        AbilityNeutralAnimation = "animation,32";
 
         DeathAnimation = "animation,10";
 
@@ -23,9 +24,10 @@
         AttackSound2 = SoundManager.instance.arrow_attack2;
         AttackSound3 = SoundManager.instance.arrow_attack2;
 
-        AbilityUpSound = SoundManager.instance.chicken1;
+        AbilityNeutralSound = SoundManager.instance.chicken1;
         AbilityHorizSound = SoundManager.instance.trap;
         AbilityDownSound = SoundManager.instance.arrow_attack2;
         AbilityTriggerSound = SoundManager.instance.hookshoot;
+        AbilityUpSound = SoundManager.instance.arrow_attack2;
     }
 }

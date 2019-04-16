@@ -169,6 +169,7 @@ public class WarriorMechanicalHook : ProjectileItem
                 clawhookState = ClawhookState.RetractingOthers;
             }
             hitActor = collision.gameObject.GetComponent<AActor>();
+            owner.AbilityCastedInAir = false;
             timer = 0f;
         }
         else if (clawhookState == ClawhookState.Shooting)

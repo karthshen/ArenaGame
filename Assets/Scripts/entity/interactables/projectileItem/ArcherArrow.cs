@@ -13,7 +13,7 @@ public class ArcherArrow : ProjectileItem
     private float xModifier = 0.06f;
     private float damageModifier = 1f;
 
-    private const float DURATION_TIME = 2.0f;
+    private const float DURATION_TIME = 0.6f;
 
     private ParticleSystem[] particleSystems;
 
@@ -113,7 +113,7 @@ public class ArcherArrow : ProjectileItem
 
         else if (collision.gameObject.GetComponent<PickupItem>())
         {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            IgnoreEntityCollision(collision.gameObject.GetComponent<PickupItem>());
             return;
         }
         //else

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Calibur : ProjectileItem
+public class UpwardCalibur : ProjectileItem
 {
     [SerializeField]
-    private float velocity = 30.0f;
-    private float moveHorizontal = 0.3f;
+    private float velocity = 20.0f;
+    private float moveHorizontal = 0.5f;
     private Vector3 movement;
 
     private const float DURATION_TIME = 0.9f;
@@ -27,15 +27,15 @@ public class Calibur : ProjectileItem
 
         if (owner.IsGrounded)
         {
-            gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
-                owner.transform.position.y + owner.transform.lossyScale.y / 2, owner.transform.position.z);
+            gameObject.transform.position = new Vector3(owner.transform.position.x,
+                owner.transform.position.y + owner.transform.lossyScale.y /2f, owner.transform.position.z);
         }
         else
         {
-            gameObject.transform.position = new Vector3(owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
-               owner.transform.position.y + owner.transform.lossyScale.y / 2 * 0.5f, owner.transform.position.z);
+            gameObject.transform.position = new Vector3(owner.transform.position.x,
+               owner.transform.position.y + owner.transform.lossyScale.y/2 * 0.5f, owner.transform.position.z);
         }
-        movement = new Vector3(moveHorizontal * Mathf.Sin(yDirectionInRadian), 0.0f, 0.0f);
+        movement = new Vector3(0f, moveHorizontal, 0.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -44,7 +44,7 @@ public class Calibur : ProjectileItem
 
         if (hitActor)
         {
-            hitActor.TakeDamage(owner.GetActorStat().AttackPower * 1.1f, owner);
+            hitActor.TakeDamage(owner.GetActorStat().AttackPower * 1f, owner);
             IgnoreEntityCollision(hitActor);
 
             //GameObject swordblast = Object.Instantiate(Resources.Load("SwordBurst")) as GameObject;
@@ -62,6 +62,12 @@ public class Calibur : ProjectileItem
 
             //blast.ItemStart();
 
+            return;
+        }
+
+        if (!collision.gameObject.GetComponent<AEntity>())
+        {
+            IgnoreGameobjectCollision(collision.gameObject);
             return;
         }
 

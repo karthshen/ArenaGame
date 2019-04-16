@@ -52,6 +52,7 @@ public abstract class AActor : AEntity
     public Ability abilityRight;
     public Ability abilityTrigger;
     public Ability abilityBumper;
+    public Ability abilityNeutral;
 
     public Queue<Combo> attackQueue = new Queue<Combo>();
 
@@ -487,22 +488,16 @@ public abstract class AActor : AEntity
 
     public virtual void Jump()
     {
-        //rb.AddForce(Vector3.up * actorStat.JumpVelocity);
-        //Debug.Log("Zeroing Velocity on Actor:" + GetName());
-        GetRigidbody().velocity = Vector3.zero;
-        GetRigidbody().angularVelocity = Vector3.zero;
+        ClearForceOnActor();
 
         Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * jumpForceFactor;
 
-        //Debug.Log(GetName() + " jumped with force: " + forceJump + " Current Gravity: " + Physics.gravity);
         if(jumpNum == 0)
         {
             forceJump *= 1.1f;
         }
 
         rb.AddForce(forceJump);
-
-        //Debug.Log(GetName() + " is jumping at " + actorStat.JumpVelocity * 111 + " velocity and " + Vector3.up * actorStat.JumpVelocity * 111 + " Force");
     }
 
     public abstract void Attack();

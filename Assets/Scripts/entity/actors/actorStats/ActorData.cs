@@ -29,6 +29,7 @@ public abstract class ActorData
     private string abilityUpAnimation;
     private string abilityTriggerAnimation;
     private string abilityBumperAnimation;
+    private string abilityNeutralAnimation;
     private string jumpAnimation;
     private string deathAnimation = "animation,10";
     private string idleAnimation = "animation,13";
@@ -44,6 +45,7 @@ public abstract class ActorData
     private AudioClip abilityDownSound;
     private AudioClip abilityUpSound;
     private AudioClip abilityHorizSound;
+    private AudioClip abilityNeutralSound;
     private AudioClip abilityTriggerSound;
     private AudioClip jumpSound = SoundManager.instance.jump;
     private AudioClip landSound = SoundManager.instance.land;
@@ -574,6 +576,32 @@ public abstract class ActorData
         set
         {
             freezeAnimation = value;
+        }
+    }
+
+    public string AbilityNeutralAnimation
+    {
+        get
+        {
+            return abilityNeutralAnimation;
+        }
+
+        set
+        {
+            abilityNeutralAnimation = value;
+        }
+    }
+
+    public AudioClip AbilityNeutralSound
+    {
+        get
+        {
+            return abilityNeutralSound;
+        }
+
+        set
+        {
+            abilityNeutralSound = value;
         }
     }
 }

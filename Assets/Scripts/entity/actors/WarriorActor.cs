@@ -7,6 +7,7 @@ public class WarriorActor : AActor
     Mesh warriorMesh;
 
     Ability warriorAbilityUp;
+    Ability warriorAbilityNeutral;
     Ability warriorAbilityDown;
     Ability warriorAbilityLeft;
     Ability warriorAbilityRight;
@@ -37,17 +38,19 @@ public class WarriorActor : AActor
         actorStat = new WarriorData();
         entityName = actorName;
 
-        warriorAbilityLeft = new WarriorCharge(this);
-        warriorAbilityRight = new WarriorCharge(this);
+        warriorAbilityLeft = new WarriorThrowBoomrang(this);
+        warriorAbilityRight = new WarriorThrowBoomrang(this);
         warriorAbilityDown = new WarriorSlash(this);
-        warriorAbilityUp = new WarriorThrowBoomrang(this);
+        warriorAbilityUp = new WarriorUpwardSlash(this);
         warriorAbilityTrigger = new WarriorShootMechanicalHook(this);
+        warriorAbilityNeutral = new WarriorCharge(this);
 
         abilityLeft = warriorAbilityLeft;
         abilityRight = warriorAbilityRight;
         abilityUp = warriorAbilityUp;
         abilityDown = warriorAbilityDown;
         abilityTrigger = warriorAbilityTrigger;
+        abilityNeutral = warriorAbilityNeutral;
 
         InitializeActor();
 

@@ -11,6 +11,8 @@ public class SmallLightBomb : ProjectileItem
 
     private LineRenderer lineRenderer;
 
+    private int bombNumber = 0;
+
     [SerializeField]
     private float disappearTime = 2.5f;
 
@@ -37,7 +39,18 @@ public class SmallLightBomb : ProjectileItem
 
         Vector3 direction = transform.position - origin.transform.position;
 
+        GetComponentInChildren<MeshRenderer>().enabled = false;
+
         //movement = new Vector3(speed * Mathf.Cos(DirectionToAngle(direction.y, direction.x)), speed * Mathf.Sin(DirectionToAngle(direction.y, direction.x)), 0);
+
+        //Ignore other small lightbombs collision
+        SmallLightBomb[] bombs = GameObject.FindObjectsOfType<SmallLightBomb>();
+        bombNumber = bombs.Length;
+        foreach(SmallLightBomb bomb in bombs)
+        {
+            if(bomb != this)
+                IgnoreEntityCollision(bomb);
+        }
 
         lineRenderer = gameObject.GetComponent<LineRenderer>();
 
@@ -50,9 +63,14 @@ public class SmallLightBomb : ProjectileItem
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<AActor>())
+        if (collision.gameObject.GetComponent<AActor>() && collision.gameObject.GetComponent<AActor>() != owner)
         {
             //Take damage here
+            AActor hitActor = collision.gameObject.GetComponent<AActor>();
+            //hitActor.FreezeTimer = 0f;
+            hitActor.TakeDamage(owner.GetActorStat().AttackPower / bombNumber * 2, owner);
+            hitActor.AttackCode = System.Guid.NewGuid();
+            hitActor.ClearForceOnActor();
             IgnoreGameobjectCollision(collision.gameObject);
             return;
         }
@@ -68,7 +86,7 @@ public class SmallLightBomb : ProjectileItem
                 //Bounce(collision.contacts[0].normal);
 
                 longestDistance += 1.5f;
-                force += 15f;
+                //force += 15f;
             }
         }
     }

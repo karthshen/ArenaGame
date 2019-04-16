@@ -3,7 +3,8 @@ using System.Collections;
 
 public class DancingArrows : ProjectileItem
 {
-    private float disappearTime = 5.0f;
+    [SerializeField]
+    private float disappearTime = 2.5f;
 
     public override void ProjectileFinish()
     {
@@ -12,12 +13,26 @@ public class DancingArrows : ProjectileItem
 
     public override void ProjectileStart()
     {
-        SmallLightBomb[] arrows = GetComponentsInChildren<SmallLightBomb>();
+        ArcherSwiftArrow[] arrows = GetComponentsInChildren<ArcherSwiftArrow>();
+        GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
 
-        foreach (SmallLightBomb arrow in arrows)
+        foreach (ArcherSwiftArrow arrow in arrows)
         {
+            arrow.SetOwner(owner);
             arrow.ProjectileStart();
         }
+
+        
+        //AActor[] actors = GameObject.FindObjectsOfType<AActor>();
+
+        //foreach (AActor actor in actors)
+        //{
+        //    Collider[] collidersToIgnore = actor.GetComponentsInChildren<Collider>();
+        //    foreach(Collider collider in collidersToIgnore)
+        //    {
+        //        Physics.IgnoreCollision(GetComponentInChildren<MeshCollider>(), collider);
+        //    }
+        //}
     }
 
     private void Update()

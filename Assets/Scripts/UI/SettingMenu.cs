@@ -7,6 +7,9 @@ public class SettingMenu : Menu
 {
     public GameObject selector;
 
+    private float loadTimer = 0.3f;
+    private bool loaded = false;
+
     public override GameObject getSelector()
     {
         return selector;
@@ -39,6 +42,9 @@ public class SettingMenu : Menu
     {
         ButtonDeselected();
 
+        if (!loaded)
+            return;
+
         if(inputDevice.LeftTrigger.WasPressed || inputDevice.LeftBumper.WasPressed)
         {
             CreditMenu();
@@ -48,6 +54,18 @@ public class SettingMenu : Menu
         }
 
         base.HandleInput(inputDevice);
+    }
+
+    private void Update()
+    {
+        if (loadTimer > 0)
+        {
+            loadTimer -= Time.deltaTime;
+            if (loadTimer <= 0)
+            {
+                loaded = true;
+            }
+        }
     }
 
     private void TutorialMenu()

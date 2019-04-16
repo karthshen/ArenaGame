@@ -12,6 +12,7 @@ public class ArcherActor : AActor
     Ability archerAbilityRight;
     Ability archerAbilityTrigger;
     Ability archerAbilityBumper;
+    Ability archerAbilityNeutral;
 
     string actorName = "Archer";
 
@@ -42,9 +43,10 @@ public class ArcherActor : AActor
         archerAbilityDown = new ArcherBurstShot(this);
         archerAbilityRight = new ArcherDeployTrap(this);
         archerAbilityLeft = new ArcherDeployTrap(this);
-        archerAbilityUp = new ArcherUnleshTheHound(this);
+        archerAbilityNeutral = new ArcherUnleshTheHound(this);
         archerAbilityTrigger = new ArcherShootClawhook(this);
-        archerAbilityBumper = new ArcherDancingArrows(this);
+        archerAbilityUp = new ArcherDancingArrows(this);
+        //archerAbilityBumper = new ArcherDancingArrows(this);
 
         abilityLeft = archerAbilityLeft;
         abilityRight = archerAbilityRight;
@@ -52,6 +54,7 @@ public class ArcherActor : AActor
         abilityDown = archerAbilityDown;
         abilityTrigger = archerAbilityTrigger;
         abilityBumper = archerAbilityBumper;
+        abilityNeutral = archerAbilityNeutral;
 
         //Default to Grounded
         IsGrounded = true;
