@@ -16,7 +16,10 @@ public class MageTeleport : Ability
         base.AbilityExecute();
 
         if (!IsTeleportable())
+        {
+            caster.AbilityCastedInAir = false;
             return;
+        }
 
         caster.CurrentEnergy -= AbilityCost;
 

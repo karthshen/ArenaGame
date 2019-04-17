@@ -20,6 +20,8 @@ public class InputHandler : MonoBehaviour
 
     public GameObject scoreboard;
 
+    private string screenshotdirectory;
+
     enum InputHandlerState
     {
         InGame = 1,
@@ -82,6 +84,8 @@ public class InputHandler : MonoBehaviour
         }
 
         pausedGameCanvas.SetActive(false);
+
+        screenshotdirectory = Application.dataPath + "/Screenshots/";
     }
 
     // Update is called once per frame
@@ -97,6 +101,11 @@ public class InputHandler : MonoBehaviour
                 state = InputHandlerState.InMenu;
                 pausedGameCanvas.SetActive(true);
                 Time.timeScale = 0;
+            }
+
+            if (inputDevice.DPadUp.WasPressed)
+            {
+                ScreenCapture.CaptureScreenshot(screenshotdirectory + "Capture"+ System.DateTime.Now.ToFileTime() + ".png", 3);
             }
 
             HandleInput(inputDevice);

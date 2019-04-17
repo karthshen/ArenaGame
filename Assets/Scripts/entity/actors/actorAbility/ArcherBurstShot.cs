@@ -42,12 +42,10 @@ public class ArcherBurstShot : Ability
 
     private void ShootArrow(float yModifier)
     {
-        caster.AttackCode = System.Guid.NewGuid();
-
         GameObject archerArrow = Object.Instantiate(Resources.Load("ArcherArrow") as GameObject);
         ArcherArrow arrow = archerArrow.GetComponent<ArcherArrow>();
         arrow.SetOwner(caster);
-        arrow.DamageModifier = 2;
+        arrow.DamageModifier = 0.7f;
         arrow.YModifier = yModifier;
         arrow.ProjectileStart();
     }

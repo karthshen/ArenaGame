@@ -12,6 +12,7 @@ public class ActorJumpState : ActorState
     Command abilityLeftCommand = new ActorLeftAbilityCommand();
     Command abilityRightCommand = new ActorRightAbilityCommand();
     Command abilityUpCommand = new ActorAbilityUpCommand();
+    Command abilityNeutralCommand = new ActorNeutralAbilityCommand();
     Command abilityTriggerCommand = new ActorAbilityTriggerCommand();
     Command abilityBumperCommand = new ActorAbilityBumperCommand();
 
@@ -90,7 +91,7 @@ public class ActorJumpState : ActorState
             return new ActorAirAttackState();
         }
         //Bumper can cast as many times as in air
-        else if (inputDevice.RightBumper.WasPressed && actor.abilityBumper != null && actor.abilityTrigger.CanCastInAir == true)
+        else if (inputDevice.RightBumper.WasPressed && actor.abilityBumper != null && actor.abilityTrigger.CanCastInAir == true && GameObject.FindObjectOfType<MageTeleportBolt>())
         {
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {
@@ -111,6 +112,16 @@ public class ActorJumpState : ActorState
                 actor.CastTimer = AActor.CAST_DURATION;
                 abilityUpCommand.Execute(actor);
                 return new ActorUpAbilityState();
+            }
+        }
+        //Ability Neutral(down) input
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickY.Value < -0.6f) && actor.abilityUp.CanCastInAir == true)
+        {
+            if (actor.CurrentEnergy >= actor.abilityNeutral.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                abilityNeutralCommand.Execute(actor);
+                return new ActorNeutralAbilityState();
             }
         }
         //Ability Left Input
