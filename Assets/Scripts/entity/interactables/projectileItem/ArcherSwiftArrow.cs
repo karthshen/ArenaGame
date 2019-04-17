@@ -9,10 +9,12 @@ public class ArcherSwiftArrow : ProjectileItem
     private Rigidbody rb;
 
     [SerializeField]
-    private float disappearTime = 0.7f;
+    private float disappearTime = 0.4f;
 
     [SerializeField]
     private float force = 50f;
+
+    private bool attacked = false;
 
 
     public override void ProjectileFinish()
@@ -55,23 +57,13 @@ public class ArcherSwiftArrow : ProjectileItem
             AActor hitActor = collision.gameObject.GetComponent<AActor>();
             hitActor.ClearForceOnActor();
             //hitActor.FreezeTimer = 0f;
-            owner.AttackCode = System.Guid.NewGuid();
-            hitActor.TakeDamage(owner.GetActorStat().AttackPower / 3, owner);
+            if (!attacked)
+            {
+                owner.AttackCode = System.Guid.NewGuid();
+            }
+            hitActor.TakeDamage(owner.GetActorStat().AttackPower / 3.75f, owner);
+            attacked = true;
             //hitActor.ClearForceOnActor();
-        }
-        else if (collision.gameObject.GetComponent<PickupItem>())
-        {
-            IgnoreEntityCollision(collision.gameObject.GetComponent<PickupItem>());
-            return;
-        }
-        else if (collision.gameObject.GetComponent<AInteractable>())
-        {
-
-        }
-        else
-        {
-            IgnoreGameobjectCollision(collision.gameObject);
-            return;
         }
 
         ProjectileFinish();

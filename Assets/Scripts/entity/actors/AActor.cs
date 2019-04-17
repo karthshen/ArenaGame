@@ -490,6 +490,9 @@ public abstract class AActor : AEntity
     {
         ClearForceOnActor();
 
+        if(rb.useGravity == false)
+            return;
+
         Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * jumpForceFactor;
 
         if(jumpNum == 0)

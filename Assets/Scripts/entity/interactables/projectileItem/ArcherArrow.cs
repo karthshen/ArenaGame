@@ -23,6 +23,8 @@ public class ArcherArrow : ProjectileItem
 
     private float duration_time = 0f;
 
+    private bool attacked = false;
+
     public float YModifier
     {
         get
@@ -107,8 +109,15 @@ public class ArcherArrow : ProjectileItem
 
         if (hitActor)
         {
+            if (!attacked)
+            {
+                owner.AttackCode = System.Guid.NewGuid();
+            }
             hitActor.TakeDamage(owner.GetActorStat().AttackPower / 1.5f * DamageModifier, owner);
             SoundManager.instance.PlayEffectWithAudioSource(hitActor.GetAudioSource(), SoundManager.instance.arrowHit, ref hasPlayed, 0.6f);
+            attacked = true;
+
+            ProjectileFinish();
         }
 
         else if (collision.gameObject.GetComponent<PickupItem>())
