@@ -1,5 +1,4 @@
 # ArenaGame
--------------
 Arena is a multi-player fighting game inspired by Super Smash Series and implemented with Unity3D game engine.
 
 ### Demo videos: ###
