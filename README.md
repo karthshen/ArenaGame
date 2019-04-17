@@ -52,9 +52,10 @@ Here I will be using Warrior Actor to illustrate the basic combat control in-gam
 - **Action 1** : Character Neutral Ability
 ![](https://i.imgur.com/cQlhpy1.gif)
 - **Action 1 + Left Stick Down/Up/Left/Right**: Character Directional Ability, includes a down ability, up ability, and horizontal abilities
-![Down Ability](https://i.imgur.com/Xd6a2ta.gif)
-![Up Ability](https://i.imgur.com/16WSCaB.gif)
-![Horizontal Ability](https://i.imgur.com/w7788lu.gif)
+
+	![Down Ability](https://i.imgur.com/Xd6a2ta.gif)
+	![Up Ability](https://i.imgur.com/16WSCaB.gif)
+	![Horizontal Ability](https://i.imgur.com/w7788lu.gif)
 
 - **Right Trigger + Left Stick Direction**: Character throw his unique ability to the direction of the left stick. In the case of Warrior, warrior will shoot a claw hook to the direction he desires. If it hits another character, warrior will pull the character toward him; if it hits a wall, warrior will be pulled toward the wall.
 ![Trigger](https://i.imgur.com/Xl2MOYb.gif)
