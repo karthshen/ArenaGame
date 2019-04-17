@@ -57,8 +57,19 @@ Here I will be using Warrior Actor to illustrate the basic combat control in-gam
 ![Horizontal Ability](https://i.imgur.com/w7788lu.gif)
 
 - **Right Trigger + Left Stick Direction**: Character throw his unique ability to the direction of the left stick. In the case of Warrior, warrior will shoot a claw hook to the direction he desires. If it hits another character, warrior will pull the character toward him; if it hits a wall, warrior will be pulled toward the wall.
-
 ![Trigger](https://i.imgur.com/Xl2MOYb.gif)
+
+- **NOTE:** In the case of Mage, she will shoot a teleport bolt at the direction she desires, and then player can push **Right Bumper** to teleport to the location of the bolt.
+
+### Authors ###
+- Jiantao Shen - karth-shen@hotmail.com
+- Bingyu Li - bingyuli0428@gmail.com
+
+### License ###
+Everything beside the imports are licensed under the GPL 3.0 License. see the [LICENSE.md](LICENSE.md) file for details
+
+### Acknowledgments ###
+- Nothing yet
 
 ## Imported Assets Credits ##
 **Mesh**:
@@ -87,3 +98,4 @@ Here I will be using Warrior Actor to illustrate the basic combat control in-gam
 - Chicken https://freesound.org/people/Rudmer_Rotteveel/sounds/316920/
 - Back UI https://freesound.org/people/NenadSimic/sounds/171697/
 - 321 GO https://freesound.org/people/steel2008/sounds/231277/
+
