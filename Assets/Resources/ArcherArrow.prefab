@@ -72,7 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3098436055607407706}
   - component: {fileID: 4552879044576702011}
-  - component: {fileID: 5464278429771980080}
   - component: {fileID: 3204555290361730032}
   - component: {fileID: 5784292655760379408}
   m_Layer: 0
@@ -110,19 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   com: {fileID: 1287314029386683693}
---- !u!65 &5464278429771980080
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3098436055607407707}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5799813, y: 0.11246267, z: 0.14377087}
-  m_Center: {x: 0.0012928247, y: 0, z: 0}
 --- !u!54 &3204555290361730032
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -235,6 +221,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &6668039138789064371
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571950405804861574}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.148435, z: 0.9744587}
+  m_Center: {x: -0.0000010069667, y: -8.069763, z: -0.9956188}
 --- !u!1 &7017243374041656248
 GameObject:
   m_ObjectHideFlags: 0
@@ -18785,6 +18784,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c14fb5392ca104da7b53f8d6f1f645, type: 3}
+--- !u!1 &4571950405804861574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7207052465434766182, guid: 09c14fb5392ca104da7b53f8d6f1f645,
+    type: 3}
+  m_PrefabInstance: {fileID: 6590539371481662432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4571950405804897446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7207052465434277702, guid: 09c14fb5392ca104da7b53f8d6f1f645,

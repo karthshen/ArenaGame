@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+/*
+    The main Entity class
+    Contains all methods for performing basic functions
+*/
+/// <summary>
+
 public abstract class AEntity : MonoBehaviour
 {
     protected System.Guid entityId;
@@ -38,7 +44,7 @@ public abstract class AEntity : MonoBehaviour
 
     public void NullParameterCheck()
     {
-        if (entityId == null || entityName == null || state == null )//|| entityMesh == null)
+        if (entityId == null || entityName == null || state == null)//|| entityMesh == null)
         {
             throw new UnassignedReferenceException(GetType() + "class is not initialized correctly");
         }

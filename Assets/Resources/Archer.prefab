@@ -1831,6 +1831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ATTACK_INTERVAL: 0.26923078
   AIR_ATTACK_LENGTH: 0.26923078
+  playerNum: 0
   winSymbol: {fileID: 6241143386541957152}
   currentHealth: 0
   currentEnergy: 0
@@ -1891,7 +1892,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644403953209738242}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f04b562e73dfc36459ad1c3477c77970, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5433,7 +5434,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508756266972305752}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f04b562e73dfc36459ad1c3477c77970, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

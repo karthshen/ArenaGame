@@ -36,7 +36,7 @@ public abstract class AActor : AEntity
     private float currentHealth;
     [SerializeField]
     private float currentEnergy;
-    
+
     private float jumpForceFactor = 91f;
     private float moveHorizontal;
     private float moveVertical;
@@ -357,7 +357,7 @@ public abstract class AActor : AEntity
 
         GetRigidbody().AddForce(backMovement);
 
-        if(state.GetType() != typeof(ActorDeathState))
+        if (state.GetType() != typeof(ActorDeathState))
             state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
     }
 
@@ -409,7 +409,7 @@ public abstract class AActor : AEntity
     public float TakeDamageFromEntity(float damage, float knockingForce, AEntity attacker)
     {
         AttackCode = System.Guid.NewGuid();
-        float isHit =  TakeDamage(damage, this);
+        float isHit = TakeDamage(damage, this);
         KnockBackBasedOnDirection(knockingForce, this);
 
         return isHit;
@@ -490,17 +490,17 @@ public abstract class AActor : AEntity
     {
         ClearForceOnActor();
 
-        if(rb.useGravity == false)
+        if (rb.useGravity == false || rb.velocity != Vector3.zero)
             return;
 
         Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * jumpForceFactor;
 
-        if(jumpNum == 0)
+        if (jumpNum == 0)
         {
             forceJump *= 1.1f;
         }
 
-        rb.AddForce(forceJump);
+        rb.AddForce(forceJump, ForceMode.Acceleration);
     }
 
     public abstract void Attack();
@@ -663,7 +663,7 @@ public abstract class AActor : AEntity
             item.ItemPickUp(this);
         }
 
-        if(!IsGrounded && state.GetType() == typeof(ActorJumpState) && (collision.gameObject.GetComponent<AActor>() && transform.position.y > collision.transform.position.y))
+        if (!IsGrounded && state.GetType() == typeof(ActorJumpState) && (collision.gameObject.GetComponent<AActor>() && transform.position.y > collision.transform.position.y))
         {
             BackToStanding();
         }
@@ -671,7 +671,7 @@ public abstract class AActor : AEntity
 
     private void OnCollisionStay(Collision collision)
     {
-        if ((collision.gameObject.tag == "Ground" && bIsGrounded == false && (state.GetType() != typeof(ActorDeathState)) && state.GetType()!= typeof(ActorFreezeState)))
+        if ((collision.gameObject.tag == "Ground" && bIsGrounded == false && (state.GetType() != typeof(ActorDeathState)) && state.GetType() != typeof(ActorFreezeState)))
         {
             bIsGrounded = true;
             BackToStanding();

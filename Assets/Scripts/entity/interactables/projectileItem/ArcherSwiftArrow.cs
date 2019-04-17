@@ -62,6 +62,9 @@ public class ArcherSwiftArrow : ProjectileItem
                 owner.AttackCode = System.Guid.NewGuid();
             }
             hitActor.TakeDamage(owner.GetActorStat().AttackPower / 3.75f, owner);
+
+            bool hasPlayed = false;
+            SoundManager.instance.PlayEffectWithAudioSource(hitActor.GetAudioSource(), SoundManager.instance.arrowHit, ref hasPlayed, 0.6f);
             attacked = true;
             //hitActor.ClearForceOnActor();
         }
