@@ -37,6 +37,7 @@ public abstract class AActor : AEntity
     [SerializeField]
     private float currentEnergy;
 
+    [SerializeField]
     private float jumpForceFactor = 91f;
     private float moveHorizontal;
     private float moveVertical;
@@ -490,7 +491,7 @@ public abstract class AActor : AEntity
     {
         ClearForceOnActor();
 
-        if (rb.useGravity == false || rb.velocity != Vector3.zero)
+        if (rb.useGravity == false || rb.velocity != Vector3.zero || jumpNum < 0)
             return;
 
         Vector3 forceJump = Vector3.up * actorStat.JumpVelocity * jumpForceFactor;
@@ -619,7 +620,8 @@ public abstract class AActor : AEntity
             CastTimer -= Time.deltaTime;
             if (CastTimer <= 0)
             {
-                GetRigidbody().drag = 0;
+                if(GetRigidbody().drag!=0)
+                    GetRigidbody().drag = 0;
                 BackToStanding();
             }
         }

@@ -11,6 +11,7 @@ public class WarriorThrowBoomrang : Ability
     {
         this.caster = caster;
         AbilityCost = 2;
+        DragInAir = false;
     }
 
     public override void AbilityExecute()

@@ -19,7 +19,20 @@ public class CameraController : MonoBehaviour
     float arenaCameraeraDistance;
 
     public AActor[] actors;
-    public float cameraSpeed = 1;
+    private float cameraSpeed = 1f;
+
+    public float CameraSpeed
+    {
+        get
+        {
+            return cameraSpeed;
+        }
+
+        set
+        {
+            cameraSpeed = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +68,7 @@ public class CameraController : MonoBehaviour
 
     private void MoveCamera()
     {
-        transform.position = Vector3.MoveTowards(transform.position, desiredPos, cameraSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, desiredPos, CameraSpeed);
     }
 
     private void UpdateCameraPosition()
@@ -129,9 +142,9 @@ public class CameraController : MonoBehaviour
         //Positions arenaCameraera around a center point
         Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z) + arenaCameraeraCenter;
 
-        transform.position = Vector3.Lerp(transform.position, position, cameraSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, position, CameraSpeed * Time.deltaTime);
 
-        finalLookat = Vector3.Lerp(finalLookat, arenaCameraeraCenter, cameraSpeed * Time.deltaTime);
+        finalLookat = Vector3.Lerp(finalLookat, arenaCameraeraCenter, CameraSpeed * Time.deltaTime);
         //Look at
         transform.LookAt(finalLookat);
     }
