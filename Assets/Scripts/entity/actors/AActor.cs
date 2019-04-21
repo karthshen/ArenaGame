@@ -702,14 +702,14 @@ public abstract class AActor : AEntity
     {
         scoreboard.gameObject.SetActive(true);
         scoreboard.SetWinner(GetName());
-        scoreboard.winnerPlayerNum.text = playerNum.ToString();
+        scoreboard.winnerPlayerNum.text = (playerNum+1).ToString();
         scoreboard.winnerTotalDamage.text = ((int)TotalDamageDealt).ToString();
     }
 
     public void Lose(Scoreboard scoreboard)
     {
         scoreboard.SetLoser(GetName());
-        scoreboard.loserPlayerNum.text = playerNum.ToString();
+        scoreboard.loserPlayerNum.text = (playerNum+1).ToString();
         scoreboard.loserTotalDamage.text = ((int)TotalDamageDealt).ToString();
     }
 
