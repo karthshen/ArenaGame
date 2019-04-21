@@ -27,6 +27,7 @@ public class DelayedStart : MonoBehaviour
         while (Time.realtimeSinceStartup < pauseTime)
             yield return 0;
         countDown.gameObject.SetActive(false);
+        GameObject.FindObjectOfType<CameraController>().CameraSpeed = 0.3f;
         Time.timeScale = 1;
     }
 }
