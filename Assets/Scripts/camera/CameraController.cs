@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
     float arenaCameraeraDistance;
 
     public AActor[] actors;
+
     private float cameraSpeed = 1f;
 
     public float CameraSpeed

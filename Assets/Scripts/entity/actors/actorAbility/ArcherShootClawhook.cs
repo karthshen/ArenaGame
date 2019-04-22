@@ -11,7 +11,7 @@ public class ArcherShootClawhook : Ability
     {
         this.caster = caster;
         AbilityCost = 0;
-        DragInAir = false;
+        //DragInAir = false;
     }
 
     public override void AbilityExecute()
@@ -22,7 +22,7 @@ public class ArcherShootClawhook : Ability
             return;
 
         caster.CurrentEnergy -= AbilityCost;
-        caster.ClearForceOnActor();
+        //caster.ClearForceOnActor();
 
         clawhook = Object.Instantiate(Resources.Load("Clawhook")) as GameObject;
         ArcherClawhook claw = clawhook.GetComponent<ArcherClawhook>();

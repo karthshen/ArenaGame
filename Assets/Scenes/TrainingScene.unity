@@ -2194,7 +2194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CAMERA_SIZE_FACTOR: 3
   actors: []
-  cameraSpeed: 1
 --- !u!1001 &1718703263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2405,6 +2404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083155653337272933, guid: 63649deaf5755be47b71cd88a1132580,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -13.1
       objectReference: {fileID: 0}
     - target: {fileID: 2848324305126118263, guid: 63649deaf5755be47b71cd88a1132580,
         type: 3}
