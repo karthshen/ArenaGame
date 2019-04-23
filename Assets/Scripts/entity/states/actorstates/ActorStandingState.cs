@@ -86,7 +86,7 @@ public class ActorStandingState : ActorState
             }
         }
         //Ability Neutral(down) input
-        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickY.Value < -0.6f))
+        else if ((inputDevice.Action1.WasPressed && inputDevice.LeftStickY.Value < -0.6f) && actor.abilityNeutral != null)
         {
             if (actor.CurrentEnergy >= actor.abilityNeutral.AbilityCost)
             {
